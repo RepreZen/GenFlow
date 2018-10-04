@@ -30,19 +30,19 @@ import com.reprezen.genflow.api.target.GenTarget;
 import com.reprezen.genflow.api.target.GenTargetNamedSource;
 import com.reprezen.genflow.api.target.GenTargetPrerequisite;
 import com.reprezen.genflow.api.template.builders.DynamicGeneratorBuilder;
+import com.reprezen.genflow.api.template.builders.DynamicGeneratorBuilder.DynamicGeneratorSpec;
 import com.reprezen.genflow.api.template.builders.NamedSourceBuilder;
+import com.reprezen.genflow.api.template.builders.NamedSourceBuilder.NamedSourceSpec;
 import com.reprezen.genflow.api.template.builders.OutputItemBuilder;
+import com.reprezen.genflow.api.template.builders.OutputItemBuilder.OutputItemSpec;
 import com.reprezen.genflow.api.template.builders.ParameterBuilder;
+import com.reprezen.genflow.api.template.builders.ParameterBuilder.ParameterSpec;
 import com.reprezen.genflow.api.template.builders.PrerequisiteBuilder;
+import com.reprezen.genflow.api.template.builders.PrerequisiteBuilder.PrerequisiteSpec;
 import com.reprezen.genflow.api.template.builders.PrimarySourceBuilder;
+import com.reprezen.genflow.api.template.builders.PrimarySourceBuilder.PrimarySourceSpec;
 import com.reprezen.genflow.api.template.builders.PropertyBuilder;
 import com.reprezen.genflow.api.template.builders.StaticResourceBuilder;
-import com.reprezen.genflow.api.template.builders.DynamicGeneratorBuilder.DynamicGeneratorSpec;
-import com.reprezen.genflow.api.template.builders.NamedSourceBuilder.NamedSourceSpec;
-import com.reprezen.genflow.api.template.builders.OutputItemBuilder.OutputItemSpec;
-import com.reprezen.genflow.api.template.builders.ParameterBuilder.ParameterSpec;
-import com.reprezen.genflow.api.template.builders.PrerequisiteBuilder.PrerequisiteSpec;
-import com.reprezen.genflow.api.template.builders.PrimarySourceBuilder.PrimarySourceSpec;
 import com.reprezen.genflow.api.template.builders.StaticResourceBuilder.StaticResourceSpec;
 import com.reprezen.genflow.api.template.config.GenTargetConfigUtil;
 import com.reprezen.genflow.api.template.config.GenTemplateConfig;
@@ -56,10 +56,10 @@ import com.reprezen.genflow.api.trace.GenTemplateTrace;
 import com.reprezen.genflow.api.trace.GenTemplateTraceBuilder;
 import com.reprezen.genflow.api.trace.GenTemplateTraces;
 import com.reprezen.genflow.api.util.Eval;
+import com.reprezen.genflow.api.util.Eval.VarName;
 import com.reprezen.genflow.api.util.FileUtils;
 import com.reprezen.genflow.api.util.Strings;
 import com.reprezen.genflow.api.util.TypeUtils;
-import com.reprezen.genflow.api.util.Eval.VarName;
 
 public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 
@@ -854,7 +854,9 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 						if (contextOutputFileNames instanceof Map) {
 							// Set resolved value to the context's GenTargetParameters, so they will be
 							// available during GenTemplate execution
-							((Map<String, String>) contextOutputFileNames).put((String) paramName, resolvedValue);
+							@SuppressWarnings("unchecked")
+							Map<String, String> fileNamesMap = (Map<String, String>) contextOutputFileNames;
+							fileNamesMap.put((String) paramName, resolvedValue);
 						}
 					}
 				}
