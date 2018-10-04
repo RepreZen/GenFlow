@@ -23,6 +23,15 @@
 									<exclude>*:genflow-api</exclude>
 								</excludes>
 							</artifactSet>
+							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>							
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/services/com.reprezen.genflow.api.template.IGenTemplate</resource>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/services/com.reprezen.genflow.api.template.IGenTemplateGroup</resource>
+								</transformer>
+							</transformers>
 						</configuration>
 						<phase>package</phase>
 						<goals>
