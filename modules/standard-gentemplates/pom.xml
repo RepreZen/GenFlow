@@ -32,6 +32,7 @@
 									<resource>META-INF/services/com.reprezen.genflow.api.template.IGenTemplateGroup</resource>
 								</transformer>
 							</transformers>
+							<createSourcesJar>true</createSourcesJar>
 						</configuration>
 						<phase>package</phase>
 						<goals>
