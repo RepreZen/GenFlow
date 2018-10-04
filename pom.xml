@@ -7,5 +7,6 @@
   <modules>
   	<module>modules/genflow-api</module>
   	<module>modules/standard-gentemplates</module>
+  	<module>modules/gentemplates/openapi3-doc</module>
   </modules>
 </project>

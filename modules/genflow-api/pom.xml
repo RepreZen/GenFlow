@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.reprezen.genflow</groupId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>codegen-api</name>
+  <name>genflow-api</name>
   <dependencies>
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
