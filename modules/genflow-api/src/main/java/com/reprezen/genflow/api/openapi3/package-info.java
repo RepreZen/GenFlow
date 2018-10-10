@@ -15,20 +15,20 @@
  * Classes include:
  * <dl>
  * <dt>{@link OpenApi3Source}</dt>
- * <dd>An {@link com.modelsolv.reprezen.generators.api.source.ISource}
- * implementation that can load OpenAPI v3 files.</dd>
+ * <dd>An {@link com.reprezen.genflow.api.source.ISource} implementation that
+ * can load OpenAPI v3 files.</dd>
  * <dt>{@link OpenApi3Locator}</dt>
  * <dd>A locator that can be used to locate and dereference structures within a
  * OpenAPI v33 definition.</dd>
  * <dt>{@link OpenApi3GenTemplate}</dt>
  * <dd>A class that extends
- * {@link com.modelsolv.reprezen.generators.api.template.GenTemplate}, using
+ * {@link com.reprezen.genflow.api.template.GenTemplate}, using
  * {@link OpenApi3Source} as the primary source.</dd>
  * <dt>{@link OpenApi3OutputItem}</dt>
  * <dd>An implementation of
- * {@link com.modelsolv.reprezen.generators.api.outputitem.IOutputItem} that
- * uses {@link com.reprezen.kaizen.oasparser.model3.OpenApi3} as both its
- * primary type and its input type.
+ * {@link com.reprezen.genflow.api.outputitem.IOutputItem} that uses
+ * {@link com.reprezen.kaizen.oasparser.model3.OpenApi3} as both its primary
+ * type and its input type.
  * </dl>
  * 
  * @author Andy Lowry

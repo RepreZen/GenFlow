@@ -10,48 +10,48 @@ package com.reprezen.genflow.api.template;
 
 public class GenTemplateDependency {
 
-    public enum GenTemplateDependencyType {
-        PRIMARY_SOURCE, NAMED_SOURCE, GENERATOR, PARAMETER
-    }
+	public enum GenTemplateDependencyType {
+		PRIMARY_SOURCE, NAMED_SOURCE, GENERATOR, PARAMETER
+	}
 
-    private final GenTemplateDependencyType type;
-    private final String name;
-    private final String info;
-    private final boolean required;
-    private final String description;
+	private final GenTemplateDependencyType type;
+	private final String name;
+	private final String info;
+	private final boolean required;
+	private final String description;
 
-    public GenTemplateDependency(GenTemplateDependencyType type, String name, String info, boolean required,
-            String description) {
-        this.name = name;
-        this.type = type;
-        this.info = info;
-        this.required = required;
-        this.description = description;
-    }
+	public GenTemplateDependency(GenTemplateDependencyType type, String name, String info, boolean required,
+			String description) {
+		this.name = name;
+		this.type = type;
+		this.info = info;
+		this.required = required;
+		this.description = description;
+	}
 
-    public GenTemplateDependencyType getType() {
-        return type;
-    }
+	public GenTemplateDependencyType getType() {
+		return type;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getInfo() {
-        return info;
-    }
+	public String getInfo() {
+		return info;
+	}
 
-    public boolean isRequired() {
-        return required;
-    }
+	public boolean isRequired() {
+		return required;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    @Override
-    public String toString() {
-        return String.format("%s[name: %s, type: %s, info: %s, required: %s, description: %s]", getClass()
-                .getSimpleName(), name, type, info, required, description);
-    }
+	@Override
+	public String toString() {
+		return String.format("%s[name: %s, type: %s, info: %s, required: %s, description: %s]",
+				getClass().getSimpleName(), name, type, info, required, description);
+	}
 }

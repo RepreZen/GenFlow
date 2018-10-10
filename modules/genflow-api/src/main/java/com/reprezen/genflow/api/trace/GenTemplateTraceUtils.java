@@ -33,14 +33,10 @@ public final class GenTemplateTraceUtils {
 	 * Find trace items of a given type and containing at least one source item with
 	 * a given role and locator.
 	 * 
-	 * @param trace
-	 *            trace object whose items are searched
-	 * @param traceItemType
-	 *            item type trace item type
-	 * @param sourceRole
-	 *            source role source item role
-	 * @param sourceLocator
-	 *            source locator source locator
+	 * @param trace         trace object whose items are searched
+	 * @param traceItemType item type trace item type
+	 * @param sourceRole    source role source item role
+	 * @param sourceLocator source locator source locator
 	 * @return matching trace items
 	 */
 	public static List<GenTemplateTraceItem> getTraceItems(GenTemplateTrace trace, String traceItemType,
@@ -58,10 +54,8 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Find trace items of a given type.
 	 * 
-	 * @param trace
-	 *            trace object whose items are searched
-	 * @param traceItemType
-	 *            trace item type
+	 * @param trace         trace object whose items are searched
+	 * @param traceItemType trace item type
 	 * @return matching trace items
 	 */
 	public static List<GenTemplateTraceItem> getTraceItemsOfType(GenTemplateTrace trace, String traceItemType) {
@@ -72,17 +66,12 @@ public final class GenTemplateTraceUtils {
 	 * Find the single trace item with a given type and at least one source item
 	 * with a given source role and locator.
 	 * 
-	 * @param trace
-	 *            trace object whose items are searched
-	 * @param traceItemType
-	 *            trace item type
-	 * @param sourceRole
-	 *            source item role
-	 * @param sourceLocator
-	 *            source locator
+	 * @param trace         trace object whose items are searched
+	 * @param traceItemType trace item type
+	 * @param sourceRole    source item role
+	 * @param sourceLocator source locator
 	 * @return matching trace item, or <code>null</code> if no item matches
-	 * @throws IllegalArgumentException
-	 *             if multiple matching trace items are found
+	 * @throws IllegalArgumentException if multiple matching trace items are found
 	 */
 	public static GenTemplateTraceItem getTraceItem(GenTemplateTrace trace, String traceItemType, String sourceRole,
 			String sourceLocator) {
@@ -96,10 +85,8 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Predicate to test if a source item has a given role and locator
 	 * 
-	 * @param sourceRole
-	 *            source item role
-	 * @param sourceLocator
-	 *            locator
+	 * @param sourceRole    source item role
+	 * @param sourceLocator locator
 	 * @return predicate
 	 */
 	public static Predicate<GenTemplateTraceSourceItem> getSourcePredicate(final String sourceRole,
@@ -115,8 +102,7 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Predicate to test if a trace item has a given type
 	 * 
-	 * @param traceItemType
-	 *            trace item type
+	 * @param traceItemType trace item type
 	 * @return predicate
 	 */
 	public static Predicate<GenTemplateTraceItem> hasType(final String traceItemType) {
@@ -132,8 +118,7 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Test if a trace item has a given output file.
 	 * 
-	 * @param file
-	 *            output file
+	 * @param file output file
 	 * @return true if the trace item matches
 	 */
 	public static Predicate<GenTemplateTraceItem> hasFile(final File file) {
@@ -149,8 +134,7 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Test if a source item has a given role.
 	 * 
-	 * @param sourceRole
-	 *            source role
+	 * @param sourceRole source role
 	 * @return true if the source item matches
 	 */
 	public static Predicate<GenTemplateTraceSourceItem> hasSourceRole(final String sourceRole) {
@@ -165,10 +149,8 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Test if a trace item has at least one source item with a given role.
 	 * 
-	 * @param item
-	 *            trace item
-	 * @param sourceRole
-	 *            source role
+	 * @param item       trace item
+	 * @param sourceRole source role
 	 * @return true if the trace item matches
 	 */
 	public static boolean hasSourceRole(GenTemplateTraceItem item, final String sourceRole) {
@@ -178,8 +160,7 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Predicate that tests whether source item has a given locator
 	 * 
-	 * @param sourceLocator
-	 *            locator
+	 * @param sourceLocator locator
 	 * @return predicate
 	 */
 	public static Predicate<GenTemplateTraceSourceItem> hasSourceLocator(final String sourceLocator) {
@@ -194,10 +175,8 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Test whether a trace item has a source item with a given role.
 	 * 
-	 * @param item
-	 *            trace item
-	 * @param sourceRole
-	 *            source role
+	 * @param item       trace item
+	 * @param sourceRole source role
 	 * @return true if the trace item matches
 	 */
 	public static boolean hasSourceLocator(GenTemplateTraceItem item, final String sourceRole) {
@@ -207,10 +186,8 @@ public final class GenTemplateTraceUtils {
 	/**
 	 * Test whether a trace item has a source item satisfying a given predicate.
 	 * 
-	 * @param item
-	 *            trace tiem
-	 * @param condition
-	 *            predicate
+	 * @param item      trace tiem
+	 * @param condition predicate
 	 * @return true if the trace item matches
 	 */
 	public static boolean hasSourceItemMeetingCondition(GenTemplateTraceItem item,

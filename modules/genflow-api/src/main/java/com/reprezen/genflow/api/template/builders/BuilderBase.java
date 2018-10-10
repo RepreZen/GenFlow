@@ -8,8 +8,8 @@
  *******************************************************************************/
 package com.reprezen.genflow.api.template.builders;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Andy Lowry
@@ -29,7 +29,7 @@ public class BuilderBase<T extends BuilderBase<?>> {
 		protected String description;
 
 		public SpecBase(String[] descriptionLines) {
-			this.description = Stream.of(descriptionLines).collect(Collectors.joining("\n"));
+			this.description = Arrays.asList(descriptionLines).stream().collect(Collectors.joining("/n"));
 		}
 
 		public final String getDescription() {

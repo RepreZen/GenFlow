@@ -56,8 +56,7 @@ public class GenTemplateTraceBuilder {
 	/**
 	 * Set the GenTemplate ID for the current trace item.
 	 * 
-	 * @param genTemplateId
-	 *            required ID of GenTemplate
+	 * @param genTemplateId required ID of GenTemplate
 	 * @return the trace builder
 	 */
 	public GenTemplateTraceBuilder withTemplateId(String genTemplateId) {
@@ -69,8 +68,7 @@ public class GenTemplateTraceBuilder {
 	 * Set the base directory for this trace object to that of a given
 	 * {@link GenTarget} object.
 	 * 
-	 * @param target
-	 *            the GenTarget object
+	 * @param target the GenTarget object
 	 * @return the trace builder
 	 */
 	public GenTemplateTraceBuilder forGenTarget(GenTarget target) {
@@ -80,8 +78,7 @@ public class GenTemplateTraceBuilder {
 	/**
 	 * Set the base directory for this trace object.
 	 * 
-	 * @param baseDirectory
-	 *            the base directory
+	 * @param baseDirectory the base directory
 	 * @return the trace builder
 	 */
 	public GenTemplateTraceBuilder withBaseDirectory(File baseDirectory) {
@@ -92,8 +89,7 @@ public class GenTemplateTraceBuilder {
 	/**
 	 * Start building a new trace item for this trace.
 	 * 
-	 * @param type
-	 *            required trace item type
+	 * @param type required trace item type
 	 * @return the trace builder
 	 */
 	public GenTemplateTraceItemBuilder newItem(String type) {
@@ -118,10 +114,8 @@ public class GenTemplateTraceBuilder {
 	 * </ul>
 	 * </ul>
 	 * 
-	 * @param resourcePath
-	 *            full resource path
-	 * @param outputFile
-	 *            output file containing a copy of the resource
+	 * @param resourcePath full resource path
+	 * @param outputFile   output file containing a copy of the resource
 	 * @return The trace builder.
 	 */
 	@SuppressWarnings("nls")
@@ -138,12 +132,9 @@ public class GenTemplateTraceBuilder {
 	 * <code>resourceRoot</code> path of
 	 * <code>outputFile<code> relative to <code>outputRoot</code>.
 	 * 
-	 * @param resourceRoot
-	 *            path designating the root of the copied resource tree
-	 * @param outputFile
-	 *            path to the file to which the resource was copied
-	 * @param outputRoot
-	 *            path of the output directory to which the tree was copied
+	 * @param resourceRoot path designating the root of the copied resource tree
+	 * @param outputFile   path to the file to which the resource was copied
+	 * @param outputRoot   path of the output directory to which the tree was copied
 	 * @return The trace builder.
 	 * @see #addStaticResource(String, File)
 	 */
@@ -168,11 +159,9 @@ public class GenTemplateTraceBuilder {
 	 * </ul>
 	 * </ul>
 	 * 
-	 * @param outputFile
-	 *            The generated output file.
-	 * @param locator
-	 *            Optional locator identifying a structure contained within the
-	 *            primary source.
+	 * @param outputFile The generated output file.
+	 * @param locator    Optional locator identifying a structure contained within
+	 *                   the primary source.
 	 * @return the trace builder
 	 */
 	@SuppressWarnings("nls")
@@ -228,8 +217,7 @@ public class GenTemplateTraceBuilder {
 		/**
 		 * Sets the type of this trace item.
 		 * 
-		 * @param type
-		 *            trace item type
+		 * @param type trace item type
 		 * @return the trace item builder
 		 * @see GenTemplateTraceItem#type
 		 */
@@ -244,8 +232,7 @@ public class GenTemplateTraceBuilder {
 		 * The given output file will become the default for subsequent trace items
 		 * added to this trace using the builder.
 		 * 
-		 * @param outputFile
-		 *            the output file
+		 * @param outputFile the output file
 		 * 
 		 * @return the trace item builder.
 		 * @see GenTemplateTraceItem#outputFile
@@ -259,8 +246,7 @@ public class GenTemplateTraceBuilder {
 		/**
 		 * Sets optional locator for trace item's output item.
 		 * 
-		 * @param locator
-		 *            the locator
+		 * @param locator the locator
 		 * @returns the trace item builder
 		 * @see GenTemplateTraceItem#locator
 		 */
@@ -272,10 +258,8 @@ public class GenTemplateTraceBuilder {
 		/**
 		 * Adds a string property to the trace item.
 		 * 
-		 * @param name
-		 *            the property name
-		 * @param value
-		 *            the property value
+		 * @param name  the property name
+		 * @param value the property value
 		 * @return the trace item builder
 		 */
 		public GenTemplateTraceItemBuilder withProperty(String name, String value) {
@@ -287,12 +271,9 @@ public class GenTemplateTraceBuilder {
 		/**
 		 * Adds a source item to this trace item.
 		 * 
-		 * @param role
-		 *            source role
-		 * @param sourceName
-		 *            source name
-		 * @param locator
-		 *            optional locator
+		 * @param role       source role
+		 * @param sourceName source name
+		 * @param locator    optional locator
 		 * @return the trace item builder
 		 * @see GenTemplateTraceSourceItem
 		 * @see GenTemplateTraceItem#sourceItems
@@ -322,8 +303,7 @@ public class GenTemplateTraceBuilder {
 		 * The source name will be set to {@link GenTemplateTrace.RESOURCE_SOURCE_NAME})
 		 * 
 		 * @param role
-		 * @param locator
-		 *            full resource path
+		 * @param locator full resource path
 		 * @return the trace item builder
 		 */
 		public GenTemplateTraceItemBuilder withResourceSourceItem(String role, String locator) {
@@ -336,8 +316,7 @@ public class GenTemplateTraceBuilder {
 		 * The role will be set to {@link GenTemplateTrace.SOURCE_DATA_ROLE}, and the
 		 * source name will be set to {@link GenTemplateTrace.SOURCE_DATA_ROLE}.
 		 * 
-		 * @param locator
-		 *            the locator
+		 * @param locator the locator
 		 * @return the trace item builder
 		 * @see #withSourceItem(String, String, String)
 		 */
@@ -349,12 +328,9 @@ public class GenTemplateTraceBuilder {
 		 * Copies a property from the trace of a dependency to this trace item, and adds
 		 * the dependency as a source for this trace item.
 		 * 
-		 * @param traceItem
-		 *            dependency trace item
-		 * @param genTemplateName
-		 *            template name of dependency
-		 * @param property
-		 *            name of property to copy
+		 * @param traceItem       dependency trace item
+		 * @param genTemplateName template name of dependency
+		 * @param property        name of property to copy
 		 * @return the trace item builder
 		 */
 		public GenTemplateTraceItemBuilder withPropertyFromTraceItem(GenTemplateTraceItem traceItem,

@@ -21,7 +21,7 @@
  * prerequisite GenTarget satisfying this constraint - or in general any attempt
  * to execute a GenTarget that does not satisfactorily meet all the binding
  * requirements of its GenTemplate - will fail with a
- * {@link com.modelsolv.reprezen.generators.api.GenerationException}.
+ * {@link com.reprezen.genflow.api.GenerationException}.
  * <p>
  * While the above considerations apply to most actual GenTemplates, the binding
  * mechanism is not visible at the most basic levels - the {@link IGenTemplate}
@@ -34,7 +34,7 @@
  * Binding requirements are created in a GenTemplate implementation by
  * overriding {@link GenTemplate#configure} and including in-line definitions
  * that invoke builders, as explained in the <code><a href=
- * "builders/package-summary.html">com.modelsolv.reprezen.generators.api.template.builders</a></code>
+ * "builders/package-summary.html">com.reprezen.genflow.api.template.builders</a></code>
  * package summary. It is also possible to place this information in a separate
  * configuration file. If {@link SimpleGentemplate#configure} is not overridden,
  * then its default implementation will defer to
@@ -48,7 +48,7 @@
  * GenTargets are executed in the correct order.
  * <p>
  * A GenTemplate must include a resource named
- * <code>META-INF/services/com.modelsolv.reprezen.generators.api.template.IGenTemplate</code>
+ * <code>META-INF/services/com.reprezen.genflow.api.template.IGenTemplate</code>
  * in order to be available for use. The file should include the fully-qualified
  * type name of the implementing class.
  * <p>

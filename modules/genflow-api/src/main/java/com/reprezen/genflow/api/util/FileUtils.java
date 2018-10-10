@@ -36,29 +36,23 @@ public final class FileUtils {
 	 * Copies resources from JAR file to specified location. Used class to lookup
 	 * JAR file location.
 	 * 
-	 * @param codeBase
-	 *            class to lookup JAR file location
-	 * @param source
-	 *            source path in JAR
-	 * @param target
-	 *            target location in local file system
+	 * @param codeBase class to lookup JAR file location
+	 * @param source   source path in JAR
+	 * @param target   target location in local file system
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
 	public static List<File> copyResources(Class<?> codeBase, String source, File target) throws Exception {
-		File jarFile = new File(codeBase.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+		File jarFile = new File(codeBase.getProtectionDomain().getCodeSource().getLocation().getPath());
 		return copyResources(jarFile, source, target);
 	}
 
 	/**
 	 * Copies resources from JAR file to specified location.
 	 * 
-	 * @param jarFile
-	 *            JAR file location
-	 * @param source
-	 *            source path in JAR
-	 * @param target
-	 *            target location in local file system
+	 * @param jarFile JAR file location
+	 * @param source  source path in JAR
+	 * @param target  target location in local file system
 	 * @throws IOException
 	 */
 	public static List<File> copyResources(File jarFile, String source, File target) throws Exception {

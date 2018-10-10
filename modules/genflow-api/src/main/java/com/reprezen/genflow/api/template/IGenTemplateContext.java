@@ -17,8 +17,8 @@ import com.reprezen.genflow.api.source.ISource;
 import com.reprezen.genflow.api.target.GenTarget;
 import com.reprezen.genflow.api.trace.GenTemplateTrace;
 import com.reprezen.genflow.api.trace.GenTemplateTraceBuilder;
-import com.reprezen.genflow.api.trace.GenTemplateTraces;
 import com.reprezen.genflow.api.trace.GenTemplateTraceBuilder.GenTemplateTraceItemBuilder;
+import com.reprezen.genflow.api.trace.GenTemplateTraces;
 
 public interface IGenTemplateContext {
 

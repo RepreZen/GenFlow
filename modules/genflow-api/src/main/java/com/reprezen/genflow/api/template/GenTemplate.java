@@ -84,6 +84,12 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 	private final Map<String, ISource<?>> namedSourceBindings = Maps.newHashMap();
 	private final Map<String, Object> parameterBindings = Maps.newHashMap();
 
+	private final ClassLoader instanceClassLoader;
+
+	public GenTemplate() {
+		this.instanceClassLoader = getClass().getClassLoader();
+	}
+
 	@Override
 	public ISource<?> getPrimarySource() throws GenerationException {
 		// There are three possibilities here. First, this GenTemplate may configure a
@@ -364,7 +370,7 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 
 	protected void validate() throws GenerationException {
 		if (primarySourceSpec != null) {
-			Optional<ISource<?>> instance = primarySourceSpec.getInstance();
+			Optional<ISource<?>> instance = primarySourceSpec.getInstance(instanceClassLoader);
 			if (instance.isPresent() && !primaryType.isAssignableFrom(instance.get().getValueType())) {
 				throw new GenerationException("Primary source produces values of wrong type for GenTemplate: expected "
 						+ primaryType + ", got " + instance.get().getValueType());
@@ -392,7 +398,7 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 		@SuppressWarnings("unchecked")
 		ISource<PrimaryType> primarySource = (ISource<PrimaryType>) getPrimarySource();
 		if (primarySource == null && primarySourceSpec != null) {
-			Optional<ISource<?>> source = primarySourceSpec.getInstance();
+			Optional<ISource<?>> source = primarySourceSpec.getInstance(instanceClassLoader);
 			if (source.isPresent()) {
 				@SuppressWarnings("unchecked")
 				ISource<PrimaryType> validSource = (ISource<PrimaryType>) source.get();
@@ -527,7 +533,7 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 		}
 
 		private IOutputItem<PrimaryType, ?> initOutputItem(OutputItemSpec spec) throws GenerationException {
-			Optional<IOutputItem<?, ?>> outputItem = spec.getOutputItemInstance();
+			Optional<IOutputItem<?, ?>> outputItem = spec.getOutputItemInstance(genTemplate.instanceClassLoader);
 			if (outputItem.isPresent()) {
 				outputItem.get().init(context);
 				@SuppressWarnings("unchecked")
@@ -567,7 +573,8 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 
 		private IDynamicGenerator<PrimaryType> initDynamicGenerator(DynamicGeneratorSpec spec)
 				throws GenerationException {
-			Optional<IDynamicGenerator<?>> generator = spec.getDynamicGeneratorInstance();
+			Optional<IDynamicGenerator<?>> generator = spec
+					.getDynamicGeneratorInstance(genTemplate.instanceClassLoader);
 			if (generator.isPresent()) {
 				generator.get().init(context);
 				@SuppressWarnings("unchecked")
@@ -584,10 +591,6 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 			GenTemplateTraceBuilder traceBuilder = context.getTraceBuilder();
 			for (StaticResourceSpec spec : genTemplate.staticResourceSpecs) {
 				String resourcePath = spec.getResourcePath();
-				if (!resourcePath.startsWith("/")) {
-					resourcePath = genTemplate.getClass().getPackage().getName().replaceAll("[.]", "/") + "/"
-							+ resourcePath;
-				}
 				File destination = target.resolveOutputPath(spec.getOutput());
 				try {
 					List<File> outputFiles = FileUtils.copyResources(context.getExecutingGenTemplate().getClass(),
@@ -677,7 +680,7 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 			List<String> missing = Lists.newArrayList();
 			for (NamedSourceSpec spec : genTemplate.namedSourceSpecs.values()) {
 				String name = spec.getName();
-				Optional<ISource<?>> source = spec.getInstance();
+				Optional<ISource<?>> source = spec.getInstance(genTemplate.instanceClassLoader);
 				if (!source.isPresent()) {
 					throw new GenerationException("Failed to instantiate named source: " + spec.toString());
 				}
@@ -845,22 +848,25 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 		private void tryResolveAndSetOutputFileNames() {
 			if (genTemplate.parameterBindings.containsKey(OUTPUT_FILES_PARAM)
 					&& genTemplate.parameterBindings.get(OUTPUT_FILES_PARAM) instanceof Map) {
-				Map<?, ?> outputParams = (Map<?, ?>) genTemplate.parameterBindings.get(OUTPUT_FILES_PARAM);
+				@SuppressWarnings("unchecked")
+				Map<String, Object> outputParams = (Map<String, Object>) genTemplate.parameterBindings
+						.get(OUTPUT_FILES_PARAM);
 				Object contextOutputFileNames = context.getGenTargetParameters().get(OUTPUT_FILES_PARAM);
-				for (Object paramName : outputParams.keySet()) {
+				for (String paramName : outputParams.keySet()) {
 					if (paramName instanceof String && outputParams.get(paramName) instanceof String) {
 						String resolvedValue = Eval.subst((String) outputParams.get(paramName),
 								genTemplate.parameterBindings, itemVarName, itemValue);
-						genTemplate.parameterBindings.put((String) paramName, resolvedValue);
+						genTemplate.parameterBindings.put(paramName, resolvedValue);
 						// If we got to this point, contextOutputFileNames should be a non-null Map, as
 						// parameterBindings
 						// Checking just in case
 						if (contextOutputFileNames instanceof Map) {
-							// Set resolved value to the context's GenTargetParameters, so they will be
-							// available during GenTemplate execution
 							@SuppressWarnings("unchecked")
-							Map<String, String> fileNamesMap = (Map<String, String>) contextOutputFileNames;
-							fileNamesMap.put((String) paramName, resolvedValue);
+							Map<String, String> cast = (Map<String, String>) contextOutputFileNames;
+							// Set resolved value to the context's GenTargetParameters, so they will be
+							// available during
+							// GenTemplate execution
+							cast.put(paramName, resolvedValue);
 						}
 					}
 				}

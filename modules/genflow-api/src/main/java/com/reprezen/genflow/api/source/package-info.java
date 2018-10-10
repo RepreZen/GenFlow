@@ -38,9 +38,9 @@
  * {@link AbstractSource#extractByNonSourceType(Object, Class)} is provided,
  * which can be overridden by subclasses that support extraction by types other
  * than the source type. The default implementation here throws a
- * {@link com.modelsolv.reprezen.generators.api.GenerationException}. This is
- * done using a the method {@link AbstractSource#cantExtractException(Class)},
- * which is also introduced by this class and can be used by subclasses.</dd>
+ * {@link com.reprezen.genflow.api.GenerationException}. This is done using a
+ * the method {@link AbstractSource#cantExtractException(Class)}, which is also
+ * introduced by this class and can be used by subclasses.</dd>
  * <dt>{@link ILocator}</dt>
  * <dd>Defines an interface for creating and dereferencing locator
  * references.</dd>

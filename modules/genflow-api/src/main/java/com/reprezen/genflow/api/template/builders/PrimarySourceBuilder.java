@@ -89,18 +89,16 @@ public class PrimarySourceBuilder extends BuilderBase<PrimarySourceBuilder> {
 			return sourceClassName;
 		}
 
-		public Optional<ISource<?>> getInstance() {
-			Optional<Object> instance = BuilderUtil.getInstance(sourceClassName);
-			return instance.isPresent() ? Optional.<ISource<?>>of((ISource<?>) instance.get())
-					: Optional.<ISource<?>>empty();
+		public Optional<ISource<?>> getInstance(ClassLoader classLoader) {
+			return BuilderUtil.getInstance(sourceClassName, classLoader);
 		}
 
 		public String getValueClassName() {
 			if (valueClassName == null) {
-				Optional<ISource<?>> instance = getInstance();
+				Optional<ISource<?>> instance = BuilderUtil.getInstance(sourceClassName);
 				if (instance.isPresent()) {
 					try {
-						valueClassName = instance.get().getValueType().getName();
+						valueClassName = ((ISource<?>) instance.get()).getValueType().getName();
 					} catch (GenerationException e) {
 					}
 				}

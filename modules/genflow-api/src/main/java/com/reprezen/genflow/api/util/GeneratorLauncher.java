@@ -38,7 +38,6 @@ public class GeneratorLauncher {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("GL");
 		if (args.length == 0) {
 			throw new IllegalArgumentException(
 					"No GenTargets specified. Please provide one or more GenTarget name or path");//$NON-NLS-1$

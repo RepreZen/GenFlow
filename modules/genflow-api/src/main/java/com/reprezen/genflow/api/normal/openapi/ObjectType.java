@@ -56,9 +56,8 @@ public enum ObjectType {
 	/**
 	 * Define container paths for an object.
 	 * 
-	 * @param pairs
-	 *            a model version number followed by a container path, repeated for
-	 *            all relevant versions
+	 * @param pairs a model version number followed by a container path, repeated
+	 *              for all relevant versions
 	 */
 	private ObjectType(Object... pairs) {
 		if ((pairs.length % 2) != 0) {
@@ -97,10 +96,8 @@ public enum ObjectType {
 	 * type, meaning that it consists of this object type's container path followed
 	 * by an object name
 	 * 
-	 * @param refFragment
-	 *            the fragment portion of a $ref node URL
-	 * @param version
-	 *            model version
+	 * @param refFragment the fragment portion of a $ref node URL
+	 * @param version     model version
 	 * @return
 	 */
 	public boolean matches(String refFragment, int version) {
@@ -111,10 +108,8 @@ public enum ObjectType {
 	 * Extracts the object name from the given $ref URL fragment, assuming that
 	 * fragment matches this model object type
 	 * 
-	 * @param refFragment
-	 *            the fragment portion of a $ref node URL
-	 * @param version
-	 *            model version
+	 * @param refFragment the fragment portion of a $ref node URL
+	 * @param version     model version
 	 * @return the object name (i.e. property name in the container object)
 	 */
 	public String getObjectName(String refFragment, int version) {
@@ -132,10 +127,8 @@ public enum ObjectType {
 	 * would require walking the tree to some extent to find nodes that are not
 	 * within any containers, and copying them as-is as they are encountered.
 	 * 
-	 * @param propertyName
-	 *            top-level property name appearing in model
-	 * @param version
-	 *            model version
+	 * @param propertyName top-level property name appearing in model
+	 * @param version      model version
 	 * @return true if the property is on the path to any model object container
 	 */
 	public static boolean isObjectContainerPrefix(String propertyName, int version) {
@@ -146,10 +139,8 @@ public enum ObjectType {
 	/**
 	 * Obtains the value of this object container from the given tree
 	 * 
-	 * @param tree
-	 *            the model tree
-	 * @param version
-	 *            the model version
+	 * @param tree    the model tree
+	 * @param version the model version
 	 * @return container value, including all objects of this model object type
 	 */
 	public JsonNode getFromNode(JsonNode tree, int version) {
@@ -163,12 +154,9 @@ public enum ObjectType {
 	 * Creates object nodes and array nodes on the way as needed, and replaces any
 	 * existing value.
 	 * 
-	 * @param tree
-	 *            the tree into which the value is inserted
-	 * @param value
-	 *            the value to be inserted
-	 * @param version
-	 *            model version number, controlling which container path is used
+	 * @param tree    the tree into which the value is inserted
+	 * @param value   the value to be inserted
+	 * @param version model version number, controlling which container path is used
 	 */
 	public void setInNode(JsonNode tree, JsonNode value, int version) {
 		JsonPointer p = paths.get(version).getPath();
@@ -202,11 +190,9 @@ public enum ObjectType {
 	 * Build a JsonNode tree to contain the given value at the given JsonPointer
 	 * path. Empty array and object nodes are created and nested as needed.
 	 * 
-	 * @param p
-	 *            a JsonPointer indicating where the value is to appear in the
-	 *            resulting structure
-	 * @param value
-	 *            the value to embed in the structure
+	 * @param p     a JsonPointer indicating where the value is to appear in the
+	 *              resulting structure
+	 * @param value the value to embed in the structure
 	 * @return the created structure
 	 */
 	private JsonNode buildTree(JsonPointer p, JsonNode value) {
@@ -227,8 +213,7 @@ public enum ObjectType {
 	 * Return all the object types for all containers defined for a given model
 	 * version
 	 * 
-	 * @param version
-	 *            the model version
+	 * @param version the model version
 	 * @return
 	 */
 	public static Collection<ObjectType> getTypesForVersion(int version) {
@@ -239,10 +224,8 @@ public enum ObjectType {
 	 * Filter a collection of object type enums, omitting those that do not apply to
 	 * the given model version
 	 * 
-	 * @param version
-	 *            model version
-	 * @param types
-	 *            object types to filter
+	 * @param version model version
+	 * @param types   object types to filter
 	 * @return the filtered list
 	 */
 	public static Collection<ObjectType> getTypesForVersion(int version, Collection<ObjectType> types) {
@@ -252,10 +235,8 @@ public enum ObjectType {
 	/**
 	 * Locate the object type, if any, that matches the given $ref URL fragment.
 	 * 
-	 * @param refFragment
-	 *            fragment of a $ref node URL
-	 * @param version
-	 *            model version
+	 * @param refFragment fragment of a $ref node URL
+	 * @param version     model version
 	 * @return matching object type, if any
 	 */
 	public static Optional<ObjectType> find(String refFragment, int version) {

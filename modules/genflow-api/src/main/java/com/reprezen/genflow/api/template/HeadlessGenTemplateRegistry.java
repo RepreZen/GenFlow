@@ -43,7 +43,6 @@ public final class HeadlessGenTemplateRegistry {
 			while (genTemplates.hasNext()) {
 				try {
 					IGenTemplate template = genTemplates.next();
-					System.out.println(template.getId());
 					registry.put(template.getId(), template);
 				} catch (ServiceConfigurationError e) {
 					logger.warn("Could not retrieve gentemplate; skipping", e);
@@ -82,8 +81,7 @@ public final class HeadlessGenTemplateRegistry {
 	}
 
 	/**
-	 * @param id
-	 *            id of the gen template
+	 * @param id id of the gen template
 	 * @return the gen template by ID
 	 */
 	public static IGenTemplate getGenTemplate(String id) {

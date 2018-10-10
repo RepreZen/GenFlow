@@ -35,5 +35,4 @@ public class GenTemplateTraces {
 	public GenTemplateTrace get(GenTarget target) {
 		return get(GenTargetUtils.getGenTargetFile(target));
 	}
-
 }

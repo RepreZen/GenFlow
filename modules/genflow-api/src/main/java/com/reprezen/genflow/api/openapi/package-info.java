@@ -17,21 +17,20 @@
  * Classes include:
  * <dl>
  * <dt>{@link OpenApiSource}</dt>
- * <dd>An {@link com.modelsolv.reprezen.generators.api.source.ISource}
- * implementation that can load OpenAPI v2 or v3 files and provides methods to
- * disambiguate</dd>
+ * <dd>An {@link com.reprezen.genflow.api.source.ISource} implementation that
+ * can load OpenAPI v2 or v3 files and provides methods to disambiguate</dd>
  * <dt>{@link OpenApiLocator}</dt>
  * <dd>A locator that can be used to locate and dereference structures within a
  * OpenAPI document.</dd>
  * <dt>{@link OpenApiGenTemplate}</dt>
  * <dd>A class that extends
- * {@link com.modelsolv.reprezen.generators.api.template.GenTemplate}, using
+ * {@link com.reprezen.genflow.api.template.GenTemplate}, using
  * {@link OpenApiSource} as the primary source.</dd>
  * <dt>{@link OpenApiOutputItem}</dt>
  * <dd>An implementation of
- * {@link com.modelsolv.reprezen.generators.api.outputitem.IOutputItem} that
- * uses {@link com.reprezen.kaizen.oasparser.model3.OpenApi3} as both its
- * primary type and its input type.
+ * {@link com.reprezen.genflow.api.outputitem.IOutputItem} that uses
+ * {@link com.reprezen.kaizen.oasparser.model3.OpenApi3} as both its primary
+ * type and its input type.
  * </dl>
  * 
  * @author Andy Lowry

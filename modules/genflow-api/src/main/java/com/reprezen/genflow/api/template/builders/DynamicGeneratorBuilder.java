@@ -52,10 +52,8 @@ public class DynamicGeneratorBuilder extends NamedBuilderBase<DynamicGeneratorBu
 			validate();
 		}
 
-		public Optional<IDynamicGenerator<?>> getDynamicGeneratorInstance() {
-			Optional<Object> instance = BuilderUtil.getInstance(generatorClassName);
-			return instance.isPresent() ? Optional.<IDynamicGenerator<?>>of((IDynamicGenerator<?>) instance.get())
-					: Optional.<IDynamicGenerator<?>>empty();
+		public Optional<IDynamicGenerator<?>> getDynamicGeneratorInstance(ClassLoader classLoader) {
+			return BuilderUtil.getInstance(generatorClassName, classLoader);
 		}
 
 		@Override

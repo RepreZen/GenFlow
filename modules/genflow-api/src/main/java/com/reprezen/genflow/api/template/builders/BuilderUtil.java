@@ -24,15 +24,15 @@ public class BuilderUtil {
 		}
 	}
 
-	public static Optional<Object> getInstance(String className) {
+	public static <T> Optional<T> getInstance(String className) {
+		return getInstance(className, BuilderUtil.class.getClassLoader());
+	}
+
+	public static <T> Optional<T> getInstance(String className, ClassLoader classLoader) {
 		Class<?> clazz = null;
 		try {
-			clazz = Class.forName(className);
+			clazz = classLoader.loadClass(className);
 		} catch (ClassNotFoundException e) {
-			try {
-				clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
-			} catch (ClassNotFoundException e1) {
-			}
 		}
 		Object instance = null;
 		if (clazz != null) {
@@ -42,7 +42,9 @@ public class BuilderUtil {
 					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			}
 		}
-		return instance != null ? Optional.of(instance) : Optional.empty();
+		@SuppressWarnings("unchecked")
+		T castInstance = (T) instance;
+		return Optional.ofNullable(castInstance);
 	}
 
 	public static String simpleName(Object o) {

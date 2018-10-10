@@ -66,7 +66,7 @@ public final class GenTemplateTraceItem {
 	 * Optional string identifying a structure contained within the overall value
 	 * represented by the output file data.
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.source.ILocator
+	 * @see com.reprezen.genflow.api.source.ILocator
 	 * 
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)

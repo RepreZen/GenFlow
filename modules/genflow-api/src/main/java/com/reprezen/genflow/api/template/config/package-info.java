@@ -9,7 +9,7 @@
 /**
  * This package contains POJOs that house the items that are required to
  * configure GenTemplate classes derived from
- * {@link com.modelsolv.reprezen.generators.api.trace.GenTemplate}.
+ * {@link com.reprezen.genflow.api.trace.GenTemplate}.
  * <p>
  * The config file for a given GenTemplate class should be available as resource
  * named either "config.json" or "<Name>-config.json", where <Name> is the
@@ -32,7 +32,7 @@
  * {@link NamedSourceConfig}, {@link OutputItemConfig},
  * {@link StaticResourceConfing}, {@ParameterConfig}</dt>
  * <dd>POJOs representing config data used by
- * {@link com.modelsolv.reprezen.generators.api.trace.GenTemplate}</dd>
+ * {@link com.reprezen.genflow.api.trace.GenTemplate}</dd>
  * <dt>{@link GenTargetConfigUtil}</dt>
  * <dd>Class that handles loading of config data</dd>
  * </dl>

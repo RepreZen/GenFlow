@@ -14,19 +14,19 @@
  * Classes include:
  * <dl>
  * <dt>{@link SwaggerSource}</dt>
- * <dd>An {@link com.modelsolv.reprezen.generators.api.source.ISource}
- * implementation that can load Swagger files.</dd>
+ * <dd>An {@link com.reprezen.genflow.api.source.ISource} implementation that
+ * can load Swagger files.</dd>
  * <dt>{@link SwaggerLocator}</dt>
  * <dd>A locator that can be used to locate and dereference structures within a
  * Swagger definition.</dd>
  * <dt>{@link SwaggerGenTemplate}</dt>
  * <dd>A class that extends
- * {@link com.modelsolv.reprezen.generators.api.template.GenTemplate}, using
+ * {@link com.reprezen.genflow.api.template.GenTemplate}, using
  * {@link SwaggerSource} as the primary source.</dd>
  * <dt>{@link SwaggerOutputItem}</dt>
  * <dd>An implementation of
- * {@link com.modelsolv.reprezen.generators.api.outputitem.IOutputItem} that
- * uses {@link io.swagger.models.Swagger} as both its primary type and its input
+ * {@link com.reprezen.genflow.api.outputitem.IOutputItem} that uses
+ * {@link io.swagger.models.Swagger} as both its primary type and its input
  * type.
  * </dl>
  * 

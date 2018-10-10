@@ -13,9 +13,9 @@
  * output it has generated. For each piece of output, trace items can describe
  * the contributing sources and the role played by each. In both cases (outputs
  * and sources), the trace items can incorporate locators (see
- * {@link com.modelsolv.reprezen.generators.api.source.ILocator}) to identify
- * logical portions of actual source or output files. We call such portions
- * "output items" and "source items."
+ * {@link com.reprezen.genflow.api.source.ILocator}) to identify logical
+ * portions of actual source or output files. We call such portions "output
+ * items" and "source items."
  * <p>
  * Classes include:
  * <dl>

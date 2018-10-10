@@ -37,8 +37,7 @@ public class GenTemplateTraceSerializer {
 	 * GenTarget, with the same name but with the extension
 	 * <code>.trace.json</code>.
 	 * 
-	 * @param genTargetFile
-	 *            controlling GenTarget
+	 * @param genTargetFile controlling GenTarget
 	 * @return output file
 	 */
 	public static File getTraceFileForGenTarget(File genTargetFile) {
@@ -48,10 +47,8 @@ public class GenTemplateTraceSerializer {
 	/**
 	 * Serialize a trace file to its output file.
 	 * 
-	 * @param trace
-	 *            the trace object
-	 * @param traceFileLocation
-	 *            the output file
+	 * @param trace             the trace object
+	 * @param traceFileLocation the output file
 	 * @throws GenerationException
 	 */
 	public static void save(GenTemplateTrace trace, File traceFileLocation) throws GenerationException {
@@ -69,10 +66,8 @@ public class GenTemplateTraceSerializer {
 	 * If a base directory is provided, all serialized trace item output file paths
 	 * will be resolved against that directory in the process of deserialization.
 	 * 
-	 * @param traceFile
-	 *            the file containing the serialized data
-	 * @param baseDirectory
-	 *            base directory for the trace object, or null for none.
+	 * @param traceFile     the file containing the serialized data
+	 * @param baseDirectory base directory for the trace object, or null for none.
 	 * @return the trace object
 	 * @throws GenerationException
 	 */
@@ -91,8 +86,7 @@ public class GenTemplateTraceSerializer {
 	 * Deserialize a trace object, using the containing directory as the base
 	 * directory
 	 * 
-	 * @param traceFile
-	 *            file containing serialized trace data
+	 * @param traceFile file containing serialized trace data
 	 * @return trace object
 	 * @throws GenerationException
 	 */

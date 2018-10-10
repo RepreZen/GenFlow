@@ -22,7 +22,6 @@ public class Util {
 	 */
 	public static <T> Iterable<T> iterable(final Iterator<T> iterator) {
 		return new Iterable<T>() {
-
 			@Override
 			public Iterator<T> iterator() {
 				return iterator;

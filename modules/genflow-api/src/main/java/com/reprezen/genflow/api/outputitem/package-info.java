@@ -9,15 +9,15 @@
 /**
  * This package provides support for Output Items, which are used by
  * GenTemplates that extend
- * {@link com.modelsolv.reprezen.generators.api.template.GenTemplate} to create
- * genereated output files.
+ * {@link com.reprezen.genflow.api.template.GenTemplate} to create genereated
+ * output files.
  * <p>
  * An output item is responsible for producing the content of an output file,
  * given an item of source data, plus a set of named string-valued parameters
  * appearing in the controlling GenTarget. The input item is supplied as a pair
  * of values: the overall source value loaded by the GenTemplate's primary
  * source, and an item value obtained from that source value by an extraction
- * method of {@link com.modelsolv.reprezen.generators.api.source.ISource}.
+ * method of {@link com.reprezen.genflow.api.source.ISource}.
  * <p>
  * Classes in this package include:
  * <dl>
@@ -29,10 +29,10 @@
  * <p>
  * An output item must be initialized via {@link outputitem.IOutputItem#init()}
  * before being used to generate output. This is used to provide both a
- * {@link com.modelsolv.reprezen.generators.api.trace.GenTemplateTraceBuilder}
- * and a {@link com.modelsolv.reprezen.generators.api.trace.GenTemplateTraces}
- * object for use during generation. The former allows the output item to create
- * trace information as it executes, while the latter provides access to trace
+ * {@link com.reprezen.genflow.api.trace.GenTemplateTraceBuilder} and a
+ * {@link com.reprezen.genflow.api.trace.GenTemplateTraces} object for use
+ * during generation. The former allows the output item to create trace
+ * information as it executes, while the latter provides access to trace
  * information from prerequisite GenTargets.
  * <dt>{@link AbstractOutputItem}</dt>
  * <dd>Provides default implementations for some methods</dd>

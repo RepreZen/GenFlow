@@ -51,8 +51,7 @@ public interface IGenTemplate {
 	 * normally be applicable to more than one model type should be suppressed for
 	 * one or more but not all of them
 	 * 
-	 * @param modelType
-	 *            the type of model for which to test suppression
+	 * @param modelType the type of model for which to test suppression
 	 * @return true to suppress this gentemplate for this model type
 	 */
 	public boolean isSuppressed(Class<?> modelType);

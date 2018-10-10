@@ -21,8 +21,8 @@ import com.reprezen.genflow.api.template.builders.PrerequisiteBuilder.Prerequisi
 import com.reprezen.genflow.api.template.builders.PrimarySourceBuilder.PrimarySourceSpec;
 import com.reprezen.genflow.api.trace.GenTemplateTrace;
 import com.reprezen.genflow.api.trace.GenTemplateTraceBuilder;
-import com.reprezen.genflow.api.trace.GenTemplateTraces;
 import com.reprezen.genflow.api.trace.GenTemplateTraceBuilder.GenTemplateTraceItemBuilder;
+import com.reprezen.genflow.api.trace.GenTemplateTraces;
 
 public class GenTemplateContext implements IGenTemplateContext {
 
@@ -39,9 +39,7 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#getLogger(
-	 * )
+	 * @see com.reprezen.genflow.api.template.IGenTemplateContext#getLogger()
 	 */
 	@Override
 	public Logger getLogger() {
@@ -55,8 +53,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getControllingGenTarget()
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getControllingGenTarget
+	 * ()
 	 */
 	@Override
 	public GenTarget getControllingGenTarget() {
@@ -70,9 +69,7 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#getTraces(
-	 * )
+	 * @see com.reprezen.genflow.api.template.IGenTemplateContext#getTraces()
 	 */
 	@Override
 	public GenTemplateTraces getTraces() {
@@ -86,8 +83,7 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getTraceBuilder()
+	 * @see com.reprezen.genflow.api.template.IGenTemplateContext#getTraceBuilder()
 	 */
 	@Override
 	public GenTemplateTraceBuilder getTraceBuilder() {
@@ -101,8 +97,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getExecutingGenTemplate()
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getExecutingGenTemplate
+	 * ()
 	 */
 	@Override
 	public IGenTemplate getExecutingGenTemplate() {
@@ -116,8 +113,7 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getPrimarySource()
+	 * @see com.reprezen.genflow.api.template.IGenTemplateContext#getPrimarySource()
 	 */
 	@Override
 	public ISource<?> getPrimarySource() {
@@ -127,8 +123,7 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getDependencies()
+	 * @see com.reprezen.genflow.api.template.IGenTemplateContext#getDependencies()
 	 */
 	@Override
 	public GenTemplateDependencies getDependencies() {
@@ -146,8 +141,8 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getOutputDirectory()
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getOutputDirectory()
 	 */
 	@Override
 	public File getOutputDirectory() {
@@ -161,8 +156,8 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getCurrentOutputFile()
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getCurrentOutputFile()
 	 */
 	@Override
 	public File getCurrentOutputFile() {
@@ -178,8 +173,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getGenTargetParameters()
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getGenTargetParameters(
+	 * )
 	 */
 	@Override
 	public Map<String, Object> getGenTargetParameters() {
@@ -189,8 +185,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * getPrerequisiteTrace(java.lang.String)
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#getPrerequisiteTrace(
+	 * java.lang.String)
 	 */
 	@Override
 	public GenTemplateTrace getPrerequisiteTrace(String prerequisiteName) throws GenerationException {
@@ -201,8 +198,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * resolveOutputPath(java.io.File)
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#resolveOutputPath(java.
+	 * io.File)
 	 */
 	@Override
 	public File resolveOutputPath(File path) throws GenerationException {
@@ -212,8 +210,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * addTraceItem(java.lang.String)
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#addTraceItem(java.lang.
+	 * String)
 	 */
 	@Override
 	public GenTemplateTraceItemBuilder addTraceItem(String type) {
@@ -223,8 +222,9 @@ public class GenTemplateContext implements IGenTemplateContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.modelsolv.reprezen.generators.api.template.IGenTemplateContext#
-	 * addPrimaryTraceItem(java.io.File, java.lang.String)
+	 * @see
+	 * com.reprezen.genflow.api.template.IGenTemplateContext#addPrimaryTraceItem(
+	 * java.io.File, java.lang.String)
 	 */
 	@Override
 	public GenTemplateTraceBuilder addPrimaryTraceItem(File outputFile, String locator) {

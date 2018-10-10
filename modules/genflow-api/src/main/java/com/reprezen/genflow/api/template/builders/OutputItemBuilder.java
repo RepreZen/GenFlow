@@ -70,10 +70,8 @@ public class OutputItemBuilder extends NamedBuilderBase<OutputItemBuilder> {
 			return outputItemClassName;
 		}
 
-		public Optional<IOutputItem<?, ?>> getOutputItemInstance() {
-			Optional<Object> instance = BuilderUtil.getInstance(outputItemClassName);
-			return instance.isPresent() ? Optional.<IOutputItem<?, ?>>of((IOutputItem<?, ?>) instance.get())
-					: Optional.<IOutputItem<?, ?>>empty();
+		public Optional<IOutputItem<?, ?>> getOutputItemInstance(ClassLoader classLoader) {
+			return BuilderUtil.getInstance(outputItemClassName, classLoader);
 		}
 
 		public String getOutputFile() {
@@ -107,7 +105,7 @@ public class OutputItemBuilder extends NamedBuilderBase<OutputItemBuilder> {
 		public String toString() {
 			String primaryType = "?";
 			String itemType = "?";
-			Optional<Object> instance = BuilderUtil.getInstance(outputItemClassName);
+			Optional<Object> instance = BuilderUtil.getInstance(outputItemClassName, this.getClass().getClassLoader());
 			if (instance.isPresent()) {
 				try {
 					primaryType = ((IOutputItem<?, ?>) instance.get()).getPrimaryType().getName();
