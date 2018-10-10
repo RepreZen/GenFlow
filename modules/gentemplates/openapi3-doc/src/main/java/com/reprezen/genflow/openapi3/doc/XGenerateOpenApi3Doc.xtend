@@ -1,21 +1,23 @@
 package com.reprezen.genflow.openapi3.doc
 
+import com.google.common.collect.Lists
 import com.reprezen.genflow.api.openapi3.OpenApi3OutputItem
+import com.reprezen.genflow.common.HtmlInjections
 import com.reprezen.kaizen.oasparser.model3.OpenApi3
-import java.util.ArrayList
 import java.util.List
 import java.util.regex.Pattern
 
-class GenerateOpenApi3Doc extends OpenApi3OutputItem {
-
-	public static val URL_PREFIX_PARAM = 'urlPrefix'
-	public static val ANCHOR_NAME_PARAM = 'anchorName'
-	public static val PREVIEW_PARAM = 'preview'
+class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 
 	extension OptionHelper optionHelper
 	extension HtmlHelper htmlHelper
 	extension MiscHelper miscHelper
+	extension HtmlInjections htmlInjections
 
+	def generate(OpenApi3 model, HtmlInjections htmlInjections) {
+		this.htmlInjections = htmlInjections
+		return generate(model)
+	}
 	override generate(OpenApi3 model) {
 		try {
 			HelperHelper.open(model, context)
@@ -30,13 +32,14 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 
 	def doGenerate(OpenApi3 model) {
 		val urlPrefix = getUrlPrefix
+		val preview = isPreview
 		val startTime = System.nanoTime
 		val showPaths = !model.paths.empty
 		val showDefs = (!preview || !showPaths) && !model.schemas.empty
 		val showParams = (!preview || !showPaths) && !model.parameters.empty
 		val showResponses = (!preview || !showPaths) && !model.responses.empty
 		val includeTOC = !preview && isIncludeTOC
-
+		
 		val html = '''
 			<!DOCTYPE html>
 			<html lang="en">
@@ -108,6 +111,9 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 			                $('div.markdown table').addClass("table").addClass("table-striped");
 			            });
 			        </script>
+			        «IF preview»
+			        	«HtmlInjections.BODY_BOTTOM.inject»
+			        «ENDIF»
 			        «IF includeTOC»
 			        	<script src="«urlPrefix»bootstrap/js/reprezenTOCBuilder.js"></script>
 			        «ENDIF»
@@ -138,6 +144,10 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 			    <!-- Bootstrap core CSS -->
 			    <link href="«urlPrefix»bootstrap/css/bootstrap.css" rel="stylesheet">
 			    <link href="«urlPrefix»bootstrap/css/bootstrap-reprezen.css" rel="stylesheet">
+			    «IF preview»
+			    	<!-- Workaround for live preview problem with web-font loading -->
+			    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+			    «ENDIF»
 			
 			    <!-- Custom styles for this template -->
 			    <link href="«urlPrefix»bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
@@ -156,6 +166,9 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 			        max-width: 100%;
 			    }
 			    </style>
+			    «IF preview»
+					«HtmlInjections.HEAD_BOTTOM.inject»
+			    «ENDIF»
 			</head>
 		'''
 	}
@@ -235,8 +248,8 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 			</div>
 		'''
 	}
-
-	val private indentedPreBlock = Pattern.compile("^(\\s*)<pre\\s+[^>]*class=\"remove-xtend-indent\"[^>]*>.*$",
+	
+	val indentedPreBlock = Pattern.compile("^(\\s*)<pre\\s+[^>]*class=\"remove-xtend-indent\"[^>]*>.*$",
 		Pattern.CASE_INSENSITIVE + Pattern.DOTALL) // DOTALL so we match trailing \r chars
 
 	def private removeUnwantedIndentation(String html) {
@@ -245,7 +258,7 @@ class GenerateOpenApi3Doc extends OpenApi3OutputItem {
 
 	def private removeUnwantedIndentation(List<String> lines) {
 		var i = 0
-		val unindentedLines = new ArrayList<String>
+		val unindentedLines = Lists.<String>newArrayList
 		while (i < lines.size) {
 			var line = lines.get(i)
 			var matcher = indentedPreBlock.matcher(line)

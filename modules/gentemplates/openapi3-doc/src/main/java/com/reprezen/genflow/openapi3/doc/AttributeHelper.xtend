@@ -58,7 +58,7 @@ class AttributeHelper implements Helper {
 	}
 
 	def getRzveTypeName(Object obj) {
-		obj.getRZVE?.typeName
+		obj.RZVE?.typeName
 	}
 
 	def getMinimum(Object obj) {

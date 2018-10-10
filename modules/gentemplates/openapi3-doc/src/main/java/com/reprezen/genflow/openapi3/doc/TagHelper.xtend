@@ -9,11 +9,11 @@
 package com.reprezen.genflow.openapi3.doc
 
 import com.google.common.collect.Sets
+import java.util.Collection
+import java.util.Set
 import com.reprezen.kaizen.oasparser.model3.OpenApi3
 import com.reprezen.kaizen.oasparser.model3.Operation
 import com.reprezen.kaizen.oasparser.model3.Path
-import java.util.Collection
-import java.util.Set
 
 class TagHelper implements Helper {
     private OpenApi3 model

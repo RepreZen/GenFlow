@@ -9,8 +9,8 @@
 package com.reprezen.genflow.openapi3.doc
 
 import com.reprezen.genflow.openapi3.doc.StructureTable.SchemaStructureTable
-import com.reprezen.jsonoverlay.Overlay
 import com.reprezen.kaizen.oasparser.model3.Schema
+import com.reprezen.jsonoverlay.Overlay
 
 class SchemaHelper implements Helper {
 

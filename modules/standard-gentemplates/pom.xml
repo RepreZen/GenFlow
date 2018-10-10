@@ -46,7 +46,15 @@
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi3-doc</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi3-doc</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

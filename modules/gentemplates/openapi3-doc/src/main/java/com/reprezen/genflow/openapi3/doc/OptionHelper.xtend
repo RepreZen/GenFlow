@@ -13,25 +13,29 @@ class OptionHelper implements Helper {
 	public static val URL_PREFIX_PARAM = 'urlPrefix'
 	public static val ANCHOR_NAME_PARAM = 'anchorName'
 	public static val PREVIEW_PARAM = 'preview'
-
+	public static val HTML_INJECTIONS_PARAM = 'htmlInjections'
+	
 	def getUrlPrefix() {
-		URL_PREFIX_PARAM.parameter.orElse(null)?.asString?.orElse(null)
+		URL_PREFIX_PARAM.parameter.map[asString].orElse(null)
 	}
 
 	def getAnchorName() {
-		ANCHOR_NAME_PARAM.parameter.orElse(null)?.asString?.orElse(null)
+		ANCHOR_NAME_PARAM.parameter.map[asString].orElse(null)
 	}
 
 	def isPreview() {
-		PREVIEW_PARAM.parameter.orElse(null)?.asBoolean?.orElse(null) ?: false
+		PREVIEW_PARAM.parameter.map[asBoolean].orElse(null) ?: false
 	}
 
 	def isShowComponentModels() {
-		OpenApi3DocGenTemplate::SHOW_ALL_OF_COMPONENTS_OPTION.parameter.orElse(null)?.asBoolean?.orElse(null) ?: true
+		XOpenApi3DocGenTemplate::SHOW_ALL_OF_COMPONENTS_OPTION.parameter.map[asBoolean].orElse(null) ?: true
 	}
 
 	def isIncludeTOC() {
-		OpenApi3DocGenTemplate::INCLUDE_TABLE_OF_CONTENTS_OPTION.parameter.orElse(null)?.asBoolean?.orElse(null) ?:
-			true
+		XOpenApi3DocGenTemplate::INCLUDE_TABLE_OF_CONTENTS_OPTION.parameter.map[asBoolean].orElse(null) ?: true
+	}
+
+	def getHtmlInjections() {
+		return HTML_INJECTIONS_PARAM.parameter.map[asObject].orElse(null)
 	}
 }

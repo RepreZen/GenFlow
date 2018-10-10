@@ -20,7 +20,7 @@ class HtmlHelper implements Helper {
 	var private nextIdNum = 1
 
 	def String getFileUrl(Object obj) {
-		obj.getRZVE?.fileUrl
+		obj.RZVE?.fileUrl
 	}
 
 	def String htmlEscape(String value) {
@@ -62,7 +62,7 @@ class HtmlHelper implements Helper {
 	}
 
 	def getPointer(Object obj) {
-		obj.getRZVE?.pointer
+		obj.RZVE?.pointer
 	}
 
 	val private static mapper = new ObjectMapper()

@@ -10,7 +10,7 @@ abstract class StructureTable<T> {
 	extension protected HtmlHelper = HelperHelper.htmlHelper
 	extension protected AttributeHelper = HelperHelper.attributeHelper
 	extension protected DocHelper = HelperHelper.docHelper
-	extension protected RecursionHelper = HelperHelper.recursionHelper
+	extension RecursionHelper = HelperHelper.recursionHelper
 	extension protected ArrayHelper = HelperHelper.arrayHelper
 	extension protected RefHelper = HelperHelper.refHelper
 	extension protected OptionHelper = HelperHelper.optionHelper
@@ -327,7 +327,7 @@ abstract class StructureTable<T> {
 			Parameter: // same for parameters
 				return obj.isRequired
 			Schema: // all other named things are references to models, and the referrer determines requiredness
-				return referrer.requiredProperties.contains(name)
+				return referrer.requiredProperties?.contains(name)
 			default:
 				throw new IllegalArgumentException(
 					"Named item is represented by neither a Property, a Parameter, nor a Model")
@@ -339,6 +339,11 @@ abstract class StructureTable<T> {
 			switch (referrer) {
 				Schema:
 					return referrer.requiredFields.toList
+// FIXME adapt to OAS3
+//				ModelImpl:
+//					return referrer.required
+//				ObjectProperty:
+//					return referrer.requiredProperties
 			}
 		}
 		return #[]

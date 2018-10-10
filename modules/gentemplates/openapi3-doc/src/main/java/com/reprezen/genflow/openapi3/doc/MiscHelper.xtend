@@ -12,6 +12,6 @@ class MiscHelper implements Helper {
     }
 
     def <K,V> sortByPosition(Collection<K> keys, Map<K, V> map) {
-        keys.sortBy[map.get(it)?.getRZVE?.position ?: Integer::MAX_VALUE]
+        keys.sortBy[map.get(it)?.RZVE?.position ?: Integer::MAX_VALUE]
     }
 }
