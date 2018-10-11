@@ -142,7 +142,7 @@
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>genflow-common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>

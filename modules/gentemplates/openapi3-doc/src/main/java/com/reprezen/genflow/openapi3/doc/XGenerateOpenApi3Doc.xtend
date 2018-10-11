@@ -6,6 +6,7 @@ import com.reprezen.genflow.common.HtmlInjections
 import com.reprezen.kaizen.oasparser.model3.OpenApi3
 import java.util.List
 import java.util.regex.Pattern
+import static com.reprezen.genflow.common.HtmlInjections.*
 
 class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 
@@ -14,16 +15,13 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	extension MiscHelper miscHelper
 	extension HtmlInjections htmlInjections
 
-	def generate(OpenApi3 model, HtmlInjections htmlInjections) {
-		this.htmlInjections = htmlInjections
-		return generate(model)
-	}
 	override generate(OpenApi3 model) {
 		try {
 			HelperHelper.open(model, context)
 			optionHelper = HelperHelper.optionHelper
 			htmlHelper = HelperHelper.htmlHelper
 			miscHelper = HelperHelper.miscHelper
+			htmlInjections = context.genTargetParameters.get(HTML_INJECTIONS_PARAM) as HtmlInjections ?: new HtmlInjections()
 			doGenerate(model)
 		} finally {
 			HelperHelper.close()
@@ -112,7 +110,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			            });
 			        </script>
 			        «IF preview»
-			        	«HtmlInjections.BODY_BOTTOM.inject»
+			        	«BODY_BOTTOM.inject»
 			        «ENDIF»
 			        «IF includeTOC»
 			        	<script src="«urlPrefix»bootstrap/js/reprezenTOCBuilder.js"></script>
@@ -167,7 +165,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			    }
 			    </style>
 			    «IF preview»
-					«HtmlInjections.HEAD_BOTTOM.inject»
+					«HEAD_BOTTOM.inject»
 			    «ENDIF»
 			</head>
 		'''

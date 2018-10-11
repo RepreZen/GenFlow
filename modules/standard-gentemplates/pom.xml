@@ -20,6 +20,7 @@
                                 </includes>
                                 <excludes>
                                     <exclude>*:genflow-api</exclude>
+                                    <exclude>*:standard-templates</exclude>
                                 </excludes>
                             </artifactSet>
                             <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
@@ -57,4 +58,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 </project>

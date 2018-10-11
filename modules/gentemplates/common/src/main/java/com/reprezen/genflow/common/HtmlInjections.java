@@ -3,6 +3,8 @@ package com.reprezen.genflow.common;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class HtmlInjections {
 
@@ -19,34 +21,37 @@ public class HtmlInjections {
 	public static final String BODY_TOP = "BODY_TOP";
 	public static final String BODY_BOTTOM = "BODY_BOTTOM";
 
+	public static final String HTML_INJECTIONS_PARAM = "HTML_INJECTIONS";
+
 	public Optional<String> inject(String name) {
 		return Optional.ofNullable(injections.get(name));
 	}
 
-	public static Injection headTop(String htmlSnippet) {
-		return new Injection(HEAD_TOP, htmlSnippet);
+	public static Injection headTop(String... htmlSnippets) {
+		return new Injection(HEAD_TOP, htmlSnippets);
 	}
 
-	public static Injection headBottom(String htmlSnippet) {
-		return new Injection(HEAD_BOTTOM, htmlSnippet);
+	public static Injection headBottom(String... htmlSnippets) {
+		return new Injection(HEAD_BOTTOM, htmlSnippets);
 	}
 
-	public static Injection bodyTop(String htmlSnippet) {
-		return new Injection(BODY_TOP, htmlSnippet);
+	public static Injection bodyTop(String... htmlSnippets) {
+		return new Injection(BODY_TOP, htmlSnippets);
 	}
 
-	public static Injection bodyBottom(String htmlSnippet) {
-		return new Injection(BODY_BOTTOM, htmlSnippet);
+	public static Injection bodyBottom(String... htmlSnippets) {
+		return new Injection(BODY_BOTTOM, htmlSnippets);
 	}
 
 	public static class Injection {
 		private final String name;
 		private final String htmlSnippet;
 
-		public Injection(String name, String htmlSnippet) {
+		public Injection(String name, String... htmlSnippet) {
 			super();
 			this.name = name;
-			this.htmlSnippet = htmlSnippet;
+			this.htmlSnippet = Stream.of(htmlSnippet).collect(Collectors.joining("\n"));
+
 		}
 
 		public String getName() {
