@@ -6,8 +6,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class HtmlInjections {
 
+	@JsonInclude
 	private Map<String, String> injections = new HashMap<>();
 
 	public HtmlInjections(Injection... injections) {
@@ -23,7 +26,11 @@ public class HtmlInjections {
 
 	public static final String HTML_INJECTIONS_PARAM = "HTML_INJECTIONS";
 
-	public Optional<String> inject(String name) {
+	public String inject(String name) {
+		return getInjection(name).orElse("");
+	}
+
+	public Optional<String> getInjection(String name) {
 		return Optional.ofNullable(injections.get(name));
 	}
 
@@ -44,7 +51,9 @@ public class HtmlInjections {
 	}
 
 	public static class Injection {
+		@JsonInclude
 		private final String name;
+		@JsonInclude
 		private final String htmlSnippet;
 
 		public Injection(String name, String... htmlSnippet) {
