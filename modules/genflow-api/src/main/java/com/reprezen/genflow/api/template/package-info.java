@@ -99,7 +99,7 @@
  * <dd>A container for dependencies. This class also provides static methods for
  * constructing dependencies, including a method for each type of configuration
  * builder spec that can give rise to a dependency.</dd>
- * <dt>{@link HeadlessGenTemplateRegistry}</dt>
+ * <dt>{@link GemTemplateRegistry}</dt>
  * <dd>This class uses Java's {@link java.util.ServiceLoader} facility to
  * discover available GenTemplate implementations, using the
  * <code>META-INF/services/...</code> resources mentioned earlier.

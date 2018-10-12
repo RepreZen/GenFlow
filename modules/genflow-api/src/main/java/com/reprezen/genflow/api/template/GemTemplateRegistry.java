@@ -20,23 +20,23 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.ImmutableList;
 
 /**
- * Headless registry to discover generation templates. Can be used only in
- * non-Eclipse environment.
+ * Registry to discover generation templates. Can be used only in non-Eclipse
+ * environment.
  * 
  * @author Konstantin Zaitsev
  * @date May 18, 2015
  */
-public final class HeadlessGenTemplateRegistry {
+public final class GemTemplateRegistry {
 
-	private static Logger logger = LoggerFactory.getLogger(HeadlessGenTemplateRegistry.class);
+	private static Logger logger = LoggerFactory.getLogger(GemTemplateRegistry.class);
 
 	/** Singleton reference. */
-	private static HeadlessGenTemplateRegistry instance;
+	private static GemTemplateRegistry instance;
 
 	private Map<String, IGenTemplate> registry;
 
-	private HeadlessGenTemplateRegistry() {
-		ClassLoader classLoader = HeadlessGenTemplateRegistry.class.getClassLoader();
+	private GemTemplateRegistry() {
+		ClassLoader classLoader = GemTemplateRegistry.class.getClassLoader();
 		if (registry == null) {
 			registry = new HashMap<String, IGenTemplate>();
 			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
@@ -69,11 +69,11 @@ public final class HeadlessGenTemplateRegistry {
 		}
 	}
 
-	private static HeadlessGenTemplateRegistry getInstance() {
+	private static GemTemplateRegistry getInstance() {
 		if (instance == null) {
-			synchronized (HeadlessGenTemplateRegistry.class) {
+			synchronized (GemTemplateRegistry.class) {
 				if (instance == null) {
-					instance = new HeadlessGenTemplateRegistry();
+					instance = new GemTemplateRegistry();
 				}
 			}
 		}

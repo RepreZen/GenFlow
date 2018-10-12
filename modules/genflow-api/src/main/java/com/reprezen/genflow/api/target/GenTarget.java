@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
-import com.reprezen.genflow.api.template.HeadlessGenTemplateRegistry;
+import com.reprezen.genflow.api.template.GemTemplateRegistry;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.template.IGenTemplate.Generator;
 import com.reprezen.genflow.api.trace.GenTemplateTrace;
@@ -232,10 +232,11 @@ public class GenTarget {
 		}
 		if (genTemplate == null) {
 			try {
-				genTemplate = HeadlessGenTemplateRegistry.getGenTemplate(genTemplateId);
+				genTemplate = GemTemplateRegistry.getGenTemplate(genTemplateId);
 			} catch (Throwable e) {
 				logger.severe("Failed to locate GenTemplate " + genTemplateId);
-				throw e;
+				e.printStackTrace();
+				throw new GenerationException("doh", e);
 			}
 		}
 		Generator generator = genTemplate.getGenerator();
