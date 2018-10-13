@@ -78,7 +78,7 @@
     <artifactId>genflow-api</artifactId>
     <parent>
         <groupId>com.reprezen.genflow</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>genflow-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>

@@ -34,5 +34,6 @@
     </build>
     <properties>
         <maven.install.skip>true</maven.install.skip>
+        <maven.deply.skip>true</maven.deply.skip>
     </properties>
 </project>
