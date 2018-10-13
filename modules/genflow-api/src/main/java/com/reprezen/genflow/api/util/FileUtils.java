@@ -44,7 +44,6 @@ public final class FileUtils {
 	 */
 	public static List<File> copyResources(Class<?> codeBase, String source, File target) throws Exception {
 		File jarFile = new File(codeBase.getProtectionDomain().getCodeSource().getLocation().getPath());
-		System.out.println(jarFile);
 		return copyResources(jarFile, source, target);
 	}
 
@@ -73,16 +72,11 @@ public final class FileUtils {
 			while (entries.hasMoreElements()) {
 				JarEntry entry = entries.nextElement();
 				String name = entry.getName();
-				System.out.printf("Entry: %s; prefix: %s", name, prefix);
 				if (name.equals(source)) {
-					System.out.println(" - copy whole entry");
 					result.add(copyJarEntry(jar, entry, target));
 				} else if (name.startsWith(prefix) && !entry.isDirectory()) {
 					File outputFile = new File(target, entry.getName().substring(prefix.length()));
-					System.out.println(" - copy to " + outputFile);
 					result.add(copyJarEntry(jar, entry, outputFile));
-				} else {
-					System.out.println(" - ignored");
 				}
 			}
 		}
