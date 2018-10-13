@@ -43,7 +43,7 @@ public final class GemTemplateRegistry {
 			while (genTemplates.hasNext()) {
 				try {
 					IGenTemplate template = genTemplates.next();
-					registry.put(template.getId(), template);
+					register(template);
 				} catch (ServiceConfigurationError e) {
 					logger.warn("Could not retrieve gentemplate; skipping", e);
 				}
@@ -56,7 +56,7 @@ public final class GemTemplateRegistry {
 					while (groupIterator.hasNext()) {
 						try {
 							IGenTemplate template = groupIterator.next();
-							registry.put(template.getId(), template);
+							register(template);
 						} catch (Exception e) {
 							logger.warn("Could not retrieve gentemplate from group; skipping", e);
 						}
@@ -66,6 +66,22 @@ public final class GemTemplateRegistry {
 				}
 
 			}
+		}
+	}
+
+	private void register(IGenTemplate template) {
+		register(template.getId(), template);
+		if (template instanceof AbstractGenTemplate) {
+			((AbstractGenTemplate) template).getAlsoKnownAsIds().stream().forEach((aka -> register(aka, template)));
+		}
+	}
+
+	private void register(String id, IGenTemplate template) {
+		if (!registry.containsKey(id)) {
+			registry.put(id, template);
+		} else {
+			logger.warn(String.format("Id '%s' for GenTemplate %s already in use; ignoring", id,
+					template.getClass().getName()));
 		}
 	}
 
