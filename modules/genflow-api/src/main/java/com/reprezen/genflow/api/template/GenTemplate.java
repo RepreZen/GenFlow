@@ -597,6 +597,12 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 			GenTemplateTraceBuilder traceBuilder = context.getTraceBuilder();
 			for (StaticResourceSpec spec : genTemplate.staticResourceSpecs) {
 				String resourcePath = spec.getResourcePath();
+				if (!resourcePath.startsWith("/")) {
+					resourcePath = genTemplate.getClass().getPackage().getName().replaceAll("\\.", "/") + "/"
+							+ resourcePath;
+				} else {
+					resourcePath = resourcePath.substring(1);
+				}
 				File destination = target.resolveOutputPath(spec.getOutput());
 				try {
 					List<File> outputFiles = FileUtils.copyResources(context.getExecutingGenTemplate().getClass(),
