@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
@@ -43,24 +44,35 @@ public final class FileUtils {
 	 * @throws URISyntaxException
 	 */
 	public static List<File> copyResources(Class<?> codeBase, String source, File target) throws Exception {
-		File jarFile = new File(codeBase.getProtectionDomain().getCodeSource().getLocation().getPath());
-		return copyResources(jarFile, source, target);
+		URL codeLocation = null;
+		File codeSource = null;
+		try {
+
+			codeLocation = codeBase.getProtectionDomain().getCodeSource().getLocation();
+			codeSource = new File(codeLocation.toURI());
+		} catch (URISyntaxException e) {
+			// bug in code locations located in plugin bundles - URL incorrectly includes
+			// bare spaces, so above fails, but this should work OK.
+			codeSource = new File(codeLocation.getPath());
+		}
+		return copyResources(codeSource, source, target);
 	}
 
 	/**
 	 * Copies resources from JAR file to specified location.
 	 * 
-	 * @param jarFile JAR file location
-	 * @param source  source path in JAR
-	 * @param target  target location in local file system
+	 * @param codeSource code source location (usually a JAR file, in dev it may be
+	 *                   a classes directory)
+	 * @param source     source path in JAR
+	 * @param target     target location in local file system
 	 * @throws IOException
 	 */
-	public static List<File> copyResources(File jarFile, String source, File target) throws Exception {
-		if (jarFile.isFile()) {
-			return copyJarResources(jarFile, source, target);
+	public static List<File> copyResources(File codeSource, String source, File target) throws Exception {
+		if (codeSource.isFile()) {
+			return copyJarResources(codeSource, source, target);
 		} else {
 			// Unlikely except in dev environment
-			return copyFileResources(new File(jarFile, source), target);
+			return copyFileResources(new File(codeSource, source), target);
 		}
 	}
 
