@@ -131,6 +131,12 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 	}
 
 	@Override
+	protected List<String> getAlsoKnownAsIds() throws GenerationException {
+		init();
+		return super.getAlsoKnownAsIds();
+	}
+
+	@Override
 	public Map<String, GenTemplateProperty> getProperties() throws GenerationException {
 		init();
 		return Collections.unmodifiableMap(properties);

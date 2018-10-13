@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
+import com.reprezen.genflow.api.GenerationException;
 
 /**
  * Registry to discover generation templates. Can be used only in non-Eclipse
@@ -72,7 +73,11 @@ public final class GemTemplateRegistry {
 	private void register(IGenTemplate template) {
 		register(template.getId(), template);
 		if (template instanceof AbstractGenTemplate) {
-			((AbstractGenTemplate) template).getAlsoKnownAsIds().stream().forEach((aka -> register(aka, template)));
+			try {
+				((AbstractGenTemplate) template).getAlsoKnownAsIds().stream().forEach((aka -> register(aka, template)));
+			} catch (GenerationException e) {
+				logger.warn(String.format("Failed to register also-known-as IDs for gentemplate " + template.getId()));
+			}
 		}
 	}
 

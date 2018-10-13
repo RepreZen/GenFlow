@@ -36,7 +36,7 @@ public abstract class AbstractGenTemplate implements IGenTemplate {
 		alsoKnownAsIds.addAll(Arrays.asList(akaIds));
 	}
 
-	protected List<String> getAlsoKnownAsIds() {
+	protected List<String> getAlsoKnownAsIds() throws GenerationException {
 		return Collections.unmodifiableList(alsoKnownAsIds);
 	}
 
