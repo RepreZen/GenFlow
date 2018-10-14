@@ -49,9 +49,9 @@
     </properties>
     <parent>
         <groupId>com.reprezen.genflow</groupId>
-        <artifactId>genflow-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../parent/pom.xml</relativePath>
+        <artifactId>genflow</artifactId>
+        <version>0.0.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <dependencies>
         <dependency>

@@ -8,8 +8,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.reprezen.genflow</groupId>
-        <artifactId>genflow-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>genflow</artifactId>
+        <version>0.0.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Common code for use in GenTemplate implementations</description>

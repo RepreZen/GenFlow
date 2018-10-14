@@ -8,7 +8,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>standard-gentemplates</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.0</version>
     <packaging>jar</packaging>
     <name>Standard GenTemplates</name>
     <description>RepreZen Standard GenTemplates</description>
@@ -136,17 +136,9 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi3-doc</artifactId>
+            <version>0.0.0</version>
         </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>openapi3-doc</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
