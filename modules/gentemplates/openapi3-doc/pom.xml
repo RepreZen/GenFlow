@@ -51,7 +51,7 @@
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
         <version>0.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     <dependencies>
         <dependency>
