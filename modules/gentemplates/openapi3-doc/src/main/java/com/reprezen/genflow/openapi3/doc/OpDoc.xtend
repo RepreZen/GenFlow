@@ -57,14 +57,15 @@ class OpDoc {
 			    	«op.callbacks.get(callback).getCallbackHtml(callback)»
 			    «ENDFOR»
 			</ul>
-		 '''
+		'''
 	}
 
 	def getNonBodyParameters(Operation op) {
 		op.parameters?.filter[it.in != "body"].toList
 	}
 
-	def getMessageBodyHtml(Operation op /* , HttpMethod method */ ) {
+	def getMessageBodyHtml(
+		Operation op /* , HttpMethod method */ ) {
 		'''
 			«op.requestBody.asNullIfMissing?.getRequestBodyHtml»
 			«FOR code : op.responses.keySet.sortByPosition(op.responses)»«op.responses.get(code).getResponseHtml(code)»«ENDFOR»
@@ -138,17 +139,14 @@ class OpDoc {
 	}
 
 	def getResponseLinks(Response response) {
-		if (response.links.empty)
-			''''''
-		else
-			'''
-				<li class="list-group-item">
-					<h4><strong>Links</strong></h4>
-					«FOR link : response.links.keySet»
-						«link.getLinkHtml(response.links.get(link))»
-					«ENDFOR»
-				</li>
-			'''
+		if (response.links.empty) '''''' else '''
+			<li class="list-group-item">
+				<h4><strong>Links</strong></h4>
+				«FOR link : response.links.keySet»
+					«link.getLinkHtml(response.links.get(link))»
+				«ENDFOR»
+			</li>
+		'''
 	}
 
 	def getLinkHtml(String name, Link link) {
@@ -174,23 +172,23 @@ class OpDoc {
 
 	def statusLabel(String status) {
 		val context = try {
-				switch s: Integer.parseInt(status) {
-					case s >= 100 && s < 200: // Informational
-						"info"
-					case s >= 200 && s < 300: // Success
-						"success"
-					case s >= 300 && s < 400: // Redirection
-						"info"
-					case s >= 400 && s < 500: // Bad request
-						"danger"
-					case s >= 500 && s < 600: // server error
-						"danger"
-					default:
-						"default"
-				}
-			} catch (NumberFormatException e) {
-				status // handle "default" case
+			switch s: Integer.parseInt(status) {
+				case s >= 100 && s < 200: // Informational
+					"info"
+				case s >= 200 && s < 300: // Success
+					"success"
+				case s >= 300 && s < 400: // Redirection
+					"info"
+				case s >= 400 && s < 500: // Bad request
+					"danger"
+				case s >= 500 && s < 600: // server error
+					"danger"
+				default:
+					"default"
 			}
+		} catch (NumberFormatException e) {
+			status // handle "default" case
+		}
 		'''<span class="label label-«context»">«status»</span>'''
 	}
 

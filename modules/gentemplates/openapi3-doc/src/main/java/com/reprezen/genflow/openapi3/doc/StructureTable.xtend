@@ -246,7 +246,7 @@ abstract class StructureTable<T> {
 		def private dispatch getTypeSpec(RecursiveRenderException e, AttrDetails det) {
 			"(recursive)"
 		}
-		
+
 		override protected renderColumn(String colAttr, String name, Object referrer, Indentation ind,
 			AttrDetails det) {
 			if (obj instanceof RecursiveRenderException) {
@@ -327,7 +327,7 @@ abstract class StructureTable<T> {
 			Parameter: // same for parameters
 				return obj.isRequired
 			Schema: // all other named things are references to models, and the referrer determines requiredness
-				return referrer.requiredProperties?.contains(name)
+				return referrer.requiredProperties.contains(name)
 			default:
 				throw new IllegalArgumentException(
 					"Named item is represented by neither a Property, a Parameter, nor a Model")
@@ -339,11 +339,6 @@ abstract class StructureTable<T> {
 			switch (referrer) {
 				Schema:
 					return referrer.requiredFields.toList
-// FIXME adapt to OAS3
-//				ModelImpl:
-//					return referrer.required
-//				ObjectProperty:
-//					return referrer.requiredProperties
 			}
 		}
 		return #[]

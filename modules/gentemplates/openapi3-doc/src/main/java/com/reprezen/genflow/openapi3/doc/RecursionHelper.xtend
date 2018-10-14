@@ -5,52 +5,52 @@ import java.util.Map
 
 class RecursionHelper implements Helper {
 
-    override init() {}
+	override init() {}
 
-    // would really like an IdentityHashSet here, but Java.util doesn't have one.
-    // identity semantics required so we distinguish between different objects even if they're equal
-    val private Map<Object, Void> activeObjects = new IdentityHashMap<Object, Void>()
+	// would really like an IdentityHashSet here, but Java.util doesn't have one.
+	// identity semantics required so we distinguish between different objects even if they're equal
+	val private Map<Object, Void> activeObjects = new IdentityHashMap<Object, Void>()
 
-    def use(Object obj) {
-        if (activeObjects.containsKey(obj)) {
-            throw new RecursiveRenderException(obj)
-        } else {
-            new Activation(obj, this)
-        }
-    }
+	def use(Object obj) {
+		if (activeObjects.containsKey(obj)) {
+			throw new RecursiveRenderException(obj)
+		} else {
+			new Activation(obj, this)
+		}
+	}
 
-    def activate(Object obj) {
-        activeObjects.put(obj, null)
-    }
+	def activate(Object obj) {
+		activeObjects.put(obj, null)
+	}
 
-    def deactivate(Object obj) {
-        activeObjects.remove(obj)
-    }
+	def deactivate(Object obj) {
+		activeObjects.remove(obj)
+	}
 }
 
 class Activation implements AutoCloseable {
-    val private RecursionHelper helper
-    val private Object obj
+	val private RecursionHelper helper
+	val private Object obj
 
-    new(Object obj, RecursionHelper helper) {
-        this.helper = helper
-        this.obj = obj
-        helper.activate(obj)
-    }
+	new(Object obj, RecursionHelper helper) {
+		this.helper = helper
+		this.obj = obj
+		helper.activate(obj)
+	}
 
-    override close() {
-        helper.deactivate(obj)
-    }
+	override close() {
+		helper.deactivate(obj)
+	}
 }
 
 class RecursiveRenderException extends Exception {
-    private Object obj
+	private Object obj
 
-    new(Object obj) {
-        this.obj = obj
-    }
+	new(Object obj) {
+		this.obj = obj
+	}
 
-    def getObject() {
-        return obj
-    }
+	def getObject() {
+		return obj
+	}
 }

@@ -14,17 +14,17 @@ import java.util.List
 
 class ParamsDoc {
 
-    def paramsHtml(List<? extends Parameter> params) {
-        if (!params.empty) {
-            val table = new ParametersStructureTable((params as List<Parameter>), #["name", "Name"], #["in", "In"], #["default", "Default"],
-                #["type", "Type"], #["doc", "Description"])
-            '''
-                <li class="list-group-item">
-                    <h4>Parameters</h4>
-                    
-                    «table.render(null)»
-                </li>
-            '''
-        }
-    }
+	def paramsHtml(List<Parameter> params) {
+		if (!params.empty) {
+			val table = new ParametersStructureTable(params, #["name", "Name"], #["in", "In"],
+				#["default", "Default"], #["type", "Type"], #["doc", "Description"])
+			'''
+				<li class="list-group-item">
+				    <h4>Parameters</h4>
+				    
+				    «table.render(null)»
+				</li>
+			'''
+		}
+	}
 }

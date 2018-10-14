@@ -27,8 +27,7 @@ class AttributeHelper implements Helper {
 //	def dispatch getAttribute(Property prop, String attr) {
 //		propertyHelper.getAttribute(prop, attr)
 //	}
-
-	def dispatch getAttribute(Parameter param, String attr) {		
+	def dispatch getAttribute(Parameter param, String attr) {
 		parameterHelper.getAttribute(param, attr)
 	}
 

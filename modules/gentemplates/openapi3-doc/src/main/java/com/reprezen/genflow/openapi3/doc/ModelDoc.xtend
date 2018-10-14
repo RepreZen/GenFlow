@@ -13,32 +13,32 @@ import com.reprezen.kaizen.oasparser.model3.Schema
 
 class ModelDoc {
 
-    val OpenApi3 model = HelperHelper.model
-    val String name
-    val Schema definition
+	val OpenApi3 model = HelperHelper.model
+	val String name
+	val Schema definition
 
-    extension SchemaHelper = HelperHelper.schemaHelper
-    extension DocHelper = HelperHelper.docHelper
-    extension HtmlHelper = HelperHelper.htmlHelper
+	extension SchemaHelper = HelperHelper.schemaHelper
+	extension DocHelper = HelperHelper.docHelper
+	extension HtmlHelper = HelperHelper.htmlHelper
 
-    new(String name) {
-        this.name = name
-        this.definition = model.schemas.get(name)
-    }
+	new(String name) {
+		this.name = name
+		this.definition = model.schemas.get(name)
+	}
 
-    def getHtml() {
-        '''
-            <a class="anchor toc-entry" id="«definition.htmlId»" data-toc-level=1 data-toc-text="«name»"></a>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">«name»</h4>
-                </div>
-                <div class="panel-body">
-                    «definition.description.docHtml»
-                    «definition.renderSchema»
-                </div>
-            </div>
-        '''
-    }
+	def getHtml() {
+		'''
+			<a class="anchor toc-entry" id="«definition.htmlId»" data-toc-level=1 data-toc-text="«name»"></a>
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+			        <h4 class="panel-title">«name»</h4>
+			    </div>
+			    <div class="panel-body">
+			        «definition.description.docHtml»
+			        «definition.renderSchema»
+			    </div>
+			</div>
+		'''
+	}
 
 }

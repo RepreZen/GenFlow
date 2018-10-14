@@ -16,54 +16,54 @@ import com.reprezen.kaizen.oasparser.model3.Operation
 import com.reprezen.kaizen.oasparser.model3.Path
 
 class TagHelper implements Helper {
-    private OpenApi3 model
-    extension DocHelper docHelper
-    extension HtmlHelper htmlHelper
+	private OpenApi3 model
+	extension DocHelper docHelper
+	extension HtmlHelper htmlHelper
 
-    override init() {
-        model = HelperHelper.model
-        docHelper = HelperHelper.docHelper
-        htmlHelper = HelperHelper.htmlHelper
-    }
+	override init() {
+		model = HelperHelper.model
+		docHelper = HelperHelper.docHelper
+		htmlHelper = HelperHelper.htmlHelper
+	}
 
-    def getTagBadges(Operation op) {
-        '''
-            «FOR tag : op.tags?.reorderTags ?: #[]»
-                <span class="pull-right">&nbsp;<span class="badge" data-toggle="tooltip" data-title="«tag.modelTag?.
+	def getTagBadges(Operation op) {
+		'''
+			«FOR tag : op.tags?.reorderTags ?: #[]»
+				<span class="pull-right">&nbsp;<span class="badge" data-toggle="tooltip" data-title="«tag.modelTag?.
                 description?.docHtml?.toString?.htmlEscape»" data-html="true">«tag»</span></span>
-            «ENDFOR»
-        '''
-    }
+			«ENDFOR»
+		'''
+	}
 
-    def getCommonTags(Path path) {
-        var Set<String> common
-        for (op : path.operations.values) {
-            if (common === null) {
-                common = Sets.newHashSet(op.tags)
-            } else {
-                common.retainAll(op.tags)
-            }
-        }
-        (common ?: #[]).reorderTags
-    }
+	def getCommonTags(Path path) {
+		var Set<String> common
+		for (op : path.operations.values) {
+			if (common === null) {
+				common = Sets.newHashSet(op.tags)
+			} else {
+				common.retainAll(op.tags)
+			}
+		}
+		(common ?: #[]).reorderTags
+	}
 
-    def reorderTags(Collection<String> tags) {
-        val orderedTags = Sets.newLinkedHashSet
-        for (tag : model.tags.map[it.name].filterNull) {
-            if (tags.contains(tag)) {
-                orderedTags.add(tag)
-            }
-        }
-        orderedTags.addAll(tags)
-        orderedTags
-    }
+	def reorderTags(Collection<String> tags) {
+		val orderedTags = Sets.newLinkedHashSet
+		for (tag : model.tags.map[it.name].filterNull) {
+			if (tags.contains(tag)) {
+				orderedTags.add(tag)
+			}
+		}
+		orderedTags.addAll(tags)
+		orderedTags
+	}
 
-    def getModelTag(String tagName) {
-        for (tag : model.tags) {
-            if (tag.name == tagName) {
-                return tag
-            }
-        }
-        return null
-    }
+	def getModelTag(String tagName) {
+		for (tag : model.tags) {
+			if (tag.name == tagName) {
+				return tag
+			}
+		}
+		return null
+	}
 }

@@ -14,7 +14,7 @@ class OptionHelper implements Helper {
 	public static val ANCHOR_NAME_PARAM = 'anchorName'
 	public static val PREVIEW_PARAM = 'preview'
 	public static val HTML_INJECTIONS_PARAM = 'htmlInjections'
-	
+
 	def getUrlPrefix() {
 		URL_PREFIX_PARAM.parameter.map[asString].orElse(null)
 	}

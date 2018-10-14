@@ -19,7 +19,8 @@ class AttrDetails {
 	def details(boolean topLevel) {
 		val details = detailRows
 		if (!details.empty) {
-			val detailsTable = details.detailsTable
+			val detailsTable = details.
+				detailsTable
 			if (topLevel) {
 				// wrapping in an outer table to make it look the same as in the case where there really is 
 				// an outer table that contains this. Otherwise bootstrap css gives it an odd look
@@ -97,8 +98,8 @@ class AttrDetails {
 	}
 
 	def private getBounds() {
-		val minEq = if(obj.getExclusiveMinimum!=null && !obj.getExclusiveMinimum) "="
-		val maxEq = if(obj.getExclusiveMaximum!=null && !obj.getExclusiveMaximum) "="
+		val minEq = if(obj.getExclusiveMinimum !== null && !obj.getExclusiveMinimum) "="
+		val maxEq = if(obj.getExclusiveMaximum !== null && !obj.getExclusiveMaximum) "="
 		val bounds = if (obj.minimum !== null) {
 				if (obj.maximum !== null) {
 					'''«obj.minimum» <«minEq» «obj.title» <«maxEq» «obj.maximum»'''
@@ -112,11 +113,12 @@ class AttrDetails {
 	}
 
 	def private String getLengthBounds() {
-		if ((obj.minLength!=null && obj.minLength > 0) && (obj.maxLength !=null && obj.maxLength < Integer::MAX_VALUE)) {
+		if ((obj.minLength !== null && obj.minLength > 0) &&
+			(obj.maxLength !== null && obj.maxLength < Integer::MAX_VALUE)) {
 			'''«obj.minLength» &lt;= <em>length</em> &lt;= «obj.maxLength»'''
-		} else if (obj.minLength !=null && obj.minLength > 0) {
+		} else if (obj.minLength !== null && obj.minLength > 0) {
 			'''<em>length</em> &gt;= «obj.minLength»'''
-		} else if (obj.maxLength!=null && obj.maxLength < Integer::MAX_VALUE) {
+		} else if (obj.maxLength !== null && obj.maxLength < Integer::MAX_VALUE) {
 			'''<em>length</em> &lt;= «obj.maxLength»'''
 		}
 	}
@@ -124,5 +126,5 @@ class AttrDetails {
 	def private getEnumList() {
 		obj.enums?.map[it.asNullIfMissing?.toString?.htmlEscape]?.join("<br>")
 	}
-	
+
 }

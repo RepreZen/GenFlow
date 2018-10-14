@@ -14,53 +14,53 @@ import com.reprezen.jsonoverlay.Overlay
 
 class SchemaHelper implements Helper {
 
-    extension AttributeHelper attributeHelper
-    extension ArrayHelper arrayHelper
+	extension AttributeHelper attributeHelper
+	extension ArrayHelper arrayHelper
 	extension KaiZenParserHelper = new KaiZenParserHelper
 
-    override init() {        
-        attributeHelper = HelperHelper.attributeHelper
-        arrayHelper = HelperHelper.arrayHelper
-    }
+	override init() {
+		attributeHelper = HelperHelper.attributeHelper
+		arrayHelper = HelperHelper.arrayHelper
+	}
 
-    def renderSchema(Schema schema) {               
-        switch schema {
-        	case schema.primitive:
-        		schema.renderPrimitiveSchema
-        	case schema.type == 'array':
-        		schema.renderArraySchema    	
-        	default:
-        		schema.renderSchemaTable
-        }
-    }
+	def renderSchema(Schema schema) {
+		switch schema {
+			case schema.primitive:
+				schema.renderPrimitiveSchema
+			case schema.type == 'array':
+				schema.renderArraySchema
+			default:
+				schema.renderSchemaTable
+		}
+	}
 
-    def private renderSchemaTable(Schema schema) {
-    	if (schema !== null && !Overlay.of(schema).toJson.empty) {
-        	val table = new SchemaStructureTable(schema, #["name", "Name"], #["type", "Type"], #["doc", "Description"])
-        	table.render(null)
-        }
-    }
+	def private renderSchemaTable(Schema schema) {
+		if (schema !== null && !Overlay.of(schema).toJson.empty) {
+			val table = new SchemaStructureTable(schema, #["name", "Name"], #["type", "Type"], #["doc", "Description"])
+			table.render(null)
+		}
+	}
 
-    def renderArraySchema(Schema schema) {
-        val typeSpec = schema.arrayTypeSpec        
-        val Schema eltType = schema.elementType
-        val details = new AttrDetails(eltType)
-        '''
-            <code>«typeSpec»</code>
-            «IF eltType.primitive»«details.infoButton»«details.details(true)»«ELSE»«eltType.renderSchemaTable»«ENDIF»
-        '''
-    }
+	def renderArraySchema(Schema schema) {
+		val typeSpec = schema.arrayTypeSpec
+		val Schema eltType = schema.elementType
+		val details = new AttrDetails(eltType)
+		'''
+			<code>«typeSpec»</code>
+			«IF eltType.primitive»«details.infoButton»«details.details(true)»«ELSE»«eltType.renderSchemaTable»«ENDIF»
+		'''
+	}
 
-    def isPrimitive(Schema obj) {
-    	#{"boolean", "integer", "null", "number", "string"}.contains(obj.type)
-    }
+	def isPrimitive(Schema obj) {
+		#{"boolean", "integer", "null", "number", "string"}.contains(obj.type)
+	}
 
-    def renderPrimitiveSchema(Schema schema) {
-        val details = new AttrDetails(schema)
-        '''<code>«schema.type»</code>«details.infoButton»«details.details(true)»'''
-    }
+	def renderPrimitiveSchema(Schema schema) {
+		val details = new AttrDetails(schema)
+		'''<code>«schema.type»</code>«details.infoButton»«details.details(true)»'''
+	}
 
-    def getSchemaTitle(Schema schema) {
-        #[schema.getKaiZenSchemaName, schema.title, schema.rzveTypeName].filter[it !== null].last
-    }
+	def getSchemaTitle(Schema schema) {
+		#[schema.getKaiZenSchemaName, schema.title, schema.rzveTypeName].filter[it !== null].last
+	}
 }

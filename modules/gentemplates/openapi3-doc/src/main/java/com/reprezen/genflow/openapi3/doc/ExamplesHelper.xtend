@@ -26,7 +26,8 @@ class ExamplesHelper implements Helper {
 		example?.exampleText?.exampleSection
 	}
 
-	def private String render(Example example, String name) {
+	def private String render(Example example,
+		String name) {
 		'''
 			<dt>«name»</dt>
 			<dd>

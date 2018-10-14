@@ -7,38 +7,38 @@ import com.reprezen.kaizen.oasparser.model3.Response
 
 class RefHelper implements Helper {
 
-    var private OpenApi3 model
+	var private OpenApi3 model
 
-    override init() {
-        model = HelperHelper.model
-    }
+	override init() {
+		model = HelperHelper.model
+	}
 
-    def dispatch Object resolve(Object obj) {
-        switch obj {
+	def dispatch Object resolve(Object obj) {
+		switch obj {
 // FIXME adapt to OAS3
 //            RefParameter: obj.resolve
 //            RefModel: obj.resolve
 //            RefProperty: obj.resolve
 //            RefResponse: obj.resolve
-            default: obj
-        }
-    }
+			default: obj
+		}
+	}
 
-    def dispatch Object safeResolve(Object obj) {
-        try {
-            obj.resolve
-        } catch (BadReferenceException e) {
-            obj
-        }
-    }
+	def dispatch Object safeResolve(Object obj) {
+		try {
+			obj.resolve
+		} catch (BadReferenceException e) {
+			obj
+		}
+	}
 
-    def dispatch resolve(Parameter param) {
-        param
-    }
+	def dispatch resolve(Parameter param) {
+		param
+	}
 
-    def dispatch safeResolve(Parameter param) {
-        param
-    }
+	def dispatch safeResolve(Parameter param) {
+		param
+	}
 
 // FIXME adapt to OAS3
 //    def dispatch resolve(RefParameter ref) {
@@ -49,13 +49,13 @@ class RefHelper implements Helper {
 //        ref.safeResolve(ref.$ref, RefType::PARAMETER, ref.simpleRef, ref.refFormat)
 //    }
 //
-    def dispatch resolve(Schema model) {
-        model
-    }
+	def dispatch resolve(Schema model) {
+		model
+	}
 
-    def dispatch safeResolve(Schema model) {
-        model
-    }
+	def dispatch safeResolve(Schema model) {
+		model
+	}
 
 // FIXME adapt to OAS3
 //    def dispatch resolve(RefModel ref) {
@@ -81,14 +81,13 @@ class RefHelper implements Helper {
 //    def dispatch safeResolve(RefProperty ref) {
 //        ref.safeResolve(ref.$ref, RefType::DEFINITION, ref.simpleRef, ref.refFormat)
 //    }
+	def dispatch resolve(Response response) {
+		response
+	}
 
-    def dispatch resolve(Response response) {
-        response
-    }
-
-    def dispatch safeResolve(Response response) {
-        response
-    }
+	def dispatch safeResolve(Response response) {
+		response
+	}
 
 // FIXME adapt to OAS3
 //    def dispatch resolve(RefResponse ref) {
@@ -128,15 +127,15 @@ class RefHelper implements Helper {
 }
 
 class BadReferenceException extends Exception {
-    val private String refString
+	val private String refString
 
-    new(String refString) {
-        super("Invalid reference: " + refString)
-        this.refString = refString
-    }
+	new(String refString) {
+		super("Invalid reference: " + refString)
+		this.refString = refString
+	}
 
-    def getRefString() {
-        refString
-    }
+	def getRefString() {
+		refString
+	}
 
 }
