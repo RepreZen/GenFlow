@@ -1,0 +1,4 @@
+language: java
+pcache:
+  directories:
+    - $HOME/.m2
