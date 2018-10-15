@@ -53,15 +53,6 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <!-- without this, standard-templates proj is left out -->
-                    <processAllModules>true</processAllModules>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
