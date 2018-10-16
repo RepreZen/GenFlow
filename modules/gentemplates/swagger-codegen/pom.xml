@@ -5,7 +5,7 @@
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
         <version>0.0.3-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>../../..</relativePath>
     </parent>
     <artifactId>swagger-codegen</artifactId>
     <name>swagger-codegen</name>
