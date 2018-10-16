@@ -37,6 +37,8 @@ public interface IGenTemplate {
 
 	List<GenTemplateDependency> getDependencies() throws GenerationException;
 
+	IGenTemplate newInstance() throws GenerationException;
+
 	Generator getGenerator();
 
 	/**

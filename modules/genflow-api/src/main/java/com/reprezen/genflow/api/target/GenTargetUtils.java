@@ -28,9 +28,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.GenerationException;
-import com.reprezen.genflow.api.template.GemTemplateRegistry;
 import com.reprezen.genflow.api.template.GenTemplateProperty;
 import com.reprezen.genflow.api.template.GenTemplateProperty.StandardProperties;
+import com.reprezen.genflow.api.template.GenTemplateRegistry;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.trace.GenTemplateTrace;
 import com.reprezen.genflow.api.trace.GenTemplateTraceSerializer;
@@ -139,7 +139,7 @@ public final class GenTargetUtils {
 	}
 
 	private static String getProvider(GenTarget target) {
-		IGenTemplate template = GemTemplateRegistry.getGenTemplate(target.getGenTemplateId());
+		IGenTemplate template = GenTemplateRegistry.getGenTemplate(target.getGenTemplateId());
 		String unknown = "unknown provider";
 		if (template == null) {
 			return unknown;

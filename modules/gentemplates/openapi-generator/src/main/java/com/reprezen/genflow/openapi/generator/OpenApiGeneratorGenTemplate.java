@@ -29,6 +29,7 @@ import com.reprezen.genflow.api.template.GenTemplate;
 import com.reprezen.genflow.api.template.GenTemplateContext;
 import com.reprezen.genflow.api.template.GenTemplateProperty;
 import com.reprezen.genflow.api.template.GenTemplateProperty.StandardProperties;
+import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.openapi.generator.OpenApiGeneratorModulesInfo.Info;
 
 import io.swagger.parser.OpenAPIParser;
@@ -72,6 +73,11 @@ public abstract class OpenApiGeneratorGenTemplate extends OpenApiGenTemplate {
 						"OpenAPI Generator", info.getReportedName(), info.getType(),
 						codegenClass.getPackage().getName(), codegenClass.getSimpleName())));
 		define(property().named(StandardProperties.GENERATOR_TYPE).withValue(info.getType().name()));
+	}
+
+	@Override
+	public IGenTemplate newInstance() throws GenerationException {
+		return new BuiltinOpenApiGeneratorGenTemplate(codegenClass, info);
 	}
 
 	@Override
