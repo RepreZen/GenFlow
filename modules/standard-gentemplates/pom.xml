@@ -59,5 +59,9 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <artifactId>openapi-generator</artifactId>
             <version>0.0.3-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-codegen</artifactId>
+        </dependency>
     </dependencies>
 </project>

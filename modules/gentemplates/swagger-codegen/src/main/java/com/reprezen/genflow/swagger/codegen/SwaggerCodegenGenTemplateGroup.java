@@ -6,7 +6,7 @@
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
  *******************************************************************************/
-package com.reprezen.genflow.openapi.generator;
+package com.reprezen.genflow.swagger.codegen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +18,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
-import org.openapitools.codegen.CodegenConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,25 +25,29 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.template.IGenTemplateGroup;
-import com.reprezen.genflow.openapi.generator.OpenApiGeneratorModulesInfo.Info;
+import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
 
-public class OpenApiGeneratorGenTemplateGroup implements IGenTemplateGroup {
+import io.swagger.codegen.CodegenConfig;
 
-	public static Logger logger = LoggerFactory.getLogger(OpenApiGeneratorGenTemplateGroup.class);
+public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
+
+	public static Logger logger = LoggerFactory.getLogger(SwaggerCodegenGenTemplateGroup.class);
 
 	@Override
 	public Iterable<IGenTemplate> getGenTemplates(ClassLoader classLoader) {
-		OpenApiGeneratorModulesInfo modulesInfo = getModulesInfo();
+		SwaggerCodegenModulesInfo modulesInfo = getModulesInfo();
 		List<IGenTemplate> genTemplates = Lists.newArrayList();
 		for (Class<? extends CodegenConfig> config : getCodegenConfigClasses(modulesInfo,
 				CodegenConfig.class.getClassLoader())) {
 			Info info = modulesInfo.getInfo(config);
-			genTemplates.add(new BuiltinOpenApiGeneratorGenTemplate(config, info));
+			BuiltinSwaggerCodegenGenTemplate builtinSwaggerCodegenGenTemplate = new BuiltinSwaggerCodegenGenTemplate(
+					config, info);
+			genTemplates.add(builtinSwaggerCodegenGenTemplate);
 		}
 		return genTemplates;
 	}
 
-	public Collection<Class<? extends CodegenConfig>> getCodegenConfigClasses(OpenApiGeneratorModulesInfo modulesInfo,
+	public Collection<Class<? extends CodegenConfig>> getCodegenConfigClasses(SwaggerCodegenModulesInfo modulesInfo,
 			ClassLoader classLoader) {
 		Set<Class<? extends CodegenConfig>> classes = Sets.newHashSet();
 		try {
@@ -95,10 +98,9 @@ public class OpenApiGeneratorGenTemplateGroup implements IGenTemplateGroup {
 		return classes;
 	}
 
-	public static OpenApiGeneratorModulesInfo getModulesInfo() {
-		OpenApiGeneratorModulesInfo modulesInfo = new OpenApiGeneratorModulesInfo();
-		// resources are in directory whose path mimics this class' package
-		URL infoUrl = OpenApiGeneratorGenTemplateGroup.class.getResource("");
+	public static SwaggerCodegenModulesInfo getModulesInfo() {
+		SwaggerCodegenModulesInfo modulesInfo = new SwaggerCodegenModulesInfo();
+		URL infoUrl = SwaggerCodegenGenTemplateGroup.class.getResource("");
 		try {
 			modulesInfo.load(infoUrl);
 		} catch (IOException e) {

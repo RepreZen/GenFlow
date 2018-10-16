@@ -34,45 +34,64 @@ import io.swagger.models.Swagger;
 
 public class GenTool {
 	public static void main(String[] args) throws IOException, GenerationException {
-		String glob = args[0];
-		if (!glob.matches("[*?\\[\\]]")) {
-			glob = "*" + glob + "*";
-		}
-		PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
-		List<IGenTemplate> matches = GenTemplateRegistry.getGenTemplates().stream()
-				.filter(t -> matcher.matches(Paths.get(t.getId()))).sorted((a, b) -> a.getId().compareTo(b.getId()))
-				.collect(Collectors.toList());
+		String glob = null;
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		int doGen;
-		do {
-			for (int i = 0; i < matches.size(); i++) {
-				IGenTemplate template = matches.get(i);
-				System.out.printf("[%d] %s [aka: %s]\n", i + 1, template.getId(),
-						getAkas(template).stream().collect(Collectors.joining(", ")));
-			}
-			doGen = 0;
-			String response = null;
-			do {
-				System.out.print("Selection to execute: ");
-				response = in.readLine().trim();
-				if (response == null || response.length() == 0) {
-					doGen = 0;
+		if (args.length > 0 && args[0].trim().length() > 0) {
+			glob = args[0].trim();
+		}
+		while (true) {
+			if (glob == null) {
+				System.out.print("Glob pattern to select GenTemplates: ");
+				glob = in.readLine().trim();
+				if (glob == null || glob.length() == 0) {
 					break;
 				}
-				if (response.matches("^[0-9]+$")) {
-					int num = Integer.parseInt(response);
-					if (num > 0 && num <= matches.size()) {
-						doGen = num;
+			}
+			if (!glob.matches("[*?\\[\\]]")) {
+				glob = "*" + glob + "*";
+			}
+			PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
+			List<IGenTemplate> matches = GenTemplateRegistry.getGenTemplates().stream()
+					.filter(t -> matcher.matches(Paths.get(t.getId()))).sorted((a, b) -> a.getId().compareTo(b.getId()))
+					.collect(Collectors.toList());
+			if (matches.size() == 0) {
+				System.out.println("No matching gentemplates");
+				glob = null;
+				continue;
+			}
+			int doGen;
+			do {
+				for (int i = 0; i < matches.size(); i++) {
+					IGenTemplate template = matches.get(i);
+					System.out.printf("[%d] %s [aka: %s]\n", i + 1, template.getId(),
+							getAkas(template).stream().collect(Collectors.joining(", ")));
+				}
+				doGen = 0;
+				String response = null;
+				do {
+					System.out.print("Selection to execute: ");
+					response = in.readLine().trim();
+					if (response == null || response.length() == 0) {
+						doGen = 0;
+						glob = null;
 						break;
 					}
+					if (response.matches("^[0-9]+$")) {
+						int num = Integer.parseInt(response);
+						if (num > 0 && num <= matches.size()) {
+							doGen = num;
+							break;
+						}
+					}
+					System.out.println("Please indicate the number one of the GenTemplates by its number.");
+					doGen = -1;
+				} while (doGen == -1);
+				if (doGen > 0) {
+					exec(GenTemplateRegistry.getGenTemplate(matches.get(doGen - 1).getId()));
 				}
-				System.out.println("Please indicate the number one of the GenTemplates by its number.");
-				doGen = -1;
-			} while (doGen == -1);
-			if (doGen > 0) {
-				exec(GenTemplateRegistry.getGenTemplate(matches.get(doGen - 1).getId()));
-			}
-		} while (doGen > 0);
+			} while (doGen > 0);
+		}
+		System.out.println("All done");
 	}
 
 	private static List<String> getAkas(IGenTemplate template) throws GenerationException {
