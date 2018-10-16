@@ -45,6 +45,7 @@
         <module>modules/standard-gentemplates</module>
         <module>modules/gentemplates/common</module>
         <module>modules/gentemplates/openapi3-doc</module>
+        <module>modules/gentemplates/openapi-generator</module>
     </modules>
     <build>
         <plugins>
@@ -251,6 +252,16 @@
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>1.6</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
