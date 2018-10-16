@@ -10,7 +10,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -47,17 +47,18 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/standard-gentemplates</url>
+        <tag>v0.0.3</tag>
     </scm>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi3-doc</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
+            <version>0.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi-generator</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
+            <version>0.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
