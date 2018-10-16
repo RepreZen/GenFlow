@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>genflow</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
@@ -39,7 +39,6 @@
         <connection>scm:git:git@github.com:RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:git@github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/master</url>
-        <tag>HEAD</tag>
     </scm>
     <modules>
         <module>modules/genflow-api</module>
@@ -249,12 +248,12 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
+                <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
+                <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.openapitools</groupId>
@@ -269,7 +268,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>standard-gentemplates</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
+                <version>0.0.3-SNAPSHOT</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -280,7 +279,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-codegen</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
+                <version>0.0.3-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
