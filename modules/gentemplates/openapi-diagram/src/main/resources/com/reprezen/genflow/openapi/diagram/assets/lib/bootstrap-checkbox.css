@@ -1,0 +1,45 @@
+.bootstrap-checkbox {
+    display:inline-block;
+    position:relative;
+    width:13px;
+    height:13px;
+    border:1px solid #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bootstrap-checkbox i{
+    position:absolute;
+    left : -1px;
+    top : -2px;
+}
+
+.btn{
+    min-width: 207px !important;
+}
+
+.btn .caret{
+    position: relative;
+    right: -45px;
+}
+
+.btn-group li{
+    list-style-type: none;
+    padding-top: 5px;
+}
+
+.dropdown-menu{
+    padding: 10px 10px 10px 30px;
+}
+
+.disablenode{
+    opacity: 0.5;
+    pointer-events:none;
+}
+
+.dropdown-menu li{
+    margin-left: -5px;
+}
+

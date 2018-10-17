@@ -10,7 +10,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -53,16 +53,18 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi3-doc</artifactId>
-            <version>0.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi-generator</artifactId>
-            <version>0.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>swagger-codegen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>openapi-diagram</artifactId>
         </dependency>
     </dependencies>
 </project>

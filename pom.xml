@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>genflow</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
@@ -52,6 +52,7 @@
         <module>modules/gentemplates/openapi3-doc</module>
         <module>modules/gentemplates/openapi-generator</module>
         <module>modules/gentemplates/swagger-codegen</module>
+        <module>modules/gentemplates/openapi-diagram</module>
     </modules>
     <build>
         <plugins>
@@ -261,12 +262,12 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
-                <version>0.0.5</version>
+                <version>0.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
-                <version>0.0.5</version>
+                <version>0.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.openapitools</groupId>
@@ -281,7 +282,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>standard-gentemplates</artifactId>
-                <version>0.0.5</version>
+                <version>0.0.6-SNAPSHOT</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -292,7 +293,27 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-codegen</artifactId>
-                <version>0.0.5</version>
+                <version>0.0.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>1.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-diagram</artifactId>
+                <version>0.0.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>0.0.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi3-doc</artifactId>
+                <version>0.0.6-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

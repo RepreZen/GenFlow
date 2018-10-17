@@ -47,7 +47,6 @@ public final class FileUtils {
 		URL codeLocation = null;
 		File codeSource = null;
 		try {
-
 			codeLocation = codeBase.getProtectionDomain().getCodeSource().getLocation();
 			codeSource = new File(codeLocation.toURI());
 		} catch (URISyntaxException e) {
@@ -78,6 +77,13 @@ public final class FileUtils {
 
 	public static List<File> copyJarResources(File jarFile, String source, File target) throws IOException {
 		List<File> result = Lists.newArrayList();
+		// resolve "." and ".." compoents. We prefix with "/" and remove afterward, in
+		// order to preventing resolving relative to current working directory in
+		// filesystem (e.g. "../foo" would do that)
+		source = new File("/" + source).getCanonicalPath().substring(1);
+		if (source.startsWith("../")) {
+			throw new IOException("Invalid relative static resource path - no parent path component to absorb '..'");
+		}
 		String prefix = source.equals(".") ? "" : source + "/";
 		try (JarFile jar = new JarFile(jarFile)) {
 			final Enumeration<JarEntry> entries = jar.entries();

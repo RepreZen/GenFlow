@@ -120,7 +120,16 @@ public class GenTool {
 				.withOutputDir(".") //
 				.withPrimarySource(sourceFile) //
 				.build();
-		GenTargetUtils.execute(null, false, false, null, target);
+		try {
+			GenTargetUtils.execute(null, false, false, null, target);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			System.err.flush();
+			try {
+				Thread.currentThread().sleep(1000);
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 
 	private static String getSourceFileName(IGenTemplate template) throws GenerationException {
