@@ -1,7 +1,7 @@
 /*******************************************************************************
-i * Copyright © 2013, 2016 Modelsolv, Inc.
+ * i * Copyright © 2013, 2016 Modelsolv, Inc.
  * All Rights Reserved.
- *
+ * 
  * NOTICE: All information contained herein is, and remains the property
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
@@ -81,7 +81,7 @@ class SwaggerDiagramData {
 				},
 				"methods": [
 				«FOR entry : path.operationMap.safe.sorted.entrySet SEPARATOR ','»
-				«generateMethod(path, entry.key, entry.value)»
+					«generateMethod(path, entry.key, entry.value)»
 				«ENDFOR»
 				],
 				"mediaTypes" : [
@@ -153,7 +153,7 @@ class SwaggerDiagramData {
 	def generateResponse(String code, Response response) {
 		val intCode = StatusCodeComparator.safeParse(code, DEFAULT_RESPONSE_CODE)
 
-		//the next line is according to spec but I don't think it is good 
+		// the next line is according to spec but I don't think it is good 
 		// val defaultPrefix = if(intCode == DEFAULT_RESPONSE_CODE) "(default response) :" else ""
 		// val defaultPrefix = ""
 		'''
@@ -194,7 +194,7 @@ class SwaggerDiagramData {
 		}
 	}
 
-	def getParameterObjectType(Parameter parameter) {		
+	def getParameterObjectType(Parameter parameter) {
 		switch (parameter.in ?: "<null>") {
 			case "query": return 'QueryParameter'
 			case "header": return 'HeaderParameter'
@@ -210,7 +210,7 @@ class SwaggerDiagramData {
 	}
 
 	def String getResponseType(Response response) {
-		val schema = response.schema
+		val schema = response.responseSchema
 		return typesProvider.propertyTypeLabel("Response", schema)
 	}
 

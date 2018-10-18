@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright © 2013, 2016 Modelsolv, Inc.
  * All Rights Reserved.
- *
+ * 
  * NOTICE: All information contained herein is, and remains the property
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
@@ -75,13 +75,17 @@ class SwaggerDiagramTypes {
 
 	def dispatch String schemaLabel(String context, ArrayModel model) {
 
-		//no minItems for ArrayModel 
+		// no minItems for ArrayModel 
 		val atLeastOne = false
 		return arrayTypeLabel(context, model.items, atLeastOne)
 	}
 
 	def dispatch String schemaLabel(String context, RefModel refModel) {
 		return refModel.simpleRef
+	}
+
+	def String propertyTypeLabel(String context, Model schema) {
+		return context.spaceIfNeeded("Object (inline)");
 	}
 
 	def String propertyTypeLabel(String context, Property type) {

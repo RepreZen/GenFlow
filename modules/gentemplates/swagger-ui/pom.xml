@@ -14,7 +14,6 @@
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
-            <version>0.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
