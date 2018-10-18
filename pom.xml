@@ -56,6 +56,7 @@
         <module>modules/tools</module>
         <module>modules/gentemplates/swagger-doc</module>
         <module>modules/gentemplates/openapi-normalizer</module>
+        <module>modules/gentemplates/swagger-ui</module>
     </modules>
     <build>
         <plugins>
@@ -317,6 +318,11 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-normalizer</artifactId>
+                <version>0.0.7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-ui</artifactId>
                 <version>0.0.7-SNAPSHOT</version>
             </dependency>
         </dependencies>

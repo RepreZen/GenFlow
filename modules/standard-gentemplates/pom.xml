@@ -74,5 +74,9 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi-normalizer</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-ui</artifactId>
+        </dependency>
     </dependencies>
 </project>

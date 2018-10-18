@@ -1,0 +1,23 @@
+.swagger-ui-options {
+    float: right;
+    text-align: right;
+}
+#options-gear ~ div {
+    display: none;
+    padding: 10px;
+    border: 1px solid gray;
+}
+#options-gear:checked ~ div {
+    display: block;
+    color: gray;
+}
+.swagger-ui-options .iconbox {
+    display: none;
+}
+.swagger-ui-options .iconbox + label {
+    cursor: pointer;
+}
+.swagger-ui-options .iconbox +label .checked { display: none;}
+.swagger-ui-options .iconbox:checked + label .checked { display: inline;}
+.swagger-ui-options .iconbox +label .unchecked { display: inline;}
+.swagger-ui-options .iconbox:checked + label .unchecked { display: none;}

@@ -1,0 +1,47 @@
+/* Swagger-UI's formatting gets screwed up by bootstrap, so we can't use bootstrap.
+** But we use bootstrap classes for error messages.
+** This css file essentially provides bootstrap-like styling we need for the error box.
+*/
+#errors-placeholder .alert {
+    background-color: #f2dede;
+    border: 1px solid  rgb(235,204,209);
+    border-radius: 4px;
+    color: #a94442;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+#errors-placeholder .alert h4 {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 19.8px;
+}
+
+#errors-placeholder .alert button.close {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0,0,0,0);
+    background-origin: padding-box;
+    border-style: none;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    float: right;
+    font-family: inherit;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 21px;
+    margin: 0px;
+    opacity: 0.2;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+}
+
+#errors-placeholder .sr-only {
+    display: none;
+}

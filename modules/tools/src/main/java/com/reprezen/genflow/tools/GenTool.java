@@ -372,8 +372,9 @@ public class GenTool {
 			result += "  Parameters: ";
 			result += params.isEmpty() ? "(none set)\n" : "\n";
 			for (Entry<String, Object> param : params.entrySet()) {
+				Object value = param.getValue();
 				result += String.format("    %s [%s]: %s\n", param.getKey(),
-						param.getValue().getClass().getSimpleName(), param.getValue());
+						value != null ? value.getClass().getSimpleName() : "", String.valueOf(value));
 			}
 			return result;
 		}
