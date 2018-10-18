@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -55,6 +55,7 @@
         <module>modules/gentemplates/openapi-diagram</module>
         <module>modules/tools</module>
         <module>modules/gentemplates/swagger-doc</module>
+        <module>modules/gentemplates/openapi-normalizer</module>
     </modules>
     <build>
         <plugins>
@@ -311,6 +312,11 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-doc</artifactId>
+                <version>0.0.7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-normalizer</artifactId>
                 <version>0.0.7-SNAPSHOT</version>
             </dependency>
         </dependencies>

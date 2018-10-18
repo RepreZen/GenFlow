@@ -90,8 +90,8 @@ You will be presented with the following choices for specifying your value:
 * **Number**: You will be prompted for a number. If your entry looks like an integer, it will be parsed as an Integer value; otherwise it will be parsed as a Double value.
 * **Boolean**: You will be prompted to type either `true` or `false`.
 * **JSON**: You will be prompted to type a single-line JSON string. The string is parsed by the Jackson JSON parser, and the `JsonNode` result becomes the parameter value.
-** For example, a list of integers might look like `[1,2,3]`
-** For example, a JSON object might look like `{"x": 1, "y": 2}`
+  * For example, a list of integers might look like `[1,2,3]`
+  * For example, a JSON object might look like `{"x": 1, "y": 2}`
 
 ## Executing the GenTarget
 

@@ -16,7 +16,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <packaging>pom</packaging>
     <name>Standard GenTemplates</name>
     <description>RepreZen Standard GenTemplates</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/modules/standard-gentemplates</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -69,6 +69,10 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>swagger-doc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>openapi-normalizer</artifactId>
         </dependency>
     </dependencies>
 </project>

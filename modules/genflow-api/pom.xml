@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>GenFlow API</name>
     <description>RepreZen GenFlow API</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>

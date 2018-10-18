@@ -5,19 +5,15 @@
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
         <version>0.0.7-SNAPSHOT</version>
-        <relativePath>../../../</relativePath>
+        <relativePath>../../..</relativePath>
     </parent>
-    <artifactId>swagger-doc</artifactId>
-    <name>swagger-doc</name>
-    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/swagger-doc</url>
+    <artifactId>openapi-normalizer</artifactId>
+    <name>openapi-normalizer</name>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi-normalizer</url>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.pegdown</groupId>
-            <artifactId>pegdown</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

@@ -5,7 +5,7 @@
     <artifactId>openapi3-doc</artifactId>
     <name>openapi3-doc</name>
     <description>RepreZen Documentation GenTemplate for OpenAPI v3 Models</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>

@@ -9,6 +9,7 @@
     </parent>
     <artifactId>openapi-diagram</artifactId>
     <name>openapi-diagram</name>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi-diagram</url>
     <dependencies>
         <dependency>
             <groupId>org.eclipse.xtend</groupId>

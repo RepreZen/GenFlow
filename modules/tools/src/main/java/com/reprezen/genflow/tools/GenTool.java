@@ -33,7 +33,9 @@ import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.genflow.api.GenerationException;
+import com.reprezen.genflow.api.openapi.OpenApiDocument;
 import com.reprezen.genflow.api.target.GenTarget;
 import com.reprezen.genflow.api.target.GenTargetBuilder;
 import com.reprezen.genflow.api.target.GenTargetUtils;
@@ -44,7 +46,6 @@ import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 import io.swagger.models.Swagger;
-import io.swagger.v3.oas.models.OpenAPI;
 
 public class GenTool {
 
@@ -112,6 +113,7 @@ public class GenTool {
 	private GenTarget buildTarget(IGenTemplate template) throws IOException, GenerationException {
 		GenTargetInfo target = new GenTargetInfo(template);
 		target.setPrimarySource(getDefaultPrimarySource(template));
+		setParameterDefaults(target);
 		while (true) {
 			System.out.print(target.describe());
 			Optional<BuildChoice> choice = textPrompt.getChoice("Alter GenTarget: ", BuildChoice.class);
@@ -140,6 +142,22 @@ public class GenTool {
 		return template.getDependencies().stream()
 				.filter(d -> d.getType().equals(GenTemplateDependencyType.PRIMARY_SOURCE)).findFirst()
 				.map(d -> d.getInfo());
+	}
+
+	private void setParameterDefaults(GenTargetInfo target) throws GenerationException {
+		IGenTemplate template = target.getGenTemplate();
+		template.getDependencies().stream().filter(d -> d.getType() == GenTemplateDependencyType.PARAMETER)
+				.forEach(d -> {
+					if (d.getInfo() != null) {
+						JsonNode node;
+						try {
+							node = mapper.readTree(d.getInfo());
+						} catch (IOException e) {
+							node = JsonNodeFactory.instance.textNode(d.getInfo());
+						}
+						target.setParam(d.getName(), mapper.convertValue(node, Object.class));
+					}
+				});
 	}
 
 	private enum ValType implements Supplier<String> {
@@ -383,7 +401,7 @@ public class GenTool {
 			fileName = "PetStoreV2.yaml";
 		} else if (OpenApi3.class.getName().equals(sourceType)) {
 			fileName = "PetStoreV3.yaml";
-		} else if (OpenAPI.class.getName().equals(sourceType)) {
+		} else if (OpenApiDocument.class.getName().equals(sourceType)) {
 			fileName = "PetStoreV3.yaml";
 		}
 		if (fileName != null) {

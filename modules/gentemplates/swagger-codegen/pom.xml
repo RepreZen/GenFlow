@@ -9,6 +9,7 @@
     </parent>
     <artifactId>swagger-codegen</artifactId>
     <name>swagger-codegen</name>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/swagger-codegen</url>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

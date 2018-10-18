@@ -9,6 +9,7 @@
     </parent>
     <artifactId>genflow-tools</artifactId>
     <description>Tools for manual testing of GenTemplate execution</description>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/tools</url>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

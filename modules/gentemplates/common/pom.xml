@@ -14,7 +14,7 @@
     </parent>
     <name>genflow-common</name>
     <description>Common code for use in GenTemplate implementations</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
