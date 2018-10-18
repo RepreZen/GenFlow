@@ -43,7 +43,7 @@
         <connection>scm:git:git@github.com:RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:git@github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/master</url>
-        <tag>v0.0.5</tag>
+        <tag>HEAD</tag>
     </scm>
     <modules>
         <module>modules/genflow-api</module>
