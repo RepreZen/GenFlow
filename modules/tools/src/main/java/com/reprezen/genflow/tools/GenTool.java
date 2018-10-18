@@ -48,7 +48,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public class GenTool {
 
-	TextPrompt textPrompt = new TextPrompt();
+	private TextPrompt textPrompt = new TextPrompt();
 
 	public static void main(String[] args) throws IOException, GenerationException {
 		new GenTool().run(args.length > 0 ? args[0] : null);
@@ -62,13 +62,14 @@ public class GenTool {
 			}
 			if (!glob.isPresent()) {
 				break;
-			} else if (!glob.get().matches(".*[*?\\[\\]].*")) {
-				glob = Optional.of("*" + glob.get() + "*");
 			}
+			// all glob matches are unanchored
+			glob = glob.map(String::toLowerCase)
+					.map(g -> (g.startsWith("*") ? "" : "*") + g + (g.endsWith("*") ? "" : "*"));
 			PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob.get());
 			List<AbstractGenTemplate> matches = GenTemplateRegistry.getGenTemplates().stream()
-					.filter(t -> matcher.matches(Paths.get(t.getId()))).sorted((a, b) -> a.getId().compareTo(b.getId()))
-					.map(t -> {
+					.filter(t -> matcher.matches(Paths.get(t.getId().toLowerCase())))
+					.sorted((a, b) -> a.getId().compareTo(b.getId())).map(t -> {
 						return (AbstractGenTemplate) t;
 					}).collect(Collectors.toList());
 			if (matches.size() == 0) {
