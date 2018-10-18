@@ -53,6 +53,8 @@
         <module>modules/gentemplates/openapi-generator</module>
         <module>modules/gentemplates/swagger-codegen</module>
         <module>modules/gentemplates/openapi-diagram</module>
+        <module>modules/tools</module>
+        <module>modules/gentemplates/swagger-doc</module>
     </modules>
     <build>
         <plugins>
@@ -192,15 +194,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>local-build</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>modules/tools</module>
-            </modules>
-        </profile>
     </profiles>
     <dependencyManagement>
         <dependencies>
@@ -313,6 +306,11 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi3-doc</artifactId>
+                <version>0.0.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-doc</artifactId>
                 <version>0.0.6-SNAPSHOT</version>
             </dependency>
         </dependencies>

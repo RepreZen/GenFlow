@@ -12,7 +12,7 @@
         <version>0.0.6-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>genflow-common</name>
     <description>Common code for use in GenTemplate implementations</description>
     <url>https://github.com/RepreZen/GenFlow</url>
     <licenses>
@@ -42,7 +42,7 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
+        <connection>scm:git:gimodulet://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
         <tag>v0.0.5</tag>

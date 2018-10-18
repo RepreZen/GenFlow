@@ -66,5 +66,9 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi-diagram</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-doc</artifactId>
+        </dependency>
     </dependencies>
 </project>

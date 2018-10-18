@@ -5,20 +5,22 @@
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
         <version>0.0.6-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>../../../</relativePath>
     </parent>
-    <artifactId>genflow-tools</artifactId>
-    <description>Tools for manual testing of GenTemplate execution</description>
+    <artifactId>swagger-doc</artifactId>
+    <name>swagger-doc</name>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.pegdown</groupId>
+            <artifactId>pegdown</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>standard-gentemplates</artifactId>
-            <type>pom</type>
+            <artifactId>genflow-common</artifactId>
         </dependency>
     </dependencies>
-    <name>genflow-tools</name>
 </project>
