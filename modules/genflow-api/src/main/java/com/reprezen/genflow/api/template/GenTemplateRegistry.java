@@ -10,14 +10,15 @@ package com.reprezen.genflow.api.template;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.ImmutableList;
 import com.reprezen.genflow.api.GenerationException;
 
 /**
@@ -27,17 +28,17 @@ import com.reprezen.genflow.api.GenerationException;
  * @author Konstantin Zaitsev
  * @date May 18, 2015
  */
-public final class GemTemplateRegistry {
+public final class GenTemplateRegistry {
 
-	private static Logger logger = LoggerFactory.getLogger(GemTemplateRegistry.class);
+	private static Logger logger = LoggerFactory.getLogger(GenTemplateRegistry.class);
 
 	/** Singleton reference. */
-	private static GemTemplateRegistry instance;
+	private static GenTemplateRegistry instance;
 
 	private Map<String, IGenTemplate> registry;
 
-	private GemTemplateRegistry() {
-		ClassLoader classLoader = GemTemplateRegistry.class.getClassLoader();
+	private GenTemplateRegistry() {
+		ClassLoader classLoader = GenTemplateRegistry.class.getClassLoader();
 		if (registry == null) {
 			registry = new HashMap<String, IGenTemplate>();
 			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
@@ -90,11 +91,11 @@ public final class GemTemplateRegistry {
 		}
 	}
 
-	private static GemTemplateRegistry getInstance() {
+	private static GenTemplateRegistry getInstance() {
 		if (instance == null) {
-			synchronized (GemTemplateRegistry.class) {
+			synchronized (GenTemplateRegistry.class) {
 				if (instance == null) {
-					instance = new GemTemplateRegistry();
+					instance = new GenTemplateRegistry();
 				}
 			}
 		}
@@ -104,16 +105,20 @@ public final class GemTemplateRegistry {
 	/**
 	 * @param id id of the gen template
 	 * @return the gen template by ID
+	 * @throws GenerationException
 	 */
 	public static IGenTemplate getGenTemplate(String id) {
 		assert id != null;
 		if (getInstance().registry.containsKey(id)) {
-			return getInstance().registry.get(id);
+			try {
+				return getInstance().registry.get(id).newInstance();
+			} catch (GenerationException e) {
+			}
 		}
-		throw new RuntimeException("Template " + id + " not found"); //$NON-NLS-1$ //$NON-NLS-2$
+		throw new RuntimeException("Template " + id + " not found");
 	}
 
-	public static ImmutableList<IGenTemplate> getGenTemplates() {
-		return ImmutableList.copyOf(getInstance().registry.values());
+	public static List<IGenTemplate> getGenTemplates() {
+		return getInstance().registry.values().stream().distinct().collect(Collectors.toList());
 	}
 }

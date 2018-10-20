@@ -1,0 +1,162 @@
+/* Body styles */
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* NODE CONTAINER */
+.flowtree {
+    margin: 30px 10px 10px;
+    padding: 10px;
+}
+
+/* Background of the diagram */
+.chartGroup .background {
+    fill: #FFFFFF;
+    stroke-width: 0.0;
+    stroke-opacity: 0.0;
+}
+
+/* Node rectangle background  */
+/* This is common style for each rectangle. */
+.node rect {
+    fill: #c44f27;
+    fill-opacity: 1;
+    stroke: #c44f27;
+    stroke-width: 2px;
+}
+
+/* OBJECT TYPES */
+
+/* ObjectResource and CollectionResource */
+.node rect.resource{
+  cursor: pointer;
+  fill: #86a9d1;
+}
+
+/* Styles for DataTypes */
+.node rect.dataType{
+  cursor: pointer;
+  fill: #c3d4e8;
+}
+
+.node rect.referenceLink{
+   fill: #fff;
+}
+
+/* Methods */
+.node rect.method, .node .requestPort,.node .responsePort{
+  fill: #c3d4e8;
+}
+
+.node rect.method {
+  cursor: pointer;
+}
+
+.node .requestPort,.node .responsePort{
+    stroke: #c3d4e8;
+    stroke-width: 0;
+    stroke-opacity: 0;
+}
+
+.node rect.response{
+   fill: #fff;
+}
+
+.node rect.request{
+   fill: #fff;
+}
+
+.node g.expander-group {
+    cursor: pointer;
+}
+
+/* HEADERS */
+
+/* the line separator of node header and body part */
+.node .separator{
+    stroke: #cc0000;
+    stroke-width: 0;
+    pointer-events: none;
+}
+
+/* Collapse/Expand arrow for containers*/
+.node .expander{
+    fill: #000;
+}
+
+/*======= LINKS  ===========*/
+
+/* Reference Links */
+.link{
+    fill : none;
+    stroke: #c44f27;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+#arrowhead_rlink, 
+#markerCircle_rlink{
+    fill : #c44f27;
+    stroke: #c44f27;
+    stroke-width: 1.5;
+    pointer-events: none;
+}
+
+/* Response and Request connectors, they are placed inside a method box and go from messages to the ports */
+.responseLink,.requestLink{
+    fill : none;
+    stroke:#c44f27;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+#markerCircle_msg, #arrowhead_msg{
+    fill : #c44f27;
+    stroke: #c44f27;
+    stroke-width: 0;
+}
+
+#markerCircle_rlink, #arrowhead_rlink{
+    fill : #c44f27;
+    stroke: #c44f27;
+    stroke-width: 0;
+}
+
+/* Template parameter binding (URL link) lines. */
+/* Stroke property for the lines are in chart-flow-jquery.js file in the "resourceUriLinkColors", which will give different color for each line */
+.urlLinks{
+    fill : none;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* FONTS - SIZES and STYLES */
+
+/* Make sure when you change the property for Font and text also change it in js file */
+/* there is method inside "layout-flow.js "*/
+/* method name is createSVGtext(), that helps calculate width of text */
+.node text {
+   font: 12px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    pointer-events: none;
+    font-weight: normal;
+    fill: #333;
+	line-height:24px;
+}
+
+.externalLink{
+    fill : none;
+    stroke:#c44f27;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* style for node selection highlighting */
+.selected {
+  stroke: #0000FF !important;
+  stroke-width: 2 !important;
+  stroke-opacity: 0.9 !important;
+}

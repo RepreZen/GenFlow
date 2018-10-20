@@ -1,0 +1,147 @@
+# This CSS file is extracted from bootstrap's css file. Each
+# rule has ".reprezen " added to the front, so it will only
+# apply in our own elements. Otherwise bootstrap totally screws
+# up many elements of swagger-ui display. Bootstrap javascript
+# does not appear to interfere with swagger ui.
+
+# All rules defined for the following classes are included:
+# - alert
+# - close
+# - sr-only
+
+.reprezen {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+.reprezen .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.reprezen .alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.reprezen .alert .alert-link {
+  font-weight: bold;
+}
+.reprezen .alert > p,
+.reprezen .alert > ul {
+  margin-bottom: 0;
+}
+.reprezen .alert > p + p {
+  margin-top: 5px;
+}
+.reprezen .alert-dismissable,
+.reprezen .alert-dismissible {
+  padding-right: 35px;
+}
+.reprezen .alert-dismissable .close,
+.reprezen .alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+.reprezen .alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.reprezen .alert-success hr {
+  border-top-color: #c9e2b3;
+}
+.reprezen .alert-success .alert-link {
+  color: #2b542c;
+}
+.reprezen .alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.reprezen .alert-info hr {
+  border-top-color: #a6e1ec;
+}
+.reprezen .alert-info .alert-link {
+  color: #245269;
+}
+.reprezen .alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.reprezen .alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+.reprezen .alert-warning .alert-link {
+  color: #66512c;
+}
+.reprezen .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.reprezen .alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+.reprezen .alert-danger .alert-link {
+  color: #843534;
+}
+
+.reprezen .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.reprezen .sr-only-focusable:active,
+.reprezen .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+.reprezen .alert-dismissable .close,
+.reprezen .alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+.reprezen .close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+.reprezen .close:hover,
+.reprezen .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+.reprezen button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}

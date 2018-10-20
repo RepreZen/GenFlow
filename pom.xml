@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2018 ModelSolv, Inc. and others. All rights reserved. 
-This program and the accompanying materials are made available under the 
-terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
-ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
+	This program and the accompanying materials are made available under the 
+	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
+	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
+	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>genflow</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -40,18 +40,36 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
-        <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
+        <connection>scm:git:git@github.com:RepreZen/GenFlow.git</connection>
+        <developerConnection>scm:git:git@github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/master</url>
+        <tag>HEAD</tag>
     </scm>
     <modules>
         <module>modules/genflow-api</module>
         <module>modules/standard-gentemplates</module>
         <module>modules/gentemplates/common</module>
         <module>modules/gentemplates/openapi3-doc</module>
+        <module>modules/gentemplates/openapi-generator</module>
+        <module>modules/gentemplates/swagger-codegen</module>
+        <module>modules/gentemplates/openapi-diagram</module>
+        <module>modules/tools</module>
+        <module>modules/gentemplates/swagger-doc</module>
+        <module>modules/gentemplates/openapi-normalizer</module>
+        <module>modules/gentemplates/swagger-ui</module>
     </modules>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <releaseProfiles>releases</releaseProfiles>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -121,18 +139,6 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>${nexus.autorelease}</autoReleaseAfterClose>
-                    <autoDropAfterRelease>${nexus.autodrop}</autoDropAfterRelease>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>au.com.acegi</groupId>
                 <artifactId>xml-format-maven-plugin</artifactId>
                 <version>3.0.7</version>
@@ -167,6 +173,25 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>releases</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>${nexus.autorelease}</autoReleaseAfterClose>
+                            <autoDropAfterRelease>${nexus.autodrop}</autoDropAfterRelease>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -232,12 +257,73 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
-                <version>0.0.0</version>
+                <version>0.0.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
-                <version>0.0.0</version>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>standard-gentemplates</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-codegen</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>1.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-diagram</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi3-doc</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-doc</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-normalizer</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-ui</artifactId>
+                <version>0.0.8-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

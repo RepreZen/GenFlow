@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>GenFlow API</name>
     <description>RepreZen GenFlow API</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -39,6 +39,7 @@
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api</url>
+        <tag>HEAD</tag>
     </scm>
     <dependencies>
         <dependency>
@@ -117,7 +118,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.0</version>
+        <version>0.0.8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 </project>

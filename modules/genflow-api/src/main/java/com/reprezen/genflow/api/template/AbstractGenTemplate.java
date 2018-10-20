@@ -36,7 +36,7 @@ public abstract class AbstractGenTemplate implements IGenTemplate {
 		alsoKnownAsIds.addAll(Arrays.asList(akaIds));
 	}
 
-	protected List<String> getAlsoKnownAsIds() throws GenerationException {
+	public List<String> getAlsoKnownAsIds() throws GenerationException {
 		return Collections.unmodifiableList(alsoKnownAsIds);
 	}
 
@@ -48,6 +48,15 @@ public abstract class AbstractGenTemplate implements IGenTemplate {
 	@Override
 	public List<GenTemplateDependency> getDependencies() throws GenerationException {
 		return context.getDependencies().get();
+	}
+
+	@Override
+	public IGenTemplate newInstance() throws GenerationException {
+		try {
+			return getClass().newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new GenerationException("Failed to instantiate GenTemplate", e);
+		}
 	}
 
 	@Override

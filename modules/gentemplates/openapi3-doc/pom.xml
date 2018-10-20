@@ -3,9 +3,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>openapi3-doc</artifactId>
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>openapi3-doc</name>
     <description>RepreZen Documentation GenTemplate for OpenAPI v3 Models</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -36,6 +36,7 @@
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -44,7 +45,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.0</version>
+        <version>0.0.8-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
     <dependencies>
@@ -89,7 +90,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.5</version>
         </dependency>
     </dependencies>
 </project>

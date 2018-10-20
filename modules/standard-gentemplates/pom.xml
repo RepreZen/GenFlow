@@ -10,13 +10,13 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <version>0.0.8-SNAPSHOT</version>
+        <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
     <name>Standard GenTemplates</name>
     <description>RepreZen Standard GenTemplates</description>
-    <url>https://github.com/RepreZen/GenFlow</url>
+    <url>https://github.com/RepreZen/GenFlow/tree/modules/standard-gentemplates</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -47,12 +47,36 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/standard-gentemplates</url>
+        <tag>HEAD</tag>
     </scm>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi3-doc</artifactId>
-            <version>0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>openapi-generator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-codegen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>openapi-diagram</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-doc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>openapi-normalizer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-ui</artifactId>
         </dependency>
     </dependencies>
 </project>

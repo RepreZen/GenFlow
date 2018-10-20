@@ -160,6 +160,5 @@ public class OpenApi3Source extends AbstractSource<OpenApi3> {
 		protected Option[] getNormalizerOptions() {
 			return Option.DOC_DEFAULT_OPTIONS;
 		}
-
 	}
 }

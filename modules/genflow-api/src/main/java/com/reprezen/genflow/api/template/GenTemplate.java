@@ -131,7 +131,7 @@ public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 	}
 
 	@Override
-	protected List<String> getAlsoKnownAsIds() throws GenerationException {
+	public List<String> getAlsoKnownAsIds() throws GenerationException {
 		init();
 		return super.getAlsoKnownAsIds();
 	}
