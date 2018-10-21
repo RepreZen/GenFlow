@@ -52,6 +52,14 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.reprezen.rapidml</groupId>
+        	<artifactId>com.reprezen.rapidml</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>com.reprezen.rapidml</groupId>
+        	<artifactId>com.reprezen.rapidml.model</artifactId>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

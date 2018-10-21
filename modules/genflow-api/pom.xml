@@ -78,6 +78,14 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.reprezen.rapidml</groupId>
+        	<artifactId>com.reprezen.rapidml.model</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>com.reprezen.rapidml</groupId>
+        	<artifactId>com.reprezen.rapidml</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

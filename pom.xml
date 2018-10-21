@@ -325,6 +325,16 @@
                 <artifactId>swagger-ui</artifactId>
                 <version>0.0.8-SNAPSHOT</version>
             </dependency>
+            <dependency>
+            	<groupId>com.reprezen.rapidml</groupId>
+            	<artifactId>com.reprezen.rapidml.model</artifactId>
+            	<version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.reprezen.rapidml</groupId>
+            	<artifactId>com.reprezen.rapidml</artifactId>
+            	<version>0.0.1-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
