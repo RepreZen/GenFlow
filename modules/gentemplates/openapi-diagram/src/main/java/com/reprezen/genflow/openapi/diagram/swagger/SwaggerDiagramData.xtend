@@ -23,16 +23,16 @@ import java.util.HashMap
 import static org.apache.commons.text.StringEscapeUtils.*
 
 class SwaggerDiagramData {
-	private static final StatusCodeComparator STATUS_CODE_COMPARATOR = new StatusCodeComparator
-	private static final int DEFAULT_RESPONSE_CODE = -1;
+	val static StatusCodeComparator STATUS_CODE_COMPARATOR = new StatusCodeComparator
+	val static int DEFAULT_RESPONSE_CODE = -1;
 
 	extension XtendHelper = new XtendHelper
 	extension Anchors = new Anchors
 
-	private SwaggerDiagramTypes typesProvider
-	private Swagger swagger
+	val SwaggerDiagramTypes typesProvider
+	val Swagger swagger
 
-	public new(Swagger model) {
+	new(Swagger model) {
 		swagger = model
 		typesProvider = new SwaggerDiagramTypes(model)
 	}

@@ -211,7 +211,6 @@ public final class GenTemplateTraceItem {
 		this.sourceItems = sources;
 	}
 
-	@SuppressWarnings("nls")
 	@Override
 	public String toString() {
 		File outputFile = null;

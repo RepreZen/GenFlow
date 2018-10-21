@@ -9,7 +9,7 @@ class RecursionHelper implements Helper {
 
 	// would really like an IdentityHashSet here, but Java.util doesn't have one.
 	// identity semantics required so we distinguish between different objects even if they're equal
-	val private Map<Object, Void> activeObjects = new IdentityHashMap<Object, Void>()
+	val Map<Object, Void> activeObjects = new IdentityHashMap<Object, Void>()
 
 	def use(Object obj) {
 		if (activeObjects.containsKey(obj)) {
@@ -29,8 +29,8 @@ class RecursionHelper implements Helper {
 }
 
 class Activation implements AutoCloseable {
-	val private RecursionHelper helper
-	val private Object obj
+	val RecursionHelper helper
+	val Object obj
 
 	new(Object obj, RecursionHelper helper) {
 		this.helper = helper
@@ -44,7 +44,7 @@ class Activation implements AutoCloseable {
 }
 
 class RecursiveRenderException extends Exception {
-	private Object obj
+	val Object obj
 
 	new(Object obj) {
 		this.obj = obj

@@ -1,16 +1,12 @@
 package com.reprezen.genflow.openapi3.doc
 
-import com.reprezen.kaizen.oasparser.model3.OpenApi3
 import com.reprezen.kaizen.oasparser.model3.Parameter
-import com.reprezen.kaizen.oasparser.model3.Schema
 import com.reprezen.kaizen.oasparser.model3.Response
+import com.reprezen.kaizen.oasparser.model3.Schema
 
 class RefHelper implements Helper {
 
-	var private OpenApi3 model
-
 	override init() {
-		model = HelperHelper.model
 	}
 
 	def dispatch Object resolve(Object obj) {
@@ -127,7 +123,7 @@ class RefHelper implements Helper {
 }
 
 class BadReferenceException extends Exception {
-	val private String refString
+	val String refString
 
 	new(String refString) {
 		super("Invalid reference: " + refString)

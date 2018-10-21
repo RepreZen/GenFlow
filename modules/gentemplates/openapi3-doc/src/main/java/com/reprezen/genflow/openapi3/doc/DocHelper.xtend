@@ -19,7 +19,7 @@ class DocHelper implements Helper {
 		htmlHelper = HelperHelper.htmlHelper
 	}
 
-	var static private extensions = Extensions.SMARTS + Extensions.QUOTES + Extensions.AUTOLINKS + Extensions.TABLES +
+	var static extensions = Extensions.SMARTS + Extensions.QUOTES + Extensions.AUTOLINKS + Extensions.TABLES +
 		Extensions.FENCED_CODE_BLOCKS + Extensions.STRIKETHROUGH + Extensions.ATXHEADERSPACE
 	extension PegDownProcessor = new PegDownProcessor(extensions)
 
@@ -40,12 +40,10 @@ class DocHelper implements Helper {
 	}
 
 	def private String processMarkdown(String md) {
-		var Exception exc = null;
 		for (i : 1 .. 3) {
 			try {
 				return md.markdownToHtml
 			} catch (Exception e) {
-				exc = e;
 			}
 		}
 		return '''Markdown processing error; raw documentation:<div class="well">«md.htmlEscape»</div>'''

@@ -16,7 +16,7 @@ import java.util.Collection
 import java.util.Set
 
 class TagHelper implements Helper {
-    private Swagger swagger
+    var Swagger swagger
     extension DocHelper docHelper
     extension HtmlHelper htmlHelper
 
@@ -38,7 +38,7 @@ class TagHelper implements Helper {
     def getCommonTags(Path path) {
         var Set<String> common
         for (op : path.operationMap.values) {
-            if (common == null) {
+            if (common === null) {
                 common = Sets.newHashSet(op.tags)
             } else {
                 common.retainAll(op.tags)

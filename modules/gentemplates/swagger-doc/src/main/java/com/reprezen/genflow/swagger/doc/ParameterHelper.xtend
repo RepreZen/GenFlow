@@ -1,6 +1,5 @@
 package com.reprezen.genflow.swagger.doc
 
-import com.reprezen.genflow.swagger.doc.Helper
 import io.swagger.models.parameters.AbstractParameter
 import io.swagger.models.parameters.AbstractSerializableParameter
 import io.swagger.models.parameters.BodyParameter

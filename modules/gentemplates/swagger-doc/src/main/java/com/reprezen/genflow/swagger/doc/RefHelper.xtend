@@ -16,7 +16,7 @@ import io.swagger.models.refs.RefType
 
 class RefHelper implements Helper {
 
-	var private Swagger swagger
+	var Swagger swagger
 
 	override init() {
 		swagger = HelperHelper.swagger
@@ -137,7 +137,7 @@ class RefHelper implements Helper {
 }
 
 class BadReferenceException extends Exception {
-	val private String refString
+	val String refString
 
 	new(String refString) {
 		super("Invalid reference: " + refString)

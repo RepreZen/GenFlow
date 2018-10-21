@@ -125,7 +125,6 @@ public final class GenTemplateTrace {
 		this.baseDirectory = baseDirectory;
 	}
 
-	@SuppressWarnings("nls")
 	@Override
 	public String toString() {
 		return "GenTemplateTrace [genTemplateId=" + genTemplateId + ", baseDirectory=" + baseDirectory + ", traceItems="

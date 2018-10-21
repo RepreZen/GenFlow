@@ -31,7 +31,7 @@ class XtendHelper {
 			return map as SortedMap<K, V>
 		}
 		val result = Maps::<K, V>newTreeMap
-		if (map != null) {
+		if (map !== null) {
 			result.putAll(map)
 		}
 		return result
@@ -42,17 +42,17 @@ class XtendHelper {
 			return map as SortedMap<K, V>
 		}
 		val result = Maps::<K, K, V>newTreeMap(comparator)
-		if (map != null) {
+		if (map !== null) {
 			result.putAll(map)
 		}
 		return result
 	}
 	
 	def <T> Iterable<T> andAlso(Iterable<T> list, Iterable<T> another) {
-		if (list == null || list.empty) {
+		if (list === null || list.empty) {
 			return another.safe
 		}
-		if (another == null || another.empty) {
+		if (another === null || another.empty) {
 			return list
 		}
 		val result = new LinkedList<T>()
@@ -62,7 +62,7 @@ class XtendHelper {
 	}
  
  	def <T> String joinedMap(Iterable<? extends T> list, String separator, Functions.Function2<T, Integer, String> op) {
-		if (list == null || list.empty) {
+		if (list === null || list.empty) {
 			return ''
 		}
 		val int[] idxRef = #[0]

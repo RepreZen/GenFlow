@@ -8,8 +8,8 @@ class AttrDetails {
 	extension HtmlHelper = HelperHelper.htmlHelper
 	extension KaiZenParserHelper = new KaiZenParserHelper
 
-	val private Schema obj
-	val private String id
+	val Schema obj
+	val String id
 
 	new(Schema obj) {
 		this.obj = obj
@@ -19,8 +19,7 @@ class AttrDetails {
 	def details(boolean topLevel) {
 		val details = detailRows
 		if (!details.empty) {
-			val detailsTable = details.
-				detailsTable
+			val detailsTable = details.detailsTable
 			if (topLevel) {
 				// wrapping in an outer table to make it look the same as in the case where there really is 
 				// an outer table that contains this. Otherwise bootstrap css gives it an odd look
