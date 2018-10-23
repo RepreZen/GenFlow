@@ -11,9 +11,9 @@ package com.reprezen.genflow.api.zenmodel;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 
-import com.modelsolv.reprezen.restapi.ZenModel;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.source.AbstractLocator;
+import com.reprezen.restapi.ZenModel;
 
 public class ZenModelLocator extends AbstractLocator<ZenModel> {
 

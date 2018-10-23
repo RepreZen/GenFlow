@@ -17,19 +17,19 @@ import org.eclipse.xtext.EcoreUtil2;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.modelsolv.reprezen.core.RapidFileExtensions;
-import com.modelsolv.reprezen.restapi.DataModel;
-import com.modelsolv.reprezen.restapi.RestapiPackage;
-import com.modelsolv.reprezen.restapi.SingleValueType;
-import com.modelsolv.reprezen.restapi.ZenModel;
-import com.modelsolv.reprezen.restapi.implicit.ZenModelNormalizer;
-import com.modelsolv.reprezen.restapi.xtext.loaders.ZenModelLoader;
+import com.reprezen.core.RapidFileExtensions;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.loadability.AbstractLoadabilityTester;
 import com.reprezen.genflow.api.loadability.LoadabilityTester;
 import com.reprezen.genflow.api.source.AbstractSource;
 import com.reprezen.genflow.api.source.ILocator;
 import com.reprezen.genflow.api.zenmodel.util.CommonServices;
+import com.reprezen.restapi.DataModel;
+import com.reprezen.restapi.RestapiPackage;
+import com.reprezen.restapi.SingleValueType;
+import com.reprezen.restapi.ZenModel;
+import com.reprezen.restapi.implicit.ZenModelNormalizer;
+import com.reprezen.restapi.xtext.loaders.ZenModelLoader;
 
 public class ZenModelSource extends AbstractSource<ZenModel> {
 

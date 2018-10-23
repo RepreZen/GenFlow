@@ -8,7 +8,7 @@
  *******************************************************************************/
 package com.reprezen.genflow.api.zenmodel.util;
 
-import static com.modelsolv.reprezen.restapi.xtext.loaders.ZenLibraries.PRIMITIVE_TYPES;
+import static com.reprezen.restapi.xtext.loaders.ZenLibraries.PRIMITIVE_TYPES;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -24,22 +24,22 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.modelsolv.reprezen.restapi.Feature;
-import com.modelsolv.reprezen.restapi.MediaType;
-import com.modelsolv.reprezen.restapi.Method;
-import com.modelsolv.reprezen.restapi.PropertyRealization;
-import com.modelsolv.reprezen.restapi.ResourceAPI;
-import com.modelsolv.reprezen.restapi.SingleValueType;
-import com.modelsolv.reprezen.restapi.Structure;
-import com.modelsolv.reprezen.restapi.TypedMessage;
-import com.modelsolv.reprezen.restapi.TypedRequest;
-import com.modelsolv.reprezen.restapi.TypedResponse;
-import com.modelsolv.reprezen.restapi.ZenModel;
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.Cardinality;
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.FeatureCardinalities;
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.OverrideCardinalities;
-import com.modelsolv.reprezen.restapi.xtext.loaders.ModelLoaderUtils;
-import com.modelsolv.reprezen.restapi.xtext.util.ZenModelHelper;
+import com.reprezen.restapi.Feature;
+import com.reprezen.restapi.MediaType;
+import com.reprezen.restapi.Method;
+import com.reprezen.restapi.PropertyRealization;
+import com.reprezen.restapi.ResourceAPI;
+import com.reprezen.restapi.SingleValueType;
+import com.reprezen.restapi.Structure;
+import com.reprezen.restapi.TypedMessage;
+import com.reprezen.restapi.TypedRequest;
+import com.reprezen.restapi.TypedResponse;
+import com.reprezen.restapi.ZenModel;
+import com.reprezen.restapi.datatypes.cardinality.Cardinality;
+import com.reprezen.restapi.datatypes.cardinality.FeatureCardinalities;
+import com.reprezen.restapi.datatypes.cardinality.OverrideCardinalities;
+import com.reprezen.restapi.xtext.loaders.ModelLoaderUtils;
+import com.reprezen.restapi.xtext.util.ZenModelHelper;
 
 /**
  * Java utilities for the templates around the WADL generation.

@@ -10,9 +10,9 @@ package com.reprezen.genflow.api.zenmodel;
 
 import java.io.File;
 
-import com.modelsolv.reprezen.restapi.ZenModel;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.outputitem.AbstractOutputItem;
+import com.reprezen.restapi.ZenModel;
 
 public abstract class ZenModelOutputItem extends AbstractOutputItem<ZenModel, ZenModel> {
 

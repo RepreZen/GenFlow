@@ -8,17 +8,17 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.graph;
 
-import static com.modelsolv.reprezen.restapi.util.RestapiModelUtils.getZenModel;
+import static com.reprezen.restapi.util.RestapiModelUtils.getZenModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.modelsolv.reprezen.restapi.ReferenceLink;
-import com.modelsolv.reprezen.restapi.ResourceDefinition;
-import com.modelsolv.reprezen.restapi.ServiceDataResource;
-import com.modelsolv.reprezen.restapi.ZenModel;
+import com.reprezen.restapi.ReferenceLink;
+import com.reprezen.restapi.ResourceDefinition;
+import com.reprezen.restapi.ServiceDataResource;
+import com.reprezen.restapi.ZenModel;
 
 /**
  * Topologically sorts resources to achieve the left-to-right direction of

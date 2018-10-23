@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.modelsolv.reprezen.restapi.ZenModel;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.template.GenTemplate;
 import com.reprezen.genflow.api.template.builders.OutputItemBuilder;
+import com.reprezen.restapi.ZenModel;
 
 public abstract class ZenModelGenTemplate extends GenTemplate<ZenModel> {
 

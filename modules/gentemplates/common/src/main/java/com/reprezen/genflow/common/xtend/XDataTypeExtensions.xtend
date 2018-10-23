@@ -8,15 +8,15 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.modelsolv.reprezen.restapi.CollectionResource
-import com.modelsolv.reprezen.restapi.ReferenceEmbed
-import com.modelsolv.reprezen.restapi.ReferenceLink
-import com.modelsolv.reprezen.restapi.ReferenceTreatment
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.Cardinality
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.FeatureCardinalities
-import com.modelsolv.reprezen.restapi.datatypes.cardinality.OverrideCardinalities
+import com.reprezen.restapi.CollectionResource
+import com.reprezen.restapi.PropertyRealization
+import com.reprezen.restapi.ReferenceEmbed
+import com.reprezen.restapi.ReferenceLink
+import com.reprezen.restapi.ReferenceTreatment
+import com.reprezen.restapi.datatypes.cardinality.Cardinality
+import com.reprezen.restapi.datatypes.cardinality.FeatureCardinalities
+import com.reprezen.restapi.datatypes.cardinality.OverrideCardinalities
 import java.util.List
-import com.modelsolv.reprezen.restapi.PropertyRealization
 
 /**
  * Extension for datatype

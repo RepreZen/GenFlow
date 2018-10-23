@@ -53,12 +53,12 @@
             <artifactId>genflow-api</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.reprezen.rapidml</groupId>
-        	<artifactId>com.reprezen.rapidml</artifactId>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.reprezen.rapidml</groupId>
-        	<artifactId>com.reprezen.rapidml.model</artifactId>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml.model</artifactId>
         </dependency>
     </dependencies>
     <properties>

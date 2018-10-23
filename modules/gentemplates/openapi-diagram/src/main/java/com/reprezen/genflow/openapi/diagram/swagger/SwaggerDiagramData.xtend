@@ -8,7 +8,7 @@
  *******************************************************************************/
 package com.reprezen.genflow.openapi.diagram.swagger
 
-import com.reprezen.genflow.common.MethodServices
+import com.reprezen.genflow.common.services.MethodServices
 import io.swagger.models.HttpMethod
 import io.swagger.models.Operation
 import io.swagger.models.Path

@@ -10,15 +10,15 @@ package com.reprezen.genflow.common.xtend
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import com.modelsolv.reprezen.restapi.ImportDeclaration
-import com.modelsolv.reprezen.restapi.ZenModel
+import com.reprezen.restapi.ImportDeclaration
+import com.reprezen.restapi.ZenModel
+import com.reprezen.restapi.util.RestapiModelUtils
 import java.util.HashMap
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
-import com.modelsolv.reprezen.restapi.util.RestapiModelUtils
 import org.eclipse.xtext.naming.QualifiedName
 
 /**

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package com.reprezen.genflow.openapi.diagram.openapi3
 
-import com.reprezen.genflow.common.MethodServices
+import com.reprezen.genflow.common.services.MethodServices
 import com.reprezen.genflow.openapi.diagram.swagger.StatusCodeComparator
 import com.reprezen.genflow.openapi.diagram.swagger.XtendHelper
 import com.reprezen.kaizen.oasparser.model3.Header

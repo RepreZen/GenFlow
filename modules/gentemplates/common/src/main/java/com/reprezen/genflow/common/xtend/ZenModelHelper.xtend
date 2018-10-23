@@ -8,20 +8,20 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.modelsolv.reprezen.restapi.Documentable
-import com.modelsolv.reprezen.restapi.RealizationContainer
-import com.modelsolv.reprezen.restapi.ReferenceEmbed
-import com.modelsolv.reprezen.restapi.ReferenceLink
-import com.modelsolv.reprezen.restapi.ReferenceTreatment
-import com.modelsolv.reprezen.restapi.ResourceAPI
-import com.modelsolv.reprezen.restapi.ServiceDataResource
-import com.modelsolv.reprezen.restapi.TypedMessage
-import com.modelsolv.reprezen.restapi.ZenModel
-import com.modelsolv.reprezen.restapi.Enumeration
-import com.modelsolv.reprezen.restapi.Feature
-import com.modelsolv.reprezen.restapi.PrimitiveProperty
-import com.modelsolv.reprezen.restapi.ReferenceProperty
-import com.modelsolv.reprezen.restapi.UserDefinedType
+import com.reprezen.restapi.Documentable
+import com.reprezen.restapi.Enumeration
+import com.reprezen.restapi.Feature
+import com.reprezen.restapi.PrimitiveProperty
+import com.reprezen.restapi.RealizationContainer
+import com.reprezen.restapi.ReferenceEmbed
+import com.reprezen.restapi.ReferenceLink
+import com.reprezen.restapi.ReferenceProperty
+import com.reprezen.restapi.ReferenceTreatment
+import com.reprezen.restapi.ResourceAPI
+import com.reprezen.restapi.ServiceDataResource
+import com.reprezen.restapi.TypedMessage
+import com.reprezen.restapi.UserDefinedType
+import com.reprezen.restapi.ZenModel
 import java.util.ArrayList
 import java.util.Arrays
 import java.util.Collection

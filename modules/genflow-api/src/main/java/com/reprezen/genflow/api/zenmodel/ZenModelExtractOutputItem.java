@@ -10,10 +10,10 @@ package com.reprezen.genflow.api.zenmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.modelsolv.reprezen.restapi.ZenModel;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.outputitem.AbstractOutputItem;
 import com.reprezen.genflow.api.util.TypeUtils;
+import com.reprezen.restapi.ZenModel;
 
 public abstract class ZenModelExtractOutputItem<ItemType extends EObject> extends
         AbstractOutputItem<ZenModel, ItemType> {

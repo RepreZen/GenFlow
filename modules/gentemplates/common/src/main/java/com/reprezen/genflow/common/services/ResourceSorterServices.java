@@ -12,9 +12,9 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.modelsolv.reprezen.restapi.ResourceAPI;
-import com.modelsolv.reprezen.restapi.ServiceDataResource;
 import com.reprezen.genflow.common.graph.ResourceSorter;
+import com.reprezen.restapi.ResourceAPI;
+import com.reprezen.restapi.ServiceDataResource;
 
 public class ResourceSorterServices {
 	public static List<ServiceDataResource> sort(List<ServiceDataResource> resources) {

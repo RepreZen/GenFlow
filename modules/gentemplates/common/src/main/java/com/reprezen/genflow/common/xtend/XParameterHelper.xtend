@@ -8,14 +8,14 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.modelsolv.reprezen.restapi.MessageParameter
-import com.modelsolv.reprezen.restapi.Parameter
-import com.modelsolv.reprezen.restapi.PropertyReference
-import com.modelsolv.reprezen.restapi.ReferenceTreatment
-import com.modelsolv.reprezen.restapi.SourceReference
-import com.modelsolv.reprezen.restapi.TypedMessage
-import com.modelsolv.reprezen.restapi.PrimitiveProperty
-import com.modelsolv.reprezen.restapi.ReferenceProperty
+import com.reprezen.restapi.MessageParameter
+import com.reprezen.restapi.Parameter
+import com.reprezen.restapi.PrimitiveProperty
+import com.reprezen.restapi.PropertyReference
+import com.reprezen.restapi.ReferenceProperty
+import com.reprezen.restapi.ReferenceTreatment
+import com.reprezen.restapi.SourceReference
+import com.reprezen.restapi.TypedMessage
 import java.util.Collections
 import java.util.List
 

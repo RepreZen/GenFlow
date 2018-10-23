@@ -40,6 +40,7 @@ public class BuilderUtil {
 				instance = clazz.getConstructor().newInstance();
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
 			}
 		}
 		@SuppressWarnings("unchecked")
