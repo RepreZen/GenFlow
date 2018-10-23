@@ -8,20 +8,20 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.reprezen.restapi.Documentable
-import com.reprezen.restapi.Enumeration
-import com.reprezen.restapi.Feature
-import com.reprezen.restapi.PrimitiveProperty
-import com.reprezen.restapi.RealizationContainer
-import com.reprezen.restapi.ReferenceEmbed
-import com.reprezen.restapi.ReferenceLink
-import com.reprezen.restapi.ReferenceProperty
-import com.reprezen.restapi.ReferenceTreatment
-import com.reprezen.restapi.ResourceAPI
-import com.reprezen.restapi.ServiceDataResource
-import com.reprezen.restapi.TypedMessage
-import com.reprezen.restapi.UserDefinedType
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.Documentable
+import com.reprezen.rapidml.Enumeration
+import com.reprezen.rapidml.Feature
+import com.reprezen.rapidml.PrimitiveProperty
+import com.reprezen.rapidml.RealizationContainer
+import com.reprezen.rapidml.ReferenceEmbed
+import com.reprezen.rapidml.ReferenceLink
+import com.reprezen.rapidml.ReferenceProperty
+import com.reprezen.rapidml.ReferenceTreatment
+import com.reprezen.rapidml.ResourceAPI
+import com.reprezen.rapidml.ServiceDataResource
+import com.reprezen.rapidml.TypedMessage
+import com.reprezen.rapidml.UserDefinedType
+import com.reprezen.rapidml.ZenModel
 import java.util.ArrayList
 import java.util.Arrays
 import java.util.Collection

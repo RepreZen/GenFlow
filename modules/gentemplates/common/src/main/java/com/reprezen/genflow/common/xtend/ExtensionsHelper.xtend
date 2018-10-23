@@ -8,8 +8,8 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.reprezen.restapi.Extensible
-import com.reprezen.restapi.Extension
+import com.reprezen.rapidml.Extensible
+import com.reprezen.rapidml.Extension
 
 class ExtensionsHelper {
 	def Iterable<Extension> getRapidExtensions(Extensible rapidElement) {

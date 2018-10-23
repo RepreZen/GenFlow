@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright © 2013, 2016 Modelsolv, Inc.
  * All Rights Reserved.
- *
+ * 
  * NOTICE: All information contained herein is, and remains the property
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
@@ -11,14 +11,14 @@ package com.reprezen.genflow.rapidml.doc.xtend
 import com.reprezen.genflow.api.zenmodel.util.CommonServices
 import com.reprezen.genflow.common.xtend.XImportHelper
 import com.reprezen.genflow.common.xtend.XParameterHelper
-import com.reprezen.restapi.DataModel
-import com.reprezen.restapi.Enumeration
-import com.reprezen.restapi.Feature
-import com.reprezen.restapi.PrimitiveProperty
-import com.reprezen.restapi.ReferenceProperty
-import com.reprezen.restapi.Structure
-import com.reprezen.restapi.UserDefinedType
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.DataModel
+import com.reprezen.rapidml.Enumeration
+import com.reprezen.rapidml.Feature
+import com.reprezen.rapidml.PrimitiveProperty
+import com.reprezen.rapidml.ReferenceProperty
+import com.reprezen.rapidml.Structure
+import com.reprezen.rapidml.UserDefinedType
+import com.reprezen.rapidml.ZenModel
 
 class XGenerateInterfaceDataModels {
 	extension XDocHelper docHelper
@@ -63,8 +63,8 @@ class XGenerateInterfaceDataModels {
 	}
 
 	/**
-     * Generate complex type
-     */
+	 * Generate complex type
+	 */
 	def dispatch private String generateType(Structure dataType) {
 		'''
 			<a class="anchor" id="«dataType.htmlLink»" data-zenname="«dataType.name»"></a>
@@ -121,8 +121,8 @@ class XGenerateInterfaceDataModels {
 	}
 
 	/**
-     * Generate enumeration.
-     */
+	 * Generate enumeration.
+	 */
 	def dispatch private String generateType(Enumeration dataType) {
 		'''
 			<a class="anchor" id="«dataType.htmlLink»" data-zenname="«dataType.name»"></a>
@@ -174,12 +174,12 @@ class XGenerateInterfaceDataModels {
 				«dataType.allConstraints.generateConstraints»
 				      </div>
 				     </div>
-			    '''
+			   '''
 	}
 
 	/**
-     * Generates property type for ReferenceProperty and PrimitiveProperty
-     */
+	 * Generates property type for ReferenceProperty and PrimitiveProperty
+	 */
 	def dispatch private generatePropertyType(ReferenceProperty property) {
 		'''
 			«IF property.containment»

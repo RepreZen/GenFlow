@@ -8,15 +8,15 @@
  *******************************************************************************/
 package com.reprezen.genflow.rapidml.doc.xtend
 
-import com.reprezen.restapi.Constraint
-import com.reprezen.restapi.DataModel
-import com.reprezen.restapi.Documentable
-import com.reprezen.restapi.Feature
-import com.reprezen.restapi.LengthConstraint
-import com.reprezen.restapi.RegExConstraint
-import com.reprezen.restapi.ResourceAPI
-import com.reprezen.restapi.ValueRangeConstraint
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.Constraint
+import com.reprezen.rapidml.DataModel
+import com.reprezen.rapidml.Documentable
+import com.reprezen.rapidml.Feature
+import com.reprezen.rapidml.LengthConstraint
+import com.reprezen.rapidml.RegExConstraint
+import com.reprezen.rapidml.ResourceAPI
+import com.reprezen.rapidml.ValueRangeConstraint
+import com.reprezen.rapidml.ZenModel
 import java.io.File
 import java.net.URI
 import java.util.List

@@ -9,10 +9,10 @@
 package com.reprezen.genflow.common.xtend
 
 import com.google.common.collect.Multimap
-import com.reprezen.restapi.HasSecurityValue
-import com.reprezen.restapi.SecurityScheme
-import com.reprezen.restapi.SecuritySchemeLibrary
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.HasSecurityValue
+import com.reprezen.rapidml.SecurityScheme
+import com.reprezen.rapidml.SecuritySchemeLibrary
+import com.reprezen.rapidml.ZenModel
 import java.util.Collections
 import org.eclipse.emf.ecore.EObject
 

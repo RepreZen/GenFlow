@@ -13,8 +13,8 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.reprezen.genflow.common.graph.ResourceSorter;
-import com.reprezen.restapi.ResourceAPI;
-import com.reprezen.restapi.ServiceDataResource;
+import com.reprezen.rapidml.ResourceAPI;
+import com.reprezen.rapidml.ServiceDataResource;
 
 public class ResourceSorterServices {
 	public static List<ServiceDataResource> sort(List<ServiceDataResource> resources) {

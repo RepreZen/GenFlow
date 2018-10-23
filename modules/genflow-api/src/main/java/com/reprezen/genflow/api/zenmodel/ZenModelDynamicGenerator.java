@@ -10,13 +10,13 @@ package com.reprezen.genflow.api.zenmodel;
 
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.template.AbstractDynamicGenerator;
-import com.reprezen.restapi.ZenModel;
+import com.reprezen.rapidml.ZenModel;
 
 public abstract class ZenModelDynamicGenerator extends AbstractDynamicGenerator<ZenModel> {
 
-    @Override
-    public Class<?> getPrimaryType() throws GenerationException {
-        return ZenModel.class;
-    }
+	@Override
+	public Class<?> getPrimaryType() throws GenerationException {
+		return ZenModel.class;
+	}
 
 }

@@ -10,9 +10,9 @@ package com.reprezen.genflow.common.xtend
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import com.reprezen.restapi.ImportDeclaration
-import com.reprezen.restapi.ZenModel
-import com.reprezen.restapi.util.RestapiModelUtils
+import com.reprezen.rapidml.ImportDeclaration
+import com.reprezen.rapidml.ZenModel
+import com.reprezen.rapidml.util.RapidmlModelUtils
 import java.util.HashMap
 import java.util.List
 import java.util.Map
@@ -98,7 +98,7 @@ abstract class XGenericImportHelper<M, T extends EObject> {
 	def String getTypeFullQualifiedName(T dataType) {
 		if (dataType.eResource !== null && importedTypes.containsValue(dataType)) {
 			if (namespaces.containsKey(dataType.eResource.URI)) {
-				val model = RestapiModelUtils::getZenModel(dataType)
+				val model = RapidmlModelUtils::getZenModel(dataType)
 				val namespace = model?.namespace
 				var QualifiedName qname = QualifiedName::EMPTY
 				if (namespace !== null) {

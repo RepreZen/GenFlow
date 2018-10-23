@@ -8,14 +8,14 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.reprezen.restapi.MessageParameter
-import com.reprezen.restapi.Parameter
-import com.reprezen.restapi.PrimitiveProperty
-import com.reprezen.restapi.PropertyReference
-import com.reprezen.restapi.ReferenceProperty
-import com.reprezen.restapi.ReferenceTreatment
-import com.reprezen.restapi.SourceReference
-import com.reprezen.restapi.TypedMessage
+import com.reprezen.rapidml.MessageParameter
+import com.reprezen.rapidml.Parameter
+import com.reprezen.rapidml.PrimitiveProperty
+import com.reprezen.rapidml.PropertyReference
+import com.reprezen.rapidml.ReferenceProperty
+import com.reprezen.rapidml.ReferenceTreatment
+import com.reprezen.rapidml.SourceReference
+import com.reprezen.rapidml.TypedMessage
 import java.util.Collections
 import java.util.List
 

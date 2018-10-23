@@ -8,7 +8,7 @@
  *******************************************************************************/
 package com.reprezen.genflow.api.zenmodel.util;
 
-import static com.reprezen.restapi.xtext.loaders.ZenLibraries.PRIMITIVE_TYPES;
+import static com.reprezen.rapidml.xtext.loaders.ZenLibraries.PRIMITIVE_TYPES;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -24,22 +24,22 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.reprezen.restapi.Feature;
-import com.reprezen.restapi.MediaType;
-import com.reprezen.restapi.Method;
-import com.reprezen.restapi.PropertyRealization;
-import com.reprezen.restapi.ResourceAPI;
-import com.reprezen.restapi.SingleValueType;
-import com.reprezen.restapi.Structure;
-import com.reprezen.restapi.TypedMessage;
-import com.reprezen.restapi.TypedRequest;
-import com.reprezen.restapi.TypedResponse;
-import com.reprezen.restapi.ZenModel;
-import com.reprezen.restapi.datatypes.cardinality.Cardinality;
-import com.reprezen.restapi.datatypes.cardinality.FeatureCardinalities;
-import com.reprezen.restapi.datatypes.cardinality.OverrideCardinalities;
-import com.reprezen.restapi.xtext.loaders.ModelLoaderUtils;
-import com.reprezen.restapi.xtext.util.ZenModelHelper;
+import com.reprezen.rapidml.Feature;
+import com.reprezen.rapidml.MediaType;
+import com.reprezen.rapidml.Method;
+import com.reprezen.rapidml.PropertyRealization;
+import com.reprezen.rapidml.ResourceAPI;
+import com.reprezen.rapidml.SingleValueType;
+import com.reprezen.rapidml.Structure;
+import com.reprezen.rapidml.TypedMessage;
+import com.reprezen.rapidml.TypedRequest;
+import com.reprezen.rapidml.TypedResponse;
+import com.reprezen.rapidml.ZenModel;
+import com.reprezen.rapidml.datatypes.cardinality.Cardinality;
+import com.reprezen.rapidml.datatypes.cardinality.FeatureCardinalities;
+import com.reprezen.rapidml.datatypes.cardinality.OverrideCardinalities;
+import com.reprezen.rapidml.xtext.loaders.ModelLoaderUtils;
+import com.reprezen.rapidml.xtext.util.ZenModelHelper;
 
 /**
  * Java utilities for the templates around the WADL generation.

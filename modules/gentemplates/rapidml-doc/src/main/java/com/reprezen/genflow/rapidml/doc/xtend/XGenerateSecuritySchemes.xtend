@@ -12,10 +12,10 @@ import com.reprezen.genflow.common.services.MethodServices
 import com.reprezen.genflow.common.xtend.XImportHelper
 import com.reprezen.genflow.common.xtend.XParameterHelper
 import com.reprezen.genflow.common.xtend.XSecuritySchemeImportHelper
-import com.reprezen.restapi.SecurityScheme
-import com.reprezen.restapi.SecuritySchemeLibrary
-import com.reprezen.restapi.TypedResponse
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.SecurityScheme
+import com.reprezen.rapidml.SecuritySchemeLibrary
+import com.reprezen.rapidml.TypedResponse
+import com.reprezen.rapidml.ZenModel
 
 class XGenerateSecuritySchemes {
     extension XDocHelper docHelper

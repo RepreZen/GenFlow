@@ -13,36 +13,36 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.source.AbstractLocator;
-import com.reprezen.restapi.ZenModel;
+import com.reprezen.rapidml.ZenModel;
 
 public class ZenModelLocator extends AbstractLocator<ZenModel> {
 
-    private ZenModel model;
-    private LazyURIEncoder uriEncoder = new LazyURIEncoder();
+	private ZenModel model;
+	private LazyURIEncoder uriEncoder = new LazyURIEncoder();
 
-    public ZenModelLocator(ZenModel model) {
-        this.model = model;
-    }
+	public ZenModelLocator(ZenModel model) {
+		this.model = model;
+	}
 
-    @Override
-    public <T> String locate(T item) throws GenerationException {
-        if (EObject.class.isAssignableFrom(item.getClass())) {
-            EObject eObject = (EObject) item;
-            StringBuilder result = new StringBuilder();
-            uriEncoder.appendShortFragment(eObject, result);
-            return result.toString();
-        } else {
-            throw new GenerationException("Cannot create ZenModel locator for item of type " + item.getClass());
+	@Override
+	public <T> String locate(T item) throws GenerationException {
+		if (EObject.class.isAssignableFrom(item.getClass())) {
+			EObject eObject = (EObject) item;
+			StringBuilder result = new StringBuilder();
+			uriEncoder.appendShortFragment(eObject, result);
+			return result.toString();
+		} else {
+			throw new GenerationException("Cannot create ZenModel locator for item of type " + item.getClass());
 
-        }
-    }
+		}
+	}
 
-    @Override
-    public Object dereference(String locator) {
-        return uriEncoder.resolveShortFragment(model.eResource(), locator);
-    }
-    
-    public EObject dereferenceEObject(String locator) {
-        return uriEncoder.resolveShortFragment(model.eResource(), locator);
-    }
+	@Override
+	public Object dereference(String locator) {
+		return uriEncoder.resolveShortFragment(model.eResource(), locator);
+	}
+
+	public EObject dereferenceEObject(String locator) {
+		return uriEncoder.resolveShortFragment(model.eResource(), locator);
+	}
 }

@@ -13,19 +13,19 @@ import org.eclipse.emf.ecore.EObject;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.outputitem.AbstractOutputItem;
 import com.reprezen.genflow.api.util.TypeUtils;
-import com.reprezen.restapi.ZenModel;
+import com.reprezen.rapidml.ZenModel;
 
-public abstract class ZenModelExtractOutputItem<ItemType extends EObject> extends
-        AbstractOutputItem<ZenModel, ItemType> {
+public abstract class ZenModelExtractOutputItem<ItemType extends EObject>
+		extends AbstractOutputItem<ZenModel, ItemType> {
 
-    @Override
-    public Class<?> getPrimaryType() throws GenerationException {
-        return ZenModel.class;
-    }
+	@Override
+	public Class<?> getPrimaryType() throws GenerationException {
+		return ZenModel.class;
+	}
 
-    @Override
-    public Class<?> getItemType() throws GenerationException {
-        return TypeUtils.getTypeParamClass(getClass(), ZenModelExtractOutputItem.class, 0);
-    }
+	@Override
+	public Class<?> getItemType() throws GenerationException {
+		return TypeUtils.getTypeParamClass(getClass(), ZenModelExtractOutputItem.class, 0);
+	}
 
 }

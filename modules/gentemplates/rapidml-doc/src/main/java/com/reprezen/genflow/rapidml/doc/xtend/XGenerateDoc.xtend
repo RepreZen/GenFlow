@@ -12,7 +12,7 @@ import com.reprezen.genflow.api.zenmodel.ZenModelOutputItem
 import com.reprezen.genflow.common.xtend.XImportHelper
 import com.reprezen.genflow.common.xtend.XLiveViewHelpers
 import com.reprezen.genflow.common.xtend.XSecuritySchemeImportHelper
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.ZenModel
 
 class XGenerateDoc extends ZenModelOutputItem {
 	public static val URL_PREFIX_PARAM = 'urlPrefix'

@@ -8,14 +8,14 @@
  *******************************************************************************/
 package com.reprezen.genflow.common.xtend
 
-import com.reprezen.restapi.CollectionResource
-import com.reprezen.restapi.PropertyRealization
-import com.reprezen.restapi.ReferenceEmbed
-import com.reprezen.restapi.ReferenceLink
-import com.reprezen.restapi.ReferenceTreatment
-import com.reprezen.restapi.datatypes.cardinality.Cardinality
-import com.reprezen.restapi.datatypes.cardinality.FeatureCardinalities
-import com.reprezen.restapi.datatypes.cardinality.OverrideCardinalities
+import com.reprezen.rapidml.CollectionResource
+import com.reprezen.rapidml.PropertyRealization
+import com.reprezen.rapidml.ReferenceEmbed
+import com.reprezen.rapidml.ReferenceLink
+import com.reprezen.rapidml.ReferenceTreatment
+import com.reprezen.rapidml.datatypes.cardinality.Cardinality
+import com.reprezen.rapidml.datatypes.cardinality.FeatureCardinalities
+import com.reprezen.rapidml.datatypes.cardinality.OverrideCardinalities
 import java.util.List
 
 /**

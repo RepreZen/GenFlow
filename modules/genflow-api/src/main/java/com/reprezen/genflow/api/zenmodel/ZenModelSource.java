@@ -24,12 +24,12 @@ import com.reprezen.genflow.api.loadability.LoadabilityTester;
 import com.reprezen.genflow.api.source.AbstractSource;
 import com.reprezen.genflow.api.source.ILocator;
 import com.reprezen.genflow.api.zenmodel.util.CommonServices;
-import com.reprezen.restapi.DataModel;
-import com.reprezen.restapi.RestapiPackage;
-import com.reprezen.restapi.SingleValueType;
-import com.reprezen.restapi.ZenModel;
-import com.reprezen.restapi.implicit.ZenModelNormalizer;
-import com.reprezen.restapi.xtext.loaders.ZenModelLoader;
+import com.reprezen.rapidml.DataModel;
+import com.reprezen.rapidml.RapidmlPackage;
+import com.reprezen.rapidml.SingleValueType;
+import com.reprezen.rapidml.ZenModel;
+import com.reprezen.rapidml.implicit.ZenModelNormalizer;
+import com.reprezen.rapidml.xtext.loaders.ZenModelLoader;
 
 public class ZenModelSource extends AbstractSource<ZenModel> {
 
@@ -98,7 +98,7 @@ public class ZenModelSource extends AbstractSource<ZenModel> {
 	}
 
 	private String getCurrentMetaModelVersion() {
-		String nsURI = RestapiPackage.eNS_URI;
+		String nsURI = RapidmlPackage.eNS_URI;
 		if (!Strings.isNullOrEmpty(nsURI)) {
 			int idx = nsURI.lastIndexOf('/');
 			if (idx > 0) {

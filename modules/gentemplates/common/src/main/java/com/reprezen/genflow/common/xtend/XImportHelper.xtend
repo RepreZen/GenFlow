@@ -9,14 +9,14 @@
 package com.reprezen.genflow.common.xtend
 
 import com.google.common.collect.Multimap
-import com.reprezen.restapi.DataModel
-import com.reprezen.restapi.DataType
-import com.reprezen.restapi.PrimitiveProperty
-import com.reprezen.restapi.ReferenceProperty
-import com.reprezen.restapi.ResourceAPI
-import com.reprezen.restapi.ServiceDataResource
-import com.reprezen.restapi.Structure
-import com.reprezen.restapi.ZenModel
+import com.reprezen.rapidml.DataModel
+import com.reprezen.rapidml.DataType
+import com.reprezen.rapidml.PrimitiveProperty
+import com.reprezen.rapidml.ReferenceProperty
+import com.reprezen.rapidml.ResourceAPI
+import com.reprezen.rapidml.ServiceDataResource
+import com.reprezen.rapidml.Structure
+import com.reprezen.rapidml.ZenModel
 import org.eclipse.emf.ecore.EObject
 
 /**

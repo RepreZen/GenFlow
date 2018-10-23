@@ -44,7 +44,7 @@ import com.reprezen.genflow.api.template.GenTemplateDependency.GenTemplateDepend
 import com.reprezen.genflow.api.template.GenTemplateRegistry;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.restapi.ZenModel;
+import com.reprezen.rapidml.ZenModel;
 
 import io.swagger.models.Swagger;
 
