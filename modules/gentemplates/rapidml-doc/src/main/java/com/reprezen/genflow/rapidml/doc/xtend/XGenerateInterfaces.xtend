@@ -38,7 +38,7 @@ import com.reprezen.rapidml.UserDefinedType
 import com.reprezen.rapidml.ZenModel
 import com.reprezen.rapidml.util.InheritanceUtils
 import com.reprezen.rapidml.util.TagUtils
-import com.reprezen.realization.processor.CycleDetector
+import com.reprezen.rapidml.realization.processor.CycleDetector
 import java.util.Collections
 import java.util.List
 
