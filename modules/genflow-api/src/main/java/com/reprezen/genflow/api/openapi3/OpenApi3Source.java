@@ -106,7 +106,12 @@ public class OpenApi3Source extends AbstractSource<OpenApi3> {
 		return "OpenAPI v3";
 	}
 
-	public static LoadabilityTester getLoadabilityTester() {
+	@Override
+	public LoadabilityTester getLoadabilityTester() {
+		return loadabilityTester;
+	}
+
+	public static LoadabilityTester LoadabilityTester() {
 		return loadabilityTester;
 	}
 

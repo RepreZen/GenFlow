@@ -11,6 +11,7 @@ package com.reprezen.genflow.api.source;
 import java.io.File;
 
 import com.reprezen.genflow.api.GenerationException;
+import com.reprezen.genflow.api.loadability.LoadabilityTester;
 
 public interface ISource<S> {
 	S load(File inFile) throws GenerationException;
@@ -30,4 +31,6 @@ public interface ISource<S> {
 	ILocator<S> getLocator(S soureValue);
 
 	String getLabel();
+
+	LoadabilityTester getLoadabilityTester();
 }

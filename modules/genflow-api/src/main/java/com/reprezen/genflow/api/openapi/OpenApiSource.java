@@ -62,7 +62,12 @@ public class OpenApiSource extends AbstractSource<OpenApiDocument> {
 		return "OpenAPI";
 	}
 
-	public static LoadabilityTester getLoadabilityTester() {
+	@Override
+	public LoadabilityTester getLoadabilityTester() {
+		return loadabilityTester;
+	}
+
+	public static LoadabilityTester loadabilityTester() {
 		return loadabilityTester;
 	}
 

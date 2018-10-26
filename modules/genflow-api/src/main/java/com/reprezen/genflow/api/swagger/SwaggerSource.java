@@ -139,7 +139,12 @@ public class SwaggerSource extends AbstractSource<Swagger> {
 		return super.extractByNonSourceType(model, itemClass);
 	}
 
-	public static LoadabilityTester getLoadabilityTester() {
+	@Override
+	public LoadabilityTester getLoadabilityTester() {
+		return SwaggerLoadabilityTester.getInstance();
+	}
+
+	public static LoadabilityTester loadabilityTester() {
 		return SwaggerLoadabilityTester.getInstance();
 	}
 

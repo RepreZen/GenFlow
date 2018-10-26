@@ -123,7 +123,12 @@ public class ZenModelSource extends AbstractSource<ZenModel> {
 		return "1.0";
 	}
 
-	public static LoadabilityTester getLoadabilityTester() {
+	@Override
+	public LoadabilityTester getLoadabilityTester() {
+		return ZenModelLoadabilityTester.getInstance();
+	}
+
+	public static LoadabilityTester loadabilityTester() {
 		return ZenModelLoadabilityTester.getInstance();
 	}
 

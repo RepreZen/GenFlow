@@ -12,6 +12,7 @@ import java.io.File;
 
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.loadability.AbstractLoadabilityTester;
+import com.reprezen.genflow.api.loadability.LoadabilityTester;
 
 /**
  * Generic Source implementation that can be used to provide access to files for
@@ -47,6 +48,15 @@ public class FileSource extends AbstractSource<File> {
 	@Override
 	public ILocator<File> getLocator(File soureValue) {
 		return null;
+	}
+
+	@Override
+	public LoadabilityTester getLoadabilityTester() {
+		return new FileLoadabilityTester();
+	}
+
+	public static LoadabilityTester loadabilityTester() {
+		return new FileLoadabilityTester();
 	}
 
 	public static class FileLoadabilityTester extends AbstractLoadabilityTester {
