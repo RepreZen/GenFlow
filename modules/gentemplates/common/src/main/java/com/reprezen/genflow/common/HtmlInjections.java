@@ -2,11 +2,13 @@ package com.reprezen.genflow.common;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.reprezen.genflow.api.template.IGenTemplateContext;
 
 public class HtmlInjections {
 
@@ -15,7 +17,19 @@ public class HtmlInjections {
 
 	public HtmlInjections(Injection... injections) {
 		for (Injection injection : injections) {
-			this.injections.put(injection.getName(), injection.getHtmlSnippet());
+			addInjection(injection);
+		}
+	}
+
+	public void addInjection(Injection injection) {
+		addInjection(injection.getName(), injection.getHtmlSnippet());
+	}
+
+	public void addInjection(String name, String htmlSnippet) {
+		if (injections.containsKey(name)) {
+			injections.put(name, injections.get(name) + "\n" + htmlSnippet);
+		} else {
+			injections.put(name, htmlSnippet);
 		}
 	}
 
@@ -25,6 +39,32 @@ public class HtmlInjections {
 	public static final String BODY_BOTTOM = "BODY_BOTTOM";
 
 	public static final String HTML_INJECTIONS_PARAM = "HTML_INJECTIONS";
+
+	public static HtmlInjections fromContext(IGenTemplateContext context) {
+		Object obj = context.getGenTargetParameters().get(HTML_INJECTIONS_PARAM);
+		if (obj == null) {
+			return new HtmlInjections();
+		} else if (obj instanceof HtmlInjections) {
+			return (HtmlInjections) obj;
+		} else if (obj instanceof Map<?, ?>) {
+			HtmlInjections injections = new HtmlInjections();
+			for (Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
+				try {
+					String name = (String) entry.getKey();
+					String htmlSnippet = (String) entry.getValue();
+					injections.addInjection(name, htmlSnippet);
+				} catch (ClassCastException e) {
+					String msg = String.format("Invalid entry in Html Injections map: %s => %s", entry.getKey(),
+							entry.getValue());
+					throw new IllegalArgumentException(msg, e);
+				}
+			}
+			return injections;
+		} else {
+			String msg = String.format("Invalid value for parameter '%': %s", HTML_INJECTIONS_PARAM, obj);
+			throw new IllegalArgumentException(msg);
+		}
+	}
 
 	public String inject(String name) {
 		return getInjection(name).orElse("");
