@@ -94,5 +94,9 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-wadl</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.reprezen.genflow</groupId>
+        	<artifactId>rapidml-raml</artifactId>
+        </dependency>
     </dependencies>
 </project>
