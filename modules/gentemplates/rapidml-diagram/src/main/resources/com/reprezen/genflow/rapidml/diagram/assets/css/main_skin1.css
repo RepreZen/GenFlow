@@ -1,0 +1,123 @@
+/* Body styles */
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*======= style for node container ===========*/
+/* main div style */
+.flowtree {
+    margin: 30px 10px 10px;
+    padding: 10px;
+}
+
+/* svg background */
+.chartGroup .background {
+    fill: #FFFFFF;
+    stroke-width: 0.0;
+    stroke-opacity: 0.0;
+}
+
+/* node rectangle background  */
+/* this is common style for each rectangle fill color is applied from code also */
+/* other property can me changed from here */
+.node rect {
+    cursor: pointer;
+    fill: #c44f27;
+    fill-opacity: 1;
+    stroke: #c44f27;
+    stroke-width: 2px;
+}
+
+   /* These are the different types nodes we can add move with adding class and also */
+   /* can add the different stroke for different boxes */
+.node rect.resource{
+    fill: #86a9d1;
+}
+
+.node rect.resourceChild{
+    fill: #c3d4e8;
+}
+
+.node rect.otherChild{
+    fill: #fff;
+}
+
+/* make sure fill color must match with method rect fill color*/
+.node .requestPort,.node .responsePort{
+    fill : #c3d4e8;
+    stroke: #c3d4e8;
+    stroke-width: 0;
+    stroke-opacity: 0;
+}
+
+/*======= style for connector links  ===========*/
+/* the line separator of node header and body part */
+.node .separator{
+    stroke: #cc0000;
+    stroke-width: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+/* collapse/Expand arrow */
+.node .expander{
+    fill: #000;
+}
+
+/*<!-- arrow and circle on request response lines in method -->*/
+/*<!-- Special case when we need to set color for request and response arrow head and end-->*/
+#markerCircle_msg, #arrowhead_msg{
+    fill : #c44f27;
+    stroke: #c44f27;
+    stroke-width: 0;
+}
+
+#markerCircle_rlink, #arrowhead_rlink{
+    fill : #c44f27;
+    stroke: #c44f27;
+    stroke-width: 0;
+}
+
+/* reference link style */
+/* all the reference link have same color */
+.link{
+    fill : none;
+    stroke: #c44f27;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* response/request links inside method box  */
+/* all response/request links have same property */
+.responseLink,.requestLink{
+    fill : none;
+    stroke:#c44f27;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* url links */
+/* stroke property for url links are in js file which will give different color top each line */
+.urlLinks{
+    fill : none;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+
+/* Fonts, font sizes and styles */
+
+/* Make sure when you change the property for Font and text also change it in js file */
+/* there is method inside "layout-flow.js "*/
+/* method name is createSVGtext(), that helps calculate width of text */
+.node text {
+   font: 12px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    pointer-events: none;
+    font-weight: normal;
+    fill: #333;
+	line-height:24px;
+}

@@ -9,6 +9,7 @@
 package com.reprezen.genflow.rapidml.doc.xtend
 
 import com.reprezen.genflow.api.zenmodel.ZenModelOutputItem
+import com.reprezen.genflow.common.doc.XDocHelper
 import com.reprezen.genflow.common.xtend.XImportHelper
 import com.reprezen.genflow.common.xtend.XLiveViewHelpers
 import com.reprezen.genflow.common.xtend.XSecuritySchemeImportHelper

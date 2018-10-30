@@ -58,6 +58,7 @@
         <module>modules/gentemplates/openapi-normalizer</module>
         <module>modules/gentemplates/swagger-ui</module>
         <module>modules/gentemplates/rapidml-doc</module>
+        <module>modules/gentemplates/rapidml-diagram</module>
     </modules>
     <build>
         <plugins>
@@ -348,6 +349,11 @@
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-doc</artifactId>
                 <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.reprezen.genflow</groupId>
+            	<artifactId>rapidml-diagram</artifactId>
+            	<version>0.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

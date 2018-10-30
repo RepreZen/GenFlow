@@ -7,20 +7,12 @@
         <version>0.0.9-SNAPSHOT</version>
         <relativePath>../../..</relativePath>
     </parent>
-    <artifactId>rapidml-doc</artifactId>
-    <name>rapidml-doc</name>
+    <artifactId>rapidml-diagram</artifactId>
+    <name>rapidml-diagram</name>
     <dependencies>
-        <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml.model</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

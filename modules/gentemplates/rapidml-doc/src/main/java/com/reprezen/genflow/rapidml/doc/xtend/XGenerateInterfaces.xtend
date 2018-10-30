@@ -9,6 +9,7 @@
 package com.reprezen.genflow.rapidml.doc.xtend
 
 import com.reprezen.genflow.api.zenmodel.util.CommonServices
+import com.reprezen.genflow.common.doc.XDocHelper
 import com.reprezen.genflow.common.services.DocServices
 import com.reprezen.genflow.common.xtend.XDataTypeExtensions
 import com.reprezen.genflow.common.xtend.XImportHelper
@@ -36,9 +37,9 @@ import com.reprezen.rapidml.TypedRequest
 import com.reprezen.rapidml.TypedResponse
 import com.reprezen.rapidml.UserDefinedType
 import com.reprezen.rapidml.ZenModel
+import com.reprezen.rapidml.realization.processor.CycleDetector
 import com.reprezen.rapidml.util.InheritanceUtils
 import com.reprezen.rapidml.util.TagUtils
-import com.reprezen.rapidml.realization.processor.CycleDetector
 import java.util.Collections
 import java.util.List
 

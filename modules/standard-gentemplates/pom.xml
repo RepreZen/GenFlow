@@ -82,5 +82,9 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-doc</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.reprezen.genflow</groupId>
+        	<artifactId>rapidml-diagram</artifactId>
+        </dependency>
     </dependencies>
 </project>
