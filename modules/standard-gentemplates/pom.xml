@@ -98,5 +98,10 @@
         	<groupId>com.reprezen.genflow</groupId>
         	<artifactId>rapidml-raml</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.reprezen.genflow</groupId>
+        	<artifactId>rapidml-jsonschema</artifactId>
+        	
+        </dependency>
     </dependencies>
 </project>

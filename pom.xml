@@ -62,6 +62,7 @@
         <module>modules/gentemplates/rapidml-xsd</module>
         <module>modules/gentemplates/rapidml-wadl</module>
         <module>modules/gentemplates/rapidml-raml</module>
+        <module>modules/gentemplates/rapidml-jsonschema</module>
     </modules>
     <build>
         <plugins>
@@ -376,6 +377,11 @@
             <dependency>
             	<groupId>com.reprezen.genflow</groupId>
             	<artifactId>rapidml-raml</artifactId>
+            	<version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.reprezen.genflow</groupId>
+            	<artifactId>rapidml-jsonschema</artifactId>
             	<version>0.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
