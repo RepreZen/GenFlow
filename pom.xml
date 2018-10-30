@@ -323,12 +323,12 @@
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml.model</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.atlassian.commonmark</groupId>
@@ -351,9 +351,9 @@
                 <version>0.0.9-SNAPSHOT</version>
             </dependency>
             <dependency>
-            	<groupId>com.reprezen.genflow</groupId>
-            	<artifactId>rapidml-diagram</artifactId>
-            	<version>0.0.9-SNAPSHOT</version>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-diagram</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
