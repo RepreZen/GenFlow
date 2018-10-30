@@ -87,8 +87,12 @@
             <artifactId>rapidml-diagram</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.reprezen.genflow</groupId>
-        	<artifactId>rapidml-xsd</artifactId>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-xsd</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-wadl</artifactId>
         </dependency>
     </dependencies>
 </project>
