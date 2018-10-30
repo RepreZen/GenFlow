@@ -5,8 +5,8 @@ class AttrDetails {
 	extension AttributeHelper = HelperHelper.attributeHelper
 	extension HtmlHelper = HelperHelper.htmlHelper
 
-	var private Object obj
-	val private String id
+	var Object obj
+	val String id
 
 	new(Object obj) {
 		this.obj = obj
@@ -92,7 +92,7 @@ class AttrDetails {
 			default:
 				throw new IllegalArgumentException("Internal error - unexpected detail label: " + detailName)
 		}
-		if (value != null) {
+		if (value !== null) {
 			'''<tr><th>«detailName»</th><td>«value»</td></tr>'''
 		}
 	}
@@ -100,13 +100,13 @@ class AttrDetails {
 	def private getBounds() {
 		val minEq = if(!obj.exclusiveMinimum) "="
 		val maxEq = if(!obj.exclusiveMaximum) "="
-		val bounds = if (obj.minimum != null) {
-				if (obj.maximum != null) {
+		val bounds = if (obj.minimum !== null) {
+				if (obj.maximum !== null) {
 					'''«obj.minimum» <«minEq» «obj.name» <«maxEq» «obj.maximum»'''
 				}
-			} else if (obj.minimum != null) {
+			} else if (obj.minimum !== null) {
 				'''«obj.name» >«minEq» «obj.minimum»'''
-			} else if (obj.maximum != null) {
+			} else if (obj.maximum !== null) {
 				'''«obj.name» <«maxEq» «obj.maximum»'''
 			}
 		bounds?.htmlEscape

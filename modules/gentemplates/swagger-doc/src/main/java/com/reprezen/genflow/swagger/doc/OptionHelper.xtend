@@ -1,9 +1,6 @@
 package com.reprezen.genflow.swagger.doc
 
 import com.reprezen.genflow.api.target.ParameterUtils
-import com.reprezen.genflow.swagger.doc.Helper
-import com.reprezen.genflow.swagger.doc.HelperHelper
-import com.reprezen.genflow.swagger.doc.XSwaggerDocGenTemplate
 
 class OptionHelper implements Helper {
 

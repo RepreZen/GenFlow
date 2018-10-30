@@ -8,21 +8,20 @@
  *******************************************************************************/
 package com.reprezen.genflow.swagger.doc
 
-import com.reprezen.genflow.swagger.doc.Helper
 import java.util.Collections
 import java.util.List
 
 class MimeTypeHelper implements Helper {
 
-    override init() {}
+	override init() {}
 
-    def static getHtml(List<String> types) {
-        '''
-            «IF (types ?: Collections::emptyList).empty »
-                <em>None</em>
-            «ELSE»
-                «FOR type : types»<div><code>«type»</code></div>«ENDFOR»
-            «ENDIF»
-        '''
-    }
+	def static getHtml(List<String> types) {
+		'''
+			«IF (types ?: Collections::emptyList).empty »
+				<em>None</em>
+			«ELSE»
+				«FOR type : types»<div><code>«type»</code></div>«ENDFOR»
+			«ENDIF»
+		'''
+	}
 }

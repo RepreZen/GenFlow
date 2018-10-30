@@ -10,11 +10,9 @@ import java.util.List
 class AttributeHelper implements Helper {
 
 	var ParameterHelper parameterHelper
-	var PropertyHelper propertyHelper
 	var ModelHelper modelHelper
 
 	override init() {
-		propertyHelper = HelperHelper.propertyHelper
 		parameterHelper = HelperHelper.parameterHelper
 		modelHelper = HelperHelper.modelHelper
 	}

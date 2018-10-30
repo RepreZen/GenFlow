@@ -16,7 +16,7 @@ import com.reprezen.kaizen.oasparser.model3.Operation
 import com.reprezen.kaizen.oasparser.model3.Path
 
 class TagHelper implements Helper {
-	private OpenApi3 model
+	var  OpenApi3 model
 	extension DocHelper docHelper
 	extension HtmlHelper htmlHelper
 

@@ -16,8 +16,8 @@ class HtmlHelper implements Helper {
 
 	override init() {}
 
-	val private Map<Object, String> htmlIds = Maps.newHashMap
-	var private nextIdNum = 1
+	val Map<Object, String> htmlIds = Maps.newHashMap
+	var nextIdNum = 1
 
 	def String getFileUrl(Object obj) {
 		obj.RZVE?.fileUrl
@@ -65,7 +65,7 @@ class HtmlHelper implements Helper {
 		obj.RZVE?.pointer
 	}
 
-	val private static mapper = new ObjectMapper()
+	val static mapper = new ObjectMapper()
 
 	def private RepreZenVendorExtension getRZVE(Object obj) {
 		val ext = switch (obj) {
@@ -93,7 +93,7 @@ class HtmlHelper implements Helper {
 }
 
 package class NoEscapeString {
-	val private String value
+	val String value
 
 	new(String value) {
 		this.value = value

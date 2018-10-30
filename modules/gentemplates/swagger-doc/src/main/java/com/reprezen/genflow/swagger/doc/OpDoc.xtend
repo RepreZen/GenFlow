@@ -11,13 +11,10 @@ package com.reprezen.genflow.swagger.doc
 import io.swagger.models.HttpMethod
 import io.swagger.models.Operation
 import io.swagger.models.Response
-import io.swagger.models.Swagger
 import io.swagger.models.parameters.BodyParameter
 
 class OpDoc {
-	val private Operation op
-	val private Swagger swagger = HelperHelper.swagger
-	val private String pathName
+	val Operation op
 
 	extension DocHelper = HelperHelper.docHelper
 	extension TagHelper = HelperHelper.tagHelper
@@ -29,13 +26,11 @@ class OpDoc {
 	extension AttributeHelper = HelperHelper.attributeHelper
 	extension ExamplesHelper = HelperHelper.examplesHelper
 
-	new(Operation op, Swagger swagger, String pathName) {
+	new(Operation op) {
 		this.op = op;
-		this.pathName = pathName
 	}
 
 	def getHtml(HttpMethod method) {
-		val path = swagger.paths.get(pathName)
 		'''
 			<a class="anchor toc-entry" id="«op.htmlId»" data-toc-level="2" data-toc-text="«method»"></a>
 			<span class="label label-primary resource-method">«method»</span>
@@ -57,10 +52,10 @@ class OpDoc {
 			        <tr><th>Produces</th><td>«MimeTypeHelper.getHtml(op.produces)»</td></tr>
 			    </table>
 			    </li>
-			    «new ParamsDoc(pathName, path, method).paramsHtml(op.nonBodyParameters)»
+			    «new ParamsDoc().paramsHtml(op.nonBodyParameters)»
 			    «op.getMessageBodyHtml(method)»
 			</ul>
-		    '''
+		  '''
 	}
 
 	def getNonBodyParameters(Operation op) {
@@ -116,23 +111,23 @@ class OpDoc {
 
 	def statusLabel(String status) {
 		val context = try {
-			switch s: Integer.parseInt(status) {
-				case s >= 100 && s < 200: // Informational
-					"info"
-				case s >= 200 && s < 300: // Success
-					"success"
-				case s >= 300 && s < 400: // Redirection
-					"info"
-				case s >= 400 && s < 500: // Bad request
-					"danger"
-				case s >= 500 && s < 600: // server error
-					"danger"
-				default:
-					"default"
+				switch s: Integer.parseInt(status) {
+					case s >= 100 && s < 200: // Informational
+						"info"
+					case s >= 200 && s < 300: // Success
+						"success"
+					case s >= 300 && s < 400: // Redirection
+						"info"
+					case s >= 400 && s < 500: // Bad request
+						"danger"
+					case s >= 500 && s < 600: // server error
+						"danger"
+					default:
+						"default"
+				}
+			} catch (NumberFormatException e) {
+				status // handle "default" case
 			}
-		} catch (NumberFormatException e) {
-			status // handle "default" case
-		}
 		'''<span class="label label-«context»">«status»</span>'''
 	}
 

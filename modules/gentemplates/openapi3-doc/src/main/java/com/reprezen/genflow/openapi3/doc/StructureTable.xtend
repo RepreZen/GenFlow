@@ -67,9 +67,9 @@ abstract class StructureTable<T> {
 
 	def protected abstract String getDoc();
 
-	public static class SchemaStructureTable extends StructureTable<Schema> {
+	static class SchemaStructureTable extends StructureTable<Schema> {
 
-		public new(Schema obj, String[]... cols) {
+		new(Schema obj, String[]... cols) {
 			super(obj, cols)
 		}
 
@@ -86,11 +86,11 @@ abstract class StructureTable<T> {
 			val det = new AttrDetails(obj)
 
 			val additionalPropertiesSchema = try {
-				// See https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/104 for why this can throw NPE
-				obj.getAdditionalPropertiesSchema()?.asNullIfMissing
-			} catch (NullPointerException e) {
-				null
-			}
+					// See https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/104 for why this can throw NPE
+					obj.getAdditionalPropertiesSchema()?.asNullIfMissing
+				} catch (NullPointerException e) {
+					null
+				}
 			val allOfSchemas = obj.allOfSchemas // FIXME asNullIfMissing is always true
 			val oneOfSchemas = obj.oneOfSchemas
 			val anyOfSchemas = obj.anyOfSchemas
@@ -102,8 +102,7 @@ abstract class StructureTable<T> {
 //				defaultRender(name, referrer, ind, det)
 //			} else {
 			val modelRow = if (name !== null)
-					defaultRender(name, referrer, ind,
-						det)
+					defaultRender(name, referrer, ind, det)
 			'''
 				«modelRow»«FOR prop : obj.properties.entrySet»«new SchemaStructureTable(prop.value, cols).renderObject("!" + prop.key, obj, ind.advance2)»«ENDFOR»
 				«IF additionalPropertiesSchema !== null»
@@ -166,9 +165,9 @@ abstract class StructureTable<T> {
 
 	}
 
-	public static class ParameterStructureTable extends StructureTable<Parameter> {
+	static class ParameterStructureTable extends StructureTable<Parameter> {
 
-		public new(Parameter obj, String[]... cols) {
+		new(Parameter obj, String[]... cols) {
 			super(obj, cols)
 		}
 
@@ -195,15 +194,14 @@ abstract class StructureTable<T> {
 
 	}
 
-	public static class ParametersStructureTable extends StructureTable<List<Parameter>> {
+	static class ParametersStructureTable extends StructureTable<List<Parameter>> {
 
-		public new(List<Parameter> obj, String[]... cols) {
+		new(List<Parameter> obj, String[]... cols) {
 			super(obj, cols)
 		}
 
 		override protected render(String name, Object referrer, Indentation ind) {
-			if (!obj.
-				empty) {
+			if (!obj.empty) {
 				'''«FOR param : obj»«new ParameterStructureTable(param, cols).renderObject(null, referrer, ind.advance2)»«ENDFOR»'''
 			}
 		}
@@ -218,7 +216,7 @@ abstract class StructureTable<T> {
 
 	}
 
-	public static class ExceptionStructureTable extends StructureTable<Exception> {
+	static class ExceptionStructureTable extends StructureTable<Exception> {
 
 		protected new(Exception obj, String[]... cols) {
 			super(obj, cols)
@@ -261,8 +259,7 @@ abstract class StructureTable<T> {
 		 *****************/
 		def protected String renderColumn(RecursiveRenderException e, String colAttr, String name, Object referrer,
 			Indentation ind, AttrDetails det) {
-			val obj = e.object.
-				safeResolve
+			val obj = e.object.safeResolve
 			switch colAttr {
 				case "name": {
 					val tooltip = ' <a href="#" data-toggle="tooltip" title="Recursive reference to containing object type">&hellip;</a>'
@@ -512,10 +509,10 @@ abstract class StructureTable<T> {
  */
 package class Indentation {
 
-	val private int n1
-	val private int n2
-	var private boolean used1 = false
-	var private boolean used2 = false
+	val int n1
+	val int n2
+	var boolean used1 = false
+	var boolean used2 = false
 
 	new() {
 		this(0, 0)

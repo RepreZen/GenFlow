@@ -15,7 +15,7 @@ import java.util.Map
 
 import static com.reprezen.genflow.common.HtmlInjections.*
 
-abstract class  DiagramGenerator<T> extends AbstractOutputItem<T,T> {
+abstract class DiagramGenerator<T> extends AbstractOutputItem<T, T> {
 
 	static public val JSON_OUTPUT_ITEM_NAME = "JSON"
 
@@ -27,8 +27,7 @@ abstract class  DiagramGenerator<T> extends AbstractOutputItem<T,T> {
 	static val int DEFAULT_TRANSITION_DURATION = 300
 
 	def String generate(CharSequence data, String modelName) {
-		htmlInjections = context.genTargetParameters.get(HTML_INJECTIONS_PARAM) as HtmlInjections ?:
-			new HtmlInjections()
+		htmlInjections = HtmlInjections::fromContext(context)
 		val parameters = context.getGenTargetParameters();
 		val urlPrefix = getStringParameter(URL_PREFIX_PARAM, null)
 
@@ -158,7 +157,7 @@ abstract class  DiagramGenerator<T> extends AbstractOutputItem<T,T> {
 					«BODY_BOTTOM.inject»
 					</body>
 					</html>
-				    '''
+				   '''
 	}
 
 	def boolean isPreview() {
@@ -172,6 +171,5 @@ abstract class  DiagramGenerator<T> extends AbstractOutputItem<T,T> {
 		}
 		return defaultValue;
 	}
-	
-	
+
 }

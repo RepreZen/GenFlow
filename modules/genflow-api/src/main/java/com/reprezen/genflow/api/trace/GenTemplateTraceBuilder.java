@@ -118,7 +118,6 @@ public class GenTemplateTraceBuilder {
 	 * @param outputFile   output file containing a copy of the resource
 	 * @return The trace builder.
 	 */
-	@SuppressWarnings("nls")
 	public GenTemplateTraceBuilder addStaticResource(String resourcePath, File outputFile) {
 		newItem("staticResource").withOutputFile(outputFile).withResourceSourceItem(SOURCE_DATA_ROLE, resourcePath);
 		return this;
@@ -164,7 +163,6 @@ public class GenTemplateTraceBuilder {
 	 *                   the primary source.
 	 * @return the trace builder
 	 */
-	@SuppressWarnings("nls")
 	public GenTemplateTraceBuilder addPrimaryItem(File outputFile, String locator) {
 		newItem("file").withOutputFile(outputFile).withPrimarySourceItem(locator);
 		return this;

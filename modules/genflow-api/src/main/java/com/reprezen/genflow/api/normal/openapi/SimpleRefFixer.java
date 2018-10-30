@@ -58,7 +58,7 @@ public class SimpleRefFixer {
 			return;
 		}
 		fixSimpleRef(parameter, "parameters");
-		if (parameter.path("in").equals("body")) {
+		if (parameter.path("in").asText().equals("body")) {
 			fixSchemaSimpleRefs(parameter.path("schema"));
 		}
 	}

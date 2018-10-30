@@ -97,7 +97,6 @@ public final class GenTemplateTraceSourceItem {
 		this.locator = locator;
 	}
 
-	@SuppressWarnings("nls")
 	@Override
 	public String toString() {
 		return "GenTemplateTraceSourceItem [role=" + role + ", sourceModel=" + sourceName + ", locator=" + locator

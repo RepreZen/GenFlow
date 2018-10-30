@@ -25,7 +25,7 @@ class StructureTable {
 	extension RefHelper = HelperHelper.refHelper
 	extension OptionHelper = HelperHelper.optionHelper
 
-	val final String[][] cols
+	val String[][] cols
 
 	def static get(Swagger swagger, String[]... cols) {
 		return new StructureTable(swagger, cols)
@@ -162,8 +162,7 @@ class StructureTable {
 			model.defaultRender(name, referrer, ind, det)
 		} else {
 			val modelRow = if (name !== null)
-					model.defaultRender(name, referrer, ind,
-						det)
+					model.defaultRender(name, referrer, ind, det)
 			'''
 				«modelRow»«FOR prop : model.properties.entrySet»«prop.value.renderObject("!" + prop.key, model, ind.advance2)»«ENDFOR»
 				«apSchema?.renderObject("![additional properties]", model, ind.advance2)»
@@ -342,8 +341,7 @@ class StructureTable {
 	 *****************/
 	def private dispatch String renderColumn(RecursiveRenderException e, String colAttr, String name, Object referrer,
 		Indentation ind, AttrDetails det) {
-		val obj = e.object.
-			safeResolve
+		val obj = e.object.safeResolve
 		switch colAttr {
 			case "name": {
 				val tooltip = ' <a href="#" data-toggle="tooltip" title="Recursive reference to containing object type">&hellip;</a>'
@@ -452,10 +450,10 @@ class StructureTable {
  */
 package class Indentation {
 
-	val private int n1
-	val private int n2
-	var private boolean used1 = false
-	var private boolean used2 = false
+	val int n1
+	val int n2
+	var boolean used1 = false
+	var boolean used2 = false
 
 	new() {
 		this(0, 0)

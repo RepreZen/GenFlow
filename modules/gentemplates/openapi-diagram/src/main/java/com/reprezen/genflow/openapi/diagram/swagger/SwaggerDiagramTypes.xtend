@@ -25,14 +25,14 @@ import io.swagger.models.properties.RefProperty
 import java.util.Map
 
 class SwaggerDiagramTypes {
-	private static final String UNRESOLVED = "<unresolved>"
-	private static final String UNKNOWN = "UNKNOWN"
+	val static String UNRESOLVED = "<unresolved>"
+	val static String UNKNOWN = "UNKNOWN"
 
 	extension XtendHelper = new XtendHelper
 
-	private Map<String, Parameter> sharedParams
+	val Map<String, Parameter> sharedParams
 
-	public new(Swagger model) {
+	new(Swagger model) {
 		this.sharedParams = model.parameters.safe
 	}
 
@@ -43,7 +43,7 @@ class SwaggerDiagramTypes {
 	def dispatch String parameterLabel(RefParameter refParam) {
 		val ref = refParam.simpleRef
 		val realParam = sharedParams.get(ref)
-		val type = if(realParam == null) UNRESOLVED else computeType(realParam)
+		val type = if(realParam === null) UNRESOLVED else computeType(realParam)
 		return formatParameterLabel(ref, type)
 	}
 
@@ -57,7 +57,7 @@ class SwaggerDiagramTypes {
 
 	def dispatch String computeType(BodyParameter bodyParam) {
 		val schema = bodyParam.schema
-		if (schema == null) {
+		if (schema === null) {
 			return UNRESOLVED
 		}
 		return schemaLabel("Request", schema)
@@ -97,10 +97,10 @@ class SwaggerDiagramTypes {
 			MapProperty:
 				return context.spaceIfNeeded("Object (inline)")
 			ArrayProperty:
-				return arrayTypeLabel(context, type.items, type.minItems != null && type.minItems > 0)
+				return arrayTypeLabel(context, type.items, type.minItems !== null && type.minItems > 0)
 			RefProperty:
 				return type.simpleRef
-			case type.format != null || type.type != null: {
+			case type.format !== null || type.type !== null: {
 				return primitiveTypeLabel(type.type, type.format)
 			}
 			default:
@@ -118,7 +118,7 @@ class SwaggerDiagramTypes {
 				return context.spaceIfNeeded("Array (inline)")
 			RefProperty:
 				return items.simpleRef + cardinalitySuffix(atLeastOne)
-			case items.format != null || items.type != null: {
+			case items.format !== null || items.type !== null: {
 				return primitiveTypeLabel(items.type, items.format) + atLeastOne
 			}
 			default:

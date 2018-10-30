@@ -9,8 +9,8 @@ class HtmlHelper implements Helper {
 
 	override init() {}
 
-	val private Map<Object, String> htmlIds = Maps.newHashMap
-	var private nextIdNum = 1
+	val Map<Object, String> htmlIds = Maps.newHashMap
+	var nextIdNum = 1
 
 	def String htmlEscape(String value) {
 		StringEscapeUtils::escapeHtml4(value)
@@ -60,7 +60,7 @@ class HtmlHelper implements Helper {
 }
 
 package class NoEscapeString {
-	val private String value
+	val String value
 
 	new(String value) {
 		this.value = value

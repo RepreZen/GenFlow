@@ -72,8 +72,8 @@ public final class GenTemplateRegistry {
 	}
 
 	private void register(IGenTemplate template) {
-		register(template.getId(), template);
-		if (template instanceof AbstractGenTemplate) {
+		boolean ok = register(template.getId(), template);
+		if (ok && template instanceof AbstractGenTemplate) {
 			try {
 				((AbstractGenTemplate) template).getAlsoKnownAsIds().stream().forEach((aka -> register(aka, template)));
 			} catch (GenerationException e) {
@@ -82,13 +82,22 @@ public final class GenTemplateRegistry {
 		}
 	}
 
-	private void register(String id, IGenTemplate template) {
+	private boolean register(String id, IGenTemplate template) {
 		if (!registry.containsKey(id)) {
+			try {
+				// make sure it's minimally usable
+				((GenTemplate<?>) template).init();
+			} catch (GenerationException e) {
+				logger.warn(String.format("Failed to initialize GenTarget '%s'; ignoring", template.getId()));
+				return false;
+			}
 			registry.put(id, template);
 		} else {
 			logger.warn(String.format("Id '%s' for GenTemplate %s already in use; ignoring", id,
 					template.getClass().getName()));
+			return false;
 		}
+		return true;
 	}
 
 	private static GenTemplateRegistry getInstance() {

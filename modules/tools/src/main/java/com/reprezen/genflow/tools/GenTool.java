@@ -44,6 +44,7 @@ import com.reprezen.genflow.api.template.GenTemplateDependency.GenTemplateDepend
 import com.reprezen.genflow.api.template.GenTemplateRegistry;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.rapidml.ZenModel;
 
 import io.swagger.models.Swagger;
 
@@ -404,6 +405,8 @@ public class GenTool {
 			fileName = "PetStoreV3.yaml";
 		} else if (OpenApiDocument.class.getName().equals(sourceType)) {
 			fileName = "PetStoreV3.yaml";
+		} else if (ZenModel.class.getName().equals(sourceType)) {
+			fileName = "TaxBlaster.rapid";
 		}
 		if (fileName != null) {
 			return new SourceFile(SourceType.DEFAULT, fileName);

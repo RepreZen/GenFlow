@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.8-SNAPSHOT</version>
+        <version>0.0.9-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
     <name>genflow-common</name>
@@ -51,6 +51,14 @@
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml.model</artifactId>
         </dependency>
     </dependencies>
     <properties>

@@ -6,12 +6,10 @@ import com.reprezen.kaizen.oasparser.model3.Schema
 class ArrayHelper implements Helper {
 
 	extension AttributeHelper attributeHelper
-	extension RefHelper refHelper
 	extension KaiZenParserHelper = new KaiZenParserHelper
 
 	override init() {
 		attributeHelper = HelperHelper.attributeHelper
-		refHelper = HelperHelper.refHelper
 	}
 
 	def Schema getElementType(Schema obj) {

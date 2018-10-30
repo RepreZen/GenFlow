@@ -1,0 +1,178 @@
+/*!
+ * Copyright 2013 ModelSolv, Inc.
+ */
+ 
+ /* The bootstrap color scheme does not support well the style for 'small'
+   within a panel, so it was made a bit less grey. */
+.panel-primary .panel-heading .panel-title small {
+  color: #cdc9c9;
+  font-size: 80%;
+}
+
+/* The anchors are not positioned correctly because of the fixed top header.
+   This will reposition higher all <a> tags with a 'anchor' class. */
+a.anchor {
+  display: block; 
+  position: relative; 
+  top: -60px; 
+  visibility: hidden;
+}
+
+img.logo {
+  margin-top: -10px;
+}
+
+/*
+ * RepreZen Containers
+ *
+ */
+
+.panel-primary > .restful-interface {
+}
+
+.panel-default > .object-resource {
+}
+
+span.resource-method {
+}
+
+/* 
+ * Top navigation 
+ */
+.navbar-collapse.in {
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+}
+
+/*
+ * Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+
+/* We don't want to show the dynamic side-bar in mobile view. 
+   Hence, set a hidden visibility and remove any position config.
+*/
+.reprezen-sidebar {
+	visibility: hidden;
+}
+
+.reprezen-sidebar.affix {
+	bottom: 20px;
+	overflow-y: scroll;
+  /* position: static; */
+}
+
+/* First level of nav */
+.bs-sidenav {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top:    10px;
+  padding-bottom: 10px;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+.reprezen-sidebar .nav > li > a {
+  display: block;
+  color: #716b7a;
+  padding: 5px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.reprezen-sidebar .nav > li > a:hover,
+.reprezen-sidebar .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #e7e7e7;
+  border-right: 1px solid #dbd8e0;
+}
+.reprezen-sidebar .nav > .active > a,
+.reprezen-sidebar .nav > .active:hover > a,
+.reprezen-sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #777777;
+  background-color: transparent;
+  border-right: 1px solid #563d7c;
+}
+
+/* Nav: second level (shown on .active) */
+.reprezen-sidebar .nav .nav {
+  display: none; /* Hide by default, but at >768px, show it */
+  margin-bottom: 8px;
+}
+.reprezen-sidebar .nav .nav > li > a {
+  padding-top:    3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+	.reprezen-sidebar {
+    visibility: visible;
+  }
+	
+  .reprezen-sidebar .nav > .active > ul {
+    display: block;
+  }
+  /* Widen the fixed sidebar */
+  .reprezen-sidebar.affix,
+  .reprezen-sidebar.affix-bottom {
+    width: 213px;
+  }
+  .reprezen-sidebar.affix {
+    position: fixed; /* Undo the static from mobile first approach */
+    top: 80px;
+  }
+  .reprezen-sidebar.affix-bottom {
+    position: absolute; /* Undo the static from mobile first approach */
+  }
+  .reprezen-sidebar.affix-bottom .bs-sidenav,
+  .reprezen-sidebar.affix .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px) {
+	.reprezen-sidebar {
+    visibility: visible;
+  }
+
+  /* Widen the fixed sidebar again */
+  .reprezen-sidebar.affix-bottom,
+  .reprezen-sidebar.affix {
+    width: 263px;
+  }
+}
+
+/* Set minimum size for input group spans*/
+.input-group-addon {
+    min-width:100px;
+    text-align:left;
+}
+
+.table-constraints {
+	margin-left: 10px;
+}
+
+.table-constraints th {
+	border-top: 0px solid white !important;
+}
+
+.table-constraints tr td:first-child {
+	width: 150px;
+}
+
+.table-constraints td {
+	padding: 2px 5px 2px 5px !important;
+}
