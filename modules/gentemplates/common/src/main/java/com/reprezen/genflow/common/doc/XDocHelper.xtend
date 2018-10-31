@@ -6,7 +6,7 @@
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
  *******************************************************************************/
-package com.reprezen.genflow.rapidml.doc.xtend
+package com.reprezen.genflow.common.doc
 
 import com.reprezen.rapidml.Constraint
 import com.reprezen.rapidml.DataModel
@@ -21,7 +21,7 @@ import java.io.File
 import java.net.URI
 import java.util.List
 import java.util.regex.Pattern
-import org.apache.commons.lang3.StringEscapeUtils
+import org.apache.commons.text.StringEscapeUtils
 import org.commonmark.ext.autolink.AutolinkExtension
 import org.commonmark.ext.gfm.tables.TablesExtension
 import org.commonmark.parser.Parser

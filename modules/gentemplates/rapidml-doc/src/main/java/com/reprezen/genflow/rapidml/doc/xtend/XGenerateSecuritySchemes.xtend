@@ -8,6 +8,7 @@
  *******************************************************************************/
 package com.reprezen.genflow.rapidml.doc.xtend
 
+import com.reprezen.genflow.common.doc.XDocHelper
 import com.reprezen.genflow.common.services.MethodServices
 import com.reprezen.genflow.common.xtend.XImportHelper
 import com.reprezen.genflow.common.xtend.XParameterHelper
@@ -32,17 +33,16 @@ class XGenerateSecuritySchemes {
     def String generateSecuritySchemes(ZenModel model) {
         '''
 			«IF model.securitySchemesLibrary !== null»
-				«««             <a class="anchor" id="«	securityScheme.htmlLink»"></a>
-			v class="panel panel-primary">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">«model.securitySchemesLibrary.name»</h3>
-				se</div>
-				se<div class="panel-body">
-				se  «FOR securityScheme : model.securitySchemesLibrary.securitySchemes»
-				se  	«generateSecurityScheme(securityScheme)»
-				se  «ENDFOR»
-				se</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">«model.securitySchemesLibrary.name»</h3>
 				</div>
+				<div class="panel-body">
+				  «FOR securityScheme : model.securitySchemesLibrary.securitySchemes»
+				  	«generateSecurityScheme(securityScheme)»
+				  «ENDFOR»
+				</div>
+			</div>
 			«ENDIF»
 			«FOR schemeModel : securitySchemeImportHelper.importedTypes.keySet»
 				«generateImportedSecuritySchemes(schemeModel)»

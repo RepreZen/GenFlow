@@ -58,6 +58,15 @@
         <module>modules/gentemplates/openapi-normalizer</module>
         <module>modules/gentemplates/swagger-ui</module>
         <module>modules/gentemplates/rapidml-doc</module>
+        <module>modules/gentemplates/rapidml-diagram</module>
+        <module>modules/gentemplates/rapidml-xsd</module>
+        <module>modules/gentemplates/rapidml-wadl</module>
+        <module>modules/gentemplates/rapidml-jsonschema</module>
+        <module>modules/gentemplates/rapidml-swagger</module>
+        <module>modules/gentemplates/rapidml-csharp</module>
+        <module>modules/gentemplates/rapidml-nodejs</module>
+        <module>modules/gentemplates/rapidml-jaxrs</module>
+        <module>modules/gentemplates/swagger-nswag</module>
     </modules>
     <build>
         <plugins>
@@ -322,12 +331,12 @@
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml.model</artifactId>
-                <version>0.0.1</version>
+                <version>${rapidml-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml</artifactId>
-                <version>0.0.1</version>
+                <version>${rapidml-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.atlassian.commonmark</groupId>
@@ -349,6 +358,86 @@
                 <artifactId>rapidml-doc</artifactId>
                 <version>0.0.9-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-diagram</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-xsd</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-wadl</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.raml</groupId>
+                <artifactId>raml-parser</artifactId>
+                <version>0.8.11</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-raml</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-jsonschema</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-swagger</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-csharp</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-nodejs</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.0-m10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-xjc</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-jaxrs</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-nswag</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -359,5 +448,6 @@
         <nexus.autorelease>false</nexus.autorelease>
         <nexus.autodrop>true</nexus.autodrop>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <rapidml-version>0.0.2</rapidml-version>
     </properties>
 </project>

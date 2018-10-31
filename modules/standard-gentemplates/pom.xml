@@ -82,5 +82,42 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-doc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-diagram</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-xsd</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-wadl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jsonschema</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-csharp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-nodejs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-nswag</artifactId>
+            <version>0.0.9-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

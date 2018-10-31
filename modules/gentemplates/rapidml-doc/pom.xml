@@ -23,18 +23,6 @@
             <artifactId>com.reprezen.rapidml</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark-ext-gfm-tables</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark-ext-autolink</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
         </dependency>
