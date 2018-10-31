@@ -52,7 +52,7 @@ import com.sun.xml.bind.api.impl.NameConverter;
 public class JaxbGenTemplate extends ZenModelGenTemplate {
 
     public static final String JAVA_XML_BINDINGS_GENERATOR_NAME = "Java XML Bindings";
-    public static final String JAVA_XML_BINDINGS_GENERATOR_ID = "com.modelsolv.reprezen.gentemplates.jaxb";
+    public static final String JAVA_XML_BINDINGS_GENERATOR_ID = JaxbGenTemplate.class.getName();
     public static final String XSD_DEPENDENCY = "xsdGenerator";
     private static final String TRACE_TYPE_JAXB_CLASS = "jaxbClass";
     private static final String TRACE_PROP_JAXB_CLASS_NAME = "jaxbClassName";

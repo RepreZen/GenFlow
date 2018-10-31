@@ -19,7 +19,7 @@ public class JaxRsGenTemplate extends ZenModelGenTemplate {
     }
 
     public static final String JAX_RS_GENERATOR_NAME = "JAX-RS";
-    public static final String JAX_RS_GENERATOR_ID = "com.modelsolv.reprezen.gentemplates.jaxrs"; //$NON-NLS-1$
+    public static final String JAX_RS_GENERATOR_ID = JaxRsGenTemplate.class.getName();
     public static final String JAXB_DEPENDENCY = "xsdToJavaGenerator";
 
     @Override
@@ -28,7 +28,7 @@ public class JaxRsGenTemplate extends ZenModelGenTemplate {
         define(prerequisite().named(JAXB_DEPENDENCY).on(JaxbGenTemplate.class));
         defineZenModelSource();
         define(outputItem().named("JAXRS").using(XGenerateJaxRsResource.class).writing(
-                "${com.modelsolv.reprezen.gentemplates.jaxrs.XGenerateJaxRsResource.getFilePath(serviceDataResource)}"));
+                "${com.reprezen.genflow.rapidml.jaxrs.XGenerateJaxRsResource.getFilePath(serviceDataResource)}"));
         define(GenTemplateProperty.reprezenProvider());
     }
 

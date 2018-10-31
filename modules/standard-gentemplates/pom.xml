@@ -110,5 +110,9 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-nodejs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jaxrs</artifactId>
+        </dependency>
     </dependencies>
 </project>

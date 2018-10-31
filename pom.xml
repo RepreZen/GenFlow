@@ -65,6 +65,7 @@
         <module>modules/gentemplates/rapidml-swagger</module>
         <module>modules/gentemplates/rapidml-csharp</module>
         <module>modules/gentemplates/rapidml-nodejs</module>
+        <module>modules/gentemplates/rapidml-jaxrs</module>
     </modules>
     <build>
         <plugins>
@@ -404,6 +405,31 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-nodejs</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.0-m10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-xjc</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-jaxrs</artifactId>
                 <version>0.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
