@@ -1,4 +1,4 @@
-package com.reprezen.genflow.rapidml.jsonschema
+package com.reprezen.genflow.rapidml.swagger
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.reprezen.genflow.common.jsonschema.JsonSchemaFormat
