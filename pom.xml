@@ -63,6 +63,7 @@
         <module>modules/gentemplates/rapidml-wadl</module>
         <module>modules/gentemplates/rapidml-jsonschema</module>
         <module>modules/gentemplates/rapidml-swagger</module>
+        <module>modules/gentemplates/rapidml-csharp</module>
     </modules>
     <build>
         <plugins>
@@ -388,6 +389,16 @@
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-swagger</artifactId>
                 <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-csharp</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.8.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

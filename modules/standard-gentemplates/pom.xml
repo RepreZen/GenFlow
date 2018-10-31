@@ -102,5 +102,10 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-csharp</artifactId>
+            <version>0.0.9-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

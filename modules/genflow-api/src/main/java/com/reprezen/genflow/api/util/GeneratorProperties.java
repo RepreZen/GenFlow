@@ -10,7 +10,7 @@ public class GeneratorProperties {
 
 	private static final String VERSION_PROP = "version";
 
-	public static String getRepreZenVersion() {
+	public static String getGenFlowVersion() {
 		return getProperties().containsKey(VERSION_PROP) ? props.getProperty(VERSION_PROP) : "unknown";
 	}
 
