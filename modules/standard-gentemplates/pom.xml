@@ -114,5 +114,10 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-jaxrs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-nswag</artifactId>
+            <version>0.0.9-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

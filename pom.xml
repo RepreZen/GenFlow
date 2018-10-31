@@ -66,6 +66,7 @@
         <module>modules/gentemplates/rapidml-csharp</module>
         <module>modules/gentemplates/rapidml-nodejs</module>
         <module>modules/gentemplates/rapidml-jaxrs</module>
+        <module>modules/gentemplates/swagger-nswag</module>
     </modules>
     <build>
         <plugins>
@@ -430,6 +431,11 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jaxrs</artifactId>
+                <version>0.0.9-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-nswag</artifactId>
                 <version>0.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
