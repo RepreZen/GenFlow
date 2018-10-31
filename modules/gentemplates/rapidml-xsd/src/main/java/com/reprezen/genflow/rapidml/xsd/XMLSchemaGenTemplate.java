@@ -29,6 +29,7 @@ public class XMLSchemaGenTemplate extends ZenModelGenTemplate {
 
     @Override
     public void configure() throws GenerationException {
+        alsoKnownAs("com.modelsolv.reprezen.gentemplates.xsd.XMLSchemaGenTemplate");
         defineZenModelSource();
         define(parameter().named("valueForm") //
                 .withDescription("One of ATTRIBUTE or ELEMENT, determining how single-valued primitive properties", //
