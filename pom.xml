@@ -331,12 +331,12 @@
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml.model</artifactId>
-                <version>0.0.2-SNAPSHOT</version>
+                <version>${rapidml-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
                 <artifactId>com.reprezen.rapidml</artifactId>
-                <version>0.0.2-SNAPSHOT</version>
+                <version>${rapidml-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.atlassian.commonmark</groupId>
@@ -448,5 +448,6 @@
         <nexus.autorelease>false</nexus.autorelease>
         <nexus.autodrop>true</nexus.autodrop>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <rapidml-version>0.0.2</rapidml-version>
     </properties>
 </project>
