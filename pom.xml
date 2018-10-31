@@ -61,7 +61,6 @@
         <module>modules/gentemplates/rapidml-diagram</module>
         <module>modules/gentemplates/rapidml-xsd</module>
         <module>modules/gentemplates/rapidml-wadl</module>
-        <module>modules/gentemplates/rapidml-raml</module>
         <module>modules/gentemplates/rapidml-jsonschema</module>
         <module>modules/gentemplates/rapidml-swagger</module>
     </modules>
