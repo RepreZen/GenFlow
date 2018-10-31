@@ -24,6 +24,7 @@ public class JaxRsGenTemplate extends ZenModelGenTemplate {
 
     @Override
     public void configure() throws GenerationException {
+        alsoKnownAs("com.modelsolv.reprezen.gentemplates.jaxrs");
         define(prerequisite().named(JAXB_DEPENDENCY).on(JaxbGenTemplate.class));
         defineZenModelSource();
         define(outputItem().named("JAXRS").using(XGenerateJaxRsResource.class).writing(

@@ -70,6 +70,7 @@ public class JaxbGenTemplate extends ZenModelGenTemplate {
 
     @Override
     public void configure() throws GenerationException {
+        alsoKnownAs("com.modelsolv.reprezen.gentemplates.jaxb");
         define(prerequisite().named(XSD_DEPENDENCY).on(XMLSchemaGenTemplate.class));
         define(primarySource().ofType(ZenModelSource.class));
         define(GenTemplateProperty.reprezenProvider());
