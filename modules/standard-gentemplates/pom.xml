@@ -82,5 +82,17 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-doc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jsonschema</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-xsd</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jaxrs</artifactId>
+        </dependency>
     </dependencies>
 </project>
