@@ -25,6 +25,7 @@ public class XJsonSchemaGenTemplate extends ZenModelGenTemplate {
 
     @Override
     public void configure() throws GenerationException {
+        alsoKnownAs("com.modelsolv.reprezen.gentemplates.jsonschema.xtend.XJsonSchemaGenTemplate");
         defineZenModelSource();
         defineParameterizedOutputItem(outputItem().using(XGenerateJsonSchema.class), "JSON", "${zenModel.name}.json");
         define(GenTemplateProperty.reprezenProvider());
