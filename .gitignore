@@ -103,3 +103,8 @@ buildNumber.properties
 
 # Created by the GFM eclipse marketplace plugin
 *.md.html
+
+# Xtend
+*.java._trace
+*.xtendbin
+xtend-gen

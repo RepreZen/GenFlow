@@ -18,5 +18,23 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>junit</groupId>
+        	<artifactId>junit</artifactId>
+        	<version>4.12</version>
+        	<scope>test</scope>
+        </dependency>
+        <dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.junit4</artifactId>
+			<version>2.9.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.junit</artifactId>
+			<version>2.9.2</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 </project>
