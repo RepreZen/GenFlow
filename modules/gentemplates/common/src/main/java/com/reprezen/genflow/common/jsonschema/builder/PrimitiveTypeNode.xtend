@@ -109,7 +109,7 @@ class PrimitiveTypeNode extends JsonSchemaNode<PrimitiveType> {
 
 	def protected getFormat() {
 		val type = types.get(element.name)
-		if (type != null) {
+		if (type !== null) {
 			return type.value
 		}
 		return null;

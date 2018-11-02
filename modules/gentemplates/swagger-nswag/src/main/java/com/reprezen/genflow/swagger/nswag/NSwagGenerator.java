@@ -101,7 +101,7 @@ public class NSwagGenerator {
     private Process execNSwag(String... args) throws InterruptedException, GenerationException, IOException {
         String nswag = config.getnSwagPath();
         if (nswag == null || nswag.isEmpty()) {
-            nswag = config.getNSwagLocationDefault();
+            nswag = Config.getNSwagLocationDefault();
         }
         if (nswag == null || nswag.isEmpty()) {
             nswag = "nswag";
