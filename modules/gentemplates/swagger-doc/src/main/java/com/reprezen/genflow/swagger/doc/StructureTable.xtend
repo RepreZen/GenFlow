@@ -132,9 +132,9 @@ class StructureTable {
 		if (referrer !== null) {
 			switch (referrer) {
 				ModelImpl:
-					return referrer.required
+					return referrer.required ?: #[]
 				ObjectProperty:
-					return referrer.requiredProperties
+					return referrer.requiredProperties ?: #[]
 			}
 		}
 		return #[]
