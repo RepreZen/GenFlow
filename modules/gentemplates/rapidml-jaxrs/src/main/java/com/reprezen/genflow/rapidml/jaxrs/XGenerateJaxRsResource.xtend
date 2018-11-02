@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright © 2013, 2016 Modelsolv, Inc.
  * All Rights Reserved.
- *
+ * 
  * NOTICE: All information contained herein is, and remains the property
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
@@ -118,7 +118,7 @@ public interface «getClassName(serviceDataResource)» {
 					uriParam.name)»''')
 		}
 		val requestType = getRequestType(method.request)
-		if (requestType != null) {
+		if (requestType !== null) {
 			val requestInput = '''«requestType» «escapeJavaKeywords(requestType.toFirstLower)»'''
 			parameters.add(requestInput)
 		}
@@ -176,6 +176,8 @@ public interface «getClassName(serviceDataResource)» {
 				return typeof(Date)
 			case PrimitiveTypes::FLOAT:
 				return typeof(float)
+			case PrimitiveTypes::DOUBLE:
+				return typeof(double)
 			case PrimitiveTypes::ANYURI:
 				return typeof(String)
 			case PrimitiveTypes::BASE64BINARY:
@@ -195,20 +197,20 @@ public interface «getClassName(serviceDataResource)» {
 	}
 
 	protected def String generateConsumesAnnotation(Method method) {
-		'''«IF method.request != null && !method.request.mediaTypes.empty && hasDataType(method.request)»
+		'''«IF method.request !== null && !method.request.mediaTypes.empty && hasDataType(method.request)»
 			@«getTypeName(typeof(Consumes))»(«toAnnotationParameter(method.request.mediaTypes.map[it.name])»)
 		«ENDIF»'''
 	}
 
 	protected def String generateProducesAnnotation(Method method) {
 		val response = getOKResponse(method)
-		'''«IF response != null && !response.mediaTypes.empty && hasDataType(response)»
+		'''«IF response !== null && !response.mediaTypes.empty && hasDataType(response)»
 			@«getTypeName(typeof(Produces))»(«toAnnotationParameter(response.mediaTypes.map[it.name])»)
 		«ENDIF»'''
 	}
 
 	protected def initZenElement2ClassName(ZenModel model, Resource resource) {
-		val GenTemplateTrace trace = context.getPrerequisiteTrace(JaxRsGenTemplate::JAXB_DEPENDENCY); 
+		val GenTemplateTrace trace = context.getPrerequisiteTrace(JaxRsGenTemplate::JAXB_DEPENDENCY);
 		val Collection<GenTemplateTraceItem> jaxbClassItems = getTraceItemsOfType(trace, "jaxbClass");
 		val ZenModelLocator zenModelLocator = new ZenModelLocator(model);
 		for (GenTemplateTraceItem item : jaxbClassItems) {
@@ -217,7 +219,7 @@ public interface «getClassName(serviceDataResource)» {
 			val Collection<GenTemplateTraceSourceItem> sourceItems = Collections2.filter(item.getSources(),
 				hasSourceRole("sourceData"));
 			val GenTemplateTraceSourceItem sourceItem = Iterables.getFirst(sourceItems, null);
-			if (sourceItem != null) {
+			if (sourceItem !== null) {
 				val String locator = sourceItem.getLocator();
 				val EObject zenElement = zenModelLocator.dereferenceEObject(locator);
 				zenElement2ClassQName.put(zenElement, "jaxbClassName", jaxbClassName);
@@ -235,11 +237,11 @@ public interface «getClassName(serviceDataResource)» {
 	}
 
 	protected def String getMessageType(TypedMessage message, Class<?> defaultValue, String nullValue) {
-		if (message == null) {
+		if (message === null) {
 			return nullValue
 		}
-		val Object zenMessageType = if(message.resourceType != null) message.resourceType else message.dataType
-		if (zenMessageType != null) {
+		val Object zenMessageType = if(message.resourceType !== null) message.resourceType else message.dataType
+		if (zenMessageType !== null) {
 			if (!zenElement2ClassQName.containsRow(zenMessageType)) {
 
 				// TODO report error
@@ -267,18 +269,18 @@ public interface «getClassName(serviceDataResource)» {
 	}
 
 	def private hasDataType(TypedMessage message) {
-		message.actualType != null || message.resourceType != null
+		message.actualType !== null || message.resourceType !== null
 	}
 
-	public def static String getPackageName(ServiceDataResource inputElement) {
+	def static String getPackageName(ServiceDataResource inputElement) {
 		'''com.modelsolv.reprezen.resources.«(inputElement.eContainer.eContainer as ZenModel).name.toLowerCase»'''
 	}
 
-	public def static String getClassName(ServiceDataResource inputElement) {
+	def static String getClassName(ServiceDataResource inputElement) {
 		'''«inputElement.name»Resource'''
 	}
 
-	public def static getFilePath(ServiceDataResource inputElement) {
+	def static getFilePath(ServiceDataResource inputElement) {
 		getPackageName(inputElement).replaceAll("\\.", "/") + "/" + getClassName(inputElement) + ".java"
 	}
 }

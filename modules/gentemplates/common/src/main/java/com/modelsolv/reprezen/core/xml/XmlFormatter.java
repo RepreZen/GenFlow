@@ -36,48 +36,42 @@ import org.xml.sax.SAXException;
  * 
  * Requires Java 6 to successfully run.
  * 
- * @see http
- *      ://stackoverflow.com/questions/139076/how-to-pretty-print-xml-from-java
+ * @see http ://stackoverflow.com/questions/139076/how-to-pretty-print-xml-from-java
  */
 public class XmlFormatter {
 
-	public String format(String xml) throws RuntimeException {
-		try {
-			final InputSource src = new InputSource(new StringReader(xml));
+    public String format(String xml) throws RuntimeException {
+        try {
+            final InputSource src = new InputSource(new StringReader(xml));
 
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-			DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-			Transformer transformer;
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+            Transformer transformer;
 
-			Document document = documentBuilder.parse(src);
+            Document document = documentBuilder.parse(src);
 
-			transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.STANDALONE, "false");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+            transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.STANDALONE, "false");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
 
-			StreamResult result = new StreamResult(new StringWriter());
-			DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new StringWriter());
+            DOMSource source = new DOMSource(document);
 
-			transformer.transform(source, result);
+            transformer.transform(source, result);
 
-			return result.getWriter().toString();
+            return result.getWriter().toString();
 
-		} catch (TransformerFactoryConfigurationError | TransformerException | SAXException | IOException
-				| ParserConfigurationException e) {
-			throwNotProcess(e);
-		}
+        } catch (TransformerFactoryConfigurationError | TransformerException | SAXException | IOException
+                | ParserConfigurationException e) {
+            throwNotProcess(e);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	private void throwNotProcess(Throwable e) {
-		throw new RuntimeException("Could not process the XML file to pretty-print.", e);
-	}
-
-	private void theowNotLeverage(Exception e) {
-		throw new RuntimeException("Could not leverage the reflection mechanism during XML pretty-printing.", e);
-	}
-
+    private void throwNotProcess(Throwable e) {
+        throw new RuntimeException("Could not process the XML file to pretty-print.", e);
+    }
 }

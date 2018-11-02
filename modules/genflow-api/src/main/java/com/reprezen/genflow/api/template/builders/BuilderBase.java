@@ -16,32 +16,34 @@ import java.util.stream.Collectors;
  * 
  */
 public class BuilderBase<T extends BuilderBase<?>> {
-	protected String[] descriptionLines = new String[0];
+    protected String[] descriptionLines = new String[0];
 
-	public T withDescription(String... descriptionLines) {
-		this.descriptionLines = descriptionLines;
-		@SuppressWarnings("unchecked")
-		T builder = (T) this;
-		return builder;
-	}
+    public T withDescription(String... descriptionLines) {
+        this.descriptionLines = descriptionLines;
+        @SuppressWarnings("unchecked")
+        T builder = (T) this;
+        return builder;
+    }
 
-	public static class SpecBase {
-		protected String description;
+    public static class SpecBase {
+        protected String description;
 
-		public SpecBase(String[] descriptionLines) {
-			this.description = Arrays.asList(descriptionLines).stream().collect(Collectors.joining("/n"));
-		}
+        public SpecBase(String[] descriptionLines) {
+            this.description = descriptionLines.length > 0
+                    ? Arrays.asList(descriptionLines).stream().collect(Collectors.joining("\n"))
+                    : null;
+        }
 
-		public final String getDescription() {
-			return description;
-		}
+        public final String getDescription() {
+            return description;
+        }
 
-		protected String specType() {
-			String type = this.getClass().getSimpleName();
-			if (type.endsWith("Spec")) {
-				type = type.substring(0, type.length() - 4);
-			}
-			return type.replaceAll("([a-z])([A-Z])", "$1 $2");
-		}
-	}
+        protected String specType() {
+            String type = this.getClass().getSimpleName();
+            if (type.endsWith("Spec")) {
+                type = type.substring(0, type.length() - 4);
+            }
+            return type.replaceAll("([a-z])([A-Z])", "$1 $2");
+        }
+    }
 }
