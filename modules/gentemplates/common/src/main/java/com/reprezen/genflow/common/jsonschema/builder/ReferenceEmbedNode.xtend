@@ -22,9 +22,9 @@ class ReferenceEmbedNode extends ReferenceTreatmentNode<ReferenceEmbed> {
 			defaultRealizationNode = null
 		}
 	}
-	
+
 	override inlineOrAddTopLevelNode(ObjectNode parentNode) {
-		if (factory.options.inlineReferenceEmbeds || defaultRealizationNode != null) {
+		if (factory.options.inlineReferenceEmbeds || defaultRealizationNode !== null) {
 			return write(parentNode)
 		} else {
 			val referenceTreatmentPropertyNode = parentNode.putObject(element.referenceElement.name)
@@ -32,9 +32,9 @@ class ReferenceEmbedNode extends ReferenceTreatmentNode<ReferenceEmbed> {
 			return referenceTreatmentPropertyNode
 		}
 	}
-	
+
 	override void writeType(ObjectNode node) {
-		if (defaultRealizationNode != null) {
+		if (defaultRealizationNode !== null) {
 			factory.definitionsNode.addReferenceToDefinition(node, defaultRealizationNode)
 		} else {
 			val isArray = isArrayProperty
@@ -52,7 +52,7 @@ class ReferenceEmbedNode extends ReferenceTreatmentNode<ReferenceEmbed> {
 	}
 
 	override getName() {
-		if (defaultRealizationNode != null) {
+		if (defaultRealizationNode !== null) {
 			return element.referenceElement.name
 		}
 		val nameSegments = newArrayList()
@@ -71,16 +71,16 @@ class ReferenceEmbedNode extends ReferenceTreatmentNode<ReferenceEmbed> {
 			}
 		// TODO potential class cast exception here when we switch to realization graph
 		val parent = topLevelEmbed.eContainer as RealizationContainer
-		val containerName = switch (parent) {		
- 			ResourceDefinition: parent.name		
- 			TypedMessage: TypedMessageNode::getMessageDefinitionName(parent)		
- 		}
+		val containerName = switch (parent) {
+			ResourceDefinition: parent.name
+			TypedMessage: TypedMessageNode::getMessageDefinitionName(parent)
+		}
 		return containerName;
 
 	}
 
 	private static class ReferenceEmbedItemNode extends ReferenceEmbedNode {
-		final val boolean isArray
+		val boolean isArray
 
 		new(JsonSchemaNodeFactory director, ReferenceEmbed element, boolean isArray) {
 			super(director, element)

@@ -24,7 +24,7 @@ class ReferenceLinkNode extends ReferenceTreatmentNode<ReferenceLink> {
 			val List<String> requiredProperties = Lists.newArrayList()
 			requiredProperties.addAll(getRequiredPropertyNames(element.referenceRealization))
 			
-			val rapidLink = factory.addRapidLink(propertiesNode, requiredProperties, element);
+			factory.addRapidLink(propertiesNode, requiredProperties, element);
 			
 			node.writeRequiredProperties(requiredProperties)
 			for (Feature prop : getIncludedPrimitiveProperties(element)) {

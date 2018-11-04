@@ -31,7 +31,7 @@ class FeatureNode extends PropertyNode<Feature> {
 	
     def NamedSchemaNode<?> createReferenceToStructureNode(Structure structure, boolean isMultiValued) {
 		val ServiceDataResource defaultResource = factory.getDefaultResource(structure, isMultiValued);
-		if (defaultResource != null) {
+		if (defaultResource !== null) {
 			return new ResourceLinkNode(factory, defaultResource);
 		}
 		return factory.createStructureNode(structure);
@@ -44,7 +44,7 @@ class FeatureNode extends PropertyNode<Feature> {
 	def isMultiValuedReferenceWithCollectionResource() {
 		isMultiValued //
 		&& element instanceof ReferenceProperty //
-		&& factory.getDefaultResource((element as ReferenceProperty).type, true) != null
+		&& factory.getDefaultResource((element as ReferenceProperty).type, true) !== null
 	}
 
 	override getMinOccurs() {

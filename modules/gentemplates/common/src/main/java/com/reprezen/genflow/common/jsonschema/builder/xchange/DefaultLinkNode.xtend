@@ -26,7 +26,7 @@ class DefaultLinkNode extends NamedSchemaNode<ReferenceLink> {
 		}
 		val link = element.targetResource.name + "_link";
 		if (element.targetResource instanceof ServiceDataResource &&
-			((element.targetResource as ServiceDataResource).defaultLinkDescriptor != null)) {
+			((element.targetResource as ServiceDataResource).defaultLinkDescriptor !== null)) {
 			return ((element.targetResource as ServiceDataResource).defaultLinkDescriptor as NamedLinkDescriptor).name;
 		}
 		return link;
@@ -52,7 +52,7 @@ class DefaultLinkNode extends NamedSchemaNode<ReferenceLink> {
 		
 		val List<String> requiredProperties = Lists.newArrayList(getRequiredPropertyNames(realization))
 
-		val rapidLink = factory.addRapidLink(propertiesNode, requiredProperties, element);
+		factory.addRapidLink(propertiesNode, requiredProperties, element);
 		
 		node.writeRequiredProperties(requiredProperties)
 	}

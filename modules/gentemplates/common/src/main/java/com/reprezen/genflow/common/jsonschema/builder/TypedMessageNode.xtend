@@ -16,7 +16,7 @@ class TypedMessageNode extends NamedSchemaNode<TypedMessage> {
 	
 	new(JsonSchemaNodeFactory director, TypedMessage element) {
 		super(director, element)
-		if (element.resourceType != null) {
+		if (element.resourceType !== null) {
 			delegate = factory.createResourceNode(element.resourceType as ServiceDataResource)
 		} else if (element.withDefaultRealization) {
 			delegate = factory.createDefaultRealizationNode(element)
@@ -26,7 +26,7 @@ class TypedMessageNode extends NamedSchemaNode<TypedMessage> {
 	}
 	
 	override getName() {
-		if (delegate != null) {
+		if (delegate !== null) {
 			return delegate.name
 		}
 		getMessageDefinitionName(element)
@@ -44,7 +44,7 @@ class TypedMessageNode extends NamedSchemaNode<TypedMessage> {
 		val Method method = message.eContainer() as Method;
 		val String methodName = method.getId();
 		val String resourceName = method.getContainingResourceDefinition().getName();
-		if (methodName != null) {
+		if (methodName !== null) {
 			return resourceName + "_" + methodName;
 		}
 
@@ -56,7 +56,7 @@ class TypedMessageNode extends NamedSchemaNode<TypedMessage> {
 	}
 
 	override writeBody(ObjectNode bodyNode) {
-		if (delegate != null) {
+		if (delegate !== null) {
 			delegate.writeBody(bodyNode)
 			return
 		}

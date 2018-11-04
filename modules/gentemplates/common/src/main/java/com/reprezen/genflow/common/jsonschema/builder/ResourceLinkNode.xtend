@@ -15,7 +15,7 @@ class ResourceLinkNode extends NamedSchemaNode<ResourceDefinition> {
 	override getName() {
 		val link = element.name + "_link";
 		if (element instanceof ServiceDataResource &&
-			((element as ServiceDataResource).defaultLinkDescriptor != null)) {
+			((element as ServiceDataResource).defaultLinkDescriptor !== null)) {
 			return ((element as ServiceDataResource).defaultLinkDescriptor as NamedLinkDescriptor).name;
 		}
 		return link;
@@ -30,7 +30,7 @@ class ResourceLinkNode extends NamedSchemaNode<ResourceDefinition> {
 		val rapidLinkNode = factory.createRapidLinkNode()
 		factory.definitionsNode.addReferenceToDefinition(rapidLink, rapidLinkNode)
 		
-		if (element instanceof ServiceDataResource && (element as ServiceDataResource).defaultLinkDescriptor != null) {
+		if (element instanceof ServiceDataResource && (element as ServiceDataResource).defaultLinkDescriptor !== null) {
 			for (Feature prop : (element as ServiceDataResource).defaultLinkDescriptor.allIncludedProperties.map[baseProperty]) {
 				factory.createFeatureNode(prop).write(propertiesNode)
 			}
