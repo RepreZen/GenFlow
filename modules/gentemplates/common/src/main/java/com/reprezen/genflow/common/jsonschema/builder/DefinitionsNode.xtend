@@ -9,9 +9,9 @@ import java.util.Set
 
 class DefinitionsNode extends JsonSchemaNode<ZenModel> {
 
-	val ObjectNode definitionsNode
+	private final ObjectNode definitionsNode
 	final Set<String> generatedDefinitionNames = newHashSet()
-
+	
 	new(JsonSchemaNodeFactory jsonSchemaNodeFactory, ZenModel element) {
 		this(jsonSchemaNodeFactory, element, new ObjectMapper().createObjectNode())
 	}
@@ -26,14 +26,14 @@ class DefinitionsNode extends JsonSchemaNode<ZenModel> {
 		for (ServiceDataResource resource : resources) {
 			writeTopLevelNode(factory.createResourceNode(resource))
 		}
-		val messages = element.eAllContents.filter(TypedMessage).filter[actualType !== null].toList
+		val messages = element.eAllContents.filter(TypedMessage).filter[actualType != null].toList
 		for (TypedMessage message : messages) {
 			writeTopLevelNode(factory.createTypedMessageNode(message))
 		}
 		return definitionsNode
 	}
 
-	def addReferenceToDefinition(ObjectNode node, NamedSchemaNode<?> builder) {
+	def public addReferenceToDefinition(ObjectNode node, NamedSchemaNode<?> builder) {
 		node.put("$ref", "#/definitions/" + builder.name);
 		writeTopLevelNode(builder)
 	}

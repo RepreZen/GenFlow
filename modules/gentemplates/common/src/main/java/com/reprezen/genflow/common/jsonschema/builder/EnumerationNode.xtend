@@ -8,13 +8,13 @@ import com.reprezen.rapidml.Enumeration
 
 class EnumerationNode extends TypedNode<Enumeration> {
 	protected extension JsonSchemaHelper = new JsonSchemaHelper
-	val XImportHelper importHelper
+	private final XImportHelper importHelper
 
 	new(JsonSchemaNodeFactory director, Enumeration element, XImportHelper importHelper) {
 		super(director, element)
 		this.importHelper = importHelper
 	}
-
+	
 	override getName() {
 		importHelper.getQualifiedName(element)
 	}

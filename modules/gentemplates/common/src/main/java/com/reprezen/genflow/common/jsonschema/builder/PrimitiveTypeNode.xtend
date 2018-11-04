@@ -83,12 +83,12 @@ class PrimitiveTypeNode extends JsonSchemaNode<PrimitiveType> {
 
 	def protected writeTypeAndFormat(ObjectNode node) {
 		val typeValue = getType()
-		if (typeValue === null) {
+		if (typeValue == null) {
 			throw new GenerationException("Unknown primitive type: " + element.name)
 		}
 		node.put("type", typeValue)
 		val formatValue = getFormat()
-		if (formatValue !== null) {
+		if (formatValue != null) {
 			node.put("format", formatValue)
 		}
 	}
@@ -101,7 +101,7 @@ class PrimitiveTypeNode extends JsonSchemaNode<PrimitiveType> {
 
 	def protected getType() {
 		val type = types.get(element.name)
-		if (type !== null) {
+		if (type != null) {
 			return type.key
 		}
 		return null;
@@ -109,7 +109,7 @@ class PrimitiveTypeNode extends JsonSchemaNode<PrimitiveType> {
 
 	def protected getFormat() {
 		val type = types.get(element.name)
-		if (type !== null) {
+		if (type != null) {
 			return type.value
 		}
 		return null;

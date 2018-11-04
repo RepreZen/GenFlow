@@ -27,12 +27,12 @@ class ConstraintNode extends JsonSchemaNode<Constraint> {
 				}
 			}
 			RegExConstraint: {
-				if (element.pattern !== null) {
+				if (element.pattern != null) {
 					node.put('pattern', '^' + element.pattern + '$')
 				}
 			}
 			ValueRangeConstraint: {
-				if (element.minValue !== null) {
+				if (element.minValue != null) {
 					var String value = element.minValue
 					try {
 						val number = NumberFormat.getInstance().parse(value)
@@ -44,7 +44,7 @@ class ConstraintNode extends JsonSchemaNode<Constraint> {
 				if (element.minValueExclusive) {
 					node.put('exclusiveMinimum', element.minValueExclusive)
 				}
-				if (element.maxValue !== null) {
+				if (element.maxValue != null) {
 					node.put('maximum', element.maxValue)
 					var String value = element.maxValue
 					try {

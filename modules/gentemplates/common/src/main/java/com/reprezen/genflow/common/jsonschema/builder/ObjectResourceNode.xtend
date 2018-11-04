@@ -18,18 +18,18 @@ class ObjectResourceNode extends NamedSchemaNode<ServiceDataResource> {
 	}
 	
 	protected def useDefaultRealization() {
-		return (element instanceof ObjectResource) && element.withDefaultRealization && (element.dataType !== null)
+		return (element instanceof ObjectResource) && element.withDefaultRealization && (element.dataType != null)
 	}
 
 	override getName() {
-		if (delegate !== null) {
+		if (delegate != null) {
 			return delegate.name
 		}
 		return element.name
 	}
 
 	override void writeBody(ObjectNode node) {
-		if (delegate !== null) {
+		if (delegate != null) {
 			delegate.writeBody(node)
 			return
 		}
