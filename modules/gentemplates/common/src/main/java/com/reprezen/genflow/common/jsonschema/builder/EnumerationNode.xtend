@@ -14,7 +14,7 @@ class EnumerationNode extends TypedNode<Enumeration> {
 		super(director, element)
 		this.importHelper = importHelper
 	}
-
+	
 	override getName() {
 		importHelper.getQualifiedName(element)
 	}

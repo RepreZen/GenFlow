@@ -22,101 +22,101 @@ import org.slf4j.LoggerFactory;
 import com.reprezen.genflow.api.GenerationException;
 
 /**
- * Registry to discover generation templates. Can be used only in non-Eclipse environment.
+ * Registry to discover generation templates. Can be used only in non-Eclipse
+ * environment.
  * 
  * @author Konstantin Zaitsev
  * @date May 18, 2015
  */
 public final class GenTemplateRegistry {
 
-    private static Logger logger = LoggerFactory.getLogger(GenTemplateRegistry.class);
+	private static Logger logger = LoggerFactory.getLogger(GenTemplateRegistry.class);
 
-    /** Singleton reference. */
-    private static GenTemplateRegistry instance;
+	/** Singleton reference. */
+	private static GenTemplateRegistry instance;
 
-    private Map<String, GenTemplateInfo> registry = null;
+	private Map<String, GenTemplateInfo> registry = null;
 
-    private GenTemplateRegistry() {
-    }
+	private GenTemplateRegistry() {
+	}
 
-    private void register(IGenTemplate template) {
-        GenTemplateInfo info = new GenTemplateInfo(template);
-        if (register(info.getId(), info)) {
-            info.getAkaIds().forEach(id -> register(id, info));
-        }
-    }
+	private void register(IGenTemplate template) {
+		GenTemplateInfo info = new GenTemplateInfo(template);
+		if (register(info.getId(), info)) {
+			info.getAkaIds().forEach(id -> register(id, info));
+		}
+	}
 
-    private boolean register(String id, GenTemplateInfo info) {
-        if (!registry.containsKey(id)) {
-            registry.put(id, info);
-        } else {
-            logger.warn(String.format("Id '%s' for GenTemplate %s already in use; ignoring", id, info.getName()));
-            return false;
-        }
-        return true;
-    }
+	private boolean register(String id, GenTemplateInfo info) {
+		if (!registry.containsKey(id)) {
+			registry.put(id, info);
+		} else {
+			logger.warn(String.format("Id '%s' for GenTemplate %s already in use; ignoring", id, info.getName()));
+			return false;
+		}
+		return true;
+	}
 
-    private static GenTemplateRegistry getInstance() {
-        if (instance == null) {
-            synchronized (GenTemplateRegistry.class) {
-                if (instance == null) {
-                    instance = new GenTemplateRegistry();
-                }
-            }
-        }
-        return instance;
-    }
+	private static GenTemplateRegistry getInstance() {
+		if (instance == null) {
+			synchronized (GenTemplateRegistry.class) {
+				if (instance == null) {
+					instance = new GenTemplateRegistry();
+				}
+			}
+		}
+		return instance;
+	}
 
-    /**
-     * @param id
-     *               id of the gen template
-     * @return the gen template by ID
-     * @throws GenerationException
-     */
-    public static GenTemplateInfo getGenTemplate(String id) {
-        assert id != null;
-        getInstance().scan(false);
-        if (getInstance().registry.containsKey(id)) {
-            return getInstance().registry.get(id);
-        }
-        throw new RuntimeException("Template " + id + " not found");
-    }
+	/**
+	 * @param id id of the gen template
+	 * @return the gen template by ID
+	 * @throws GenerationException
+	 */
+	public static GenTemplateInfo getGenTemplate(String id) {
+		assert id != null;
+		getInstance().scan(false);
+		if (getInstance().registry.containsKey(id)) {
+			return getInstance().registry.get(id);
+		}
+		throw new RuntimeException("Template " + id + " not found");
+	}
 
-    private void scan(boolean force) {
-        if (registry == null || force) {
-            ClassLoader classLoader = GenTemplateRegistry.class.getClassLoader();
-            registry = new HashMap<>();
-            Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
-            while (genTemplates.hasNext()) {
-                try {
-                    IGenTemplate template = genTemplates.next();
-                    register(template);
-                } catch (ServiceConfigurationError e) {
-                    logger.warn("Could not retrieve gentemplate; skipping", e);
-                }
-            }
-            Iterator<IGenTemplateGroup> groups = ServiceLoader.load(IGenTemplateGroup.class).iterator();
-            while (groups.hasNext()) {
-                try {
-                    IGenTemplateGroup templateGroup = groups.next();
-                    Iterator<IGenTemplate> groupIterator = templateGroup.getGenTemplates(classLoader).iterator();
-                    while (groupIterator.hasNext()) {
-                        try {
-                            IGenTemplate template = groupIterator.next();
-                            register(template);
-                        } catch (Exception e) {
-                            logger.warn("Could not retrieve gentemplate from group; skipping", e);
-                        }
-                    }
-                } catch (Exception e) {
-                    logger.warn("Could not retrieve gentemplate group); skipping", e);
-                }
-            }
-        }
-    }
+	private void scan(boolean force) {
+		if (registry == null || force) {
+			ClassLoader classLoader = GenTemplateRegistry.class.getClassLoader();
+			registry = new HashMap<>();
+			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
+			while (genTemplates.hasNext()) {
+				try {
+					IGenTemplate template = genTemplates.next();
+					register(template);
+				} catch (ServiceConfigurationError e) {
+					logger.warn("Could not retrieve gentemplate; skipping", e);
+				}
+			}
+			Iterator<IGenTemplateGroup> groups = ServiceLoader.load(IGenTemplateGroup.class).iterator();
+			while (groups.hasNext()) {
+				try {
+					IGenTemplateGroup templateGroup = groups.next();
+					Iterator<IGenTemplate> groupIterator = templateGroup.getGenTemplates(classLoader).iterator();
+					while (groupIterator.hasNext()) {
+						try {
+							IGenTemplate template = groupIterator.next();
+							register(template);
+						} catch (Exception e) {
+							logger.warn("Could not retrieve gentemplate from group; skipping", e);
+						}
+					}
+				} catch (Exception e) {
+					logger.warn("Could not retrieve gentemplate group); skipping", e);
+				}
+			}
+		}
+	}
 
-    public static List<GenTemplateInfo> getGenTemplates(boolean force) {
-        getInstance().scan(force);
-        return getInstance().registry.values().stream().distinct().collect(Collectors.toList());
-    }
+	public static List<GenTemplateInfo> getGenTemplates(boolean force) {
+		getInstance().scan(force);
+		return getInstance().registry.values().stream().distinct().collect(Collectors.toList());
+	}
 }

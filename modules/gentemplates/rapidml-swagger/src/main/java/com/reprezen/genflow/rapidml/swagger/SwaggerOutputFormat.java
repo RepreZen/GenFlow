@@ -13,5 +13,5 @@ package com.reprezen.genflow.rapidml.swagger;
  * @date Apr 6, 2015
  */
 public enum SwaggerOutputFormat {
-    JSON, YAML
+	JSON, YAML
 }
