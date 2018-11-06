@@ -1,0 +1,9 @@
+{
+    "filingID": "#123456",
+    "taxpayer": "ssn-xx-xxxx",
+    "jurisdiction": "PA0010000",
+    "year": 2014,
+    "currency": "USD",
+    "grossIncome": "64,000.00",
+    "taxLiability": "19,200.00"
+}

@@ -1,0 +1,58 @@
+rapidModel CardinalityOverrides
+	resourceAPI Customer baseURI "http://modelsolv.com"
+		objectResource Optional2Required type Customer
+			only properties
+				optionalProperty!
+				requiredProperty
+				requiredListProperty
+				optionalListProperty
+
+			mediaTypes
+				application/xml
+
+		objectResource RequiredList2Required type Customer
+			only properties
+				requiredListProperty!
+				optionalProperty
+				requiredProperty
+				optionalListProperty
+
+			mediaTypes
+				application/xml
+
+		objectResource OptionalList2RequiredList type Customer
+			only properties
+				optionalListProperty+
+				optionalProperty
+				requiredProperty
+				requiredListProperty
+
+			mediaTypes
+				application/xml
+
+		objectResource OptionalList2Required type Customer
+			only properties
+				optionalListProperty!
+				optionalProperty
+				requiredProperty
+				requiredListProperty
+
+			mediaTypes
+				application/xml
+
+		objectResource OptionalList2Optional type Customer
+			only properties
+				optionalListProperty?
+				optionalProperty
+				requiredProperty
+				requiredListProperty
+
+			mediaTypes
+				application/xml
+
+	dataModel Customer
+		structure Customer
+			requiredProperty : string !
+			optionalProperty : string
+			requiredListProperty : string +
+			optionalListProperty : string *

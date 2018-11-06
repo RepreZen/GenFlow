@@ -1,0 +1,8 @@
+{
+  "filingID": "taxFiling1"
+  "jurisdiction": ""
+  "year": 2012
+  "currency": "USD"
+  "grossIncome": 12345.67
+  "taxLiability": 12.34
+}

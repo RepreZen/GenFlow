@@ -1,0 +1,17 @@
+rapidModel MyModel
+	resourceAPI MyResourceAPI baseURI "http://my-namespace.com"
+		objectResource MyObject type MyType
+			URI /uri/{id}
+			mediaTypes
+				application/xml
+			method GET getMyObject
+				request
+					/** bla-bla */
+					required param app_id type string in query
+						extensions
+							x-data-threescale-name : app_ids
+			
+	dataModel MyDataModel
+		structure MyType
+			id : string
+		

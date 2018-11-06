@@ -1,0 +1,28 @@
+/* 
+  This is a Zen Model template. Customize it to reflect your services 
+  and data types.
+*/
+rapidModel Examples
+	resourceAPI ExamplesInterface baseURI "http://my-namespace.com"
+		objectResource ExamplesObject type myDataType
+			URI test
+			mediaTypes
+				application/xml
+			method GET getExamplesObject
+				request
+					example '''{"message":"request example"}'''
+
+				response ExamplesObject statusCode 200
+					example '''{"message":"response example"}'''
+
+				response statusCode 404
+
+			example '''{"message":"resource example"}'''
+
+
+	dataModel ExamplesDataModel
+		structure myDataType
+			id : string
+			dataExample '''{"message":"data example"}'''
+
+

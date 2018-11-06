@@ -1,0 +1,36 @@
+namespace  com.modelsolv.reprezen
+
+/* Standard security schemes for TaxBlaster model. */
+rapidModel TaxBlasterAuth
+	securitySchemesLibrary TaxBlasterAuthSchemes
+		/** HTTP Basic authentication. 
+		     
+		    https://www.ietf.org/rfc/rfc2617.txt */
+		securityScheme Basic
+			type basic
+			methodInvocation
+				requires authorization
+					/** userid and password, separated by a single colon (":") character, within a 
+					    base64 [7] encoded string in the credentials.*/
+					param basic_credentials type base64Binary in header
+				errorResponse statusCode 401 //Unauthorized
+		
+		/** OAuth2 authentication. 
+		    https://tools.ietf.org/rfc/rfc6749.txt */
+		securityScheme OAuth2
+			type oauth2
+			methodInvocation
+				requires authorization
+					param token type string in header
+					param access_token type string in query
+				errorResponse statusCode 401
+			defines scopes
+				/** System administator. */
+				admin
+				/** Read-only user */
+				user
+				/** Manager of the system */
+				manager
+			settings
+				authorization_url : "http://test.com/oauth/authorize"
+				request_token_url : "http://test.com/oauth/oauth/request-token"

@@ -1,0 +1,40 @@
+rapidModel TwoReferences_2to1
+	resourceAPI TwoReferences_2to1 baseURI "http://modelsolv.com"
+		objectResource DataType0Object type DataType3
+
+		objectResource DataType3Object type DataType3
+			linkDescriptor DataType3ObjectLink
+				dataType2ID
+
+		objectResource DataType1Object type DataType1
+			referenceEmbed > dataType1_containment1 
+				referenceLink > dataType2_reference1
+					targetResource DataType3Object
+					linkDescriptor DataType3Object.DataType3ObjectLink
+
+			referenceEmbed > dataType1_containment2 
+				referenceLink > dataType2_reference1
+					targetResource DataType3Object
+					linkDescriptor DataType3Object.DataType3ObjectLink
+
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+	dataModel TwoReferences_2to1
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_containment1 : containing reference DataType2*
+			dataType1_containment2 : containing reference DataType2*
+
+		structure DataType2
+			dataType2ID : string
+			dataType2_reference1 : reference DataType2*
+
+		structure DataType3
+			dataType2ID : string
+
+

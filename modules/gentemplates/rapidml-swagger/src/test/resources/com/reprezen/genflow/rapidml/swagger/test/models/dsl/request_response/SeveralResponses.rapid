@@ -1,0 +1,13 @@
+rapidModel SeveralResponses
+	resourceAPI Customer baseURI "http://modelsolv.com"
+		objectResource CustomerObject type Customer
+			mediaTypes
+				application/xml
+			method PUT severalResponses
+				response CustomerObject statusCode 202
+				response statusCode 403
+
+	dataModel Customer
+		structure Customer
+			CustomerID : string
+			CustomerName : string

@@ -1,0 +1,9 @@
+rapidModel ModelForImportNoise
+	dataModel dataModelForImport
+		structure typeA
+			noise_mfia : string
+
+		enum string enumE
+			noise_mfia : "noise_mfia"
+
+

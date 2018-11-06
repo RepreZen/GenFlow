@@ -1,0 +1,25 @@
+/* 
+Scenario: Single Resource as default for referenced SDT, without explicit Reference Link
+*/
+rapidModel SingleResource
+	resourceAPI SingleResource baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+
+		collectionResource DataType2Object type DataType2
+
+		objectResource DataType2Object2 type DataType2
+
+	dataModel SingleResource
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType2*
+
+		structure DataType2
+			dataType2ID : string

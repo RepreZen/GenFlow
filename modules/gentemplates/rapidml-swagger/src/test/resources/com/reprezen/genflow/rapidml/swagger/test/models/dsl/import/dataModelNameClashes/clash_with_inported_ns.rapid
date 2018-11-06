@@ -1,0 +1,5 @@
+namespace ns
+rapidModel clashWithImported
+	dataModel dm3
+		enum string en
+			VALUE : "imported_dm"

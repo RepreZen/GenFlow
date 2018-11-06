@@ -1,0 +1,31 @@
+/* 
+Scenario: Explicit Resource Specified by Referrer
+If the referrer has a Reference Link that specifies the target resource, 
+this should always, work regardless of whether there is a default.
+*/
+rapidModel AssignedResource
+	resourceAPI AssignedResource baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+			referenceLink > dataType1_reference1
+				targetResource DataType2Object2
+
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+
+		objectResource DataType2Object1 type DataType2
+
+		objectResource DataType2Object2 type DataType2
+
+
+	dataModel AssignedResource
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType2*
+
+		structure DataType2
+			dataType2ID : string
+
+

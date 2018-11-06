@@ -1,0 +1,16 @@
+/* This is a RAPID Model template. Customize it to describe your services and data types. */
+rapidModel EntityClassModel
+
+	dataModel EntityClassDataModel
+		structure EntityClass extends KeyValuePair
+
+		structure KeyValuePair
+			/** Grouping of code values */
+			keyValueCategoryId : string!
+			^key : string!
+			value : string
+			description : string
+			sequence : integer
+			/** Flag defines if this is changed by the customer or core to the application */
+			system : boolean!
+		

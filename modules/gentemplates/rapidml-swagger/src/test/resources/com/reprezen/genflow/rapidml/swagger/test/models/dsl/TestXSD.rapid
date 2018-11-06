@@ -1,0 +1,23 @@
+rapidModel testXSD
+	resourceAPI TestXSD
+
+	dataModel TestXSD
+		structure DataType1
+		// properties
+			simpleProp : string
+			simplePropUnbounded : decimal *
+			simplePropBounded : boolean [3..5]
+			// references
+			simpleRef : reference DataType2
+			containmentRef : containing reference DataType2
+			simpleRefUnbounded : reference DataType2 *
+			simpleRefUnboundedMandatory : reference DataType2 +
+			containmentRefUnbounded : containing reference DataType2 *
+			simpleRefBounded : reference DataType2 [3..5]
+			containmentRefBounded : containing reference DataType2 [8..15]
+
+		structure DataType2
+			id : string
+
+
+

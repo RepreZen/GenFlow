@@ -1,0 +1,53 @@
+namespace com.modelsolv.reprezen
+
+import com.modelsolv.reprezen.TaxBlasterAuth.TaxBlasterAuthSchemes from "TaxBlasterAuth.rapid" as auth
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterInterface baseURI "http://my-namespace.com"
+		secured by
+			QueryStringKeyAuth
+			auth.OAuth2
+				authorized for scopes
+					admin, manager
+
+		objectResource TaxBlasterObject type TaxBlaster
+			URI /taxBlaster/{id}
+			mediaTypes
+				application/json
+			method GET getTaxBlasterObject
+				request
+				response TaxBlasterObject statusCode 200
+			method PUT putTaxBlasterObject
+				request TaxBlasterObject
+				response statusCode 200
+				response statusCode 400
+		
+		collectionResource TaxBlasterCollection type TaxBlaster
+			URI /taxBlaster
+			secured by
+				auth.Basic
+			mediaTypes
+				application/json
+			method GET getTaxBlasterCollection
+				request
+				response TaxBlasterCollection statusCode 200
+			method POST updateTaxBlasterCollection
+				request TaxBlasterCollection
+				response statusCode 200
+				response statusCode 403
+
+	dataModel TaxBlasterDataModel
+		structure TaxBlaster
+			id : string
+
+	securitySchemesLibrary TaxBlasterCustomAuthSchemes
+		securityScheme QueryStringKeyAuth
+			type custom
+			methodInvocation
+				requires authorization
+					param apiKey type long in query
+				errorResponse statusCode 401
+				errorResponse statusCode 403
+			defines scopes
+				user
+				admin

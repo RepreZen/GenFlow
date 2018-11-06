@@ -1,0 +1,161 @@
+/* Model for  https://developers.adp.com/resources/core/calendar-v1/ */
+rapidModel Calendar
+	/** Calendar Detail, and Calendar Event communicate an Associate’s Calendar 
+	    which is a list of events for a an Associate. Calendar Event is the details of a 
+	    Calendar Event. An Associate may have upto 3 different calendars: My Calendar 
+	    (My calendar events), My Team (Events on my team’s calendars), and My Peer 
+	    (Events on my Peers calendar). */
+	resourceAPI CalendarInterface baseURI "http://my-namespace.com"
+		objectResource CalendarEventObject type CalendarEvent
+			URI /core/v1/associates/{associateoid}/calendar-event/{calendar-event-id}
+				/** Calendar event ID */
+				required templateParam "calendar-event-id" property calendarEventID
+					default "0213PTO"
+				/** Calendar event ID */
+				required templateParam associateoid type string
+					default "G4O73G9Z62SL2NFM"
+			mediaTypes
+				application/json
+			/** Retrieve a calendar event  */
+			method GET getCalendarObject
+				request
+					/** The role the user is playing during the transaction. Possible values: 
+					    employee, manager, practitioner. Rolecode header will be passed in all calls. 
+					    When coming from Myself capabilities rolecode=employee. When coming from Team 
+					    capabilities rolecode=manager. When coming from Practitioner capabilities 
+					    rolecode=practitioner. */
+					required param roleCode type string
+						default "manager"
+				response CalendarEventObject statusCode 200
+					// TODO ETag header param
+					externalExample "examples/calendarevent-sample.json"
+				response statusCode 304
+					externalExample "examples/confirmmessage_400_GET-sample.json"
+				response statusCode 400
+					externalExample "examples/confirmmessage_400_GET-sample.json"
+				response statusCode 403
+					externalExample "examples/confirmmessage_403_GET-sample.json"
+				response statusCode 404
+					externalExample "examples/confirmmessage_404_GET-sample.json"
+				response statusCode 500
+					externalExample "examples/confirmmessage_500_GET-sample.json"
+	dataModel CalendarDataModel
+		structure CalendarEvent
+			/** Is the Identifier of the given instance of a calendarEvent.  This is the 
+			    same ID which is referenced in the eventDetailUri and calendarEventUri. */
+			calendarEventID : string
+			eventStatus : reference EventStatus
+			category : reference Category
+			eventType : reference EventType
+			/** Author of the event */
+			authorName : string
+			/** A short subject which describes the calendar event */
+			subject : string
+			location : reference Location
+		/**The status of the event.  Example:  A PTO Request has been approved, denied, 
+		    partially denied*/
+		structure EventStatus
+			code : EventStatusCode
+			/**The label identifying the status which is shown on the UI. */
+			name : string
+		/** The code identifying the status of the event. */
+		enum string EventStatusCode
+			PENDING : "pending"
+			APPROVED : "approved"
+			DENIED : "denied"
+		/** Category of the event.  Examples are Benefit, Payroll, Time Management, 
+		    Retirement, Human Resource*/
+		structure Category
+			code : CategoryCode
+			/** Long Name describing the category.  This name may be used for search. */
+			name : string // TODO add facet
+		/** Code identifying the category. */
+		enum string CategoryCode
+			/**Benefit */
+			B : "B"
+			/**  Human Resource */
+			H : "H"
+			/** Payroll */
+			P : "P"
+			/** Retirement */
+			R : "R"
+			/** Time Management */
+			T : "T"
+		structure EventType
+			code : EventTypeCode
+			/** Type of Event.  The user may search by the event type name */
+			name : string // TODO add max length facet
+		/** Code identifying the event. BOE - Benefits Open Enrollment; CH - Company 
+		    Holiday;  CE - Company Event; PS - Pay Schedule; RPE - Retirement Plan 
+		    Enrollment; WS - Work Schedule; WK - Worked; PTO - Paid Time Off; BLK - Black 
+		    Out */
+		enum string EventTypeCode
+			BOE : "BOE"
+			CH : "CH"
+			CE : "CE"
+			PS : "PS"
+			RPE : "RPE"
+			WS : "WS"
+			WK : "WK"
+			PTO : "PTO"
+			BLK : "BLK"
+		/**name and address of a physical location */
+		structure Location
+			/** The label to be shown on the UI */
+			labelName : string // TODO add facet
+			/** The name of the location */
+			locationName : string // TODO add facet
+			location : reference Coordinate
+		/** The coordinates of the location of the device as captured by the gps of the 
+		    device.  Following the W3C Geolocation API Specification.  Reference: 
+		    http://dev.w3.org/geo/api/spec-source.html#altitude */
+		structure Coordinate
+			/** The angle, in degrees, of a position on Earth above the equator. (Latitude 
+			    is negative for a place below the equator.) specified in decimal degrees */
+			latitude : float
+			/** The angle, in degrees, of a position on Earth around the equator from the 
+			    Greenwich Meridian specified in decimal degrees. */
+			longitude : float
+			/** Denotes the height of th eposition, specified in meters above the [WGS84] 
+			    ellipsoid. */
+			altitudeMeasure : float
+			/** A list of formatted address lines which will be shown on the UI in the order 
+			    of the array items.  This is mutually exclusive to the component parts of the 
+			    the address.  If this is returned in the JSON it will be used to present on the 
+			    UI */
+			formattedAddressLines : string*
+			address : reference Address
+		/** components of an address */
+		structure Address
+			/** Line One consists of any valid set of the following address components: 
+			    primary address number, pre-directional (e.g. East) , street name, suffix, 
+			    post-directional (e.g. SW), secondary address identifier, and secondary address. 
+			    It may have a Post Office Box, or Private Mail Box Address (e.g. APO/FPO) if it 
+			    is a Communication Address */
+			lineOne : string
+			/** Line Two consists of any secondary address identifiers which do not fit in 
+			    Line One. Example is an Apartment or Suite designation. The preference is to fit 
+			    all designators on Line One which the USPS considers the Delivery Point. */
+			lineTwo : string
+			/**Line Three consists of any additional address designators. */
+			lineThree : string
+			/** Line Four consists of any additional address designators. */
+			lineFour : string
+			/** Line Five consists of any additional address designators. */
+			lineFive : string
+			/** Identifies the town or city. */
+			cityName : string
+			/**Qualifies the further division of the City, for example, a city may have many 
+			    districts or boroughs. The type attribute identifies the type of this entity; 
+			    e.g., City, Borough etc., and there is a pre-defined list of types supported, 
+			    with the ability to add new ones as necessary. */
+			citySubdivisionName : string
+			/**Qualifies the further division of the Country. These may be Districts, 
+			    Regions, States, Provinces etc. A possible list of values is as specified in ISO 
+			    3166-2. The type attribute identifies the type of this e.g. District, Region 
+			    etc, and there is a pre-defined list of types supported, with the ability to add 
+			    new ones as necessary */
+			countrySubdivision : string
+			countryCode : string
+			postalCode : string
+			

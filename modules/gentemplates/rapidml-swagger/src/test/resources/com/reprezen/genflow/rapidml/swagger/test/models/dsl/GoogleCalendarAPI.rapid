@@ -1,0 +1,85 @@
+rapidModel GoogleCalendarAPI
+	resourceAPI GoogleCalendarAPIInterface baseURI "https://www.googleapis.com/calendar/v3"
+	// Acl
+		collectionResource RuleCollectionObject type Rule
+			URI /calendars/{calendarId}/acl
+				/** Calendar identifier. */
+				required templateParam calendarId type string
+			mediaTypes
+				application/xml
+				application/json
+			/** Returns the rules in the access control list for the calendar. */
+			method GET get
+				request
+				response RuleCollectionObject statusCode 200
+			/** Updates an access control rule. This method supports patch semantics. */
+			method POST insert
+				request RuleCollectionObject
+				response statusCode 200
+				response statusCode 400
+		objectResource RuleObject type Rule
+			URI /calendars/{calendarId}/acl/{ruleId}
+				/** ACL rule identifier. */
+				required templateParam ruleId property id
+				/** Calendar identifier. */
+				required templateParam calendarId type string
+			mediaTypes
+				application/xml
+				application/json
+			/** Returns an access control rule. */
+			method GET get
+				request
+				response RuleObject statusCode 200
+			/** Deletes an access control rule. */
+			method DELETE delete
+				request
+				/**  */
+				response statusCode 200
+				response statusCode 400
+			/** Updates an access control rule. This method supports patch semantics. */
+			method PATCH patch
+				request RuleObject
+				response RuleObject statusCode 200
+				response statusCode 400
+			/** Updates an access control rule. */
+			method PUT update
+				request RuleObject
+				response statusCode 200
+				response statusCode 400
+			/** Watch for changes to ACL resources. */
+			method POST watch
+				request RuleObject
+					required param id type string
+				response RuleObject statusCode 200
+				response statusCode 400
+			
+	dataModel GoogleCalendarAPIDataModel
+		structure Rule
+			/** Identifier of the ACL rule.*/
+			id : string
+			/** ETag of the resource.*/
+			etag : string
+			/** Type of the resource ("calendar#aclRule"). */
+			kind : string
+			/** The role assigned to the scope. Possible values are: • "none" - Provides no 
+			    access. • "freeBusyReader" - Provides read access to free/busy information. • 
+			    "reader" - Provides read access to the calendar. Private events will appear to 
+			    users with reader access, but event details will be hidden. • "writer" - 
+			    Provides read and write access to the calendar. Private events will appear to 
+			    users with writer access, and event details will be visible. • "owner" - 
+			    Provides ownership of the calendar. This role has all of the permissions of the 
+			    writer role with the additional ability to see and manipulate ACLs. */
+			role : string
+			/** The scope of the rule. */
+			scope : reference Scope
+			/** The type of the scope. Possible values are: • "default" - The public scope. 
+			    This is the default value. • "user" - Limits the scope to a single user. • 
+			    "group" - Limits the scope to a group. • "domain" - Limits the scope to a 
+			    domain. Note: The permissions granted to the "default", or public, scope apply 
+			    to any user, authenticated or not. */
+			scope_type : string
+			/** The email address of a user or group, or the name of a domain, depending on 
+			    the scope type. Omitted for type "default". writable */
+			scope_value : string
+		structure Scope
+			id : string

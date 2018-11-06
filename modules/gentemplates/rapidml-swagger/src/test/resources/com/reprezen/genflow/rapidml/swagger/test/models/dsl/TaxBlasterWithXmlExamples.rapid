@@ -1,0 +1,256 @@
+/* 
+  The TaxBlaster model contains the REST interface for TaxBlaster, and its supporting datatypes.
+*/
+rapidModel TaxBlasterWithExamples
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+		/** The Index Resource is the entry point to the TaxBlaster API.  
+    To minimize coupling, consuming applications should start here, 
+    and follow the links to related resources.
+*/
+		objectResource IndexObject type Index
+			URI index
+			mediaTypes
+				application/xml
+			method GET getIndex
+				response IndexObject statusCode 200
+					example '''<?xml version="1.0" encoding="UTF-8"?>
+<indexObject>
+	<peopleList>
+		<person>
+			<atom:link href="http://tempuri.org/users/user1" rel="users" />
+		</person>
+		<person>
+			<atom:link href="http://tempuri.org/users/user2" rel="users" />
+		</person>
+    </peopleList>
+	<taxFilingsList>
+		<taxFiling>
+			<atom:link href="http://tempuri.org/taxfilings/taxfiling1" rel="related" />
+		</taxFiling>
+		<taxFiling>
+			<atom:link href="http://tempuri.org/taxfilings/taxfiling2" rel="related" />
+		</taxFiling>
+	</taxFilingsList>
+</indexObject> '''
+
+				response statusCode 404
+
+
+		/** The list of TaxBlaster users.  The results will vary in membership 
+    and level of detail, depending on your access privileges.
+*/
+		collectionResource PersonCollection type Person
+			URI /people
+			mediaTypes
+				application/xml
+			method GET getPeople
+				request
+				response PersonCollection statusCode 200
+					example '''<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <person>
+      <firstName>John</firstName>
+      <lastName>Smith</lastName>
+      <otherNames>
+         <element>Jean Poupon</element>
+      </otherNames>
+      <taxpayerID>user1</taxpayerID>
+   </person>
+   <person>
+      <firstName>Nancy</firstName>
+      <lastName>Williams</lastName>
+      <taxpayerID>user2</taxpayerID>
+   </person>
+   <person>
+      <firstName>Elizabeth</firstName>
+      <lastName>Davis</lastName>
+      <taxpayerID>user3</taxpayerID>
+   </person>
+   <person>
+      <firstName>Robert</firstName>
+      <lastName>Johnson</lastName>
+      <taxpayerID>user4</taxpayerID>
+   </person>
+</root>'''
+
+				response statusCode 404
+
+
+		/** The list of Tax Filings visible to the authorized user. */
+		collectionResource TaxFilingCollection type TaxFiling
+			URI taxFilings
+			mediaTypes
+				application/xml
+			method GET getTaxFilings
+				request
+				response TaxFilingCollection statusCode 200
+					example '''<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <taxfiling>
+	  <atom:link href="http://tempuri.org/taxfilings/taxfiling1" rel="self" />
+      <currency>USD</currency>
+      <filingID>taxFiling1</filingID>
+      <grossIncome>12345.67</grossIncome>
+      <jurisdiction>BURLINGAME</jurisdiction>
+      <taxLiability>12.34</taxLiability>
+      <year>2012</year>
+      <taxpayer lastName="Smith" taxpayerID="user1">
+		<atom:link href="http://tempuri.org/1" rel="related"/>
+	 </taxpayer>
+   </taxfiling>
+   <taxfiling>
+      <atom:link href="http://tempuri.org/taxfilings/taxfiling2" rel="self" />
+      <currency>USD</currency>
+      <filingID>taxFiling2</filingID>
+      <grossIncome>98765.43</grossIncome>
+      <jurisdiction>CORCORAN</jurisdiction>
+      <taxLiability>23.45</taxLiability>
+      <year>2013</year>
+      <taxpayer lastName="Williams" taxpayerID="user2">
+		<atom:link href="http://tempuri.org/2" rel="related"/>
+	 </taxpayer>
+   </taxfiling>
+   <taxfiling>
+      <atom:link href="http://tempuri.org/taxfilings/taxfiling3" rel="self" />
+      <currency>USD</currency>
+      <filingID>taxFiling3</filingID>
+      <grossIncome>56789.12</grossIncome>
+      <jurisdiction>CLAYTON</jurisdiction>
+      <taxLiability>12.34</taxLiability>
+      <year>2012</year>
+      <taxpayer lastName="Davis" taxpayerID="user3">
+		<atom:link href="http://tempuri.org/3" rel="related"/>
+	 </taxpayer>
+    </taxfiling>
+</root>'''
+
+				response statusCode 404
+
+
+		/** An individual Tax Filing record, accessed by its ID */
+		objectResource TaxFilingObject type TaxFiling
+			URI taxFilings/{filingID}
+				required templateParam filingID property filingID
+
+			referenceLink > taxpayer
+				targetResource PersonObject
+				targetProperties
+					taxpayerID
+					lastName
+
+				linkRelation about
+
+			mediaTypes
+				application/xml
+			method GET getTaxFiling
+				request
+				response TaxFilingObject statusCode 200
+					example '''<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <currency>USD</currency>
+   <filingID>taxFiling1</filingID>
+   <grossIncome>12345.67</grossIncome>
+   <jurisdiction />
+   <taxLiability>12.34</taxLiability>
+   <year>2012</year>
+</root> '''
+
+				response statusCode 404
+
+
+		/** An individual user by ID. */
+		objectResource PersonObject type Person
+			URI people/{id}
+				required templateParam id property taxpayerID
+
+			mediaTypes
+				application/xml
+			method GET getPerson
+				request
+				response PersonObject statusCode 200
+					example ''' <?xml version="1.0" encoding="UTF-8"?>
+<person>
+   <firstName>John</firstName>
+   <lastName>Smith</lastName>
+   <otherNames>
+      <element>Jean Poupon</element>
+   </otherNames>
+   <taxpayerID>user1</taxpayerID>
+</person> '''
+
+
+			method PUT putPerson
+				request PersonObject
+					example '''<?xml version="1.0" encoding="UTF-8"?>
+<person>
+   <firstName>Linda</firstName>
+   <lastName>Lee</lastName>
+</person> '''
+
+				response statusCode 200
+				response statusCode 400
+
+
+
+	/** Supporting data types for the TaxBlaster API */
+	dataModel TaxBlasterDataModel
+		/** A tax filing record for a given user, in a given tax jurisdiction, 
+in a specified tax year.
+*/
+		structure TaxFiling
+			/** A unique, system-assigned identifier for the tax filing. */
+			filingID : string
+			/** Reference to the person who owns this filing. */
+			taxpayer : reference Person
+			/** Country, province, state or local tax authority 
+    where this is being filed.
+*/
+			jurisdiction : string
+			/** Tax year */
+			year : gYear
+			/** Period within the year, if any */
+			period : int
+			/** Currency code */
+			currency : string
+			/** Total income reported on tax filing. */
+			grossIncome : decimal
+			/** Net tax liability */
+			taxLiability : decimal
+
+		/** A TaxBlaster user. */
+		structure Person
+			/** A unique, system-assigned identifier for the user. */
+			taxpayerID : string
+			/** Legal family name. */
+			lastName : string
+			/** Legal first name. */
+			firstName : string
+			/** Names previously used **/
+			otherNames : string*
+			/** Residential address for tax purposes. */
+			addresses : containing reference Address*
+
+		/** A physical address. */
+		structure Address
+			/** First address line, required. */
+			street1 : string
+			/** Second address line, optional */
+			street2 : string?
+			/** Standardized city name. */
+			city : string
+			/** State or Province */
+			stateOrProvince : string
+			/** Zipcode (US) or other postal code. */
+			postalCode : string
+			/** Standardized country code. */
+			country : string
+
+		/** The supporting data type for the Index resource.  Not meaningful
+    as a business entity, but required to support a single point of 
+    entry.
+*/
+		structure Index
+			people : reference Person*
+			taxFilings : reference TaxFiling*
+
+

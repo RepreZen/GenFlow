@@ -1,0 +1,47 @@
+rapidModel GitHubIssues
+	resourceAPI GitHubIssues baseURI "https://api.github.com/repos"
+	// Placeholder for documentation
+		objectResource IssueObject type GitHubIssues.Issue
+			URI /{organization}/{repository}/{issue}
+				/* ZEN-452 URI parameters bound to properties of a data type which is not directly referenced by the resource 
+ 				required templateParam organization property id
+				required templateParam repository property Repository.id
+				*/
+				required templateParam issue property id
+
+			mediaTypes
+				application/json
+			method GET getIssueByID
+				request
+				response IssueObject statusCode 200
+
+
+		collectionResource Comments type Comment
+			URI /{organizationId}/{repositoryId}/issues/{issueId}/comments
+				/* ZEN-452 URI parameters bound to properties of a data type which is not directly referenced by the resource 
+ 				required templateParam organizationId property Organization.id
+				required templateParam repositoryId property Repository.id
+				required templateParam issueId property Issue.id
+				*/
+
+
+	dataModel GitHubIssues
+		structure Issue
+			id : string
+			comments : reference Comment
+
+		structure Comment
+
+		structure Organization
+			id : string
+			repositories : reference Repository
+
+		structure Repository
+			id : string
+			issues : reference Issue
+
+		structure User
+			login : string
+			id : string
+
+
