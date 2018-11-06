@@ -1,0 +1,7 @@
+rapidModel ModelC
+	dataModel DataModelC
+		structure ObjectC
+			id : string
+			title: string
+
+

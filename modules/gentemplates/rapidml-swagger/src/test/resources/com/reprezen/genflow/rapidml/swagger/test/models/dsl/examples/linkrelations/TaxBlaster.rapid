@@ -1,0 +1,180 @@
+/* 
+  This example shows link relations, assigned to a reference link using
+  linkRelation property.
+*/
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+		/** The Index Resource is the entry point to the TaxBlaster API. To minimize 
+		    coupling, consuming applications should start here, and follow the links to 
+		    related resources. */
+		objectResource IndexObject type Index
+			URI index
+			/* 
+			   By default, reference links will use the reference property name
+			   as the link relation.  Here, we are overriding the reference 
+			   links to use the IANA-registered 'subsection' link relation.
+			   
+			   http://www.iana.org/assignments/link-relations/link-relations.xhtml
+			*/
+			referenceLink > people
+				targetResource PersonCollection
+				linkRelation subsection
+
+			referenceLink > taxFilings
+				targetResource TaxFilingCollection
+				linkRelation subsection
+
+			mediaTypes
+				application/json
+			method GET getIndex
+				response IndexObject statusCode 200
+				response statusCode 404
+
+
+		/** The list of Tax Filings visible to the authorized user. */
+		default collectionResource TaxFilingCollection type TaxFiling
+			URI /taxFilings
+			mediaTypes
+				application/json
+			method GET getTaxFilingCollection
+				request
+				response TaxFilingCollection statusCode 200
+
+			method POST updateTaxFilingCollection
+				request TaxFilingCollection
+				response statusCode 200
+				response statusCode 400
+
+
+		/** The list of TaxBlaster users.  The results will vary in membership and level 
+		    of detail, depending on your access privileges. */
+		default collectionResource PersonCollection type Person
+			URI /people
+			mediaTypes
+				application/json
+			method GET getPersonCollection
+				request
+				response PersonCollection statusCode 200
+
+			method POST updatePersonCollection
+				request PersonCollection
+				response statusCode 200
+				response statusCode 400
+
+
+		/** An individual Tax Filing record, accessed by its ID */
+		objectResource TaxFilingObject type TaxFiling
+			URI taxFilings/{id}
+				/** filingID of the requested TaxFiling */
+				required templateParam id property filingID
+
+			referenceLink > taxpayer
+				targetResource PersonObject 
+				targetProperties
+					taxpayerID
+					firstName
+
+			mediaTypes
+				application/json
+			method GET getTaxFiling
+				request
+				response TaxFilingObject statusCode 200
+				response statusCode 404
+
+
+		/** An individual user by ID. */
+		objectResource PersonObject type Person
+			URI people/{id}
+				/** taxpayerID of the requested Person */
+				required templateParam id property taxpayerID
+
+			mediaTypes
+				application/json
+			method GET getPersonObject
+				request
+				response PersonObject statusCode 200
+
+			method PUT putPersonObject
+				request PersonObject
+				response statusCode 200
+				response statusCode 400
+
+
+
+	/** Supporting data types for the TaxBlaster API */
+	dataModel TaxBlasterDataModel
+		/** A tax filing record for a given user, in a given tax jurisdiction, in a 
+		    specified tax year. */
+		structure TaxFiling
+			/** A unique, system-assigned identifier for the tax filing. */
+			filingID : string
+			/** Reference to the person who owns this filing. */
+			taxpayer : reference to Person
+			/** Country, province, state or local tax authority where this is being filed. 
+			    */
+			jurisdiction : string
+			/** Tax year */
+			year : gYear
+			/** Period within the year, if any */
+			period : int
+			/** Currency code */
+			currency : CurrencyCodeEnum
+			/** Total income reported on tax filing. */
+			grossIncome : decimal
+			/** Net tax liability */
+			taxLiability : decimal
+			/** Tax filing status */
+			status : TaxFilingStatusEnum
+
+		/** A TaxBlaster user. */
+		structure Person
+			/** A unique, system-assigned identifier for the user. */
+			taxpayerID : string
+			/** Legal family name. */
+			lastName : string
+			/** Legal first name. */
+			firstName : string
+			/** Names previously used **/
+			otherNames : string*
+			/** Net worth, if known */
+			netWorth : decimal
+			/** Net worth special value */
+			netWorthSpecialValue : SpecialValueEnum
+			/** Preferred language for communications with this person */
+			preferredLanguage : string
+			/** Date of birth */
+			DOB : date
+
+		/** The supporting data type for the Index resource.  Not meaningful as a 
+		    business entity, but required to support a single point of entry. */
+		structure Index
+			people : reference to Person*
+			taxFilings : reference to TaxFiling*
+
+		/** Tax filing status enumeration, using default values */
+		enum int TaxFilingStatusEnum
+			DRAFT
+			PENDING_CPA_REVIEW
+			PENDING_CLIENT_REVIEW
+			FILED
+			AMENDED
+			CLOSED
+
+		/** Special Value Enum, using explicit integer values */
+		enum int SpecialValueEnum
+			NORMAL_VALUE : 0
+			NOT_AVAILABLE : -65534
+			NOT_APPLICABLE : -65533
+			RESTRICTED : -65532
+
+		/** Currency code enum, using explicit string values */
+		enum string CurrencyCodeEnum
+			EUR : "Euro"
+			CAD : "Canadian Dollar"
+			USD : "US Dollar"
+			CHF : "Swiss Franc"
+			JPY : "Japanese Yen"
+			INR : "Indian Rupee"
+			BRL : "Brazilian Real"
+
+

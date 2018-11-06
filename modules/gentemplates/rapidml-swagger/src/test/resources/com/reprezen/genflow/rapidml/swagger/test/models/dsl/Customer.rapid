@@ -1,0 +1,80 @@
+/* This is comment, it will be ignored by the model */
+rapidModel Customer
+	/** This is a documentation for Customer interface */
+	resourceAPI Customer /* or Client */ baseURI "http://modelsolv.com"
+		/* My 
+		 multiline comment for 
+		 CustomerObject
+		 with some special symbols *, %, -
+		 and keywords: objectResource, type
+		 */
+		objectResource CustomerObject type Customer
+			referenceEmbed > Orders
+				referenceEmbed > LineItems
+					referenceLink > Product
+						targetResource ProductObject
+
+			mediaTypes
+				application/xml
+			/**Doc: * getCustomer method */
+			method GET Customer
+				request
+				response CustomerObject statusCode 200
+
+		/**This is ProducResource*/
+		objectResource ProductObject type Product
+			linkDescriptor ProductLink
+				ProductID
+
+		/**OrderObject - doc*/
+		default objectResource OrderObject type Order
+			default linkDescriptor OrderLink
+				OrderID
+				Quantity
+				Price
+
+			linkDescriptor DetailedOrderLink
+				OrderID
+				Quantity
+				Price
+				Currency
+
+		objectResource BigOrderObject type Order
+			default linkDescriptor OrderLink
+				OrderID
+				Quantity
+				Price
+
+			linkDescriptor DetailedOrderLink
+				OrderID
+				Quantity
+				Price
+				Currency
+
+	/**"Service data model for Customer"*/
+	dataModel Customer
+		/**"Customer data type"*/
+		structure Customer
+			/** CustomerId property*/
+			CustomerID : string
+			CustomerName : string
+			/**Orders reference*/
+			Orders : containing reference Order*
+
+		structure Order
+			OrderID : string
+			LineItems : containing reference LineItem*
+			Quantity : decimal
+			Price : decimal
+			Currency : string
+
+		structure LineItem
+			lineItemID : string
+			Product : reference Product
+
+		structure Product
+			ProductID : string
+			ProductName : string
+			Price : decimal
+			ReorderThreshold : decimal
+			Image : base64Binary

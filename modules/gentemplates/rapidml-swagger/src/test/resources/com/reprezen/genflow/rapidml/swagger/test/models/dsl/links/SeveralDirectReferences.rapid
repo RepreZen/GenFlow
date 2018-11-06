@@ -1,0 +1,35 @@
+rapidModel SeveralDirectReferences
+	resourceAPI SeveralDirectReferences baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+			referenceLink > dataType1_reference1
+				targetResource DataType2Object
+
+			referenceLink > dataType1_reference2
+				targetResource DataType3Object
+
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+		objectResource DataType2Object type DataType2
+			linkDescriptor DataType2ObjectLink
+				dataType2ID
+
+		objectResource DataType3Object type DataType3
+			linkDescriptor DataType3ObjectLink
+				dataType3ID
+
+	dataModel SeveralDirectReferences
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType2 *
+			dataType1_reference2 : reference DataType3 ?
+
+		structure DataType2
+			dataType2ID : string
+
+		structure DataType3
+			dataType3ID : string
+
+

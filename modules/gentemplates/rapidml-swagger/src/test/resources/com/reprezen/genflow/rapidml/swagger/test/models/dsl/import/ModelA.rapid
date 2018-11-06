@@ -1,0 +1,25 @@
+namespace com.modelsolv.reprezen
+
+import com.modelsolv.reprezen.ModelB.DataModelB from "ModelB.rapid" as ExtB
+
+rapidModel ModelA
+	resourceAPI ModelAInterface baseURI "http://testimport.com/api"
+		objectResource MyObjectA type DataModelA.ObjectA
+			URI /uri
+
+			mediaTypes
+				application/xml
+
+			method GET getMyObjectA
+				request
+				response MyObjectA statusCode 200
+
+			method PUT putMyObjectA
+				request MyObjectA
+				response statusCode 200
+				response statusCode 400
+
+	dataModel DataModelA
+		structure ObjectA
+			name: string 
+			refB : reference ExtB.ObjectB

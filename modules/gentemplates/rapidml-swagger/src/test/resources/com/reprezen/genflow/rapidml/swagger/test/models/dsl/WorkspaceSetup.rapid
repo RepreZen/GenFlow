@@ -1,0 +1,16 @@
+rapidModel WorkspaceSetup
+	resourceAPI WorkspaceSetup baseURI "http://databehavior.com"
+		objectResource OldComputer type WorkspaceSetup.Computer
+			URI /computer/{computerName}
+				required templateParam computerName property name
+				matrixParam cpuType property cpuType
+				matrixParam cpuClock property cpuClock
+			method GET getComputer
+				response OldComputer
+			method PUT putComputer
+				response OldComputer
+	dataModel WorkspaceSetup
+		structure Computer
+			name : string
+			cpuType : string
+			cpuClock : decimal

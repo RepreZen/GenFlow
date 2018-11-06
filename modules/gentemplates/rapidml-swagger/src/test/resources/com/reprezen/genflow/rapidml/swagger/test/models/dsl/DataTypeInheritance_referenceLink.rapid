@@ -1,0 +1,29 @@
+rapidModel DataTypeInheritance_referenceLink
+	resourceAPI DataTypeInheritance_referenceLinkAPI baseURI "http://my-namespace.com"
+	
+		objectResource DataTypeInheritance_referenceLinkObject type DataType1
+			URI /uri/{id}
+			
+			referenceLink >ref1
+				targetResource DataType2Object
+				targetProperties
+					supertypeProp1
+					
+			referenceEmbed >ref2
+				targetProperties
+					dt2
+					supertypeProp1
+
+		objectResource DataType2Object type DataType2
+
+	dataModel DataTypeInheritance_referenceLinkDataModel
+		structure DataType1
+			id : string
+			ref1: reference to DataType2
+			ref2: reference to DataType2
+			
+		structure DataType2 extends Supertype
+			dt2 : string
+			
+		structure Supertype
+			supertypeProp1: string

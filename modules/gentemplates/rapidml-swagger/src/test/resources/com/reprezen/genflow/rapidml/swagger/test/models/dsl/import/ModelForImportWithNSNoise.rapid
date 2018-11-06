@@ -1,0 +1,10 @@
+namespace nsForImport
+rapidModel ModelForImportWithNSNoise
+	dataModel dataModelForImportWithNS
+		structure typeA
+			noise_mfinsa : string
+
+		enum string enumE
+			noise_mfinsa : "noise_mfinsa"
+
+

@@ -1,0 +1,33 @@
+/* 
+Scenario: >1 link descriptor defined, one designated as default
+The referrer should:
+get the default link descriptor if it doesn't specify otherwise, but
+*/
+rapidModel MultipleDescriptors
+	resourceAPI MultipleDescriptors baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+		objectResource DataType2Object type DataType2
+			linkDescriptor DataType2ObjectLink
+				dataType2ID
+
+			linkDescriptor DataType2ObjectLink2
+				dataType2ID
+				aProperty
+
+	dataModel MultipleDescriptors
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType2*
+
+		structure DataType2
+			dataType2ID : string
+			aProperty : float
+
+

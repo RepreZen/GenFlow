@@ -1,0 +1,14 @@
+rapidModel JsonSchemaImportTestModel2
+	dataModel dm2
+		structure wEnum2fromModel2
+			field : enum2
+		structure wEnum3fromModel2
+			field : enum3
+		structure wEnum4fromModel2
+			field : enum4
+		enum string enum2
+			value : "JsonSchemaImportTestModel2"
+		enum string enum3
+			value : "JsonSchemaImportTestModel2"
+		enum string enum4
+			value : "JsonSchemaImportTestModel2"

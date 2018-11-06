@@ -1,0 +1,102 @@
+/* 
+  This TaxBlaster API model demonstrates how to use message-level media types.
+  These override, or supplant, the default media-type defined at the resource level.
+  
+  Green comments are used to draw attention to the feature being demonstrated in 
+  this example.
+*/
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+
+		objectResource TaxFilingObject type TaxFiling
+			URI taxFilings/{id}
+				required templateParam id property filingID
+
+			referenceLink > taxpayer
+				targetResource PersonObject 
+				targetProperties
+					firstName
+					lastName
+
+			// The default, resource-level media types declaration.
+			mediaTypes
+				application/json
+			method GET getTaxFiling
+				request
+				// This response will use the default media type application/json
+				response TaxFilingObject statusCode 200 // OK
+				// Override: we want the API to send HTML formatted error responses.
+				response statusCode 404 // Tax filing not found
+					mediaTypes
+						text/html
+
+			method PUT putTaxFilingObject
+				// Override: We want to allow Tax Filing data to be posted in csv format.
+				request TaxFilingObject
+					mediaTypes
+						text/csv
+				response statusCode 200 // OK
+				// Override: we want the API to send HTML formatted error responses.
+				response statusCode 400 // Bad Request
+					mediaTypes
+						text/html
+
+		objectResource PersonObject type Person
+			URI people/{id}
+				required templateParam id property taxpayerID
+
+			// The default, resource-level media types declaration.
+			mediaTypes
+				application/json
+			method GET getPersonObject
+				request
+				// This response will use the default media type application/json
+				response PersonObject statusCode 200 // OK
+				// Override: we want the API to send HTML formatted error responses.
+				response statusCode 404 // Person not found
+					mediaTypes
+						text/html
+
+			method PUT putPersonObject
+				// Override: We want to allow Person data to be posted in csv format.
+				request PersonObject
+					mediaTypes
+						text/csv
+				response statusCode 200 // OK
+				// Override: we want the API to send HTML formatted error responses.
+				response statusCode 400 // Bad Request
+					mediaTypes
+						text/html
+	
+	/** Supporting data types for the TaxBlaster API */
+	dataModel TaxBlasterDataModel
+		/** A tax filing record for a given user, in a given tax jurisdiction, in a 
+		    specified tax year. */
+		structure TaxFiling
+			/** A unique, system-assigned identifier for the tax filing. */
+			filingID : string
+			/** Reference to the person who owns this filing. */
+			taxpayer : reference to Person
+			/** Country, province, state or local tax authority where this is being filed. */
+			jurisdiction : string
+			/** Tax year */
+			year : gYear
+			/** Period within the year, if any */
+			period : int
+			/** Currency code */
+			currency : string
+			/** Total income reported on tax filing. */
+			grossIncome : decimal
+			/** Net tax liability */
+			taxLiability : decimal
+
+		/** A TaxBlaster user. */
+		structure Person
+			/** A unique, system-assigned identifier for the user. */
+			taxpayerID : string
+			/** Legal family name. */
+			lastName : string
+			/** Legal first name. */
+			firstName : string
+			/** Names previously used **/
+			otherNames : string*

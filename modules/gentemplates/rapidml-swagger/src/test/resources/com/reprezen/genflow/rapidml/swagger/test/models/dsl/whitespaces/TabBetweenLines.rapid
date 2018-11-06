@@ -1,0 +1,6 @@
+rapidModel UserDefinedDataTypes
+	dataModel UserDefinedDataTypesDataModel
+		// "empty" line - 	//tab-tab-tab-tab-tab
+		structure UserDefinedDataTypes
+				
+			id : string

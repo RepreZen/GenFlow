@@ -1,0 +1,27 @@
+rapidModel SeveralTemplateParams
+	resourceAPI TaxFiling_multipleParams baseURI "http://my-namespace.com"
+		objectResource TaxFilingObject type TaxFiling
+			URI taxFiling/segment1/{id}/{segment2}/{seg3}/{seg4}/{seg5}/{seg6}/{seg7}/{seg8}
+				required templateParam id property filingID
+				required templateParam segment2 property prop2
+				required templateParam seg3 property prop3
+				required templateParam seg4 property prop4
+				required templateParam seg5 property prop5
+				required templateParam seg6 property prop6
+				required templateParam seg7 property prop7
+				required templateParam seg8 property prop8
+
+			method GET getSomething
+				request
+				response TaxFilingObject statusCode 200
+
+	dataModel TaxFiling_multipleParams
+		structure TaxFiling
+			filingID : string
+			prop2 : string
+			prop3 : string
+			prop4 : string
+			prop5 : string
+			prop6 : string
+			prop7 : string
+			prop8 : string

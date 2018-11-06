@@ -1,0 +1,95 @@
+/* 
+Zen model for the APi described on  http://raml.org/docs-200.html
+*/
+rapidModel JukeBox
+	resourceAPI JukeBoxInterface baseURI "http://my-namespace.com"
+		/** Collection of available songs in Jukebox */
+		collectionResource SongCollection type Song
+			URI /songs
+			mediaTypes
+				application/json
+			/** Get a list of songs based on the song title. */
+			method GET getSongCollection
+				request
+					/** The title of the song to search (it is case insensitive and doesn't need to match the whole title) */
+					required param songTitle type string
+
+				response SongCollection statusCode 200
+					example '''[{
+                    "songId": "550e8400-e29b-41d4-a716-446655440000"
+                    "songTitle": "Get Lucky"
+
+                    "songId": "550e8400-e29b-41d4-a716-446655440111"
+                    "songTitle": "Loose yourself to dance"
+
+                    "songId": "550e8400-e29b-41d4-a716-446655440222"
+                    "songTitle": "Gio sorgio by Moroder"
+                  }]'''
+
+		objectResource JukeBoxObject type Song
+			URI /songs/{songId}
+				required templateParam songId property id
+
+			mediaTypes
+				application/json
+			/** Get the song with `songId = {songId}` */
+			method GET getJukeBoxObject
+				request
+				response JukeBoxObject statusCode 200
+					example '''{
+                  "songId": "550e8400-e29b-41d4-a716-446655440000"
+                  "songTitle": "Get Lucky"
+                  "duration": "6:07"
+                  "artist":
+                    "artistId": "110e8300-e32b-41d4-a716-664400445500"
+                    "artistName": "Daft Punk"
+                    "imageURL": "http://travelhymns.com/wp-content/uploads/2013/06/random-access-memories1.jpg"
+
+                  "album":
+                    "albumId": "183100e3-0e2b-4404-a716-66104d440550"
+                    "albumName": "Random Access Memories"
+                    "imageURL": "http://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+
+                }'''
+
+				response statusCode 404
+					example '''{"message": "Song not found"}'''
+
+
+			method POST postSongCollection
+				request SongCollection
+				response SongCollection statusCode 200
+					example '''{"Status": "Successful"}'''
+
+				response statusCode 400
+
+
+		/** The file to be reproduced by the client */ 
+		objectResource FileContentResource type Song
+			URI /songs/{songId}/"file-content"
+			mediaTypes 
+				multipart/form-data // binary/octet-stream
+			/** Get the file content */ 
+			method GET getFileContentResource
+				request
+				response FileContentResource statusCode 200
+
+			method POST postFileContentResource
+				request FileContentResource
+				response statusCode 200
+				response statusCode 400
+
+
+
+	dataModel JukeBoxDataModel
+		structure Song
+			//dataExample 
+			id : string
+
+		structure Artist
+			id : string
+
+		structure Album
+			id : string
+
+

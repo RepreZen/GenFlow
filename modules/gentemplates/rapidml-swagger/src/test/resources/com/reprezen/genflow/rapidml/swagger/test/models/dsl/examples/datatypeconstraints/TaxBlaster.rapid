@@ -1,0 +1,102 @@
+rapidModel TaxBlaster
+
+	resourceAPI InterfaceModel baseURI "http://localhost:8080"
+		
+		collectionResource TaxFilingCollection type TaxFiling
+			URI taxfilings
+			mediaTypes
+				application/json
+			method GET getTaxFilingCollection
+				request
+				response TaxFilingCollection statusCode 200
+			method POST updateTaxFilingCollection
+				request TaxFilingCollection
+				response statusCode 200
+				response statusCode 400
+		
+		collectionResource PersonCollection type Person
+			URI people
+			mediaTypes
+				application/json
+			method GET getPersonCollection
+				request
+				response PersonCollection statusCode 200
+			method POST updatePersonCollection
+				request PersonCollection
+				response statusCode 200
+				response statusCode 400
+		
+		objectResource TaxFilingObject type TaxFiling
+			URI taxfilings/{id}
+				required templateParam id property filingID
+			mediaTypes
+				application/json
+			method GET getTaxFilingObject
+				request
+			method PUT putTaxFilingObject
+				request TaxFilingObject
+				response statusCode 200
+				response statusCode 400
+		
+		objectResource PersonObject type Person
+			URI people/{id}
+				required templateParam id property taxpayerID
+			with all properties including
+				addresses+
+				ssn
+					matching regex '(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}'
+			excluding
+				otherNames
+				preferredLanguage
+				netWorth
+				netWorthSpecialValue
+			mediaTypes
+				application/json
+			method GET getPersonObject
+				request
+				response PersonObject statusCode 200
+			method PUT putPersonObject
+				request PersonObject
+				response statusCode 200
+				response statusCode 400
+	
+	dataModel DataModel
+		
+		structure TaxFiling
+			filingID : long
+			taxpayer : reference to Person
+			jurisdiction : string
+			year : int
+			period : int
+			currency : string
+			grossIncome : decimal
+			fileCompleteness : decimal //fractional value
+				with valueRange from 0 exclusive up to 1 exclusive
+			taxLiability : decimal
+			status : string
+			date: DayOfYear
+			
+		structure Person
+			taxpayerID : long
+			ssn: string
+			lastName : string
+			firstName : string
+			otherNames : string*
+			netWorth : decimal
+			netWorthSpecialValue : string
+			preferredLanguage : string
+			DOB : string
+			taxFilings : reference to TaxFiling*
+			addresses : containing Address*
+			
+		structure Address
+			street1 : string
+			street2 : string
+			city : string
+			stateOrProvince : string
+			postalCode : string
+			country : string
+		
+		simpleType DayOfYear defined as integer
+			with valueRange from minimum 1 up to maximum 365 inclusive
+			
