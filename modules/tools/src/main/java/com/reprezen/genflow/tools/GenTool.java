@@ -225,15 +225,19 @@ public class GenTool {
 		}
 		List<Path> paths = new ArrayList<>();
 		Set<String> extensions = new HashSet<>();
-		// currently we only support OpenApi v2 & v3 models, so only one possibility
-		extensions.add(".yaml");
-		extensions.add(".json");
+		if (type.get().endsWith("ZenModel")) {
+			extensions.add(".rapid");
+			extensions.add(".zen");
+		} else {
+			extensions.add(".yaml");
+			extensions.add(".json");
+		}
 		Files.walkFileTree(dir.toPath(), new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 				String fileName = path.getFileName().toString();
 				if (fileName.contains(".")) {
-					if (extensions.contains(fileName.substring(fileName.lastIndexOf(".")))) {
+					if (extensions.contains(fileName.substring(fileName.lastIndexOf(".")).toLowerCase())) {
 						paths.add(path);
 					}
 				}
