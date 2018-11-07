@@ -1,0 +1,21 @@
+rapidModel Employees
+
+	dataModel EmployeesDataModel
+		structure Employee
+			firstName: string
+			lastName: string
+			title: string
+		structure TemporaryEmployee extends Employee
+			/** A temporary employee */
+			contractTerms: string
+			restrict title: string
+				of length from 5 to 15
+		structure Consultant extends TemporaryEmployee
+			restrict firstName: string
+				matching regex r"John"
+		structure Manager extends Employee
+		structure PermanentEmployee extends Employee
+		structure ConsultantManager extends Consultant, Manager
+		structure Director extends Manager
+		structure PermanentManager extends PermanentEmployee, Manager
+			

@@ -1,0 +1,6 @@
+rapidModel UserDefinedDataTypes
+	//tab-space-tab
+	dataModel DataModelLineWithTabs		 	
+		//tab
+		structure UserDefinedDataTypes		
+			id : string

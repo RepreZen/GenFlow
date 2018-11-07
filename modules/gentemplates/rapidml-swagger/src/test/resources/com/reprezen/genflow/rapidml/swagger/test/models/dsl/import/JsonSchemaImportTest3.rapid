@@ -1,0 +1,8 @@
+namespace ns
+
+rapidModel JsonSchemaImportTestModel3
+	dataModel dm3
+		structure wEnum4fromModel3
+			field : enum4
+		enum string enum4
+			value : "JsonSchemaImportTestModel3"

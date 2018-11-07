@@ -52,6 +52,8 @@ class DefaultLinkNode extends NamedSchemaNode<ReferenceLink> {
 		
 		val List<String> requiredProperties = Lists.newArrayList(getRequiredPropertyNames(realization))
 
+		factory.addRapidLink(propertiesNode, requiredProperties, element);
+		
 		node.writeRequiredProperties(requiredProperties)
 	}
 

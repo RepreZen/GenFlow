@@ -10,7 +10,7 @@ import java.util.Set
 class DefinitionsNode extends JsonSchemaNode<ZenModel> {
 
 	val ObjectNode definitionsNode
-	final Set<String> generatedDefinitionNames = newHashSet()
+	val Set<String> generatedDefinitionNames = newHashSet()
 
 	new(JsonSchemaNodeFactory jsonSchemaNodeFactory, ZenModel element) {
 		this(jsonSchemaNodeFactory, element, new ObjectMapper().createObjectNode())

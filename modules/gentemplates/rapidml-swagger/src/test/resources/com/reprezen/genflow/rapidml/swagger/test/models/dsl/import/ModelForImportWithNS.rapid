@@ -1,0 +1,10 @@
+namespace nsForImport
+rapidModel ModelForImportWithNS
+	dataModel dataModelForImportWithNS
+		structure typeA
+			mfins : string
+
+		enum string enumE
+			mfins : "mfins"
+
+

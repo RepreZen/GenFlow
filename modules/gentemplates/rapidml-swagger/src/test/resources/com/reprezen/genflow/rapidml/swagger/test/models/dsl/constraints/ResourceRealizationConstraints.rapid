@@ -1,0 +1,58 @@
+/* Example model to show constraints override for resource realization. */
+rapidModel ResourceRealizationConstraints 
+	resourceAPI ResourceAPI baseURI "http://localhost"
+		objectResource MyObject type Structure
+			URI /uri
+			all properties
+				// override constraints of stringProp1 in resource realization
+				stringProp1
+					length from 5 to 10
+			mediaTypes
+				application/xml
+			method GET getMyObject
+				request this MyObject
+				response MyObject statusCode 200
+		
+	dataModel DataModel
+		// simple length constraints 
+		simpleType StringLenBaseType defined as string
+			length from 0 to 100
+
+		// simple length constraints 
+		simpleType StringLenType defined as StringLenBaseType
+			length from 0 to 50
+
+		// simple regex constraints
+		simpleType StringRegType defined as string
+			matching regex "([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})+"
+
+		// complex constraints with combination of length and regex
+		simpleType StringComplexType defined as string
+			length from 0 to 50
+			matching regex "[A-Z]+"
+
+		// type with range constraints 
+		simpleType IntRangeType defined as integer
+			valueRange from '1' to maximum '10'
+
+		structure Structure
+			// constraints override for custom type
+			stringProp1: StringLenType
+				// length constraint overrides simpleType
+				length from 1 to 40
+				// regex constraint added
+				matching regex "[A-Za-z0-9\\w]*"
+
+			// Add length constraints to regex
+			stringProp2: StringRegType
+				length to 10
+
+			// add constraints for primitive type property
+			stringProp3: string
+				length from 10
+			
+			intProp1: IntRangeType
+				valueRange from '2' to maximum '8'
+			
+			doubleProp1: double
+				valueRange from '-1.23' to maximum '1.23'

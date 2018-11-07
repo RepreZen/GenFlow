@@ -1,0 +1,4 @@
+rapidModel clashWithLocal
+	dataModel dm
+		enum string en
+			VALUE : "clash_with_local_dm"

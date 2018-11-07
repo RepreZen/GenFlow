@@ -1,0 +1,156 @@
+/* 
+  A Zen model for the API described on http://apievangelist.com/2014/03/08/hello-world-product-api-with-blueprint-raml-and-swagger/
+*/
+rapidModel Products
+	resourceAPI ProductInterface baseURI "http://my-namespace.com"
+		/** A collection of products */
+		collectionResource ProductCollection type Product
+			URI /products
+			mediaTypes
+				application/json
+			/** Create a product */
+			method POST updateProductCollection
+				request ProductCollection
+				response statusCode 200
+					example '''{
+			            "product1345new": {
+			              "id": "1",
+			              "name": "Product One",
+			              "description": "This is the full description of the product.",
+			              "url": "http://example.com",
+			              "image": "http://example.com/image.jpg",
+			              "thumbnailUrl": "http://example.com/image-thumb.jpg",
+			              "keywords": "western, cowboy",
+			              "brand": "Brand Name",
+			              "color": "Black",
+			              "itemCondition": "New",
+			              "manufacturer": "Manufacturer Name",
+			              "model": "Black",
+			              "sku": "SKU #",
+			              "weight": "12 pounds",
+			              "width": "12 inches",
+			              "height": "12 inches",
+			              "depth": "12 inches"
+			            }'''
+
+				response statusCode 400
+
+			/** Get a list of products */ 
+			method GET retrieveProducts
+				request
+					/** Search phrase to look for products */
+					required param q type string
+
+				response ProductCollection statusCode 200
+					example '''{
+			            "product1345": {
+			              "id": "1",
+			              "name": "Product One",
+			              "description": "This is the full description of the product.",
+			              "url": "http://example.com",
+			              "image": "http://example.com/image.jpg",
+			              "thumbnailUrl": "http://example.com/image-thumb.jpg",
+			              "keywords": "western, cowboy",
+			              "brand": "Brand Name",
+			              "color": "Black",
+			              "itemCondition": "New",
+			              "manufacturer": "Manufacturer Name",
+			              "model": "Black",
+			              "sku": "SKU #",
+			              "weight": "12 pounds",
+			              "width": "12 inches",
+			              "height": "12 inches",
+			              "depth": "12 inches"
+			            }'''
+
+				response statusCode 400
+
+
+		objectResource ProductObject type Product
+			URI /products/{id}
+				required templateParam id property id
+
+			mediaTypes
+				application/json
+			/** Get a single product */
+			method GET getProductCollection
+				request
+				response ProductObject statusCode 201
+					example '''{
+			            "product4567": {
+			              "id": "1",
+			              "name": "Product One",
+			              "description": "This is the full description of the product.",
+			              "url": "http://example.com",
+			              "image": "http://example.com/image.jpg",
+			              "thumbnailUrl": "http://example.com/image-thumb.jpg",
+			              "keywords": "western, cowboy",
+			              "brand": "Brand Name",
+			              "color": "Black",
+			              "itemCondition": "New",
+			              "manufacturer": "Manufacturer Name",
+			              "model": "Black",
+			              "sku": "SKU #",
+			              "weight": "12 pounds",
+			              "width": "12 inches",
+			              "height": "12 inches",
+			              "depth": "12 inches"
+			            }'''
+
+				response statusCode 404
+
+			/** Updates a single product */
+			method PUT updateProduct
+				request ProductCollection
+				response statusCode 200
+				response statusCode 400
+					example '''{
+			            "product1345": {
+			              "id": "1",
+			              "name": "Product One",
+			              "description": "This is the full description of the product.",
+			              "url": "http://example.com",
+			              "image": "http://example.com/image.jpg",
+			              "thumbnailUrl": "http://example.com/image-thumb.jpg",
+			              "keywords": "western, cowboy",
+			              "brand": "Brand Name",
+			              "color": "Black",
+			              "itemCondition": "New",
+			              "manufacturer": "Manufacturer Name",
+			              "model": "Black",
+			              "sku": "SKU #",
+			              "weight": "12 pounds",
+			              "width": "12 inches",
+			              "height": "12 inches",
+			              "depth": "12 inches"
+			            }'''
+
+			/** Delete a single product */
+			method DELETE deleteProduct
+				request
+				response statusCode 200
+				response statusCode 400
+
+
+
+	dataModel ProductDataModel
+		structure Product
+			id : string
+			name: string
+			description: string
+			url: string
+			image: string
+			thumbnailUrl: string
+			keywords: string
+			brand: string
+			color: string
+			itemCondition: string
+			manufacturer: string
+			model: string
+			sku: string
+			weight: string
+			width: string
+			height: string
+			depth: string
+
+

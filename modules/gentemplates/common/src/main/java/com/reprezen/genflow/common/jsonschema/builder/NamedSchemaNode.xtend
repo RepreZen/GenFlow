@@ -3,10 +3,10 @@ package com.reprezen.genflow.common.jsonschema.builder
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.google.common.base.Strings
 import com.reprezen.genflow.common.xtend.ExtensionsHelper
-import com.reprezen.genflow.common.xtend.ZenModelHelper
 import com.reprezen.rapidml.Extension
 import com.reprezen.rapidml.RealizationContainer
 import com.reprezen.rapidml.Structure
+import com.reprezen.rapidml.xtext.util.ZenModelHelper
 
 abstract class NamedSchemaNode<T> extends JsonSchemaNode<T>{
 

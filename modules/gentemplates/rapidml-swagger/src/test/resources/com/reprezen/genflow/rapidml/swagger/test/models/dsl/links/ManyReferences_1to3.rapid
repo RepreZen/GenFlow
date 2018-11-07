@@ -1,0 +1,40 @@
+rapidModel ManyReferences_1to3
+	resourceAPI SeveralDirectReferences baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+
+		objectResource DataType2Object type DataType2
+
+		objectResource DataType3Object type DataType3
+
+
+	dataModel SeveralDirectReferences
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType3*
+			dataType1_reference2 : reference DataType3*
+			dataType1_reference3 : reference DataType3*
+			dataType1_reference4 : reference DataType3*
+			dataType1_reference5 : reference DataType3*
+			dataType1_reference6 : reference DataType3*
+			dataType1_reference7 : reference DataType3*
+			dataType1_reference8 : reference DataType3*
+			dataType1_reference9 : reference DataType3*
+			dataType1_reference10 : reference DataType3*
+			dataType1_reference11 : reference DataType3?
+			dataType1_reference12 : reference DataType3*
+			dataType1_reference13 : reference DataType3*
+			dataType1_reference14 : reference DataType3*
+			dataType1_reference15 : reference DataType3*
+			dataType1_reference16 : reference DataType3*
+			dataType1_reference17 : reference DataType3*
+			dataType1_reference18 : reference DataType3*
+			dataType1_reference19 : reference DataType3*
+
+		structure DataType2
+			dataType2ID : string
+
+		structure DataType3
+			dataType3ID : string
+
+

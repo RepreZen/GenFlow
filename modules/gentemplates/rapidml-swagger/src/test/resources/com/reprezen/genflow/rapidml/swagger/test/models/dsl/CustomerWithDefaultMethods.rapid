@@ -1,0 +1,36 @@
+rapidModel CustomerWithDefaultMethods
+	resourceAPI Customer baseURI "http://modelsolv.com"
+		objectResource CustomerObject type Customer
+			mediaTypes
+				application/xml
+			method GET defaultGet
+
+			method PUT defaultPut
+
+			method POST defaultPost
+
+			method CONNECT defaultConnect
+
+			method GET getWithParameters
+				request
+					param p1 type string
+					param p2 property CustomerID
+
+
+			method GET getWithResponseParameters
+				response
+					param p3 type int
+					param p4 property CustomerName
+
+
+			method PUT emptyResponse
+				response
+
+
+
+	dataModel Customer
+		structure Customer
+			CustomerID : string
+			CustomerName : string
+
+

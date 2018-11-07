@@ -1,0 +1,17 @@
+rapidModel ShortLabels
+	resourceAPI Cu  baseURI "http://modelsolv.com"
+		objectResource CR type Cu
+			URI fr
+			mediaTypes
+				application/xml
+			method GET g
+				request
+				response CR statusCode 200
+
+			method POST p
+				request CR
+				response CR statusCode 200
+
+	dataModel Cu
+		structure Cu
+			I : int

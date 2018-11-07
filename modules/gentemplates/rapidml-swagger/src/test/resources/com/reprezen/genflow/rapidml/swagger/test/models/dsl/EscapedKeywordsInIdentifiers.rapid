@@ -1,0 +1,19 @@
+rapidModel EscapedKeywordsInIdentifiers
+	resourceAPI EscapedKeywordsInIdentifiersAPI baseURI "http://my-namespace.com"
+		objectResource ^objectResource type ^structure
+			URI /uri/{id}
+				required templateParam id property ^property
+			mediaTypes
+				application/xml
+			method GET getEscapedKeywordsInIdentifiersObject
+				request
+				response ^objectResource statusCode 200
+			method PUT putEscapedKeywordsInIdentifiersObject
+				request type ^structure
+				response statusCode 200
+				response statusCode 400
+		
+	dataModel EscapedKeywordsInIdentifiersDataModel
+		structure ^structure
+			id : string
+			^property: string
