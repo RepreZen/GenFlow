@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.18</version>
+        <version>0.0.19-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
     <artifactId>genflow-tools</artifactId>
