@@ -33,11 +33,17 @@ public final class GenTemplateRegistry {
 	private static Logger logger = LoggerFactory.getLogger(GenTemplateRegistry.class);
 
 	/** Singleton reference. */
-	private static GenTemplateRegistry instance;
+	private static GenTemplateRegistry defaultInstance = null;
+	private ClassLoader classLoader;
 
 	private Map<String, GenTemplateInfo> registry = null;
 
-	private GenTemplateRegistry() {
+	public GenTemplateRegistry() {
+		this(GenTemplateRegistry.class.getClassLoader());
+	}
+
+	public GenTemplateRegistry(ClassLoader classLoader) {
+		this.classLoader = classLoader;
 	}
 
 	private void register(IGenTemplate template) {
@@ -57,15 +63,15 @@ public final class GenTemplateRegistry {
 		return true;
 	}
 
-	private static GenTemplateRegistry getInstance() {
-		if (instance == null) {
+	private static GenTemplateRegistry getDefaultInstance() {
+		if (defaultInstance == null) {
 			synchronized (GenTemplateRegistry.class) {
-				if (instance == null) {
-					instance = new GenTemplateRegistry();
+				if (defaultInstance == null) {
+					defaultInstance = new GenTemplateRegistry();
 				}
 			}
 		}
-		return instance;
+		return defaultInstance;
 	}
 
 	/**
@@ -73,20 +79,24 @@ public final class GenTemplateRegistry {
 	 * @return the gen template by ID
 	 * @throws GenerationException
 	 */
-	public static GenTemplateInfo getGenTemplate(String id) {
+
+	public GenTemplateInfo getGenTemplate(String id) {
 		assert id != null;
-		getInstance().scan(false);
-		if (getInstance().registry.containsKey(id)) {
-			return getInstance().registry.get(id);
+		scan(false);
+		if (registry.containsKey(id)) {
+			return registry.get(id);
 		}
 		throw new RuntimeException("Template " + id + " not found");
 	}
 
+	public static GenTemplateInfo getDefaultGenTemplate(String id) {
+		return getDefaultInstance().getGenTemplate(id);
+	}
+
 	private void scan(boolean force) {
 		if (registry == null || force) {
-			ClassLoader classLoader = GenTemplateRegistry.class.getClassLoader();
 			registry = new HashMap<>();
-			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
+			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class, classLoader).iterator();
 			while (genTemplates.hasNext()) {
 				try {
 					IGenTemplate template = genTemplates.next();
@@ -115,8 +125,13 @@ public final class GenTemplateRegistry {
 		}
 	}
 
-	public static List<GenTemplateInfo> getGenTemplates(boolean force) {
-		getInstance().scan(force);
-		return getInstance().registry.values().stream().distinct().collect(Collectors.toList());
+	public List<GenTemplateInfo> getGenTemplates(boolean force) {
+		scan(force);
+		return registry.values().stream().distinct().collect(Collectors.toList());
+
+	}
+
+	public static List<GenTemplateInfo> getDefaultGenTemplates(boolean force) {
+		return getDefaultInstance().getGenTemplates(force);
 	}
 }

@@ -139,7 +139,7 @@ public final class GenTargetUtils {
 	}
 
 	private static String getProvider(GenTarget target) throws GenerationException {
-		IGenTemplate template = GenTemplateRegistry.getGenTemplate(target.getGenTemplateId()).getInstance();
+		IGenTemplate template = GenTemplateRegistry.getDefaultGenTemplate(target.getGenTemplateId()).getInstance();
 		String unknown = "unknown provider";
 		if (template == null) {
 			return unknown;
