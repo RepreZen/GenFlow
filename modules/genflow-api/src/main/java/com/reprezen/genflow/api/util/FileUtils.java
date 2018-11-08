@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
@@ -37,9 +38,12 @@ public final class FileUtils {
 	 * Copies resources from JAR file to specified location. Used class to lookup
 	 * JAR file location.
 	 * 
-	 * @param codeBase class to lookup JAR file location
-	 * @param source   source path in JAR
-	 * @param target   target location in local file system
+	 * @param codeBase
+	 *            class to lookup JAR file location
+	 * @param source
+	 *            source path in JAR
+	 * @param target
+	 *            target location in local file system
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
@@ -60,10 +64,13 @@ public final class FileUtils {
 	/**
 	 * Copies resources from JAR file to specified location.
 	 * 
-	 * @param codeSource code source location (usually a JAR file, in dev it may be
-	 *                   a classes directory)
-	 * @param source     source path in JAR
-	 * @param target     target location in local file system
+	 * @param codeSource
+	 *            code source location (usually a JAR file, in dev it may be a
+	 *            classes directory)
+	 * @param source
+	 *            source path in JAR
+	 * @param target
+	 *            target location in local file system
 	 * @throws IOException
 	 */
 	public static List<File> copyResources(File codeSource, String source, File target) throws Exception {
@@ -80,8 +87,15 @@ public final class FileUtils {
 		// resolve "." and ".." compoents. We prefix with "/" and remove afterward, in
 		// order to preventing resolving relative to current working directory in
 		// filesystem (e.g. "../foo" would do that)
-		source = new File("/" + source).getCanonicalPath().substring(1);
-		if (source.startsWith("../")) {
+		source = new File("/" + source).getCanonicalPath().replaceAll(Pattern.quote(File.separator), "/");
+		if (source.contains("/")) {
+			// skip initial slash and (on windows) device letter) for matching with jar file
+			// entries
+			source = source.substring(source.indexOf('/') + 1);
+		}
+		if (source.startsWith(".." + "/"))
+
+		{
 			throw new IOException("Invalid relative static resource path - no parent path component to absorb '..'");
 		}
 		String prefix = source.equals(".") ? "" : source + "/";
