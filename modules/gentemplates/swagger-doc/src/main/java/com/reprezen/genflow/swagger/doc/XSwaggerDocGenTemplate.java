@@ -12,7 +12,7 @@ public class XSwaggerDocGenTemplate extends SwaggerGenTemplate {
 
 	@Override
 	protected void configure() throws GenerationException {
-		alsoKnownAs("com.modelsolv.reprezen.generators.swaggerdoc.XSwaggerDocGenTemplate");
+		alsoKnownAs("com.modelsolv.reprezen.gentemplates.swaggerdoc.XSwaggerDocGenTemplate");
 		define(primarySource().ofType(SwaggerSource_DocNormalizerOptions.class));
 		define(outputItem().named("HTML").using(XGenerateSwaggerDoc.class).writing("${swagger.info.title}_doc.html"));
 		define(staticResource().copying("js").to("."));
