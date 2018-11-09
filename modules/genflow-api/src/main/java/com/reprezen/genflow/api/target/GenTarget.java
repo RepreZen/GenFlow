@@ -232,7 +232,7 @@ public class GenTarget {
 		}
 		if (genTemplate == null) {
 			try {
-				genTemplate = GenTemplateRegistry.getGenTemplate(genTemplateId).getInstance();
+				genTemplate = GenTemplateRegistry.getDefaultGenTemplate(genTemplateId).getInstance();
 			} catch (Throwable e) {
 				logger.severe("Failed to locate GenTemplate " + genTemplateId);
 				e.printStackTrace();

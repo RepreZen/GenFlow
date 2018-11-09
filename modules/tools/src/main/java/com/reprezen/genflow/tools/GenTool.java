@@ -69,7 +69,7 @@ public class GenTool {
 			glob = glob.map(String::toLowerCase)
 					.map(g -> (g.startsWith("*") ? "" : "*") + g + (g.endsWith("*") ? "" : "*"));
 			PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob.get());
-			List<GenTemplateInfo> matches = GenTemplateRegistry.getGenTemplates(false).stream()
+			List<GenTemplateInfo> matches = GenTemplateRegistry.getDefaultGenTemplates(false).stream()
 					.filter(t -> matcher.matches(Paths.get(t.getId().toLowerCase())))
 					.sorted((a, b) -> a.getId().compareTo(b.getId())).collect(Collectors.toList());
 			if (matches.size() == 0) {
