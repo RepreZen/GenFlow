@@ -9,8 +9,6 @@
 package com.reprezen.genflow.openapi.generator;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +30,7 @@ import com.reprezen.genflow.api.template.GenTemplateProperty.StandardProperties;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.openapi.generator.OpenApiGeneratorModulesInfo.Info;
 
-import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.parser.core.models.SwaggerParseResult;
 
 public abstract class OpenApiGeneratorGenTemplate extends OpenApiGenTemplate {
 
@@ -96,25 +92,8 @@ public abstract class OpenApiGeneratorGenTemplate extends OpenApiGenTemplate {
 
 		@Override
 		public void generate(OpenApiDocument model) throws GenerationException {
-			URL modelUrl;
-			SwaggerParseResult result;
-			try {
-				modelUrl = context.getPrimarySource().getInputFile().toURI().toURL();
-			} catch (MalformedURLException e) {
-				throw new GenerationException("Failed to parse OpenAPI v3 model", e);
-			}
-			if (model.isOpenApi3()) {
-				result = new OpenAPIParser().readLocation(modelUrl.toString(), null, null);
-				if (result.getOpenAPI() != null) {
-					generate(result.getOpenAPI());
-				} else {
-					throw new GenerationException(
-							"Failed to parse OpenAPI v3 model: " + result.getMessages().toString());
-				}
-			} else if (model.isOpenApi2()) {
-				OpenAPI openApi = model.asOpenAPI();
-				generate(openApi);
-			}
+			OpenAPI openApi = model.asOpenAPI();
+			generate(openApi);
 		}
 
 		private void generate(OpenAPI model) throws GenerationException {
