@@ -8,7 +8,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>genflow</artifactId>
-    <version>0.0.21-SNAPSHOT</version>
+    <version>0.0.21</version>
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
@@ -43,7 +43,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <connection>scm:git:git@github.com:RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:git@github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/master</url>
-        <tag>HEAD</tag>
+        <tag>v0.0.21</tag>
     </scm>
     <modules>
         <module>modules/genflow-api</module>
@@ -77,10 +77,10 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-		    <!-- We don't use release:perform - deployment is
+                    <!-- We don't use release:perform - deployment is
 			 done in TeamCity. This just makes an errant
 			 perform operation harmless -->
-		    <goals>clean</goals>
+                    <goals>clean</goals>
                 </configuration>
             </plugin>
             <plugin>
@@ -200,8 +200,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
         <profile>
             <id>releases</id>
             <build>
-                <plugins>
-                </plugins>
+                <plugins></plugins>
             </build>
         </profile>
     </profiles>
@@ -265,12 +264,12 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>org.openapitools</groupId>
@@ -285,7 +284,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>standard-gentemplates</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -296,7 +295,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-codegen</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -306,32 +305,32 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-diagram</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-generator</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi3-doc</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-doc</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-normalizer</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-ui</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
@@ -361,22 +360,22 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-doc</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-diagram</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-xsd</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-wadl</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>org.raml</groupId>
@@ -391,17 +390,17 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jsonschema</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-swagger</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-csharp</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -411,7 +410,7 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-nodejs</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
@@ -436,12 +435,12 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jaxrs</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-nswag</artifactId>
-                <version>0.0.21-SNAPSHOT</version>
+                <version>0.0.21</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
