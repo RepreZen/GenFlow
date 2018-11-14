@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2018 ModelSolv, Inc. and others. All rights reserved. 
-	This program and the accompanying materials are made available under the 
-	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
-	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
+This program and the accompanying materials are made available under the 
+terms of the Eclipse Public License v1.0 which accompanies this distribution, 
+and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
+ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
@@ -77,7 +77,10 @@
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <releaseProfiles>releases</releaseProfiles>
+		    <!-- We don't use release:perform - deployment is
+			 done in TeamCity. This just makes an errant
+			 perform operation harmless -->
+		    <goals>clean</goals>
                 </configuration>
             </plugin>
             <plugin>
@@ -159,6 +162,18 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>${nexus.autorelease}</autoReleaseAfterClose>
+                    <autoDropAfterRelease>${nexus.autodrop}</autoDropAfterRelease>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -186,18 +201,6 @@
             <id>releases</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>${nexus.autorelease}</autoReleaseAfterClose>
-                            <autoDropAfterRelease>${nexus.autodrop}</autoDropAfterRelease>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
