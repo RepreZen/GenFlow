@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.23-SNAPSHOT</version>
+        <version>0.0.23</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
     <name>genflow-common</name>
@@ -45,7 +45,7 @@
         <connection>scm:git:gimodulet://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
-        <tag>HEAD</tag>
+        <tag>v0.0.23</tag>
     </scm>
     <dependencies>
         <dependency>

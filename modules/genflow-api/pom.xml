@@ -39,7 +39,7 @@
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api</url>
-        <tag>HEAD</tag>
+        <tag>v0.0.23</tag>
     </scm>
     <dependencies>
         <dependency>
@@ -132,7 +132,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>0.0.23-SNAPSHOT</version>
+        <version>0.0.23</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 </project>
