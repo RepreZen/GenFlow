@@ -8,13 +8,10 @@
  *******************************************************************************/
 package com.reprezen.genflow.rapidml.swagger.test
 
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.fge.jackson.JsonLoader
 import com.github.fge.jsonschema.core.report.ProcessingReport
 import com.github.fge.jsonschema.main.JsonSchema
 import com.github.fge.jsonschema.main.JsonSchemaFactory
-import com.google.common.io.CharStreams
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
 import com.reprezen.genflow.rapidml.swagger.SwaggerOutputFormat
 import com.reprezen.genflow.rapidml.swagger.XGenerateSwagger
@@ -22,7 +19,6 @@ import com.reprezen.rapidml.ZenModel
 import com.reprezen.rapidml.implicit.ZenModelNormalizer
 import com.reprezen.rapidml.xtext.loaders.ZenModelLoader
 import java.io.File
-import java.io.InputStreamReader
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
@@ -37,8 +33,6 @@ import org.junit.runners.Parameterized.Parameters
 
 @RunWith(typeof(Parameterized))
 class SwaggerLoadSamplesTest extends Assert {
-	val static public String XTEXT_RESOURCES_BUNDLE = "com.modelsolv.reprezen.resources"
-	val static ObjectMapper MAPPER = new ObjectMapper()
 	var JsonSchema schema = null
 
 	@Parameters(name="{index}: {0}")

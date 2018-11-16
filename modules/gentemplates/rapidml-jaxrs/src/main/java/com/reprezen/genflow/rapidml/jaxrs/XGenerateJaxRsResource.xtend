@@ -30,7 +30,7 @@ import com.reprezen.rapidml.TypedMessage
 import com.reprezen.rapidml.TypedRequest
 import com.reprezen.rapidml.TypedResponse
 import com.reprezen.rapidml.ZenModel
-import com.reprezen.rapidml.xtext.libraries.util.PrimitiveTypes
+import com.reprezen.rapidml.util.PrimitiveTypes
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.Collection
