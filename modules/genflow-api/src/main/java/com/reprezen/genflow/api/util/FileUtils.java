@@ -38,12 +38,9 @@ public final class FileUtils {
 	 * Copies resources from JAR file to specified location. Used class to lookup
 	 * JAR file location.
 	 * 
-	 * @param codeBase
-	 *            class to lookup JAR file location
-	 * @param source
-	 *            source path in JAR
-	 * @param target
-	 *            target location in local file system
+	 * @param codeBase class to lookup JAR file location
+	 * @param source   source path in JAR
+	 * @param target   target location in local file system
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
@@ -64,13 +61,10 @@ public final class FileUtils {
 	/**
 	 * Copies resources from JAR file to specified location.
 	 * 
-	 * @param codeSource
-	 *            code source location (usually a JAR file, in dev it may be a
-	 *            classes directory)
-	 * @param source
-	 *            source path in JAR
-	 * @param target
-	 *            target location in local file system
+	 * @param codeSource code source location (usually a JAR file, in dev it may be
+	 *                   a classes directory)
+	 * @param source     source path in JAR
+	 * @param target     target location in local file system
 	 * @throws IOException
 	 */
 	public static List<File> copyResources(File codeSource, String source, File target) throws Exception {
