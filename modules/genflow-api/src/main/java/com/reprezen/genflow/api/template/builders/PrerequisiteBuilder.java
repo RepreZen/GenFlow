@@ -14,7 +14,7 @@ import com.reprezen.genflow.api.template.IGenTemplate;
 public class PrerequisiteBuilder extends NamedBuilderBase<PrerequisiteBuilder> {
 
 	private String genTemplateId;
-	private boolean required;
+	private boolean required = true;
 
 	public PrerequisiteBuilder on(String genTemplateId) {
 		this.genTemplateId = genTemplateId;
