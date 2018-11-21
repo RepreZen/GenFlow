@@ -197,12 +197,6 @@ ModelSolv, Inc. - initial API and implementation and/or initial documentation --
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>releases</id>
-            <build>
-                <plugins />
-            </build>
-        </profile>
     </profiles>
     <dependencyManagement>
         <dependencies>
