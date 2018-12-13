@@ -53,14 +53,14 @@ public abstract class OpenApiGeneratorGenTemplate extends OpenApiGenTemplate {
 		define(primarySource().ofType(OpenApiSource.class));
 		define(parameter().named(OPENAPI_CODEGEN_CONFIG).optional().withDescription(
 				"Contents of OpenAPI Generator configuration file.",
-				"This is the file that would be passed with --config option on OpenAPI Generator commandline.",
-				"The JSON contents of that file should be the value of this parameter.",
+				"This is the file that would be passed with the --config option on the OpenAPI Generator",
+				"command line. The JSON contents of that file should be the value of this parameter.",
 				"This parameter need not be used. If it is absent, all string-valued parameters are collected into",
-				"a map that is then passed to the OpenAPI Generator module. If a map is provided here, then string-valued",
-				"parameters are still copied in, overriding like-named values appearing in the map."));
+				"a map that is then passed to the OpenAPI Generator module. If a map is provided here, then",
+				"string-valued parameters are still copied in, overriding like-named values appearing in the map."));
 		define(parameter().named(OPENAPI_CODEGEN_SYSTEM_PROPERTIES).optional().withDescription(
-				"System properties to set, as in the -D option of OpenAPI Generatorcommand line.",
-				"Each property should be a json object with a name/value pair for each property.",
+				"System properties to set, as in the -D option of OpenAPI Generator command line.",
+				"Each property should be a JSON object with a name/value pair for each property.",
 				"Example: for '-Dmodels -Dapis=User,Pets' use the following:", "value:", "  models: ''",
 				"  apis: Users,Pets"));
 		define(GenTemplateProperty.openApiGeneratorProvider());
