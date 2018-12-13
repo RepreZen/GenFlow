@@ -8,9 +8,6 @@
  *******************************************************************************/
 package com.reprezen.genflow.api.zenmodel.util;
 
-import static com.reprezen.rapidml.xtext.loaders.ZenLibraries.PRIMITIVE_TYPES;
-
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -38,7 +35,6 @@ import com.reprezen.rapidml.ZenModel;
 import com.reprezen.rapidml.datatypes.cardinality.Cardinality;
 import com.reprezen.rapidml.datatypes.cardinality.FeatureCardinalities;
 import com.reprezen.rapidml.datatypes.cardinality.OverrideCardinalities;
-import com.reprezen.rapidml.xtext.loaders.ModelLoaderUtils;
 import com.reprezen.rapidml.xtext.util.ZenModelHelper;
 
 /**
@@ -48,7 +44,6 @@ import com.reprezen.rapidml.xtext.util.ZenModelHelper;
  * @since 2013/05/29
  */
 public class CommonServices {
-	private ZenModel zenModel;
 
 	public CommonServices() {
 	}
@@ -97,13 +92,6 @@ public class CommonServices {
 					.getCardinality(includedProperty.getBaseProperty());
 		}
 		return cardinality.getLabel();
-	}
-
-	protected ZenModel getAndLoadZenModel() throws IOException {
-		if (this.zenModel == null) {
-			this.zenModel = ModelLoaderUtils.loadModel(PRIMITIVE_TYPES);
-		}
-		return this.zenModel;
 	}
 
 	/**
