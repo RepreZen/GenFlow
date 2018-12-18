@@ -196,7 +196,19 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>
+		<profile>
+			<id>snap</id>
+			<repositories>
+				<repository>
+					<id>sonatype-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+					<layout>default</layout>
+					<releases><enabled>false</enabled></releases>
+					<snapshots><enabled>true</enabled></snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
     <dependencyManagement>
         <dependencies>
             <dependency>
