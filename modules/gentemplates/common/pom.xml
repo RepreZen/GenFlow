@@ -73,8 +73,8 @@
             <artifactId>commonmark-ext-autolink</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.apache.commons</groupId>
-        	<artifactId>commons-text</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
         </dependency>
     </dependencies>
     <properties>
