@@ -39,7 +39,9 @@ public class OpenApiGeneratorGenTemplateGroup implements IGenTemplateGroup {
 		for (Class<? extends CodegenConfig> config : getCodegenConfigClasses(modulesInfo,
 				CodegenConfig.class.getClassLoader())) {
 			Info info = modulesInfo.getInfo(config);
-			genTemplates.add(new BuiltinOpenApiGeneratorGenTemplate(config, info));
+			if (info != null && !info.isSuppressed()) {
+				genTemplates.add(new BuiltinOpenApiGeneratorGenTemplate(config, info));
+			}
 		}
 		return genTemplates;
 	}
@@ -52,13 +54,7 @@ public class OpenApiGeneratorGenTemplateGroup implements IGenTemplateGroup {
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();
 				for (Class<? extends CodegenConfig> candidate : getClassesFromServiceLoaderResource(url, classLoader)) {
-					Info info = modulesInfo.getInfo(candidate);
-					// we only provide built-in SCG modules, for which we must have moduleinfo
-					// discovered during product
-					// build
-					if (info == null || !info.isSuppressed()) {
-						classes.add(candidate);
-					}
+					classes.add(candidate);
 				}
 			}
 		} catch (IOException e) {
