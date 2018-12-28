@@ -10,22 +10,12 @@ package com.reprezen.genflow.swagger.codegen;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.ServiceLoader;
-import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Parameter;
 
-import io.swagger.codegen.CliOption;
 import io.swagger.codegen.CodegenConfig;
 
 /**
@@ -46,45 +36,43 @@ import io.swagger.codegen.CodegenConfig;
  * 
  */
 public class SwaggerCodegenDiscovery {
-	private static Logger logger = LoggerFactory.getLogger(SwaggerCodegenDiscovery.class);
 
-	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
-		SwaggerCodegenModulesInfo modulesInfo = new SwaggerCodegenModulesInfo();
-		File resourceDir = new File(args[0]);
-		URL resourceUrl = resourceDir.toURI().toURL();
-		modulesInfo.load(resourceUrl);
+	public static void main(String[] args) throws URISyntaxException, MalformedURLException, IOException {
+		File baseDir = new File(args[0]);
+		String scgVersion = CodegenConfig.class.getPackage().getImplementationVersion();
+		SwaggerCodegenModulesInfo baseInfo = SwaggerCodegenModulesInfo.load(scgVersion, baseDir.toURI().toURL());
+		if (baseInfo == null || !baseInfo.getScgVersion().equals(scgVersion)) {
+			SwaggerCodegenModulesInfo myInfo = new SwaggerCodegenModulesInfo(scgVersion);
+			if (baseInfo != null) {
+				copyInfo(baseInfo, myInfo);
+			}
+			doDiscovery(myInfo);
+			myInfo.save(baseDir);
+			if (baseInfo != null) {
+				System.out.printf("Modules info for SCG version %s created based on existing info for version %s",
+						scgVersion, baseInfo.getScgVersion());
+			} else {
+				System.out.printf("Modules infor for SCG version %s created from scratch", scgVersion);
+			}
+		} else {
+			System.out.printf("Modules info for SCG version %s already present; left unchanged", scgVersion);
+		}
+
+	}
+
+	private static void copyInfo(SwaggerCodegenModulesInfo from, SwaggerCodegenModulesInfo to) {
+		for (String cls : from.getClassNames()) {
+			to.addOrUpdateInfo(cls, from.getInfo(cls));
+		}
+		to.resetStatus();
+	}
+
+	private static void doDiscovery(SwaggerCodegenModulesInfo modulesInfo) {
 		modulesInfo.resetStatus();
 		for (CodegenConfig codegen : ServiceLoader.load(CodegenConfig.class)) {
-			Info info = new Info();
-			try {
-				info.setType(codegen.getTag());
-			} catch (Throwable e) {
-				// internal config problem in codegen module... ignore
-			}
-			info.setReportedName(codegen.getName());
-			info.setDerivedDisplayName(BuiltinSwaggerCodegenGenTemplate.getDerivedName(codegen));
-			info.setParameters(getParameters(codegen));
-			modulesInfo.addOrUpdateInfo(codegen.getClass(), info);
+			Info info = new Info(codegen);
+			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info);
 		}
-		modulesInfo.save(resourceDir);
 	}
 
-	private static List<Parameter> getParameters(CodegenConfig codegen) {
-		List<Parameter> params = Lists.newArrayList();
-		Set<String> paramNames = Sets.newHashSet();
-		for (CliOption option : codegen.cliOptions()) {
-			if (paramNames.contains(option.getOpt())) {
-				logger.warn("Duplicate parameter '{}' ignored for SCG module {}", option.getOpt(),
-						codegen.getClass().getName());
-			} else {
-				Parameter param = new Parameter();
-				param.setName(option.getOpt());
-				param.setDescription(option.getDescription());
-				param.setRequired(false);
-				params.add(param);
-				paramNames.add(option.getOpt());
-			}
-		}
-		return params.size() > 0 ? params : null;
-	}
 }

@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -21,6 +22,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.template.IGenTemplate;
@@ -37,38 +39,35 @@ public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
 	public Iterable<IGenTemplate> getGenTemplates(ClassLoader classLoader) {
 		SwaggerCodegenModulesInfo modulesInfo = getModulesInfo();
 		List<IGenTemplate> genTemplates = Lists.newArrayList();
-		for (Class<? extends CodegenConfig> config : getCodegenConfigClasses(modulesInfo,
-				CodegenConfig.class.getClassLoader())) {
-			Info info = modulesInfo.getInfo(config);
-			if (info != null && !info.isSuppressed()) {
+		for (CodegenConfig config : getCodegenConfigs(modulesInfo, CodegenConfig.class.getClassLoader())) {
+			Info info = modulesInfo.getInfo(config, true);
+			if ((info.isVetted() || !info.isBuiltin()) && !info.isSuppressed()) {
 				BuiltinSwaggerCodegenGenTemplate builtinSwaggerCodegenGenTemplate = new BuiltinSwaggerCodegenGenTemplate(
-						config, info);
+						config.getClass(), info);
 				genTemplates.add(builtinSwaggerCodegenGenTemplate);
 			}
 		}
 		return genTemplates;
 	}
 
-	public Collection<Class<? extends CodegenConfig>> getCodegenConfigClasses(SwaggerCodegenModulesInfo modulesInfo,
-			ClassLoader classLoader) {
-		Set<Class<? extends CodegenConfig>> classes = Sets.newHashSet();
+	public Collection<CodegenConfig> getCodegenConfigs(SwaggerCodegenModulesInfo modulesInfo, ClassLoader classLoader) {
+		Set<CodegenConfig> configs = Sets.newHashSet();
 		try {
 			Enumeration<URL> urls = classLoader.getResources("META-INF/services/" + CodegenConfig.class.getName());
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();
-				for (Class<? extends CodegenConfig> candidate : getClassesFromServiceLoaderResource(url, classLoader)) {
-					classes.add(candidate);
+				for (CodegenConfig candidate : getConfigsFromServiceLoaderResource(url, classLoader)) {
+					configs.add(candidate);
 				}
 			}
 		} catch (IOException e) {
 			logger.warn("Failed to locate service URLs for SCG CodegenConfig class", e);
 		}
-		return classes;
+		return configs;
 	}
 
-	private Collection<Class<? extends CodegenConfig>> getClassesFromServiceLoaderResource(URL url,
-			ClassLoader classLoader) {
-		List<Class<? extends CodegenConfig>> classes = Lists.newArrayList();
+	private Collection<CodegenConfig> getConfigsFromServiceLoaderResource(URL url, ClassLoader classLoader) {
+		List<CodegenConfig> configs = Lists.newArrayList();
 		try (InputStream in = url.openStream()) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String line;
@@ -82,26 +81,36 @@ public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
 					if (CodegenConfig.class.isAssignableFrom(c)) {
 						@SuppressWarnings("unchecked")
 						Class<? extends CodegenConfig> validClass = (Class<? extends CodegenConfig>) c;
-						classes.add(validClass);
+						configs.add(validClass.newInstance());
 					}
-				} catch (ClassNotFoundException e) {
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 					logger.warn(String.format("Failed to load SCG class %s", line), e);
 				}
 			}
 		} catch (IOException e1) {
 			logger.warn(String.format("Failed to read from service loader URL %s", url), e1);
 		}
-		return classes;
+		return configs;
 	}
 
 	public static SwaggerCodegenModulesInfo getModulesInfo() {
-		SwaggerCodegenModulesInfo modulesInfo = new SwaggerCodegenModulesInfo();
 		URL infoUrl = SwaggerCodegenGenTemplateGroup.class.getResource("");
+		String scgVersion = CodegenConfig.class.getPackage().getImplementationVersion();
 		try {
-			modulesInfo.load(infoUrl);
-		} catch (IOException e) {
+			return SwaggerCodegenModulesInfo.load(scgVersion, infoUrl);
+		} catch (IOException | URISyntaxException e) {
 			// resource not found... no modules available
+			return new SwaggerCodegenModulesInfo(scgVersion);
 		}
-		return modulesInfo;
+	}
+
+	public static void main(String[] args) {
+		// only used during development for testing outside of product
+		IGenTemplate[] genTemplates = Iterables.toArray(new SwaggerCodegenGenTemplateGroup()
+				.getGenTemplates(SwaggerCodegenGenTemplateGroup.class.getClassLoader()), IGenTemplate.class);
+		System.out.println(genTemplates.length + " GenTemplates discovered:");
+		for (IGenTemplate genTemplate : genTemplates) {
+			System.out.println(genTemplate.getName());
+		}
 	}
 }
