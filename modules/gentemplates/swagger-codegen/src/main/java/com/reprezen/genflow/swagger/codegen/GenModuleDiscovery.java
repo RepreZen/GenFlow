@@ -14,7 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ServiceLoader;
 
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
+import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
 
 import io.swagger.codegen.CodegenConfig;
 
@@ -35,14 +35,23 @@ import io.swagger.codegen.CodegenConfig;
  * @author Andy Lowry
  * 
  */
-public class SwaggerCodegenDiscovery {
+public abstract class GenModuleDiscovery {
 
-	public static void main(String[] args) throws URISyntaxException, MalformedURLException, IOException {
+	protected abstract String getLibraryVersion();
+
+	protected abstract ModuleWrapper getDummyWrapper();
+
+	protected abstract ModuleWrapper wrap(Object obj);
+
+	private ModuleWrapper dummyWrapper = getDummyWrapper();
+
+	public void runDiscovery(String[] args) throws URISyntaxException, MalformedURLException, IOException {
+
 		File baseDir = new File(args[0]);
-		String scgVersion = CodegenConfig.class.getPackage().getImplementationVersion();
-		SwaggerCodegenModulesInfo baseInfo = SwaggerCodegenModulesInfo.load(scgVersion, baseDir.toURI().toURL());
-		if (baseInfo == null || !baseInfo.getScgVersion().equals(scgVersion)) {
-			SwaggerCodegenModulesInfo myInfo = new SwaggerCodegenModulesInfo(scgVersion);
+		String libVersion = getLibraryVersion();
+		GenModulesInfo baseInfo = GenModulesInfo.load(libVersion, baseDir.toURI().toURL(), dummyWrapper);
+		if (baseInfo == null || !baseInfo.getLibVersion().equals(libVersion)) {
+			GenModulesInfo myInfo = new GenModulesInfo(libVersion);
 			if (baseInfo != null) {
 				copyInfo(baseInfo, myInfo);
 			}
@@ -51,27 +60,27 @@ public class SwaggerCodegenDiscovery {
 			myInfo.save(baseDir);
 			if (baseInfo != null) {
 				System.out.printf("Modules info for SCG version %s created based on existing info for version %s",
-						scgVersion, baseInfo.getScgVersion());
+						libVersion, baseInfo.getLibVersion());
 			} else {
-				System.out.printf("Modules infor for SCG version %s created from scratch", scgVersion);
+				System.out.printf("Modules infor for SCG version %s created from scratch", libVersion);
 			}
 		} else {
-			System.out.printf("Modules info for SCG version %s already present; left unchanged", scgVersion);
+			System.out.printf("Modules info for SCG version %s already present; left unchanged", libVersion);
 		}
 
 	}
 
-	private static void copyInfo(SwaggerCodegenModulesInfo from, SwaggerCodegenModulesInfo to) {
+	private void copyInfo(GenModulesInfo from, GenModulesInfo to) {
 		for (String cls : from.getClassNames()) {
 			to.addOrUpdateInfo(cls, from.getInfo(cls));
 		}
 		to.resetStatus();
 	}
 
-	private static void doDiscovery(SwaggerCodegenModulesInfo modulesInfo) {
+	private void doDiscovery(GenModulesInfo modulesInfo) {
 		modulesInfo.resetStatus();
 		for (CodegenConfig codegen : ServiceLoader.load(CodegenConfig.class)) {
-			Info info = new Info(codegen);
+			Info info = new Info(wrap(codegen));
 			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info);
 		}
 	}

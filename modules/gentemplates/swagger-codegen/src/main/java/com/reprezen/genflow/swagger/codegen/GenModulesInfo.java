@@ -24,7 +24,6 @@ import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -37,39 +36,31 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.eclipse.core.runtime.FileLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
-import io.swagger.codegen.CliOption;
-import io.swagger.codegen.CodegenConfig;
-import io.swagger.codegen.CodegenType;
+public class GenModulesInfo {
 
-public class SwaggerCodegenModulesInfo {
-	private static Logger logger = LoggerFactory.getLogger(SwaggerCodegenDiscovery.class);
-
-	private final String scgVersion;
+	private final String libVersion;
 	private final Map<String, Info> modulesInfo = Maps.newTreeMap();
 	private final CSVFormat csvFormat = CSVFormat.RFC4180.withHeader();
 
-	public static SwaggerCodegenModulesInfo load(String scgVersion, URL baseUrl)
+	public static GenModulesInfo load(String libVersion, URL baseUrl, ModuleWrapper dummyWrapper)
 			throws IOException, URISyntaxException {
 		String bestVersion = null;
 		for (String version : getAvailableVersions(baseUrl)) {
-			if (versionCompare(version, scgVersion) <= 0) {
+			if (versionCompare(version, libVersion) <= 0) {
 				bestVersion = version;
 			} else {
 				break;
 			}
 		}
-		return bestVersion != null ? new SwaggerCodegenModulesInfo(bestVersion).load(baseUrl) : null;
+		return bestVersion != null ? new GenModulesInfo(bestVersion).load(baseUrl, dummyWrapper) : null;
 	}
 
-	public SwaggerCodegenModulesInfo(String scgVersion) {
-		this.scgVersion = scgVersion;
+	public GenModulesInfo(String libVersion) {
+		this.libVersion = libVersion;
 	}
 
 	private static List<String> availableVersions = null;
@@ -137,23 +128,22 @@ public class SwaggerCodegenModulesInfo {
 		return m.group(1);
 	}
 
-	public String getScgVersion() {
-		return scgVersion;
+	public String getLibVersion() {
+		return libVersion;
 	}
 
 	public List<String> getModuleNames() {
 		return Lists.newArrayList(modulesInfo.keySet());
 	}
 
-	public Info getInfo(CodegenConfig config) {
-		return getInfo(config, false);
-
+	public Info getInfo(ModuleWrapper wrapper) {
+		return getInfo(wrapper, false);
 	}
 
-	public Info getInfo(CodegenConfig config, boolean createIfMissing) {
-		Info info = getInfo(config.getClass().getName());
+	public Info getInfo(ModuleWrapper wrapper, boolean createIfMissing) {
+		Info info = getInfo(wrapper.getClassName());
 		if (info == null && createIfMissing) {
-			info = new Info(config);
+			info = new Info(wrapper);
 		}
 		return info;
 	}
@@ -167,7 +157,6 @@ public class SwaggerCodegenModulesInfo {
 			info.setChanged(false);
 			info.setBuiltin(false);
 			info.setNew(false);
-			info.setVetted(false);
 		}
 	}
 
@@ -176,6 +165,7 @@ public class SwaggerCodegenModulesInfo {
 		if (existing == null) {
 			existing = new Info();
 			existing.setNew(true);
+			existing.setVetted(info.isVetted());
 			modulesInfo.put(className, existing);
 		}
 		existing.setBuiltin(true);
@@ -211,19 +201,19 @@ public class SwaggerCodegenModulesInfo {
 		return modulesInfo.keySet();
 	}
 
-	public SwaggerCodegenModulesInfo load(URL baseUrl) throws IOException {
-		loadMainFile(new URL(baseUrl, getMainFileName()));
+	public GenModulesInfo load(URL baseUrl, ModuleWrapper dummyWrapper) throws IOException {
+		loadMainFile(new URL(baseUrl, getMainFileName()), dummyWrapper);
 		URL paramsFileUrl = new URL(baseUrl, getParamsFileName());
 		loadParamsFile(paramsFileUrl);
 		return this;
 	}
 
-	private void loadMainFile(URL url) throws IOException {
+	private void loadMainFile(URL url, ModuleWrapper dummyWrapper) throws IOException {
 		try (InputStream in = url.openStream()) {
 			try (CSVParser parser = CSVParser.parse(new InputStreamReader(in), csvFormat)) {
 				for (CSVRecord record : parser) {
 					String className = record.get(MainColumns.ClassName);
-					Info info = new Info(record);
+					Info info = new Info(record, dummyWrapper);
 					modulesInfo.put(className, info);
 				}
 			}
@@ -275,11 +265,11 @@ public class SwaggerCodegenModulesInfo {
 	}
 
 	private String getParamsFileName() {
-		return String.format("moduleParams_%s.csv", scgVersion);
+		return String.format("moduleParams_%s.csv", libVersion);
 	}
 
 	private String getMainFileName() {
-		return String.format("modulesInfo_%s.csv", scgVersion);
+		return String.format("modulesInfo_%s.csv", libVersion);
 	}
 
 	private enum MainColumns {
@@ -288,7 +278,7 @@ public class SwaggerCodegenModulesInfo {
 
 	public static class Info {
 
-		private CodegenType type;
+		private Enum<?> type;
 		private String reportedName;
 		private String derivedDisplayName;
 		private String displayName;
@@ -304,41 +294,22 @@ public class SwaggerCodegenModulesInfo {
 			parameters = Lists.newArrayList();
 		}
 
-		public Info(CodegenConfig config) {
+		public Info(ModuleWrapper wrapper) {
 			this();
 			try {
-				setType(config.getTag());
+				setType(wrapper.getType());
 			} catch (Throwable e) {
 				// internal config problem in codegen module... ignore
 			}
-			setReportedName(config.getName());
-			setDerivedDisplayName(BuiltinSwaggerCodegenGenTemplate.getDerivedName(config));
-			setParameters(getParameters(config));
+			setReportedName(wrapper.getName());
+			setDerivedDisplayName(wrapper.getDerivedName());
+			setParameters(wrapper.getParameters());
 
 		}
 
-		private List<Parameter> getParameters(CodegenConfig config) {
-			List<Parameter> params = Lists.newArrayList();
-			Set<String> paramNames = Sets.newHashSet();
-			for (CliOption option : config.cliOptions()) {
-				if (paramNames.contains(option.getOpt())) {
-					logger.warn("Duplicate parameter '{}' ignored for SCG module {}", option.getOpt(),
-							config.getClass().getName());
-				} else {
-					Parameter param = new Parameter();
-					param.setName(option.getOpt());
-					param.setDescription(option.getDescription());
-					param.setRequired(false);
-					params.add(param);
-					paramNames.add(option.getOpt());
-				}
-			}
-			return params.size() > 0 ? params : null;
-		}
-
-		public Info(CSVRecord record) {
+		public Info(CSVRecord record, ModuleWrapper dummyWrapper) {
 			this();
-			setType(codegenTypeRecordValue(record.get(MainColumns.Type)));
+			setType(dummyWrapper.typeNamed(record.get(MainColumns.Type)));
 			setReportedName(stringRecordValue(record.get(MainColumns.ReportedName)));
 			setDerivedDisplayName(stringRecordValue(record.get(MainColumns.DerivedDisplayName)));
 			setDisplayName(stringRecordValue(record.get(MainColumns.DisplayName)));
@@ -391,11 +362,11 @@ public class SwaggerCodegenModulesInfo {
 			return value ? "*" : "";
 		}
 
-		public final CodegenType getType() {
+		public final Enum<?> getType() {
 			return type;
 		}
 
-		public final void setType(CodegenType type) {
+		public final void setType(Enum<?> type) {
 			this.type = type;
 		}
 
@@ -483,10 +454,6 @@ public class SwaggerCodegenModulesInfo {
 
 	private static boolean boolRecordValue(String s) {
 		return s.equals("*");
-	}
-
-	private static CodegenType codegenTypeRecordValue(String s) {
-		return s.isEmpty() ? null : CodegenType.valueOf(s);
 	}
 
 	private enum ParamColumns {

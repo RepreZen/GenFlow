@@ -9,18 +9,17 @@
 package com.reprezen.genflow.swagger.codegen;
 
 import com.reprezen.genflow.api.GenerationException;
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Parameter;
+import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Parameter;
+import com.reprezen.genflow.swagger.codegen.ModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
-import io.swagger.codegen.CodegenType;
 
 public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate {
 
-	private final SwaggerCodegenModulesInfo.Info info;
+	private final GenModulesInfo.Info info;
 
-	public BuiltinSwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass,
-			SwaggerCodegenModulesInfo.Info info) {
+	public BuiltinSwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass, GenModulesInfo.Info info) {
 		super(codegenClass, info);
 		this.info = info;
 	}
@@ -57,55 +56,9 @@ public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate 
 			// generation
 		}
 		try {
-			return getDerivedName(codegenClass.newInstance());
+			return new ScgModuleWrapper(codegenClass.newInstance()).getDerivedName();
 		} catch (InstantiationException | IllegalAccessException e) {
 			return "(unknown)";
 		}
-	}
-
-	public static String getDerivedName(CodegenConfig instance) {
-		if (instance == null) {
-			return "(unknown)";
-		}
-
-		String name = instance.getClass().getSimpleName();
-		name = trimFromEnd(name, "Generator");
-		name = trimFromEnd(name, "Codegen");
-
-		CodegenType type = instance != null ? instance.getTag() : null;
-		if (type == null) {
-			type = CodegenType.OTHER;
-		}
-		switch (type) {
-		case CLIENT:
-			name = trimFromEnd(name, "Client") + " Client";
-			break;
-		case SERVER:
-			name = trimFromEnd(name, "Server") + " Server";
-			break;
-		case DOCUMENTATION:
-			name = trimFromEnd(name, "Doc", "Documentation") + " Documentation";
-			break;
-		case CONFIG:
-			name = trimFromEnd(name, "Config", "Configuration") + " Configuration";
-			break;
-		case OTHER:
-		default:
-			name = trimFromEnd(name, "Client", "Server", "Doc", "Documentation", "Config", "Confiuration");
-			break;
-		}
-		name = camelToNatural(name);
-		return name;
-	}
-
-	private static String trimFromEnd(String s, String... suffixes) {
-		for (String suffix : suffixes) {
-			s = s.endsWith(suffix) ? s.substring(0, s.length() - suffix.length()) : s;
-		}
-		return s.trim();
-	}
-
-	private static String camelToNatural(String s) {
-		return s.replaceAll("(\\p{Lower})(\\p{Upper})", "$1 $2");
 	}
 }

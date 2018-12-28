@@ -27,7 +27,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.template.IGenTemplateGroup;
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
+import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.swagger.codegen.ModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
 
@@ -37,10 +38,10 @@ public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
 
 	@Override
 	public Iterable<IGenTemplate> getGenTemplates(ClassLoader classLoader) {
-		SwaggerCodegenModulesInfo modulesInfo = getModulesInfo();
+		GenModulesInfo modulesInfo = getModulesInfo();
 		List<IGenTemplate> genTemplates = Lists.newArrayList();
 		for (CodegenConfig config : getCodegenConfigs(modulesInfo, CodegenConfig.class.getClassLoader())) {
-			Info info = modulesInfo.getInfo(config, true);
+			Info info = modulesInfo.getInfo(new ScgModuleWrapper(config), true);
 			if ((info.isVetted() || !info.isBuiltin()) && !info.isSuppressed()) {
 				BuiltinSwaggerCodegenGenTemplate builtinSwaggerCodegenGenTemplate = new BuiltinSwaggerCodegenGenTemplate(
 						config.getClass(), info);
@@ -50,7 +51,7 @@ public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
 		return genTemplates;
 	}
 
-	public Collection<CodegenConfig> getCodegenConfigs(SwaggerCodegenModulesInfo modulesInfo, ClassLoader classLoader) {
+	public Collection<CodegenConfig> getCodegenConfigs(GenModulesInfo modulesInfo, ClassLoader classLoader) {
 		Set<CodegenConfig> configs = Sets.newHashSet();
 		try {
 			Enumeration<URL> urls = classLoader.getResources("META-INF/services/" + CodegenConfig.class.getName());
@@ -93,14 +94,14 @@ public class SwaggerCodegenGenTemplateGroup implements IGenTemplateGroup {
 		return configs;
 	}
 
-	public static SwaggerCodegenModulesInfo getModulesInfo() {
+	public static GenModulesInfo getModulesInfo() {
 		URL infoUrl = SwaggerCodegenGenTemplateGroup.class.getResource("");
 		String scgVersion = CodegenConfig.class.getPackage().getImplementationVersion();
 		try {
-			return SwaggerCodegenModulesInfo.load(scgVersion, infoUrl);
+			return GenModulesInfo.load(scgVersion, infoUrl, ScgModuleWrapper.getDummyInstance());
 		} catch (IOException | URISyntaxException e) {
 			// resource not found... no modules available
-			return new SwaggerCodegenModulesInfo(scgVersion);
+			return new GenModulesInfo(scgVersion);
 		}
 	}
 
