@@ -9,17 +9,17 @@
 package com.reprezen.genflow.swagger.codegen;
 
 import com.reprezen.genflow.api.GenerationException;
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Parameter;
-import com.reprezen.genflow.swagger.codegen.ModuleWrapper.ScgModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
+import com.reprezen.genflow.common.codegen.ModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
 
 public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate {
 
-	private final GenModulesInfo.Info info;
+	private final Info info;
 
-	public BuiltinSwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass, GenModulesInfo.Info info) {
+	public BuiltinSwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass, Info info) {
 		super(codegenClass, info);
 		this.info = info;
 	}

@@ -27,8 +27,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.template.IGenTemplateGroup;
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
-import com.reprezen.genflow.swagger.codegen.ModuleWrapper.ScgModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModulesInfo;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.common.codegen.ModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
 

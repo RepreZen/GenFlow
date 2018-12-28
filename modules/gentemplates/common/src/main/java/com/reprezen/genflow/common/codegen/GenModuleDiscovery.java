@@ -6,7 +6,7 @@
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
  *******************************************************************************/
-package com.reprezen.genflow.swagger.codegen;
+package com.reprezen.genflow.common.codegen;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ServiceLoader;
 
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
 import io.swagger.codegen.CodegenConfig;
 

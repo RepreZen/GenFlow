@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
-import com.reprezen.genflow.swagger.codegen.ModuleWrapper.ScgModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModuleDiscovery;
+import com.reprezen.genflow.common.codegen.ModuleWrapper;
+import com.reprezen.genflow.common.codegen.ModuleWrapper.ScgModuleWrapper;
 
 public class SwaggerCodegenModuleDiscovery extends GenModuleDiscovery {
 

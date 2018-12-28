@@ -21,7 +21,7 @@ import com.reprezen.genflow.api.template.GenTemplateContext;
 import com.reprezen.genflow.api.template.GenTemplateProperty;
 import com.reprezen.genflow.api.template.GenTemplateProperty.StandardProperties;
 import com.reprezen.genflow.api.template.IGenTemplate;
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Info;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
 import io.swagger.codegen.ClientOptInput;
 import io.swagger.codegen.ClientOpts;

@@ -6,7 +6,7 @@
  * of ModelSolv, Inc. See the file license.html in the root directory of
  * this project for further information.
  *******************************************************************************/
-package com.reprezen.genflow.swagger.codegen;
+package com.reprezen.genflow.common.codegen;
 
 import java.io.File;
 import java.io.FileFilter;

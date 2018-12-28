@@ -1,4 +1,4 @@
-package com.reprezen.genflow.swagger.codegen;
+package com.reprezen.genflow.common.codegen;
 
 import java.util.List;
 import java.util.Set;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.reprezen.genflow.swagger.codegen.GenModulesInfo.Parameter;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
 
 public interface ModuleWrapper {
 
