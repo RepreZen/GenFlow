@@ -47,6 +47,7 @@ public class SwaggerCodegenDiscovery {
 				copyInfo(baseInfo, myInfo);
 			}
 			doDiscovery(myInfo);
+			myInfo.purgeNonBuiltin();
 			myInfo.save(baseDir);
 			if (baseInfo != null) {
 				System.out.printf("Modules info for SCG version %s created based on existing info for version %s",
@@ -74,5 +75,4 @@ public class SwaggerCodegenDiscovery {
 			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info);
 		}
 	}
-
 }
