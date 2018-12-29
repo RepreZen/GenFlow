@@ -192,8 +192,6 @@ public abstract class GenModuleWrapper<Config> {
 	public static class OagModuleWrapper extends GenModuleWrapper<org.openapitools.codegen.CodegenConfig> {
 		private Logger logger = LoggerFactory.getLogger(ScgModuleWrapper.class);
 
-		private org.openapitools.codegen.CodegenConfig config;
-
 		public OagModuleWrapper(org.openapitools.codegen.CodegenConfig config) {
 			super(config);
 		}

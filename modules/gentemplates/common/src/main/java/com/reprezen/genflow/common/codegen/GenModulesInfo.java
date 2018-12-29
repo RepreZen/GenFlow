@@ -74,6 +74,7 @@ public class GenModulesInfo {
 			break;
 		case "bundleresource":
 			versions = getAvailableVersions(FileLocator.resolve(baseUrl));
+			break;
 		default:
 			throw new IllegalArgumentException("Can't load module info files from base URL: " + baseUrl);
 		}
@@ -97,9 +98,9 @@ public class GenModulesInfo {
 	private static List<String> getAvailableJarUrlVersions(URL baseUrl) throws URISyntaxException, IOException {
 		Matcher matcher = jarUrlPat.matcher(baseUrl.toString());
 		if (matcher.matches()) {
-			File jarFileName = new File(matcher.group(1));
-			JarFile jarFile = new JarFile(jarFileName);
-			return getAvailableJarFileVersions(jarFile, matcher.group(2));
+			try (JarFile jarFile = new JarFile(new File(matcher.group(1)))) {
+				return getAvailableJarFileVersions(jarFile, matcher.group(2));
+			}
 		} else {
 			throw new IllegalArgumentException("Unable to locate module info from URL: " + baseUrl);
 		}

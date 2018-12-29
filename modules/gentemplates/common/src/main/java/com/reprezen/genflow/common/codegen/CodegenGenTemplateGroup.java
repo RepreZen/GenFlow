@@ -47,10 +47,17 @@ public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGro
 		GenModulesInfo modulesInfo = getModulesInfo();
 		List<IGenTemplate> genTemplates = Lists.newArrayList();
 		for (Config config : getConfigs(modulesInfo, classLoader)) {
-			GenModuleWrapper<Config> wrapper = wrap(config);
-			Info info = modulesInfo.getInfo(wrapper, true);
-			if ((info.isVetted() || !info.isBuiltin()) && !info.isSuppressed()) {
-				genTemplates.add(createGenTemplate(wrapper, info));
+			try {
+				GenModuleWrapper<Config> wrapper = wrap(config);
+				Info info = modulesInfo.getInfo(wrapper, true);
+				// We allow vetted bulitins, and all non-builtin modules
+				if ((info.isVetted() || !info.isBuiltin())
+						// but not if they're explicitly suppressed
+						&& !info.isSuppressed()) {
+					genTemplates.add(createGenTemplate(wrapper, info));
+				}
+			} catch (Throwable e) {
+				getLogger().warn(String.format("Failed to create GenTemplate for module %s", config.getClass()), e);
 			}
 		}
 		return genTemplates;
@@ -65,7 +72,7 @@ public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGro
 				for (Class<? extends Config> candidate : getConfigsFromServiceLoaderResource(url, classLoader)) {
 					try {
 						configs.add(candidate.newInstance());
-					} catch (InstantiationException | IllegalAccessException e) {
+					} catch (Throwable e) {
 						getLogger().warn(String.format("Failed to load codegen module class %s", candidate.getName()),
 								e);
 					}
@@ -94,11 +101,11 @@ public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGro
 						Class<? extends Config> validClass = (Class<? extends Config>) c;
 						configs.add(validClass);
 					}
-				} catch (ClassNotFoundException e) {
+				} catch (Throwable e) {
 					getLogger().warn(String.format("Failed to load codegen module class %s", line), e);
 				}
 			}
-		} catch (IOException e1) {
+		} catch (Throwable e1) {
 			getLogger().warn(String.format("Failed to read from service loader URL %s", url), e1);
 		}
 		return configs;
