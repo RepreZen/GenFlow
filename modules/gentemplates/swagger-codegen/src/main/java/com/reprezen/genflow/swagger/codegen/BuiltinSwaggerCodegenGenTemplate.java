@@ -9,9 +9,9 @@
 package com.reprezen.genflow.swagger.codegen;
 
 import com.reprezen.genflow.api.GenerationException;
+import com.reprezen.genflow.common.codegen.GenModuleWrapper;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
-import com.reprezen.genflow.common.codegen.ModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
 
@@ -19,19 +19,19 @@ public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate 
 
 	private final Info info;
 
-	public BuiltinSwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass, Info info) {
-		super(codegenClass, info);
+	public BuiltinSwaggerCodegenGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
+		super(wrapper, info);
 		this.info = info;
 	}
 
 	@Override
 	public String getName() {
-		return getPreferredName(codegenClass, info);
+		return getPreferredName();
 	}
 
 	@Override
 	public String getId() {
-		return getClass().getPackage().getName() + "." + codegenClass.getSimpleName();
+		return getClass().getPackage().getName() + "." + wrapper.getSimpleName();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate 
 		super.configure();
 	}
 
-	public static String getPreferredName(Class<? extends CodegenConfig> codegenClass, Info info) {
+	public String getPreferredName() {
 		if (info != null) {
 			if (info.getDisplayName() != null) {
 				return info.getDisplayName().trim();
@@ -55,10 +55,6 @@ public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate 
 			// metadata is deficient (shouldn't happen) ... do a discovery-like name
 			// generation
 		}
-		try {
-			return new ScgModuleWrapper(codegenClass.newInstance()).getDerivedName();
-		} catch (InstantiationException | IllegalAccessException e) {
-			return "(unknown)";
-		}
+		return wrapper.getDerivedName();
 	}
 }

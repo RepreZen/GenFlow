@@ -5,10 +5,12 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 import com.reprezen.genflow.common.codegen.GenModuleDiscovery;
-import com.reprezen.genflow.common.codegen.ModuleWrapper;
-import com.reprezen.genflow.common.codegen.ModuleWrapper.ScgModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper;
 
-public class SwaggerCodegenModuleDiscovery extends GenModuleDiscovery {
+import io.swagger.codegen.CodegenConfig;
+
+public class ScgCodegenModuleDiscovery extends GenModuleDiscovery<CodegenConfig> {
 
 	@Override
 	protected String getLibraryVersion() {
@@ -16,16 +18,16 @@ public class SwaggerCodegenModuleDiscovery extends GenModuleDiscovery {
 	}
 
 	@Override
-	protected ModuleWrapper getDummyWrapper() {
+	protected GenModuleWrapper<CodegenConfig> getDummyWrapper() {
 		return ScgModuleWrapper.getDummyInstance();
 	}
 
 	@Override
-	protected ModuleWrapper wrap(Object configObject) {
+	protected GenModuleWrapper<CodegenConfig> wrap(Object configObject) {
 		return new ScgModuleWrapper((io.swagger.codegen.CodegenConfig) configObject);
 	}
 
 	public static void main(String[] args) throws MalformedURLException, URISyntaxException, IOException {
-		new SwaggerCodegenModuleDiscovery().runDiscovery(args);
+		new ScgCodegenModuleDiscovery().runDiscovery(args);
 	}
 }

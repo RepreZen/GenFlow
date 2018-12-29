@@ -35,15 +35,15 @@ import io.swagger.codegen.CodegenConfig;
  * @author Andy Lowry
  * 
  */
-public abstract class GenModuleDiscovery {
+public abstract class GenModuleDiscovery<Config> {
 
 	protected abstract String getLibraryVersion();
 
-	protected abstract ModuleWrapper getDummyWrapper();
+	protected abstract GenModuleWrapper<Config> getDummyWrapper();
 
-	protected abstract ModuleWrapper wrap(Object obj);
+	protected abstract GenModuleWrapper<Config> wrap(Object obj);
 
-	private ModuleWrapper dummyWrapper = getDummyWrapper();
+	private GenModuleWrapper<Config> dummyWrapper = getDummyWrapper();
 
 	public void runDiscovery(String[] args) throws URISyntaxException, MalformedURLException, IOException {
 

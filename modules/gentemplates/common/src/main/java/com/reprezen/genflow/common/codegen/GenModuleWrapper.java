@@ -11,20 +11,65 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
 
-public interface ModuleWrapper {
+import io.swagger.codegen.CodegenConfig;
 
-	public String getClassName();
+public abstract class GenModuleWrapper<Config> {
 
-	public String getClassSimpleName();
+	protected Config config;
+	private Class<Config> configClass;
 
-	public Enum<?> getType();
+	public GenModuleWrapper(Config config) {
+		this.config = config;
+		@SuppressWarnings("unchecked")
+		Class<Config> castClass = config != null ? (Class<Config>) config.getClass() : null;
+		this.configClass = castClass;
+	}
 
-	public GenericType getGenericType();
+	public GenModuleWrapper(Class<Config> configClass) {
+		this.config = null;
+		this.configClass = configClass;
+	}
 
-	public String getName();
+	public Config getWrappedInstance() {
+		return config;
+	}
 
-	public default String getDerivedName() {
-		String name = getClassSimpleName();
+	public String getClassName() {
+		return configClass.getName();
+	}
+
+	public String getSimpleName() {
+		return configClass.getSimpleName();
+	}
+
+	public String getPackageName() {
+		return configClass.getPackage().getName();
+	}
+
+	public boolean canWrap(Class<?> cls) {
+		return configClass.isAssignableFrom(cls);
+	}
+
+	public ClassLoader getClassLoader() {
+		return configClass.getClassLoader();
+	}
+
+	public String getLibraryVersion() {
+		return configClass.getPackage().getImplementationVersion();
+	}
+
+	public Config newInstance() throws InstantiationException, IllegalAccessException {
+		return configClass.newInstance();
+	}
+
+	public abstract Enum<?> getType();
+
+	public abstract GenericType getGenericType();
+
+	public abstract String getName();
+
+	public String getDerivedName() {
+		String name = getSimpleName();
 		name = Util.trimFromEnd(name, "Generator");
 		name = Util.trimFromEnd(name, "Codegen");
 
@@ -54,10 +99,10 @@ public interface ModuleWrapper {
 		CLIENT, SERVER, DOCUMENTATION, CONFIG, OTHER
 	};
 
-	public default List<Parameter> getParameters() {
+	public List<Parameter> getParameters() {
 		List<Parameter> params = Lists.newArrayList();
 		Set<String> paramNames = Sets.newHashSet();
-		for (CliOptWrapper option : getClientOptions()) {
+		for (CliOptWrapper<?> option : getClientOptions()) {
 			if (paramNames.contains(option.getName())) {
 				getLogger().warn("Duplicate parameter '{}' ignored for SCG module {}", option.getName(),
 						getClassName());
@@ -73,33 +118,26 @@ public interface ModuleWrapper {
 		return params.size() > 0 ? params : null;
 	}
 
-	public List<CliOptWrapper> getClientOptions();
+	public abstract List<CliOptWrapper<?>> getClientOptions();
 
-	public Enum<?> typeNamed(String name);
+	public abstract Enum<?> typeNamed(String name);
 
-	public Logger getLogger();
+	public abstract Logger getLogger();
 
-	public static class ScgModuleWrapper implements ModuleWrapper {
+	public static class ScgModuleWrapper extends GenModuleWrapper<io.swagger.codegen.CodegenConfig> {
+
 		private Logger logger = LoggerFactory.getLogger(ScgModuleWrapper.class);
 
-		private io.swagger.codegen.CodegenConfig config;
-
 		public ScgModuleWrapper(io.swagger.codegen.CodegenConfig config) {
-			this.config = config;
+			super(config);
 		}
 
-		public static ModuleWrapper getDummyInstance() {
-			return new ScgModuleWrapper(null);
+		public ScgModuleWrapper(Class<CodegenConfig> configClass) {
+			super(configClass);
 		}
 
-		@Override
-		public String getClassName() {
-			return config.getClass().getName();
-		}
-
-		@Override
-		public String getClassSimpleName() {
-			return config.getClass().getSimpleName();
+		public static GenModuleWrapper<io.swagger.codegen.CodegenConfig> getDummyInstance() {
+			return new ScgModuleWrapper(io.swagger.codegen.CodegenConfig.class);
 		}
 
 		@Override
@@ -130,7 +168,7 @@ public interface ModuleWrapper {
 		}
 
 		@Override
-		public List<CliOptWrapper> getClientOptions() {
+		public List<CliOptWrapper<?>> getClientOptions() {
 			return config.cliOptions().stream().map(cliOpt -> new ScgCliOptWrapper(cliOpt))
 					.collect(Collectors.toList());
 		}
@@ -147,27 +185,21 @@ public interface ModuleWrapper {
 
 	}
 
-	public static class OagModuleWrapper implements ModuleWrapper {
+	public static class OagModuleWrapper extends GenModuleWrapper<org.openapitools.codegen.CodegenConfig> {
 		private Logger logger = LoggerFactory.getLogger(ScgModuleWrapper.class);
 
 		private org.openapitools.codegen.CodegenConfig config;
 
 		public OagModuleWrapper(org.openapitools.codegen.CodegenConfig config) {
-			this.config = config;
+			super(config);
 		}
 
-		public static ModuleWrapper getDummyInstance() {
-			return new OagModuleWrapper(null);
+		public OagModuleWrapper(Class<org.openapitools.codegen.CodegenConfig> configClass) {
+			super(configClass);
 		}
 
-		@Override
-		public String getClassName() {
-			return config.getClass().getName();
-		}
-
-		@Override
-		public String getClassSimpleName() {
-			return config.getClass().getSimpleName();
+		public static GenModuleWrapper<org.openapitools.codegen.CodegenConfig> getDummyInstance() {
+			return new OagModuleWrapper(org.openapitools.codegen.CodegenConfig.class);
 		}
 
 		@Override
@@ -198,7 +230,7 @@ public interface ModuleWrapper {
 		}
 
 		@Override
-		public List<CliOptWrapper> getClientOptions() {
+		public List<CliOptWrapper<?>> getClientOptions() {
 			return config.cliOptions().stream().map(cliOpt -> new OagCliOptWrapper(cliOpt))
 					.collect(Collectors.toList());
 		}
@@ -214,19 +246,24 @@ public interface ModuleWrapper {
 		}
 	}
 
-	public static interface CliOptWrapper {
+	public static abstract class CliOptWrapper<CliOpt> {
 
-		public String getName();
+		protected CliOpt cliOpt;
 
-		public String getDescription();
+		public CliOptWrapper(CliOpt cliOpt) {
+			this.cliOpt = cliOpt;
+		}
+
+		public abstract String getName();
+
+		public abstract String getDescription();
 
 	}
 
-	public static class ScgCliOptWrapper implements CliOptWrapper {
-		private io.swagger.codegen.CliOption cliOpt;
+	public static class ScgCliOptWrapper extends CliOptWrapper<io.swagger.codegen.CliOption> {
 
 		public ScgCliOptWrapper(io.swagger.codegen.CliOption cliOpt) {
-			this.cliOpt = cliOpt;
+			super(cliOpt);
 		}
 
 		@Override
@@ -241,11 +278,10 @@ public interface ModuleWrapper {
 
 	}
 
-	public static class OagCliOptWrapper implements CliOptWrapper {
-		private org.openapitools.codegen.CliOption cliOpt;
+	public static class OagCliOptWrapper extends CliOptWrapper<org.openapitools.codegen.CliOption> {
 
 		public OagCliOptWrapper(org.openapitools.codegen.CliOption cliOpt) {
-			this.cliOpt = cliOpt;
+			super(cliOpt);
 		}
 
 		@Override

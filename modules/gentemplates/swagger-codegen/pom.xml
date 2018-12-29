@@ -52,7 +52,7 @@
                         </goals>
                         <configuration>
                             <includeProjectDependencies>true</includeProjectDependencies>
-                            <mainClass>com.reprezen.genflow.swagger.codegen.SwaggerCodegenDiscovery</mainClass>
+                            <mainClass>com.reprezen.genflow.swagger.codegen.ScgCodegenModuleDiscovery</mainClass>
                             <classpathScope>compile</classpathScope>
                             <cleanupDaemonThreads>false</cleanupDaemonThreads>
                             <arguments>

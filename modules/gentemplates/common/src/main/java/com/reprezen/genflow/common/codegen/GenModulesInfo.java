@@ -46,7 +46,7 @@ public class GenModulesInfo {
 	private final Map<String, Info> modulesInfo = Maps.newTreeMap();
 	private final CSVFormat csvFormat = CSVFormat.RFC4180.withHeader();
 
-	public static GenModulesInfo load(String libVersion, URL baseUrl, ModuleWrapper dummyWrapper)
+	public static GenModulesInfo load(String libVersion, URL baseUrl, GenModuleWrapper<?> dummyWrapper)
 			throws IOException, URISyntaxException {
 		String bestVersion = null;
 		for (String version : getAvailableVersions(baseUrl)) {
@@ -136,11 +136,11 @@ public class GenModulesInfo {
 		return Lists.newArrayList(modulesInfo.keySet());
 	}
 
-	public Info getInfo(ModuleWrapper wrapper) {
+	public Info getInfo(GenModuleWrapper<?> wrapper) {
 		return getInfo(wrapper, false);
 	}
 
-	public Info getInfo(ModuleWrapper wrapper, boolean createIfMissing) {
+	public Info getInfo(GenModuleWrapper<?> wrapper, boolean createIfMissing) {
 		Info info = getInfo(wrapper.getClassName());
 		if (info == null && createIfMissing) {
 			info = new Info(wrapper);
@@ -201,14 +201,14 @@ public class GenModulesInfo {
 		return modulesInfo.keySet();
 	}
 
-	public GenModulesInfo load(URL baseUrl, ModuleWrapper dummyWrapper) throws IOException {
+	public GenModulesInfo load(URL baseUrl, GenModuleWrapper<?> dummyWrapper) throws IOException {
 		loadMainFile(new URL(baseUrl, getMainFileName()), dummyWrapper);
 		URL paramsFileUrl = new URL(baseUrl, getParamsFileName());
 		loadParamsFile(paramsFileUrl);
 		return this;
 	}
 
-	private void loadMainFile(URL url, ModuleWrapper dummyWrapper) throws IOException {
+	private void loadMainFile(URL url, GenModuleWrapper<?> dummyWrapper) throws IOException {
 		try (InputStream in = url.openStream()) {
 			try (CSVParser parser = CSVParser.parse(new InputStreamReader(in), csvFormat)) {
 				for (CSVRecord record : parser) {
@@ -294,7 +294,7 @@ public class GenModulesInfo {
 			parameters = Lists.newArrayList();
 		}
 
-		public Info(ModuleWrapper wrapper) {
+		public Info(GenModuleWrapper<?> wrapper) {
 			this();
 			try {
 				setType(wrapper.getType());
@@ -307,7 +307,7 @@ public class GenModulesInfo {
 
 		}
 
-		public Info(CSVRecord record, ModuleWrapper dummyWrapper) {
+		public Info(CSVRecord record, GenModuleWrapper<?> dummyWrapper) {
 			this();
 			setType(dummyWrapper.typeNamed(record.get(MainColumns.Type)));
 			setReportedName(stringRecordValue(record.get(MainColumns.ReportedName)));
