@@ -34,6 +34,10 @@ public abstract class GenModuleWrapper<Config> {
 		return config;
 	}
 
+	public Class<Config> getWrappedClass() {
+		return configClass;
+	}
+
 	public String getClassName() {
 		return configClass.getName();
 	}

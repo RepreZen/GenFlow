@@ -108,6 +108,7 @@ public final class GenTemplateRegistry {
 			while (groups.hasNext()) {
 				try {
 					IGenTemplateGroup templateGroup = groups.next();
+					System.out.println(templateGroup.getClass().getName());
 					Iterator<IGenTemplate> groupIterator = templateGroup.getGenTemplates(classLoader).iterator();
 					while (groupIterator.hasNext()) {
 						try {

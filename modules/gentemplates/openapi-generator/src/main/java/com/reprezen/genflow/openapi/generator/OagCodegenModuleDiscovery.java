@@ -1,16 +1,16 @@
-package com.reprezen.genflow.swagger.codegen;
+package com.reprezen.genflow.openapi.generator;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
+import org.openapitools.codegen.CodegenConfig;
+
 import com.reprezen.genflow.common.codegen.GenModuleDiscovery;
 import com.reprezen.genflow.common.codegen.GenModuleWrapper;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModuleWrapper.OagModuleWrapper;
 
-import io.swagger.codegen.CodegenConfig;
-
-public class ScgCodegenModuleDiscovery extends GenModuleDiscovery<CodegenConfig> {
+public class OagCodegenModuleDiscovery extends GenModuleDiscovery<CodegenConfig> {
 
 	@Override
 	protected String getLibraryVersion() {
@@ -19,15 +19,15 @@ public class ScgCodegenModuleDiscovery extends GenModuleDiscovery<CodegenConfig>
 
 	@Override
 	protected GenModuleWrapper<CodegenConfig> getDummyWrapper() {
-		return ScgModuleWrapper.getDummyInstance();
+		return OagModuleWrapper.getDummyInstance();
 	}
 
 	@Override
 	protected GenModuleWrapper<CodegenConfig> wrap(Object configObject) {
-		return new ScgModuleWrapper((CodegenConfig) configObject);
+		return new OagModuleWrapper((CodegenConfig) configObject);
 	}
 
 	public static void main(String[] args) throws MalformedURLException, URISyntaxException, IOException {
-		new ScgCodegenModuleDiscovery().runDiscovery(args);
+		new OagCodegenModuleDiscovery().runDiscovery(args);
 	}
 }

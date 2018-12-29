@@ -26,10 +26,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.api.template.IGenTemplateGroup;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
-
-import io.swagger.codegen.CodegenConfig;
 
 public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGroup {
 
@@ -62,7 +59,7 @@ public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGro
 	public Collection<Config> getConfigs(GenModulesInfo modulesInfo, ClassLoader classLoader) {
 		Set<Config> configs = Sets.newHashSet();
 		try {
-			Enumeration<URL> urls = classLoader.getResources("META-INF/services/" + CodegenConfig.class.getName());
+			Enumeration<URL> urls = classLoader.getResources("META-INF/services/" + dummyWrapper.getClassName());
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();
 				for (Class<? extends Config> candidate : getConfigsFromServiceLoaderResource(url, classLoader)) {
@@ -113,7 +110,7 @@ public abstract class CodegenGenTemplateGroup<Config> implements IGenTemplateGro
 		URL infoUrl = getClass().getResource("");
 		String libVersion = dummyWrapper.getLibraryVersion();
 		try {
-			return GenModulesInfo.load(libVersion, infoUrl, ScgModuleWrapper.getDummyInstance());
+			return GenModulesInfo.load(libVersion, infoUrl, dummyWrapper);
 		} catch (IOException | URISyntaxException e) {
 			// resource not found... no modules available
 			return new GenModulesInfo(libVersion);

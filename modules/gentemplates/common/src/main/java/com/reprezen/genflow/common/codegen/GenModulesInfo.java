@@ -63,57 +63,58 @@ public class GenModulesInfo {
 		this.libVersion = libVersion;
 	}
 
-	private static List<String> availableVersions = null;
-
 	private static List<String> getAvailableVersions(URL baseUrl) throws URISyntaxException, IOException {
-		if (availableVersions == null) {
-			switch (baseUrl.getProtocol().toLowerCase()) {
-			case "file":
-				getAvailableFileUrlVersions(baseUrl);
-				break;
-			case "jar":
-				getAvailableJarUrlVersions(baseUrl);
-				break;
-			case "bundleresource":
-				return getAvailableVersions(FileLocator.resolve(baseUrl));
-			default:
-				throw new IllegalArgumentException("Can't load module info files from base URL: " + baseUrl);
-			}
+		List<String> versions;
+		switch (baseUrl.getProtocol().toLowerCase()) {
+		case "file":
+			versions = getAvailableFileUrlVersions(baseUrl);
+			break;
+		case "jar":
+			versions = getAvailableJarUrlVersions(baseUrl);
+			break;
+		case "bundleresource":
+			versions = getAvailableVersions(FileLocator.resolve(baseUrl));
+		default:
+			throw new IllegalArgumentException("Can't load module info files from base URL: " + baseUrl);
 		}
-		return availableVersions;
+		Collections.sort(versions, versionComparator);
+		return versions;
 	}
 
-	private static void getAvailableFileUrlVersions(URL baseUrl) throws URISyntaxException {
+	private static List<String> getAvailableFileUrlVersions(URL baseUrl) throws URISyntaxException {
 		File baseDir = new File(baseUrl.toURI());
-		availableVersions = Stream.of(baseDir.listFiles(new FileFilter() {
+		List<String> versions = Stream.of(baseDir.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File file) {
 				return isModulesInfoFile(file);
 			}
 		})).map(f -> getModulesInfoFileVersion(f)).collect(Collectors.toList());
-		Collections.sort(availableVersions, versionComparator);
+		return versions;
 	}
 
 	private static Pattern jarUrlPat = Pattern.compile("[jJ][aA][rR]:[fF][iI][lL][eE]:([^!]+)!(.*)");
 
-	private static void getAvailableJarUrlVersions(URL baseUrl) throws URISyntaxException, IOException {
+	private static List<String> getAvailableJarUrlVersions(URL baseUrl) throws URISyntaxException, IOException {
 		Matcher matcher = jarUrlPat.matcher(baseUrl.toString());
 		if (matcher.matches()) {
-			getAvailableJarFileVersions(new JarFile(new File(matcher.group(1))), matcher.group(2));
+			File jarFileName = new File(matcher.group(1));
+			JarFile jarFile = new JarFile(jarFileName);
+			return getAvailableJarFileVersions(jarFile, matcher.group(2));
 		} else {
 			throw new IllegalArgumentException("Unable to locate module info from URL: " + baseUrl);
 		}
 	}
 
-	private static void getAvailableJarFileVersions(JarFile jarFile, String basePath) {
-		availableVersions = new ArrayList<>();
+	private static List<String> getAvailableJarFileVersions(JarFile jarFile, String basePath) {
+		List<String> versions = new ArrayList<>();
 		for (Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
 			JarEntry entry = entries.nextElement();
 			File entryFile = new File(entry.getName());
 			if (isModulesInfoFile(entryFile)) {
-				availableVersions.add(getModulesInfoFileVersion(entryFile));
+				versions.add(getModulesInfoFileVersion(entryFile));
 			}
 		}
+		return versions;
 	}
 
 	private static Pattern moduleFilePattern = Pattern.compile("modulesInfo_(\\d+[.]\\d+[.]\\d+)[.]csv");

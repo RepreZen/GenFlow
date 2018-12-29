@@ -16,8 +16,6 @@ import java.util.ServiceLoader;
 
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
-import io.swagger.codegen.CodegenConfig;
-
 /**
  * This class is a main program that collects information about all the
  * available swagger-codegen language modules and updates the modulesInfo
@@ -79,7 +77,7 @@ public abstract class GenModuleDiscovery<Config> {
 
 	private void doDiscovery(GenModulesInfo modulesInfo) {
 		modulesInfo.resetStatus();
-		for (CodegenConfig codegen : ServiceLoader.load(CodegenConfig.class)) {
+		for (Config codegen : ServiceLoader.load(dummyWrapper.getWrappedClass())) {
 			Info info = new Info(wrap(codegen));
 			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info);
 		}
