@@ -15,11 +15,11 @@ import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
 
 import io.swagger.codegen.CodegenConfig;
 
-public class BuiltinSwaggerCodegenGenTemplate extends SwaggerCodegenGenTemplate {
+public class ScgCodegenGenTemplate extends ScgCodegenGenTemplateBase {
 
 	private final Info info;
 
-	public BuiltinSwaggerCodegenGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
+	public ScgCodegenGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
 		super(wrapper, info);
 		this.info = info;
 	}

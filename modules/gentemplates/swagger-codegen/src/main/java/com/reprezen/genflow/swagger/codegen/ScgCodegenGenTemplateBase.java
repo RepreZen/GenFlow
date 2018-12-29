@@ -30,7 +30,7 @@ import io.swagger.codegen.CodegenConfig;
 import io.swagger.codegen.DefaultGenerator;
 import io.swagger.models.Swagger;
 
-public abstract class SwaggerCodegenGenTemplate extends SwaggerGenTemplate {
+public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 
 	public static final String SWAGGER_CODEGEN_SYSTEM_PROPERTIES = "swaggerCodegenSystemProperties";
 	public static final String SWAGGER_CODEGEN_CONFIG = "swaggerCodegenConfig";
@@ -40,14 +40,14 @@ public abstract class SwaggerCodegenGenTemplate extends SwaggerGenTemplate {
 	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
 
-	public SwaggerCodegenGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
+	public ScgCodegenGenTemplateBase(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
 		this.wrapper = wrapper;
 		this.info = info;
 	}
 
 	@Override
 	public IGenTemplate newInstance() throws GenerationException {
-		return new BuiltinSwaggerCodegenGenTemplate(wrapper, info);
+		return new ScgCodegenGenTemplate(wrapper, info);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ScgCodegenGenTemplateGroup extends CodegenGenTemplateGroup<CodegenC
 
 	@Override
 	public IGenTemplate createGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
-		return new BuiltinSwaggerCodegenGenTemplate(wrapper, info);
+		return new ScgCodegenGenTemplate(wrapper, info);
 	}
 
 	public static void main(String[] args) {
