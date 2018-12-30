@@ -161,31 +161,31 @@ public class GenModulesInfo {
 		}
 	}
 
-	public void addOrUpdateInfo(String className, Info info, boolean isBuiltin) {
+	public void addOrUpdateInfo(String className, Info info, boolean fromDiscovery) {
 		Info existing = getInfo(className);
 		if (existing == null) {
 			existing = new Info();
-			existing.setNew(true);
+			existing.setNew(fromDiscovery);
 			existing.setVetted(info.isVetted());
 			modulesInfo.put(className, existing);
 		}
-		existing.setBuiltin(isBuiltin);
+		existing.setBuiltin(fromDiscovery);
 		if (info.getType() != null && info.getType() != existing.getType()) {
 			existing.setType(info.getType());
-			existing.setChanged(true);
+			existing.setChanged(fromDiscovery);
 		}
 		if (info.getReportedName() != null && !info.getReportedName().equals(existing.getReportedName())) {
 			existing.setReportedName(info.getReportedName());
-			existing.setChanged(true);
+			existing.setChanged(fromDiscovery);
 		}
 		if (info.getDerivedDisplayName() != null
 				&& !info.getDerivedDisplayName().equals(existing.getDerivedDisplayName())) {
 			existing.setDerivedDisplayName(info.getDerivedDisplayName());
-			existing.setChanged(true);
+			existing.setChanged(fromDiscovery);
 		}
 		if (info.getDisplayName() != null && !info.getDisplayName().equals(existing.getDisplayName())) {
 			existing.setDisplayName(info.getDisplayName());
-			existing.setChanged(true);
+			existing.setChanged(fromDiscovery);
 		}
 		if (info.getParameters() != null) {
 			existing.setParameters(info.getParameters());

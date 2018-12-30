@@ -52,6 +52,7 @@ public abstract class GenModuleDiscovery<Config> {
 			GenModulesInfo myInfo = new GenModulesInfo(libVersion);
 			if (baseInfo != null) {
 				baseInfo.purgeDeleted();
+				baseInfo.resetStatus();
 				copyInfo(baseInfo, myInfo);
 			}
 			doDiscovery(myInfo);
