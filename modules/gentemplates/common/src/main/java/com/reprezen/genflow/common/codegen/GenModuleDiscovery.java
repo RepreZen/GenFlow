@@ -51,10 +51,11 @@ public abstract class GenModuleDiscovery<Config> {
 		if (baseInfo == null || !baseInfo.getLibVersion().equals(libVersion)) {
 			GenModulesInfo myInfo = new GenModulesInfo(libVersion);
 			if (baseInfo != null) {
+				baseInfo.purgeDeleted();
 				copyInfo(baseInfo, myInfo);
 			}
 			doDiscovery(myInfo);
-			myInfo.purgeNonBuiltin();
+			myInfo.markDeleted();
 			myInfo.save(baseDir);
 			if (baseInfo != null) {
 				System.out.printf("Modules info for SCG version %s created based on existing info for version %s",
@@ -70,16 +71,14 @@ public abstract class GenModuleDiscovery<Config> {
 
 	private void copyInfo(GenModulesInfo from, GenModulesInfo to) {
 		for (String cls : from.getClassNames()) {
-			to.addOrUpdateInfo(cls, from.getInfo(cls));
+			to.addOrUpdateInfo(cls, from.getInfo(cls), false);
 		}
-		to.resetStatus();
 	}
 
 	private void doDiscovery(GenModulesInfo modulesInfo) {
-		modulesInfo.resetStatus();
 		for (Config codegen : ServiceLoader.load(dummyWrapper.getWrappedClass())) {
 			Info info = new Info(wrap(codegen));
-			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info);
+			modulesInfo.addOrUpdateInfo(codegen.getClass().getName(), info, true);
 		}
 	}
 }

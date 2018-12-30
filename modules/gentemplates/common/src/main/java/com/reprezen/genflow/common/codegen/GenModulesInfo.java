@@ -157,12 +157,11 @@ public class GenModulesInfo {
 	public void resetStatus() {
 		for (Info info : modulesInfo.values()) {
 			info.setChanged(false);
-			info.setBuiltin(false);
 			info.setNew(false);
 		}
 	}
 
-	public void addOrUpdateInfo(String className, Info info) {
+	public void addOrUpdateInfo(String className, Info info, boolean isBuiltin) {
 		Info existing = getInfo(className);
 		if (existing == null) {
 			existing = new Info();
@@ -170,7 +169,7 @@ public class GenModulesInfo {
 			existing.setVetted(info.isVetted());
 			modulesInfo.put(className, existing);
 		}
-		existing.setBuiltin(true);
+		existing.setBuiltin(isBuiltin);
 		if (info.getType() != null && info.getType() != existing.getType()) {
 			existing.setType(info.getType());
 			existing.setChanged(true);
@@ -193,10 +192,19 @@ public class GenModulesInfo {
 		}
 	}
 
-	public void purgeNonBuiltin() {
-		List<String> nonBuiltin = modulesInfo.keySet().stream().filter(cls -> !modulesInfo.get(cls).isBuiltin())
+	public void purgeDeleted() {
+		List<String> deleted = modulesInfo.keySet().stream().filter(cls -> modulesInfo.get(cls).isDeleted())
 				.collect(Collectors.toList());
-		nonBuiltin.forEach(cls -> modulesInfo.remove(cls));
+		deleted.forEach(cls -> modulesInfo.remove(cls));
+	}
+
+	public void markDeleted() {
+		modulesInfo.values().stream().filter(i -> !i.isBuiltin()).forEach(i -> {
+			i.setDeleted(true);
+			i.setChanged(true);
+			i.setNew(false);
+			i.setVetted(false);
+		});
 	}
 
 	public Collection<String> getClassNames() {
@@ -275,7 +283,7 @@ public class GenModulesInfo {
 	}
 
 	private enum MainColumns {
-		ClassName, Type, ReportedName, DerivedDisplayName, DisplayName, Suppressed, Builtin, Changed, New, Vetted
+		ClassName, Type, ReportedName, DerivedDisplayName, DisplayName, Suppressed, Deleted, Changed, New, Vetted
 	};
 
 	public static class Info {
@@ -286,6 +294,7 @@ public class GenModulesInfo {
 		private String displayName;
 		private boolean suppressed;
 		private boolean builtin;
+		private boolean deleted;
 		private boolean changed;
 		private boolean isNew;
 		private boolean vetted;
@@ -316,7 +325,7 @@ public class GenModulesInfo {
 			setDerivedDisplayName(stringRecordValue(record.get(MainColumns.DerivedDisplayName)));
 			setDisplayName(stringRecordValue(record.get(MainColumns.DisplayName)));
 			setSuppressed(boolRecordValue(record.get(MainColumns.Suppressed)));
-			setBuiltin(boolRecordValue(record.get(MainColumns.Builtin)));
+			setDeleted(boolRecordValue(record.get(MainColumns.Deleted)));
 			setChanged(boolRecordValue(record.get(MainColumns.Changed)));
 			setNew(boolRecordValue(record.get(MainColumns.New)));
 			setVetted(boolRecordValue(record.get(MainColumns.Vetted)));
@@ -344,8 +353,8 @@ public class GenModulesInfo {
 				case Suppressed:
 					result.add(boolMarker(isSuppressed()));
 					break;
-				case Builtin:
-					result.add(boolMarker(isBuiltin()));
+				case Deleted:
+					result.add(boolMarker(isDeleted()));
 					break;
 				case Changed:
 					result.add(boolMarker(isChanged()));
@@ -410,6 +419,14 @@ public class GenModulesInfo {
 
 		public void setBuiltin(boolean bulitin) {
 			this.builtin = bulitin;
+		}
+
+		public boolean isDeleted() {
+			return deleted;
+		}
+
+		public void setDeleted(boolean deleted) {
+			this.deleted = deleted;
 		}
 
 		public boolean isChanged() {
