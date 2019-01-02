@@ -120,6 +120,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					.get(SWAGGER_CODEGEN_SYSTEM_PROPERTIES);
 			setSystemProperties(systemProperties);
 			generator.opts(clientOptInput);
+			reportScgVersion();
 			generator.generate();
 		}
 
@@ -140,6 +141,11 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					System.setProperty(key, properties.get(key));
 				}
 			}
+		}
+
+		private void reportScgVersion() {
+			context.getLogger().info(String.format("Using swagger-codegen v%s\n",
+					CodegenConfig.class.getPackage().getImplementationVersion()));
 		}
 	}
 }

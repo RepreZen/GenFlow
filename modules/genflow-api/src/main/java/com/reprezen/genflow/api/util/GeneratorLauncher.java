@@ -207,7 +207,15 @@ public class GeneratorLauncher {
 				}
 			}
 		};
-		Handler handler = new StreamHandler(System.out, formatter);
+		Handler handler = new StreamHandler(System.out, formatter) {
+
+			@Override
+			public synchronized void publish(LogRecord record) {
+				super.publish(record);
+				flush();
+			}
+
+		};
 		logger.addHandler(handler);
 		logger.setUseParentHandlers(false);
 		return logger;
