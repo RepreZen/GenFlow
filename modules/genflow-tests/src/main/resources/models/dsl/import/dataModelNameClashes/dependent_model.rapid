@@ -1,0 +1,35 @@
+import clashWithLocal.dm from "clash_with_local.rapid"
+
+import aliased.dm2 from "aliased.rapid" as al
+import clashWithAliased.dm2 from "clash_with_aliased.rapid"
+
+import imported.dm3 from "imported.rapid"
+import clashWithImported.dm3 from "clash_with_imported.rapid"
+import ns.clashWithImported.dm3 from "clash_with_inported_ns.rapid"
+
+rapidModel dependent
+	resourceAPI interface baseURI "http://taxblaster.com/api"
+		objectResource ostEnumFromLocal type stEnumFromLocal
+		objectResource ostEnumFromClashWithLocalDM type stEnumFromClashWithLocalDM
+		objectResource ostEnumFromAliasedDM type stEnumFromAliasedDM
+		objectResource ostEnumFromClashWithAliasedDM type stEnumFromClashWithAliasedDM
+		objectResource ostEnumFromImportedDM type stEnumFromImportedDM
+		objectResource ostEnumFromClashWithImportedDM type stEnumFromClashWithImportedDM
+		objectResource ostEnumFromClashWithImportedNsDM type stEnumFromClashWithImportedNsDM
+	dataModel dm
+		structure stEnumFromLocal
+			field : en
+		structure stEnumFromClashWithLocalDM
+			field : clashWithLocal.dm.en
+		structure stEnumFromAliasedDM
+			field : al.en
+		structure stEnumFromClashWithAliasedDM
+			field : clashWithAliased.dm2.en
+		structure stEnumFromImportedDM
+			field : imported.dm3.en
+		structure stEnumFromClashWithImportedDM
+			field : clashWithImported.dm3.en
+		structure stEnumFromClashWithImportedNsDM
+			field : ns.clashWithImported.dm3.en
+		enum string en
+			VALUE : "local_dm"

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ASCII"?>
+<restapi:ZenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:domain="http://www.modelsolv.com/reprezen/restapi/datatypes/1.0" xmlns:restapi="http://www.modelsolv.com/reprezen/restapi/1.0" name="TaxBlasterModel">
+  <resourceAPIs name="TaxBlasterInterface" baseURI="http://taxblaster.com/api">
+    <ownedResourceDefinitions xsi:type="restapi:ObjectResource" name="IndexObject" type="//@dataModels.0/@ownedDataTypes.2">
+      <documentation text="The Index Resource is the entry point to the TaxBlaster API. To minimize &#xD;&#xA;coupling, consuming applications should start here, and follow the links to &#xD;&#xA;related resources. "/>
+      <methods id="getIndex">
+        <responses resourceType="IndexObject" statusCode="200"/>
+        <responses statusCode="404"/>
+      </methods>
+      <mediaTypes href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/StandardMediaTypes.xmi#application/xml"/>
+      <URI>
+        <segments name="index"/>
+      </URI>
+    </ownedResourceDefinitions>
+    <ownedResourceDefinitions xsi:type="restapi:CollectionResource" name="TaxFilingCollection" default="true" type="//@dataModels.0/@ownedDataTypes.0">
+      <documentation text="The list of Tax Filings visible to the authorized user. "/>
+      <methods id="getTaxFilingCollection">
+        <request/>
+        <responses resourceType="TaxFilingCollection" statusCode="200"/>
+      </methods>
+      <methods id="updateTaxFilingCollection" httpMethod="POST">
+        <request resourceType="TaxFilingCollection"/>
+        <responses statusCode="200"/>
+        <responses statusCode="400"/>
+      </methods>
+      <mediaTypes href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/StandardMediaTypes.xmi#application/xml"/>
+      <URI>
+        <segments name="taxFilings"/>
+      </URI>
+    </ownedResourceDefinitions>
+    <ownedResourceDefinitions xsi:type="restapi:CollectionResource" name="PersonCollection" default="true" type="//@dataModels.0/@ownedDataTypes.1">
+      <documentation text="The list of TaxBlaster users.  The results will vary in membership and level &#xD;&#xA;of detail, depending on your access privileges. "/>
+      <methods id="getPersonCollection">
+        <request/>
+        <responses resourceType="PersonCollection" statusCode="200"/>
+      </methods>
+      <methods id="updatePersonCollection" httpMethod="POST">
+        <request resourceType="PersonCollection"/>
+        <responses statusCode="200"/>
+        <responses statusCode="400"/>
+      </methods>
+      <mediaTypes href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/StandardMediaTypes.xmi#application/xml"/>
+      <URI>
+        <segments name="people"/>
+      </URI>
+    </ownedResourceDefinitions>
+    <ownedResourceDefinitions xsi:type="restapi:ObjectResource" name="TaxFilingObject" type="//@dataModels.0/@ownedDataTypes.0">
+      <documentation text="An individual Tax Filing record, accessed by its ID "/>
+      <methods id="getTaxFiling">
+        <request/>
+        <responses resourceType="TaxFilingObject" statusCode="200"/>
+        <responses statusCode="404"/>
+      </methods>
+      <mediaTypes href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/StandardMediaTypes.xmi#application/xml"/>
+      <URI>
+        <segments name="taxFilings"/>
+        <segments xsi:type="restapi:URISegmentWithParameter" name="id"/>
+        <uriParameters xsi:type="restapi:TemplateParameter" required="true" uriSegment="//@resourceAPIs.0/@ownedResourceDefinitions.3/@URI/@segments.1">
+          <documentation text="filingID of the requested TaxFiling "/>
+          <sourceReference xsi:type="restapi:PropertyReference" conceptualFeature="//@dataModels.0/@ownedDataTypes.0/@ownedFeatures.0"/>
+        </uriParameters>
+      </URI>
+      <referenceTreatments xsi:type="restapi:ReferenceLink" targetResource="PersonObject">
+        <referencePath>
+          <referenceSegment referenceElement="//@dataModels.0/@ownedDataTypes.0/@ownedFeatures.1"/>
+        </referencePath>
+        <inlineLinkDescriptor includedFeatures="//@dataModels.0/@ownedDataTypes.1/@ownedFeatures.0 //@dataModels.0/@ownedDataTypes.1/@ownedFeatures.2"/>
+      </referenceTreatments>
+    </ownedResourceDefinitions>
+    <ownedResourceDefinitions xsi:type="restapi:ObjectResource" name="PersonObject" type="//@dataModels.0/@ownedDataTypes.1">
+      <documentation text="An individual user by ID. "/>
+      <methods id="getPersonObject">
+        <request/>
+        <responses resourceType="PersonObject" statusCode="200"/>
+      </methods>
+      <methods id="putPersonObject" httpMethod="PUT">
+        <request resourceType="PersonObject"/>
+        <responses statusCode="200"/>
+        <responses statusCode="400"/>
+      </methods>
+      <mediaTypes href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/StandardMediaTypes.xmi#application/xml"/>
+      <URI>
+        <segments name="people"/>
+        <segments xsi:type="restapi:URISegmentWithParameter" name="id"/>
+        <uriParameters xsi:type="restapi:TemplateParameter" required="true" uriSegment="//@resourceAPIs.0/@ownedResourceDefinitions.4/@URI/@segments.1">
+          <documentation text="taxpayerID of the requested Person "/>
+          <sourceReference xsi:type="restapi:PropertyReference" conceptualFeature="//@dataModels.0/@ownedDataTypes.1/@ownedFeatures.0"/>
+        </uriParameters>
+      </URI>
+    </ownedResourceDefinitions>
+  </resourceAPIs>
+  <dataModels name="TaxBlasterDataModel">
+    <documentation text="Supporting data types for the TaxBlaster API "/>
+    <ownedDataTypes xsi:type="domain:Structure" name="TaxFiling">
+      <documentation text="A tax filing record for a given user, in a given tax jurisdiction, in a &#xD;&#xA;specified tax year. "/>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="filingID">
+        <documentation text="A unique, system-assigned identifier for the tax filing. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:ReferenceProperty" name="taxpayer" type="//@dataModels.0/@ownedDataTypes.1">
+        <documentation text="Reference to the person who owns this filing. "/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="jurisdiction">
+        <documentation text="Country, province, state or local tax authority where this is being filed. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="year">
+        <documentation text="Tax year "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.13"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="period">
+        <documentation text="Period within the year, if any "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.18"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="currency">
+        <documentation text="Currency code "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="grossIncome">
+        <documentation text="Total income reported on tax filing. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.6"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="taxLiability">
+        <documentation text="Net tax liability "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.6"/>
+      </ownedFeatures>
+    </ownedDataTypes>
+    <ownedDataTypes xsi:type="domain:Structure" name="Person">
+      <documentation text="A TaxBlaster user. "/>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="taxpayerID">
+        <documentation text="A unique, system-assigned identifier for the user. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="lastName">
+        <documentation text="Legal family name. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" name="firstName">
+        <documentation text="Legal first name. "/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+      <ownedFeatures xsi:type="domain:PrimitiveProperty" cardinality="*" name="otherNames">
+        <documentation text="Names previously used *"/>
+        <type xsi:type="domain:PrimitiveType" href="platform:/plugin/com.modelsolv.reprezen.restapi/libraries/PrimitiveTypes.xmi#//@primitiveTypesLibrary/@primitiveTypes.16"/>
+      </ownedFeatures>
+    </ownedDataTypes>
+    <ownedDataTypes xsi:type="domain:Structure" name="Index">
+      <documentation text="The supporting data type for the Index resource.  Not meaningful as a &#xD;&#xA;business entity, but required to support a single point of entry. "/>
+      <ownedFeatures xsi:type="domain:ReferenceProperty" cardinality="*" name="people" type="//@dataModels.0/@ownedDataTypes.1"/>
+      <ownedFeatures xsi:type="domain:ReferenceProperty" cardinality="*" name="taxFilings" type="//@dataModels.0/@ownedDataTypes.0"/>
+    </ownedDataTypes>
+  </dataModels>
+</restapi:ZenModel>

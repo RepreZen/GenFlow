@@ -1,0 +1,24 @@
+/* 
+Scenario:  No Resource Defined on a referenced SDT
+*/
+rapidModel TestNoResource
+	resourceAPI TestNoResource baseURI "http://modelsolv.com"
+		objectResource DataType1Object type DataType1
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response DataType1Object statusCode 200
+
+
+
+	dataModel TestNoResource
+		structure DataType1
+			dataType1ID : string
+			CustomerName : string
+			dataType1_reference1 : reference DataType2*
+
+		structure DataType2
+			dataType2ID : string
+
+

@@ -1,0 +1,85 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: BeamUp API
+
+paths:
+
+  # Note the use of a simplified name for the path item object.  
+  # The actual URI, assigned by the top-level Swagger spec, is 
+  # /estimates/time. But a JSON pointer to this would require a 
+  # '~1' token to substitute for each forward slash, and % url 
+  # encoding sequences for the curly braces.
+  # 
+  # The leading slash is required by Swagger, so a reference to 
+  # this item will include a leading '~1'. But we can avoid 
+  # further escape sequences by using a simplified name.     
+
+  /time:
+    get:
+      
+      summary: Time Estimates
+      description: |
+        The Time Estimates endpoint returns ETAs for all products offered at a given 
+        location, with the responses expressed as integers in seconds. We recommend 
+        that this endpoint be called every minute to provide the most accurate, 
+        up-to-date ETAs.
+      parameters:
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/start_latitude"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/start_longitude"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/customer_uuid"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/product_id"
+      tags: 
+        - Estimates
+      responses:  
+        200:
+          description: An array of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Reference to a Schema Object described in beamup_schemas.yaml
+                  $ref: "../components/beamup_schemas.yaml#/components/schemas/Product"
+        default:
+          # Defaults to an unexpected error response, defined in beamup_responses.yaml.
+          $ref: "../components/beamup_responses.yaml#/components/responses/ErrorResponse"
+      callbacks:
+        status:
+          $ref: "#/components/callbacks/statusCallback"
+
+components:
+  callbacks:
+    statusCallback:
+      /statusUpdate:
+        summary: Posts the current status of a requested trip.
+        
+        post:
+          operationId: StatusUpdateCallback
+          description: |
+            POST method to be implemented by the client. BeamUp will 
+            call this method to advise on the status of a requested, in-progress,
+            or completed trip.
+          requestBody:
+            description: content of the status update notification.
+            content: 
+              "application/json":
+                schema:
+                  type: object
+                  properties:
+                    tripId: 
+                      type: string
+                    tripStatusCode:
+                      type: string
+                      enum:
+                      - REQUESTED
+                      - IN_PROGRESS
+                      - COMPLETED
+                      - CANCELLED
+                    eta:
+                      type: string
+                      format: date-time
+          responses:
+            200: 
+              description: Normal response to acknowledge a status update.

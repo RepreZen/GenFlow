@@ -1,0 +1,26 @@
+namespace ns0
+
+import JsonSchemaImportTestModel2.dm2 from "JsonSchemaImportTest2.rapid"
+import ns.JsonSchemaImportTestModel3.dm3 from "JsonSchemaImportTest3.rapid"
+
+rapidModel JsonSchemaImportTestModel1 
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+		objectResource owEnum1fromModel1 type wEnum1fromModel1
+		objectResource owEnum3fromModel1 type wEnum3fromModel1
+		objectResource owEnum2fromModel2 type wEnum2fromModel2
+		objectResource owEnum3fromModel2 type wEnum3fromModel2
+		objectResource owEnum4fromModel2 type wEnum4fromModel2
+		objectResource owEnum4fromModel3 type wEnum4fromModel3
+		objectResource owEnum3fromModel12 type wEnum3fromModel12
+
+	dataModel dm1
+		structure wEnum1fromModel1
+			field : enum1
+		structure wEnum3fromModel1
+			field : enum3
+		structure wEnum3fromModel12
+			field : JsonSchemaImportTestModel2.dm2.enum3
+		enum string enum1
+			value : "JsonSchemaImportTestModel1"
+		enum string enum3
+			value : "JsonSchemaImportTestModel1"

@@ -1,0 +1,53 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: BeamUp API
+
+paths:
+
+  # Note the use of a simplified name for the path item object.  
+  # The actual URI, assigned by the top-level Swagger spec, is 
+  # /estimates/price. But a JSON pointer to this would require a 
+  # '~1' token to substitute for each forward slash, and % url 
+  # encoding sequences for the curly braces.
+  # 
+  # The leading slash is required by Swagger, so a reference to 
+  # this item will include a leading '~1'. But we can avoid 
+  # further escape sequences by using a simplified name.     
+  
+  /price:
+    get:
+      summary: Price Estimates
+      description: |
+        The Price Estimates endpoint returns an estimated price range for each product 
+        offered at a given location. The price estimate is provided as a formatted
+        string with the full price range and the localized currency symbol.<br><br>
+        The response also includes low and high estimates, and  the 
+        [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations 
+        requiring currency conversion. When surge is active for a particular product, 
+        its surge_multiplier will be greater than 1, but the price estimate already 
+        factors in this multiplier.
+      parameters:
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/start_latitude"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/start_longitude"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/end_latitude"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/end_longitude"
+      tags: 
+        - Estimates
+      responses:
+        200:
+          description: An array of price estimates by product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Reference to a Schema Object described in beamup_schemas.yaml
+                  $ref: "../components/beamup_schemas.yaml#/components/schemas/PriceEstimate"
+        default:
+          # Defaults to an unexpected error response, defined in beamup_responses.yaml.
+          $ref: "../components/beamup_responses.yaml#/components/responses/ErrorResponse"
+      callbacks:
+        statusCallback: 
+          $ref: "beamup_path_estimates_time.yaml#/components/callbacks/statusCallback"

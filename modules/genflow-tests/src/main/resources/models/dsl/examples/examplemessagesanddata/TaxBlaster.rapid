@@ -1,0 +1,140 @@
+/* 
+  This example demonstrates the different ways of adding example messages and example data to our models.
+  Example messages/data serve to document what the data that is sent to/from the API will look like and can occur 
+  in the following locations:
+  
+  * On a data structure defined in a dataModel (keyword = dataExample).
+  * At the resource level using the 'example' and/or 'externalExample' keyword.
+  * At the message level using the 'example' and/or 'externalExample' keyword.
+
+  The 'example' keyword references message text included between ''' '''. 
+  The 'externalExample' keyword references a local file that contains the message text.
+  
+  Example messages/data are also used by the Mock Service to provide a mock implementation of your API so it can 
+  be tried out, and your design refined, without having to fully implement the API. The Mock Service has rules for how it 
+  selects the example data it will use:
+  
+  * The Mock Service only implements responses so example messages for requests are ignored.
+  * Examples are used in order of precedence: response > resource > dataModel 
+  * If a method has more than one response the Mock Service implements the first and ignores the others.
+  * If a response has more than one example or externalExample the MockService uses the first one and ignores the others.
+  
+  Example messages and data have been added to the code below. Try running the Mock Service for this model
+  and executing the methods. See which example data is returned. Try commenting out examples at the different levels
+  in order to see how the messages change when you exercise the mocked API using the Swagger UI view.
+  
+  Comments are used in the code to draw attention to the feature being demonstrated in this example.
+*/
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+
+		objectResource TaxFilingObject type TaxFiling
+			URI taxfilings/{id}
+				required templateParam id property filingID
+
+			referenceLink > taxpayer
+				targetResource PersonObject
+				targetProperties
+					firstName
+					lastName
+
+			mediaTypes
+				application/json
+
+			method GET getTaxFiling
+				request
+				// Response level example (in-line) for TaxFiling type.
+				// This overrides example data at the resource and data levels for purposes of service mocking.
+				response TaxFilingObject statusCode 200
+					example ''' {
+						  "filingID": "#123456",
+						  "taxpayer": "ssn-xx-xxxx",
+						  "jurisdiction": "PA0010000",
+						  "year": 2014,
+						  "currency": "USD",
+						  "grossIncome": "124,000.00",
+						  "taxLiability": "45,000.00"
+						}'''
+				response statusCode 400
+
+			// Resource level example (external file) for TaxFiling type.
+			// This overrides example data at the data level for purposes of service mocking.
+			externalExample "messages/TaxFiling.json"
+
+		objectResource PersonObject type Person
+			URI people/{id}
+				required templateParam id property taxpayerID
+
+			mediaTypes
+				application/json
+			method GET getPersonObject
+				request
+				// Response level example (in-line) for the Person type.
+				// This overrides example data at the resource and data levels for purposes of service mocking.
+				response PersonObject statusCode 200
+					example ''' {
+						  "taxpayerID": "ssn-xx-xxxx",
+						  "lastName": "Eliot",
+						  "firstName": "George",
+						  "otherNames": "Mary Ann Evans"
+						}'''
+
+			method PUT putPersonObject
+				request PersonObject
+				response statusCode 200
+				response statusCode 400
+
+			// Resource level example (external file) for Person type.
+			// This overrides example data at the data level for purposes of service mocking.
+			externalExample "messages/Person.json"
+
+	/** Supporting data types for the TaxBlaster API */
+	dataModel TaxBlasterDataModel
+		/** A tax filing record for a given user, in a given tax jurisdiction, in a
+		    specified tax year. */
+		structure TaxFiling
+			/** A unique, system-assigned identifier for the tax filing. */
+			filingID : string
+			/** Reference to the person who owns this filing. */
+			taxpayer : reference to Person
+			/** Country, province, state or local tax authority where this is being filed. */
+			jurisdiction : string
+			/** Tax year */
+			year : gYear
+			/** Period within the year, if any */
+			period : int
+			/** Currency code */
+			currency : string
+			/** Total income reported on tax filing. */
+			grossIncome : decimal
+			/** Net tax liability */
+			taxLiability : decimal
+			// Data level example: will be overridden by examples at resource and response levels.
+			dataExample ''' {
+						  "filingID": "#123456",
+						  "taxpayer": "ssn-xx-xxxx",
+						  "jurisdiction": "PA0010000",
+						  "year": 2014,
+						  "period": 0,
+						  "currency": "USD",
+						  "grossIncome": "32,000.00",
+						  "taxLiability": "9,600.00"
+						} '''
+
+		/** A TaxBlaster user. */
+		structure Person
+			/** A unique, system-assigned identifier for the user. */
+			taxpayerID : string
+			/** Legal family name. */
+			lastName : string
+			/** Legal first name. */
+			firstName : string
+			/** Names previously used **/
+			otherNames : string*
+			// Data level example: will be overridden by examples at resource and response levels.
+			dataExample ''' {
+						  "taxpayerID": "ssn-xx-xxxx",
+						  "lastName": "Sand",
+						  "firstName": "George",
+						  "otherNames": "Amandine Lucie Aurore Dupin"
+						} '''

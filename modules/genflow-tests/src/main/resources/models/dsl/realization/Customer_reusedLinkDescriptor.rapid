@@ -1,0 +1,77 @@
+rapidModel Customer
+	resourceAPI Customer baseURI "http://modelsolv.com"
+		objectResource CustomerObject type Customer
+			only properties
+				CustomerID!
+				CustomerName /* cardinality from the data type definition*/
+				account!
+
+			referenceEmbed > Orders
+				referenceEmbed > LineItems 
+					referenceLink > Product
+						targetResource ProductObject
+						linkDescriptor ProductObject.ProductLink
+						linkRelation contents
+
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response CustomerObject statusCode 200
+
+		objectResource ProductObject type Product
+			linkDescriptor ProductLink
+				ProductID
+
+		default objectResource OrderObject type Order
+			default linkDescriptor OrderLink
+				OrderID
+				Quantity
+				Price
+
+			linkDescriptor DetailedOrderLink
+				OrderID
+				Quantity
+				Price
+				Currency
+
+		objectResource BigOrderObject type Order
+			default linkDescriptor OrderLink
+				OrderID
+				Quantity
+				Price
+
+			linkDescriptor DetailedOrderLink
+				OrderID
+				Quantity
+				Price
+				Currency
+
+	dataModel Customer
+		structure Customer
+			/** CustomerId property*/
+			CustomerID : string
+			CustomerName : string
+			account : string
+			/**Orders reference*/
+			Orders : containing reference Order*
+
+		structure Order
+			OrderID : string
+			LineItems : containing reference LineItem*
+			Quantity : decimal
+			Price : decimal
+			Currency : string
+
+		structure LineItem
+			lineItemID : string
+			Product : reference Product
+
+		structure Product
+			ProductID : string
+			ProductName : string
+			Price : decimal
+			ReorderThreshold : decimal
+			Image : base64Binary
+
+

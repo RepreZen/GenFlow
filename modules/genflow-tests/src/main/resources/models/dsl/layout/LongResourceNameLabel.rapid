@@ -1,0 +1,22 @@
+rapidModel LongResourceNameLabel
+	resourceAPI Customer  baseURI "http://modelsolv.com"
+		objectResource CustomerObjectLongLabelLongLabelLongLabelvLongLabelLongLabel type Customer
+			URI urifragment
+			mediaTypes
+				application/xml
+			method GET Customer
+				request
+				response CustomerObjectLongLabelLongLabelLongLabelvLongLabelLongLabel statusCode 200
+
+			method POST postSomething
+				request CustomerObjectLongLabelLongLabelLongLabelvLongLabelLongLabel
+				response CustomerObjectLongLabelLongLabelLongLabelvLongLabelLongLabel statusCode 200
+
+
+
+	dataModel Customer
+		structure Customer
+			CustomerID : string
+			CustomerName : string
+
+

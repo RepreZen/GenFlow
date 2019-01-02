@@ -1,0 +1,9 @@
+rapidModel ModelForImport
+	dataModel dataModelForImport
+		structure typeA
+			mfi : string
+
+		enum string enumE
+			mfi : "mfi"
+
+

@@ -1,0 +1,12 @@
+rapidModel EmptyResponse
+	resourceAPI Customer baseURI "http://modelsolv.com"
+		objectResource CustomerObject type Customer
+			mediaTypes
+				application/xml
+			method PUT emptyResponse
+				response
+
+	dataModel Customer
+		structure Customer
+			CustomerID : string
+			CustomerName : string

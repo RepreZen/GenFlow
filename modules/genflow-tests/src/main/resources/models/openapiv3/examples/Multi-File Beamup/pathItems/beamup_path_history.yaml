@@ -1,0 +1,33 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: BeamUp API
+
+paths:
+  /history:
+    get:
+      summary: User Activity
+      description: |
+        The User Activity endpoint returns data about a user's lifetime activity with 
+        BeamUp. The response will include pickup locations and times, dropoff locations 
+        and times, the distance of past requests, and information about which products 
+        were requested.<br><br>The history array in the response will have a maximum 
+        length based on the limit parameter. The response value count may exceed limit, 
+        therefore subsequent API requests may be necessary.
+      parameters:
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/offset"
+        - $ref: "../components/beamup_parameters.yaml#/components/parameters/limit"
+      tags: 
+        - User
+      responses:
+        200:
+          description: History information for the given user
+          content:
+            application/json:
+              schema:
+                # Reference to a Schema Object described in beamup_schemas.yaml
+                $ref: "../components/beamup_schemas.yaml#/components/schemas/Activities"
+        default:
+          # Defaults to an unexpected error response, defined in beamup_responses.yaml.
+          $ref: "../components/beamup_responses.yaml#/components/responses/ErrorResponse"

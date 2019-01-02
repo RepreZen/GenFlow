@@ -1,0 +1,4 @@
+rapidModel clashWithAliased
+	dataModel dm2
+		enum string en
+			VALUE : "clash_with_aliased_dm"

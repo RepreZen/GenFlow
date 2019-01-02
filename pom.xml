@@ -67,6 +67,7 @@
         <module>modules/gentemplates/rapidml-nodejs</module>
         <module>modules/gentemplates/rapidml-jaxrs</module>
         <module>modules/gentemplates/swagger-nswag</module>
+        <module>modules/genflow-tests</module>
     </modules>
     <build>
         <plugins>
@@ -460,6 +461,11 @@
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>2.9.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-tests</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
