@@ -21,7 +21,8 @@ import com.reprezen.genflow.api.template.GenTemplateContext;
 import com.reprezen.genflow.api.template.GenTemplateProperty;
 import com.reprezen.genflow.api.template.GenTemplateProperty.StandardProperties;
 import com.reprezen.genflow.api.template.IGenTemplate;
-import com.reprezen.genflow.swagger.codegen.SwaggerCodegenModulesInfo.Info;
+import com.reprezen.genflow.common.codegen.GenModuleWrapper;
+import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
 import io.swagger.codegen.ClientOptInput;
 import io.swagger.codegen.ClientOpts;
@@ -29,33 +30,34 @@ import io.swagger.codegen.CodegenConfig;
 import io.swagger.codegen.DefaultGenerator;
 import io.swagger.models.Swagger;
 
-public abstract class SwaggerCodegenGenTemplate extends SwaggerGenTemplate {
+public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 
 	public static final String SWAGGER_CODEGEN_SYSTEM_PROPERTIES = "swaggerCodegenSystemProperties";
 	public static final String SWAGGER_CODEGEN_CONFIG = "swaggerCodegenConfig";
 	public static final List<String> SPECIAL_PARAMS = Arrays.asList(SWAGGER_CODEGEN_CONFIG,
 			SWAGGER_CODEGEN_SYSTEM_PROPERTIES);
-	protected final Class<? extends CodegenConfig> codegenClass;
+
+	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
 
-	public SwaggerCodegenGenTemplate(Class<? extends CodegenConfig> codegenClass, Info info) {
-		this.codegenClass = codegenClass;
+	public ScgCodegenGenTemplateBase(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
+		this.wrapper = wrapper;
 		this.info = info;
 	}
 
 	@Override
 	public IGenTemplate newInstance() throws GenerationException {
-		return new BuiltinSwaggerCodegenGenTemplate(codegenClass, info);
+		return new ScgCodegenGenTemplate(wrapper, info);
 	}
 
 	@Override
 	protected StaticGenerator<Swagger> getStaticGenerator() {
-		return new Generator(this, context, codegenClass);
+		return new Generator(this, context, wrapper);
 	}
 
 	@Override
 	public void configure() throws GenerationException {
-		alsoKnownAs("com.modelsolv.reprezen.gentemplates.swagger.codegen." + codegenClass.getSimpleName());
+		alsoKnownAs("com.modelsolv.reprezen.gentemplates.swagger.codegen." + wrapper.getSimpleName());
 		define(primarySource().ofType(SwaggerSource_MinimalNormalizerOptions.class));
 		define(parameter().named(SWAGGER_CODEGEN_CONFIG).optional().withDescription(
 				"Contents of swagger codegen configuration file.",
@@ -73,27 +75,27 @@ public abstract class SwaggerCodegenGenTemplate extends SwaggerGenTemplate {
 		if (info != null) {
 			define(property().named(StandardProperties.DESCRIPTION) //
 					.withValue(String.format("Provider: %s\nGenerator Name: %s\nType: %s\nPackage: %s\nClassname: %s",
-							"Swagger Codegen", info.getReportedName(), info.getType(),
-							codegenClass.getPackage().getName(), codegenClass.getSimpleName())));
+							"Swagger Codegen", info.getReportedName(), info.getType(), wrapper.getPackageName(),
+							wrapper.getSimpleName())));
 			define(property().named(StandardProperties.GENERATOR_TYPE).withValue(info.getType().name()));
 		}
 	}
 
 	public static class Generator extends GenTemplate.StaticGenerator<Swagger> {
 
-		private Class<? extends CodegenConfig> codegenClass;
+		private GenModuleWrapper<CodegenConfig> wrapper;
 
 		public Generator(GenTemplate<Swagger> genTemplate, GenTemplateContext context,
-				Class<? extends CodegenConfig> codegenClass) {
+				GenModuleWrapper<CodegenConfig> wrapper) {
 			super(genTemplate, context);
-			this.codegenClass = codegenClass;
+			this.wrapper = wrapper;
 		}
 
 		@Override
 		public void generate(Swagger model) throws GenerationException {
 			CodegenConfig swaggerCodegen;
 			try {
-				swaggerCodegen = codegenClass.newInstance();
+				swaggerCodegen = wrapper.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
 				throw new GenerationException("Failed to instantiate Swagger Codegen instance", e);
 			}

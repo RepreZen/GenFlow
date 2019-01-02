@@ -22,6 +22,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-common</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -37,7 +41,7 @@
                         </goals>
                         <configuration>
                             <includeProjectDependencies>true</includeProjectDependencies>
-                            <mainClass>com.reprezen.genflow.openapi.generator.OpenApiGeneratorDiscovery</mainClass>
+                            <mainClass>com.reprezen.genflow.openapi.generator.OagCodegenModuleDiscovery</mainClass>
                             <classpathScope>compile</classpathScope>
                             <cleanupDaemonThreads>false</cleanupDaemonThreads>
                             <arguments>

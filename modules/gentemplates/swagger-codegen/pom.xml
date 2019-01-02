@@ -33,6 +33,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-common</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -48,7 +52,7 @@
                         </goals>
                         <configuration>
                             <includeProjectDependencies>true</includeProjectDependencies>
-                            <mainClass>com.reprezen.genflow.swagger.codegen.SwaggerCodegenDiscovery</mainClass>
+                            <mainClass>com.reprezen.genflow.swagger.codegen.ScgCodegenModuleDiscovery</mainClass>
                             <classpathScope>compile</classpathScope>
                             <cleanupDaemonThreads>false</cleanupDaemonThreads>
                             <arguments>
