@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataType1Object xmlns="http://modelsolv.com/reprezen/schemas/referenceslinkswithdifferentdepth/referenceslinkswithdifferentdepth" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" customerName="John Smith" dataType1ID="asdfgh" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/referenceslinkswithdifferentdepth/referenceslinkswithdifferentdepth referencesLinksWithDifferentDepth.xsd ">
+    <!-- serviceDataType DataType1 { refProp dataType1_reference1 : DataType2 ...} -->
+    <dataType1_reference1 dataType2ID="qwe">
+        <atom:link href="http://tempuri.org/3" rel="dataType1_reference1"/>
+    </dataType1_reference1>
+    <!-- serviceDataType DataType1 { containment refProp dataType1_containment1 : DataType2 ... } -->
+    <dataType1_containment1 dataType2ID="hgf">
+        <!-- serviceDataType DataType2 { refProp dataType3_reference1 : DataType4... } -->
+        <dataType2_reference1 dataType3ID="ert">
+            <atom:link href="http://tempuri.org/2" rel="dataType2_reference1"/>
+        </dataType2_reference1>
+        <!-- serviceDataType DataType2 { containment refProp dataType2_containmente1 : DataType3 ... } -->
+        <dataType2_containmente1 dataType3ID="asd">
+            <!-- serviceDataType DataType3 { containment refProp dataType2_containmente1 : DataType3 ... } -->
+            <dataType3_reference1>
+                <atom:link href="http://tempuri.org/1" rel="dataType3_reference1"/>
+            </dataType3_reference1>
+        </dataType2_containmente1>
+    </dataType1_containment1>
+</dataType1Object>

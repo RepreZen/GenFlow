@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:legalPersonObject xmlns:p="http://modelsolv.com/reprezen/schemas/fiboentity/fiboentity" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" legalPersonId="" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/fiboentity/fiboentity ../../../com.modelsolv.reprezen.resources/wadl/fiboEntity.xsd ">
+    <p:naturalPerson>
+        <atom:link href="http://tempuri.org" rel=""/>
+    </p:naturalPerson>
+    <p:artificial>
+        <atom:link href="http://tempuri.org" rel=""/>
+    </p:artificial>
+    <p:accepts/>
+    <p:isCapableOf/>
+</p:legalPersonObject>
