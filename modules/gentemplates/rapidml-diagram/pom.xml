@@ -18,5 +18,10 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-tests</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
