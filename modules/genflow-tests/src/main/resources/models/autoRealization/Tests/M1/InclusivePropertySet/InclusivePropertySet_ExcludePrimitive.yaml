@@ -1,0 +1,18 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+name: InclusivePropertySet_ExcludePrimitive
+realizationRules:
+  AllObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_AllExceptPrimitive
+    appliesTo:
+    - _type: ContextPattern
+      _documentation: Empty ContextPattern object has no selectors, meaning that this realization template applies to _all_ object references, in _all_ realization contexts.
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        excludedProperties:
+        - _type: PropertySelector
+          propertyType:
+            _type: PrimitivePropertySelector

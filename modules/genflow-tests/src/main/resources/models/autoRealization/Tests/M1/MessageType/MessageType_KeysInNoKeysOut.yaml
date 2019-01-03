@@ -1,0 +1,79 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |-
+  * Root Objects default to all properties
+  * Request messages on POST requests omit key properties
+  * Response messages on POST requests include only key properties
+  * Reference properties get key properties only
+name: ResourceType_CollectionResourceRefsOnly
+realizationRules:
+  POSTRequests:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_PostReq
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: POST_METHOD
+        messageType: REQUEST
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: false
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+  POST200Response:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_PostResp
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: POST_METHOD
+        messageType: SUCCESSFUL_2xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+  RefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true

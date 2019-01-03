@@ -1,0 +1,17 @@
+_type: RealizationModel
+name: KeySelectors
+realizationRules:
+      
+  Keyed:
+    appliesTo:
+    - _type: ContextPattern
+      hasKeys: true
+    realization:
+      _type: ObjectRealizationSpec
+  UnKeyed:
+    appliesTo:
+    - _type: ContextPattern
+      hasKeys: false
+    realization:
+      _type: ObjectRealizationSpec
+      

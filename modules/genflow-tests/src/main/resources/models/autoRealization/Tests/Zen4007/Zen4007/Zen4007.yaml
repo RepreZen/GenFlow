@@ -1,0 +1,92 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+
+name: Zen4007_Zen4007
+realizationRules:
+
+  ObjectResourceRoot:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: OBJECT_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _documentation: Only include multi-valued references that are _not_ auto-linkable to a collectionResource.
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          multiplicity: MULTI_VALUED
+          propertyType:
+            _type: ReferencePropertyRealization
+            autoLinkableToCollectionResource: false
+        
+  CollectionResourceRoot:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: COLLECTION_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _documentation: Only include key properties.
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+        
+  MultiRefNotLinkableToCR:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToCollectionResource: false
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _documentation: Only include multi-valued references that are auto-linkable to a CR
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          multiplicity: MULTI_VALUED
+          propertyType:
+            _type: ReferencePropertyRealization
+            autoLinkableToCollectionResource: true
+
+  MultiRefLinkableToCR:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToCollectionResource: true
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _documentation: Only include key properties.
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+                        
+      links:
+      - strategy: specification
+        linkRelation: detail
+        targetResourceType: AUTO_LINK_COLLECTION_RESOURCE
+

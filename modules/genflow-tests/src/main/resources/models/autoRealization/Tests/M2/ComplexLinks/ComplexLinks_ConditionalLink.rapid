@@ -1,0 +1,15 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./ComplexLinks_ConditionalLink.yaml"
+		
+		objectResource FinancialStatementObject type FinancialStatement
+		
+		objectResource BalanceSheetObject type BalanceSheet
+				
+		collectionResource CommentCollection type Comment
+
+		

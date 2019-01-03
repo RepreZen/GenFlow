@@ -1,0 +1,69 @@
+/* NotValidForSwagger */
+rapidModel SelectionTest
+	resourceAPI API baseURI "http://my-namespace.com"
+
+		objectResource AObject type A
+			method GET
+				response type A statusCode 99
+				response type A statusCode 100
+				response type A statusCode 199
+				response type A statusCode 200
+				response type A statusCode 299
+				response type A statusCode 300
+				response type A statusCode 399
+				response type A statusCode 400
+				response type A statusCode 499
+				response type A statusCode 500
+				response type A statusCode 599
+				response type A statusCode 600
+			method POST
+				request type A
+				response type A statusCode 200
+				response type A statusCode 300
+			method PUT
+				response type A statusCode 200
+			method PATCH
+				response type A statusCode 200
+			method DELETE
+				response type A statusCode 200
+			method OPTIONS
+				response type A statusCode 200
+				response type A statusCode 300
+			method HEAD
+				response type A statusCode 200
+			method TRACE
+				response type A statusCode 200
+			method CONNECT
+				response type A statusCode 200
+
+		collectionResource ACollection type A
+		
+		objectResource BObject type B
+			method GET
+				response type B statusCode 200
+				
+		objectResource BObject2 type B
+		
+
+	dataModel DataModel
+		structure A
+			b :  reference B
+		
+			// containment tests use reference prop contexts that
+			// also specify a multiplicity, so we end up with selection
+			// results for non-contain[er|ing] tests that are distinct
+			// from those for contain[er|ing] tests
+			bContainer: container reference B
+			bContaining: containing reference B
+			bNonContainer: containing reference B*
+			bNonContaining: container reference B*
+			bNonContainment: reference B
+			
+			bOptional: reference B?
+			bRequired: reference B!
+			bOptionalMulti: reference B*
+			bRequiredMulti: reference B+
+
+		structure B
+			x : key integer
+			a : reference A 
