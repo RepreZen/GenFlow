@@ -1,0 +1,25 @@
+---
+swagger: "2.0"
+info:
+  title: External defiitions
+  version: "1.0"
+paths: {}
+
+responses:
+  NotFound:
+    description: Not Found Response
+  Error:
+    description: Error Response
+    schema:
+      $ref: "#/definitions/Error"
+  Standard:
+    description: Standard Response
+    schema:
+      $ref: defs.yaml#/definitions/StandardResponsePayload
+
+definitions:
+  Error:
+    type: object
+    properties:
+      msg:
+        type: string

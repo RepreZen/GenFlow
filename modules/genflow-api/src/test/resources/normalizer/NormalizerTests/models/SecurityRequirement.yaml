@@ -1,0 +1,60 @@
+---
+swagger: "2.0"
+info:
+  description: Tax Blaster
+  version: 1.0.0
+  title: TaxBlaster
+host: taxblaster.com
+basePath: /api
+schemes:
+- http
+
+securityDefinitions:
+
+  basic_auth:
+    type: basic
+
+  OAuth2:
+    type: oauth2
+    scopes:
+      scope1: scope1_description 
+    flow: accessCode
+    authorizationUrl: authorizationUrl
+    tokenUrl: tokenUrl
+    
+security:
+  - basic_auth : []
+
+paths:
+
+  /taxFilings:
+
+    get:
+      summary: With default security requirement
+      description: Provide details for the entire list (for collection resources) or an item (for object resources)
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+    
+    post:
+      summary: With OAth2 security
+      security:
+        - OAuth2 : [scope1]
+        
+      description: Create a new item
+      parameters:
+       - name: request
+         in: body
+         required: true
+         schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+    
+      
+
