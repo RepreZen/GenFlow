@@ -39,6 +39,7 @@ import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.template.FakeGenTemplateContext;
 import com.reprezen.genflow.api.zenmodel.ZenModelSource;
 import com.reprezen.genflow.rapidml.xsd.ResourceApiSchemaGenerator;
+import com.reprezen.genflow.test.common.RapidMLInjectorProvider;
 import com.reprezen.rapidml.ZenModel;
 import com.reprezen.rapidml.implicit.ZenModelNormalizer;
 
