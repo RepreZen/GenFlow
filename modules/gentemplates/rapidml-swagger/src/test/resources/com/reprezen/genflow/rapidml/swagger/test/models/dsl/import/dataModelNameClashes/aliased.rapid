@@ -1,4 +1,0 @@
-rapidModel aliased
-	dataModel dm2
-		enum string en
-			VALUE : "aliased_dm"

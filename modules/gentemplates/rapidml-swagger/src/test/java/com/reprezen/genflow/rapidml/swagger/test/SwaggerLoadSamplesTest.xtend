@@ -30,6 +30,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
+import com.reprezen.genflow.test.common.GeneratorTestFixture
+import com.google.common.io.Resources
 
 @RunWith(typeof(Parameterized))
 class SwaggerLoadSamplesTest extends Assert {
@@ -38,7 +40,8 @@ class SwaggerLoadSamplesTest extends Assert {
 	@Parameters(name="{index}: {0}")
 	def static Iterable<Object[]> data() {
 		val dataList = new ArrayList<Object[]>
-		val modelDir = new File(SwaggerLoadSamplesTest.getResource("models").toURI.path)
+
+		val modelDir = new File(Resources.getResource(GeneratorTestFixture, "/models/dsl").toURI.path)
 		Files.walkFileTree(modelDir.toPath, new SimpleFileVisitor<Path>() {
 			override FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
 				if (path.last.toString.endsWith(".rapid")) {
