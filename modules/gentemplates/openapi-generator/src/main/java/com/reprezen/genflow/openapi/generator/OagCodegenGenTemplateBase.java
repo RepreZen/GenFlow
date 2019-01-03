@@ -8,7 +8,6 @@
  *******************************************************************************/
 package com.reprezen.genflow.openapi.generator;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -126,10 +125,8 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					.get(OPENAPI_CODEGEN_SYSTEM_PROPERTIES);
 			setSystemProperties(systemProperties);
 			generator.opts(clientOptInput);
-			List<File> result = generator.generate();
-			for (File next : result) {
-				System.out.println("File: " + next.getAbsolutePath());
-			}
+			reportOagVersion();
+			generator.generate();
 		}
 
 		private void addParameters(Map<String, String> config, Map<String, Object> params) {
@@ -151,5 +148,9 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			}
 		}
 
+		private void reportOagVersion() {
+			context.getLogger().info(String.format("Using openapi-generator v%s\n",
+					CodegenConfig.class.getPackage().getImplementationVersion()));
+		}
 	}
 }
