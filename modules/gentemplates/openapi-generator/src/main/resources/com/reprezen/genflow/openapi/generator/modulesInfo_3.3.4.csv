@@ -6,37 +6,37 @@ org.openapitools.codegen.languages.Apache2ConfigCodegen,CONFIG,apache2,Apache2 C
 org.openapitools.codegen.languages.ApexClientCodegen,CLIENT,apex,Apex Client,,,,,,*
 org.openapitools.codegen.languages.AspNetCoreServerCodegen,SERVER,aspnetcore,Asp Net Core Server,C# ASP.Net Core Server,,,,,*
 org.openapitools.codegen.languages.BashClientCodegen,CLIENT,bash,Bash Client,,,,,,*
-org.openapitools.codegen.languages.CLibcurlClientCodegen,CLIENT,c,CLibcurl Client,,,,*,*,
+org.openapitools.codegen.languages.CLibcurlClientCodegen,CLIENT,c,CLibcurl Client,C libcurl Client,,,*,*,*
 org.openapitools.codegen.languages.CSharpClientCodegen,CLIENT,csharp,CSharp Client,C# Client,,,,,*
-org.openapitools.codegen.languages.CSharpDotNet2ClientCodegen,CLIENT,csharp-dotnet2,CSharp Dot Net2 Client,C# for .NET v2 Client,,,,,*
-org.openapitools.codegen.languages.CSharpNancyFXServerCodegen,SERVER,csharp-nancyfx,CSharp Nancy FX Server,C# for .NET NancyFx Server,,,,,*
-org.openapitools.codegen.languages.CSharpRefactorClientCodegen,CLIENT,csharp-refactor,CSharp Refactor Client,,,,*,*,
+org.openapitools.codegen.languages.CSharpDotNet2ClientCodegen,CLIENT,csharp-dotnet2,CSharp Dot Net2 Client,C# Client for .NET v2,,,,,*
+org.openapitools.codegen.languages.CSharpNancyFXServerCodegen,SERVER,csharp-nancyfx,CSharp Nancy FX Server,C# NancyFx Server,,,,,*
+org.openapitools.codegen.languages.CSharpRefactorClientCodegen,CLIENT,csharp-refactor,CSharp Refactor Client,C# Client (Refactor),,,*,*,*
 org.openapitools.codegen.languages.ClojureClientCodegen,CLIENT,clojure,Clojure Client,,,,,,*
 org.openapitools.codegen.languages.ConfluenceWikiCodegen,DOCUMENTATION,cwiki,Confluence Wiki Documentation,,,,,,*
 org.openapitools.codegen.languages.CppPistacheServerCodegen,SERVER,cpp-pistache-server,Cpp Pistache Server,C++ Pistache Server,,,,,*
 org.openapitools.codegen.languages.CppQt5ClientCodegen,CLIENT,cpp-qt5,Cpp Qt5 Client,C++ QT5 Client,,,,,*
-org.openapitools.codegen.languages.CppQt5QHttpEngineServerCodegen,SERVER,cpp-qt5-qhttpengine-server,Cpp Qt5QHttp Engine Server,,,,*,*,
+org.openapitools.codegen.languages.CppQt5QHttpEngineServerCodegen,SERVER,cpp-qt5-qhttpengine-server,Cpp Qt5QHttp Engine Server,C++ QT5 QHTTPEngine Server,,,*,*,*
 org.openapitools.codegen.languages.CppRestClientCodegen,CLIENT,cpp-restsdk,Cpp Rest Client,C++ Client,,*,*,,
-org.openapitools.codegen.languages.CppRestSdkClientCodegen,CLIENT,cpp-restsdk,Cpp Rest Sdk Client,,,,*,*,
+org.openapitools.codegen.languages.CppRestSdkClientCodegen,CLIENT,cpp-restsdk,Cpp Rest Sdk Client,C++ REST SDK Client,,,*,*,*
 org.openapitools.codegen.languages.CppRestbedServerCodegen,SERVER,cpp-restbed-server,Cpp Restbed Server,C++ Restbed Server,,,,,*
 org.openapitools.codegen.languages.CppTizenClientCodegen,CLIENT,cpp-tizen,Cpp Tizen Client,C++ Tizen Client,,,,,*
 org.openapitools.codegen.languages.DartClientCodegen,CLIENT,dart,Dart Client,,,,,,*
-org.openapitools.codegen.languages.DartJaguarClientCodegen,CLIENT,dart-jaguar,Dart Jaguar Client,,,,*,*,
+org.openapitools.codegen.languages.DartJaguarClientCodegen,CLIENT,dart-jaguar,Dart Jaguar Client,,,,*,*,*
 org.openapitools.codegen.languages.EiffelClientCodegen,CLIENT,eiffel,Eiffel Client,,,,,,*
 org.openapitools.codegen.languages.ElixirClientCodegen,CLIENT,elixir,Elixir Client,,,,,,*
 org.openapitools.codegen.languages.ElmClientCodegen,CLIENT,elm,Elm Client,,,,,,*
 org.openapitools.codegen.languages.ErlangClientCodegen,CLIENT,erlang-client,Erlang Client,,,,,,*
-org.openapitools.codegen.languages.ErlangProperCodegen,CLIENT,erlang-proper,Erlang Proper Client,,,,*,*,
+org.openapitools.codegen.languages.ErlangProperCodegen,CLIENT,erlang-proper,Erlang Proper Client,Erlang PropEr Client,,,*,*,*
 org.openapitools.codegen.languages.ErlangServerCodegen,SERVER,erlang-server,Erlang Server,,,,,,*
 org.openapitools.codegen.languages.FinchServerCodegen,SERVER,scala-finch,Finch Server,Scala Finch Server,,,,,*
 org.openapitools.codegen.languages.FlashClientCodegen,CLIENT,flash,Flash Client,,,,,,*
 org.openapitools.codegen.languages.GoClientCodegen,CLIENT,go,Go Client,,,,,,*
-org.openapitools.codegen.languages.GoGinServerCodegen,SERVER,go-gin-server,Go Gin Server,,,,*,*,
+org.openapitools.codegen.languages.GoGinServerCodegen,SERVER,go-gin-server,Go Gin Server,,,,*,*,*
 org.openapitools.codegen.languages.GoServerCodegen,SERVER,go-server,Go Server,,,,,,*
 org.openapitools.codegen.languages.GroovyClientCodegen,CLIENT,groovy,Groovy Client,,,,,,*
 org.openapitools.codegen.languages.HaskellHttpClientCodegen,CLIENT,haskell-http-client,Haskell Http Client,Haskell HTTP Client,,,,,*
 org.openapitools.codegen.languages.HaskellServantCodegen,SERVER,haskell,Haskell Servant Server,,,,,,*
-org.openapitools.codegen.languages.JMeterClientCodegen,CLIENT,jmeter,JMeter Client,,,,*,*,
+org.openapitools.codegen.languages.JMeterClientCodegen,CLIENT,jmeter,JMeter Client,,,,*,*,*
 org.openapitools.codegen.languages.JMeterCodegen,CLIENT,jmeter,JMeter Client,,,*,*,,
 org.openapitools.codegen.languages.JavaCXFClientCodegen,CLIENT,jaxrs-cxf-client,Java CXF Client,,,,,,*
 org.openapitools.codegen.languages.JavaCXFServerCodegen,SERVER,jaxrs-cxf,Java CXF Server,Java CXF (JAX-RS) Server,,,,,*
@@ -53,20 +53,20 @@ org.openapitools.codegen.languages.JavaResteasyServerCodegen,SERVER,jaxrs-restea
 org.openapitools.codegen.languages.JavaUndertowServerCodegen,SERVER,java-undertow-server,Java Undertow Server,,,,,,*
 org.openapitools.codegen.languages.JavaVertXServerCodegen,SERVER,java-vertx,Java Vert X Server,Java Vert.x Server,,,,,*
 org.openapitools.codegen.languages.JavascriptClientCodegen,CLIENT,javascript,Javascript Client,JavaScript Client,,,,,*
-org.openapitools.codegen.languages.JavascriptClosureAngularClientCodegen,CLIENT,javascript-closure-angular,Javascript Closure Angular Client,JavaScript Closure Angular Client,,,,,*
-org.openapitools.codegen.languages.JavascriptFlowtypedClientCodegen,CLIENT,javascript-flowtyped,Javascript Flowtyped Client,,,,*,*,
+org.openapitools.codegen.languages.JavascriptClosureAngularClientCodegen,CLIENT,javascript-closure-angular,Javascript Closure Angular Client,JavaScript Closure + Angular Client ,,,,,*
+org.openapitools.codegen.languages.JavascriptFlowtypedClientCodegen,CLIENT,javascript-flowtyped,Javascript Flowtyped Client,JavaScript Flow Client,,,*,*,*
 org.openapitools.codegen.languages.KotlinClientCodegen,CLIENT,kotlin,Kotlin Client,,,,,,*
 org.openapitools.codegen.languages.KotlinServerCodegen,SERVER,kotlin-server,Kotlin Server,,,,,,*
-org.openapitools.codegen.languages.KotlinSpringServerCodegen,SERVER,kotlin-spring,Kotlin Spring Server,,,,*,*,
+org.openapitools.codegen.languages.KotlinSpringServerCodegen,SERVER,kotlin-spring,Kotlin Spring Server,,,,*,*,*
 org.openapitools.codegen.languages.LuaClientCodegen,CLIENT,lua,Lua Client,,,,,,*
-org.openapitools.codegen.languages.MysqlSchemaCodegen,SCHEMA,mysql-schema,Mysql Schema,,,,*,*,
+org.openapitools.codegen.languages.MysqlSchemaCodegen,SCHEMA,mysql-schema,MySQL Schema,,,,*,*,*
 org.openapitools.codegen.languages.NodeJSServerCodegen,SERVER,nodejs-server,Node JS Server,Node.js Server,,,,,*
 org.openapitools.codegen.languages.ObjcClientCodegen,CLIENT,objc,Objc Client,Objective-C Client,,,,,*
 org.openapitools.codegen.languages.OpenAPIGenerator,DOCUMENTATION,openapi,Open API Documentation,OpenAPI (JSON),,,,,*
 org.openapitools.codegen.languages.OpenAPIYamlGenerator,DOCUMENTATION,openapi-yaml,Open APIYaml Documentation,OpenAPI (YAML),,,,,*
 org.openapitools.codegen.languages.PerlClientCodegen,CLIENT,perl,Perl Client,,,,,,*
 org.openapitools.codegen.languages.PhpClientCodegen,CLIENT,php,Php Client,PHP Client,,,,,*
-org.openapitools.codegen.languages.PhpLaravelServerCodegen,SERVER,php-laravel,Php Laravel Server,,,,*,*,
+org.openapitools.codegen.languages.PhpLaravelServerCodegen,SERVER,php-laravel,Php Laravel Server,PHP Laravel Server,,,*,*,*
 org.openapitools.codegen.languages.PhpLumenServerCodegen,SERVER,php-lumen,Php Lumen Server,PHP Lumen Server,,,,,*
 org.openapitools.codegen.languages.PhpSilexServerCodegen,SERVER,php-silex,Php Silex Server,PHP Silex Server,,,,,*
 org.openapitools.codegen.languages.PhpSlimServerCodegen,SERVER,php-slim,Php Slim Server,PHP Slim Server,,,,,*
@@ -97,7 +97,7 @@ org.openapitools.codegen.languages.SwiftClientCodegen,CLIENT,swift2-deprecated,S
 org.openapitools.codegen.languages.TypeScriptAngularClientCodegen,CLIENT,typescript-angular,Type Script Angular Client,TypeScript Angular Client,,,,,*
 org.openapitools.codegen.languages.TypeScriptAngularJsClientCodegen,CLIENT,typescript-angularjs,Type Script Angular Js Client,TypeScript AngularJS Client,,,,,*
 org.openapitools.codegen.languages.TypeScriptAureliaClientCodegen,CLIENT,typescript-aurelia,Type Script Aurelia Client,TypeScript Aurelia Client,,,,,*
-org.openapitools.codegen.languages.TypeScriptAxiosClientCodegen,CLIENT,typescript-axios,Type Script Axios Client,,,,*,*,
+org.openapitools.codegen.languages.TypeScriptAxiosClientCodegen,CLIENT,typescript-axios,Type Script Axios Client,TypeScript Axios Client,,,*,*,*
 org.openapitools.codegen.languages.TypeScriptFetchClientCodegen,CLIENT,typescript-fetch,Type Script Fetch Client,TypeScript Fetch Client,,,,,*
 org.openapitools.codegen.languages.TypeScriptInversifyClientCodegen,CLIENT,typescript-inversify,Type Script Inversify Client,TypeScript Inversify Client,,,,,*
 org.openapitools.codegen.languages.TypeScriptJqueryClientCodegen,CLIENT,typescript-jquery,Type Script Jquery Client,TypeScript JQuery Client,,,,,*
