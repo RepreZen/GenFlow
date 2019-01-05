@@ -11,7 +11,7 @@ io.swagger.codegen.languages.CSharpClientCodegen,CLIENT,csharp,CSharp Client,C# 
 io.swagger.codegen.languages.ClojureClientCodegen,CLIENT,clojure,Clojure Client,,,,,,*
 io.swagger.codegen.languages.ConfluenceWikiGenerator,DOCUMENTATION,cwiki,Confluence Wiki Documentation,,,,,,*
 io.swagger.codegen.languages.CppRestClientCodegen,CLIENT,cpprest,Cpp Rest Client,C++ Client,,,,,*
-io.swagger.codegen.languages.CsharpDotNet2ClientCodegen,CLIENT,csharp-dotnet2,Csharp Dot Net2 Client,C# for .NET v2 Client,,,,,*
+io.swagger.codegen.languages.CsharpDotNet2ClientCodegen,CLIENT,csharp-dotnet2,Csharp Dot Net2 Client,C# Client for .NET v2 ,,,,,*
 io.swagger.codegen.languages.DartClientCodegen,CLIENT,dart,Dart Client,,,,,,*
 io.swagger.codegen.languages.DartJaguarClientCodegen,CLIENT,dart-jaguar,Dart Jaguar Client,,,,*,*,*
 io.swagger.codegen.languages.EiffelClientCodegen,CLIENT,eiffel,Eiffel Client,,,,,,*
@@ -47,7 +47,7 @@ io.swagger.codegen.languages.KotlinClientCodegen,CLIENT,kotlin,Kotlin Client,,,,
 io.swagger.codegen.languages.KotlinServerCodegen,SERVER,kotlin-server,Kotlin Server,,,,*,*,*
 io.swagger.codegen.languages.LuaClientCodegen,CLIENT,lua,Lua Client,,,,,,*
 io.swagger.codegen.languages.LumenServerCodegen,SERVER,lumen,Lumen Server,PHP Lumen Server,,,,,*
-io.swagger.codegen.languages.NancyFXServerCodegen,SERVER,nancyfx,Nancy FX Server,C# for .NET NancyFx Server,,,,,*
+io.swagger.codegen.languages.NancyFXServerCodegen,SERVER,nancyfx,Nancy FX Server,C# NancyFx Server,,,,,*
 io.swagger.codegen.languages.NodeJSServerCodegen,SERVER,nodejs-server,Node JS Server,Node.js Server,,,,,*
 io.swagger.codegen.languages.ObjcClientCodegen,CLIENT,objc,Objc Client,Objective-C Client,,,,,*
 io.swagger.codegen.languages.PerlClientCodegen,CLIENT,perl,Perl Client,,,,,,*
