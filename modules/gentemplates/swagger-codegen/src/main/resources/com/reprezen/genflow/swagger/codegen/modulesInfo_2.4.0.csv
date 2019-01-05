@@ -13,7 +13,7 @@ io.swagger.codegen.languages.ConfluenceWikiGenerator,DOCUMENTATION,cwiki,Conflue
 io.swagger.codegen.languages.CppRestClientCodegen,CLIENT,cpprest,Cpp Rest Client,C++ Client,,,,,*
 io.swagger.codegen.languages.CsharpDotNet2ClientCodegen,CLIENT,csharp-dotnet2,Csharp Dot Net2 Client,C# for .NET v2 Client,,,,,*
 io.swagger.codegen.languages.DartClientCodegen,CLIENT,dart,Dart Client,,,,,,*
-io.swagger.codegen.languages.DartJaguarClientCodegen,CLIENT,dart-jaguar,Dart Jaguar Client,,,,*,*,
+io.swagger.codegen.languages.DartJaguarClientCodegen,CLIENT,dart-jaguar,Dart Jaguar Client,,,,*,*,*
 io.swagger.codegen.languages.EiffelClientCodegen,CLIENT,eiffel,Eiffel Client,,,,,,*
 io.swagger.codegen.languages.ElixirClientCodegen,CLIENT,elixir,Elixir Client,,,,,,*
 io.swagger.codegen.languages.ElmClientCodegen,CLIENT,elm,Elm Client,,,,,,*
@@ -44,7 +44,7 @@ io.swagger.codegen.languages.JavaVertXServerCodegen,SERVER,java-vertx,Java Vert 
 io.swagger.codegen.languages.JavascriptClientCodegen,CLIENT,javascript,Javascript Client,JavaScript Client,,,,,*
 io.swagger.codegen.languages.JavascriptClosureAngularClientCodegen,CLIENT,javascript-closure-angular,Javascript Closure Angular Client,JavaScript Closure Angular Client,,,,,*
 io.swagger.codegen.languages.KotlinClientCodegen,CLIENT,kotlin,Kotlin Client,,,,,,*
-io.swagger.codegen.languages.KotlinServerCodegen,SERVER,kotlin-server,Kotlin Server,,,,*,*,
+io.swagger.codegen.languages.KotlinServerCodegen,SERVER,kotlin-server,Kotlin Server,,,,*,*,*
 io.swagger.codegen.languages.LuaClientCodegen,CLIENT,lua,Lua Client,,,,,,*
 io.swagger.codegen.languages.LumenServerCodegen,SERVER,lumen,Lumen Server,PHP Lumen Server,,,,,*
 io.swagger.codegen.languages.NancyFXServerCodegen,SERVER,nancyfx,Nancy FX Server,C# for .NET NancyFx Server,,,,,*
@@ -63,7 +63,7 @@ io.swagger.codegen.languages.RubyClientCodegen,CLIENT,ruby,Ruby Client,,,,,,*
 io.swagger.codegen.languages.RustClientCodegen,CLIENT,rust,Rust Client,,,,,,*
 io.swagger.codegen.languages.RustServerCodegen,SERVER,rust-server,Rust Server,,,,,,*
 io.swagger.codegen.languages.ScalaClientCodegen,CLIENT,scala,Scala Client,,,,,,*
-io.swagger.codegen.languages.ScalaGatlingCodegen,CLIENT,scala-gatling,Scala Gatling Client,,,,*,*,
+io.swagger.codegen.languages.ScalaGatlingCodegen,CLIENT,scala-gatling,Scala Gatling Client,,,,*,*,*
 io.swagger.codegen.languages.ScalaLagomServerCodegen,SERVER,scala-lagom-server,Scala Lagom Server,,,,,,*
 io.swagger.codegen.languages.ScalatraServerCodegen,SERVER,scalatra,Scalatra Server,Scala Scalatra Server,,,,,*
 io.swagger.codegen.languages.ScalazClientCodegen,CLIENT,scalaz,Scalaz Client,Scala Scalaz Client,,,,,*
@@ -85,7 +85,7 @@ io.swagger.codegen.languages.TypeScriptAngularClientCodegen,CLIENT,typescript-an
 io.swagger.codegen.languages.TypeScriptAngularJsClientCodegen,CLIENT,typescript-angularjs,Type Script Angular Js Client,TypeScript AngularJS Client,,,,,*
 io.swagger.codegen.languages.TypeScriptAureliaClientCodegen,CLIENT,typescript-aurelia,Type Script Aurelia Client,TypeScript Aurelia Client,,,,,*
 io.swagger.codegen.languages.TypeScriptFetchClientCodegen,CLIENT,typescript-fetch,Type Script Fetch Client,TypeScript Fetch Client,,,,,*
-io.swagger.codegen.languages.TypeScriptInversifyClientCodegen,CLIENT,typescript-inversify,Type Script Inversify Client,,,,*,*,
+io.swagger.codegen.languages.TypeScriptInversifyClientCodegen,CLIENT,typescript-inversify,Type Script Inversify Client,TypeScript Inversify Client,,,*,*,*
 io.swagger.codegen.languages.TypeScriptJqueryClientCodegen,CLIENT,typescript-jquery,Type Script Jquery Client,TypeScript JQuery Client,,,,,*
 io.swagger.codegen.languages.TypeScriptNodeClientCodegen,CLIENT,typescript-node,Type Script Node Client,TypeScript Node Client,,,,,*
 io.swagger.codegen.languages.UndertowCodegen,SERVER,undertow,Undertow Server,Java Undertow Server,,,,,*
