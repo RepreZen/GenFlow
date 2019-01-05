@@ -1,5 +1,6 @@
 # GenFlow
 [![Build Status](https://travis-ci.org/RepreZen/GenFlow.svg?branch=master)](https://travis-ci.org/RepreZen/GenFlow)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://mvnrepository.com/artifact/com.reprezen.genflow)
 
 Code Generation framework used in RepreZen API Studio
 
