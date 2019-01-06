@@ -18,6 +18,8 @@ RepreZen API Studio supports API design-first and <a href="http://RZen.io/APICod
 GenFlow is a comprehensive API code generation framework that supports a wide variety of code generation scenarios.
 Here are some of its essential features:
 
-* *Generates API client libraries, services, documentation* and other essential components, using pre-built or custom generators.
-  <br>&nbsp;&nbsp;Learn More:
-    * [What code generators are included in RepreZen API Studio?&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link icon">](https://support.reprezen.com/support/solutions/articles/24000018770-what-code-generators-are-included-in-reprezen-api-studio-)
+* **Generates API client libraries, services, documentation** and other essential components, using pre-built or custom generators.
+  
+##### &nbsp;&nbsp;&nbsp;Learn More:
+
+&nbsp;&nbsp;&nbsp;[What code generators are included in RepreZen API Studio?&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link icon">](https://support.reprezen.com/support/solutions/articles/24000018770-what-code-generators-are-included-in-reprezen-api-studio-)
