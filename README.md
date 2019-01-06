@@ -19,7 +19,5 @@ GenFlow is a comprehensive API code generation framework that supports a wide va
 Here are some of its essential features:
 
 * **Generates API client libraries, services, documentation** and other essential components, using pre-built or custom generators.
-  
-##### &nbsp;&nbsp;&nbsp;Learn More:
-
-&nbsp;&nbsp;&nbsp;[What code generators are included in RepreZen API Studio?&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link icon">](https://support.reprezen.com/support/solutions/articles/24000018770-what-code-generators-are-included-in-reprezen-api-studio-)
+  ##### &nbsp;&nbsp;&nbsp;Learn More:
+  &nbsp;&nbsp;&nbsp;[What code generators are included in RepreZen API Studio?&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link icon">](https://support.reprezen.com/support/solutions/articles/24000018770-what-code-generators-are-included-in-reprezen-api-studio-)
