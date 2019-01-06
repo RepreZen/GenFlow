@@ -39,8 +39,8 @@ Here are some of its essential features:
 * **Supports custom code generators** written in Java, and provides a powerful, template-driven framework built on Xtend.<br><br>
   &nbsp;&nbsp;&nbsp;**`Learn More:`**
   
-      * [Xtend Homepage&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link">](https://www.eclipse.org/xtend/)
-      * [Custom Code Generation in RepreZen API Studio&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link">](http://RZen.io/CGDocs)
+     * [Xtend Homepage&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link">](https://www.eclipse.org/xtend/)
+     * [Custom Code Generation in RepreZen API Studio&nbsp;<img src="https://www.reprezen.com/hubfs/external-link.svg" height="12" width="12" alt="external link">](http://RZen.io/CGDocs)
 
 * **Integrates KaiZen OpenAPI Normalizer** as a preprocessor or standalone code generator. KaiZen Normalizer consolidates multi-file OpenAPI projects to a single document by resolving references, applying defaults, and expanding cascading properties to ensure reliable processing by downstream code generators and API documentation formats.<br><br>
 &nbsp;&nbsp;&nbsp;**`Learn More:`**
