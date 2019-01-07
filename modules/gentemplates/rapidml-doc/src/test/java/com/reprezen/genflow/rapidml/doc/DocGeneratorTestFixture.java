@@ -16,7 +16,9 @@ import java.util.Map;
 import org.eclipse.emf.common.util.Monitor;
 import org.junit.runner.Description;
 
+import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.template.FakeGenTemplateContext;
+import com.reprezen.genflow.api.zenmodel.ZenModelSource;
 import com.reprezen.genflow.rapidml.doc.xtend.XGenerateDoc;
 import com.reprezen.genflow.test.common.GeneratorTestFixture;
 import com.reprezen.rapidml.ZenModel;
@@ -38,7 +40,13 @@ public class DocGeneratorTestFixture extends GeneratorTestFixture {
 	protected Map<String, String> doGenerate(ZenModel zenModel, File dir, Monitor progressMonitor) throws IOException {
 		new ZenModelNormalizer().normalize(zenModel);
 		XGenerateDoc generator = new XGenerateDoc();
-		generator.init(new FakeGenTemplateContext());
+		generator.init(
+				new FakeGenTemplateContext(new ZenModelSource(new File(zenModel.eResource().getURI().toFileString())) {
+					@Override
+					public ZenModel load(File inFile) throws GenerationException {
+						return zenModel;
+					}
+				}));
 		String result = generator.generate(zenModel);
 		return Collections.singletonMap("test_doc.html", result); //$NON-NLS-1$
 	}

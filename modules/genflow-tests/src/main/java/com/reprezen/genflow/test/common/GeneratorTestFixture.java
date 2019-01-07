@@ -96,7 +96,7 @@ public abstract class GeneratorTestFixture extends TestWatcher {
 
 	private URI getRestFileURI(Description description) {
 		String sampleRestFilePath = getSampleRestName(description);
-		URI modelURI = URI.createURI(Resources.getResource("models/dsl").getFile());
+		URI modelURI = URI.createFileURI(Resources.getResource("models/dsl").getFile());
 		for (String nextSegment : sampleRestFilePath.split("/")) {
 			modelURI = modelURI.appendSegment(nextSegment);
 		}
