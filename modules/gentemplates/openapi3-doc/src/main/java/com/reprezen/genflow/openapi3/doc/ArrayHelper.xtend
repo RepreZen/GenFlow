@@ -54,11 +54,11 @@ class ArrayHelper implements Helper {
 		val max = obj.maxItems
 		val min = obj.minItems
 		switch null {
-			case min === null && max === null:
+			case (min === null || min === 0) && (max === null || max === 0):
 				"[*]"
-			case min == 0 && max == 1:
+			case (min === null || min === 0) && max === 1:
 				"[?]"
-			case min == 1 && max === null:
+			case (min !== null && min === 1) && (max === null || max === 0):
 				"[+]"
 			case min !== null && max === null: '''[«min»+]'''
 			case min === null && max !== null: '''[..«max»]'''
