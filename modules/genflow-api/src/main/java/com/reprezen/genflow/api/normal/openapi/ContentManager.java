@@ -196,6 +196,8 @@ public class ContentManager {
 						requiredScheme.retain();
 					}
 				}
+			} else if (item.getSectionType() == ObjectType.SECURITY_SCHEME) {
+				item.retain();
 			}
 		}
 	}

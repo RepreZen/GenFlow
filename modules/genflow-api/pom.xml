@@ -86,6 +86,11 @@
             <groupId>com.reprezen.rapidml</groupId>
             <artifactId>com.reprezen.rapidml.model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
