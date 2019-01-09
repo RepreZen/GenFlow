@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An instance of an XSD model generated from links/TwoChainedReferences.rest -->
+<dataType1Object xmlns="http://modelsolv.com/reprezen/schemas/twochainedreferences/twochainedreferences" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" customerName="John" dataType1ID="asd" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/twochainedreferences/twochainedreferences twoChainedReferences.xsd ">
+    <dataType1_containment1 dataType2ID="qaz">
+        <dataType2_reference1 dataType2ID="wsx">
+            <atom:link href="http://tempuri.org" rel="related"/>
+        </dataType2_reference1>
+        <dataType2_reference2 dataType2ID="edc">
+            <atom:link href="http://tempuri.org" rel="related"/>
+        </dataType2_reference2>
+    </dataType1_containment1>
+</dataType1Object>

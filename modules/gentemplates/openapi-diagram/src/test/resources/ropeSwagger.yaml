@@ -1,0 +1,1123 @@
+swagger: "2.0"
+info: 
+ version: "1.0.0"
+ title: "Rope Workflow API"
+ description: ""
+ termsOfService: ""
+ contact: 
+   name: "RV Software Engineering."
+   url: "http://confluence.redventures.net/display/ST01/.Designing+the+Rope+integration+v1.0"
+host: "test-rope.redventures.net"
+schemes: 
+ - "http"
+consumes: 
+ - "application/json"
+produces: 
+ - "application/json"
+paths: 
+# Address
+  /address/autocomplete/{driver}:
+    get:
+      tags:
+        -
+          "Address"
+          
+      description: >
+      
+        Completes a partial address by using the available information.
+        
+       
+        Example path: <br/>        
+              `http://rope.redventures.net/address/autocomplete/redventures?zip=11212`&`address=164+East` 
+        
+        The response varies by driver:
+        
+        * For google:
+        
+            * **Requests to the Google Places API cannot exceed 100,000 hits a day! Please use this driver only if you have permission and if tracking is in place.**
+            * Returned values for the example path are in mixed case, with "East" and "Street" spelled out; and **zip4** is null.
+            * For more detail: <a href="http://developers.google.com/places" target="_blank">http://developers.google.com/places</a>
+             
+        * For melissadata:
+        
+            * Returned values for the example path are mostly capitalized, with abbreviations ("E" and "St"); and **zip4** is null.
+            * For more detail: <a href="http://www.melissadata.com/" target="_blank">http://www.melissadata.com/</a>.
+            
+        * For redventures:
+            
+            * Returned values for the example path are capitalized, with abbreviations ("E" and "ST"); and city is null.
+            * Is based on the <a href="https://www.usps.com/business/web-tools-apis/address-information-api.htm" 
+              target="_blank">U.S. Postal Service Zip4 detail tables</a> and 
+              on <a href="https://developer.yahoo.com/ypa/" target="_blank">Yahoo!</a>. //?? right links??
+              
+        * For usps:
+        
+            * Is ported from data in the <a href="https://www.usps.com/business/web-tools-apis/address-information-api.htm" 
+              target="_blank">U.S. Postal Service Zip4 detail tables</a>.
+            * The data is stored in elastic search and is indexed on {StreetNumber}{StreetName}{City}{State}{Zip}{Zip4}.
+       
+             
+      operationId: "autoComplete"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters:
+        - 
+          $ref: "#/parameters/address"
+        -
+          $ref: "#/parameters/driverAuto"  
+        - 
+          $ref: "#/parameters/range"
+        -
+          $ref: "#/parameters/zip"
+                   
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/addressResponseSchema"
+          examples:
+            {"application/json":
+              { 
+                "streets": 
+                [
+                 {"street": "164 E 94th St",
+                 "city": null,
+                 "state": "NY",
+                 "zip": "11212",
+                 "zip4": "2250"},
+                 {"street": "164 E 96th St",
+                 "city": null,
+                 "state": "NY",
+                 "zip": "11212",
+                 "zip4": "3533"}
+                ]
+              }
+            }
+      
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+
+
+  /address/demographics/population/{driver}?zip={zip}:
+    get:
+      tags:
+        - 
+          "Address"  
+  
+      description: >
+      
+        Returns the population and type ("Metro", "Rural") for the area in and around a zip-code area. 
+        
+        
+        Only the redventures driver is supported as of May 2016.
+        For information on that driver, see the description for /address/autocomplete/{driver}.
+        
+        
+        Example path: <br/>        
+              `http://rope.redventures.net/address/demographics/population/redventures?zip=29732`
+             
+      operationId: "nearby"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters:
+        -
+          $ref: "#/parameters/driverDemographics"  
+        -
+          $ref: "#/parameters/zipRequired"
+          
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/demographicResponseSchema"
+          examples:
+            {"application/json":
+               {
+                  "population": "11068",
+                  "areaType": "Metro"
+               }
+            }
+      
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+      
+
+
+  /address/nearbyplaces/{driver}:
+    get:
+      tags:
+        - 
+          "Address"  
+  
+      description: >
+      
+        Returns addresses in and around a zip-code area. 
+        
+        
+        Only the google driver is supported as of May 2016.
+        For information on that API, see the description for /address/autocomplete/{driver}.
+        
+        
+        Example path: <br/>        
+              `http://rope.redventures.net/address/nearbyplaces/google?zip=29732`
+        
+      # All query fields other than **zip** are specific to the Google Places API.     
+      operationId: "nearby"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters:
+        -
+          $ref: "#/parameters/driverNearby"  
+        -
+          $ref: "#/parameters/zipRequired"
+          
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/addressResponseSchema"
+          examples:
+            {"application/json":
+              { 
+                "streets": 
+                [
+                 {"street": "164 E 94th St",
+                 "city": null,
+                 "state": "NY",
+                 "zip": "11212",
+                 "zip4": "2250"},
+                 {"street": "164 E 96th St",
+                 "city": null,
+                 "state": "NY",
+                 "zip": "11212",
+                 "zip4": "3533"}
+                ]
+              }
+            }
+      
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+
+
+  /address/parse?address={address}:
+    get:
+      tags:
+        - 
+          "Address"  
+  
+      description: >
+      
+        Parses the street part of an address into a series of components by using the redventures driver, 
+        which is covered in the description for /address/autocomplete/{driver}. 
+        <br/><br/>
+        The response includes an indicator of a street's "post direction," if any (for example, "N" for "Franklin Street North"),
+        and of a street's "pre direction," if any (for example, "S" for "South Franklin Street)."  
+        <br/><br/>
+        An apartment number is not parsed separately, but is treated as an extension of the street name.
+        <br/><br/>
+        Example path: <br/>        
+          `http://rope.redventures.net/address/parse?address=123+North+Jones+Street+East`
+             
+      operationId: "parse"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+  
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/parseResponseSchema"
+            
+          examples:
+            {"application/json": {
+                "unparsed": {
+                  "address": "123 North Jones Street East"
+                },
+                "parsed": {
+                  "address": {
+                    "streetNumber": "123",
+                    "streetPostDirection": "E",
+                    "streetPreDirection": "N",
+                    "streetSuffix": "ST",
+                    "streetName": "JONES"
+                  }
+                } 
+              } 
+            }
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+
+
+
+  /address/zip/{zip}:
+    get:
+      tags:
+        - 
+          "Address"  
+  
+      description: >
+      
+        Returns the city, state, and counties for a given zip code, with each county name concatenated 
+        to the state-specific Federal Information Processing Standard (FIPS) county code.
+        <br/><br/>
+        Uses the redventures driver, which is covered in the description for /address/autocomplete/{driver}.
+        
+        
+        Example path: <br/>        
+              `http://rope.redventures.net/address/zip/73949`
+             
+      operationId: "cityState"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters:
+        -
+          $ref: "#/parameters/zipRequired"
+          
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+               $ref: "#/definitions/cityStateResponseSchema"
+          examples:
+            {"application/json":
+               {
+                 "cityState": [
+                  {
+                    "city": "TEXHOMA",
+                    "stateAbbr": "OK",
+                    "counties": "CIMARRON:025,TEXAS:139",
+                    "preferredCity": 1
+                  } ]
+              }
+            }
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+      
+      
+
+
+
+
+
+  /address/zip4?address={address}&zip={zip}:
+    get:
+      tags:
+        - 
+          "Address"  
+  
+      description: >
+      
+        Returns the zip, zip4, and zip9 values in response to an address and zip code. Uses the  
+        redventures driver, which is covered in the description for /address/autocomplete/{driver}.
+        
+        
+        Example path: <br/>        
+          `http://rope.redventures.net/address/zip4?address=16+Marion+PL`&`zip=07306`
+             
+      operationId: "zip4"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters:
+        -
+          $ref: "#/parameters/addressOmit"  
+        -
+          $ref: "#/parameters/zipRequired"
+          
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/zip4ResponseSchema"
+          examples:
+            {"application/json": [ {
+                  "zip": "07306",
+                  "zip4": "6438",
+                  "zip9": "073066438" },
+                {
+                  "zip": "07306",
+                  "zip4": "6447",
+                  "zip9": "073066447"
+                } ]
+            }
+      
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+ 
+
+
+
+
+
+
+      
+# Serviceable
+  /company/{companyId}/serviceable.json:
+    post: 
+      tags: 
+        - 
+          "Serviceable"
+      description: > 
+        Runs a service check. 
+        
+              
+        Required payload fields, for most partners: either **addressId** or **contactId**. 
+          
+        All payload fields:
+         
+         | Name                                                      | Description
+         | -------------------------------------------------         | ---------------------------------------- 
+         | **addressId**                                             | ID of a company address, whether created at contact creation or by use of the address API
+         | **contactId**                                             | ID of a company contact //?? meaning of "to check service on"??// 
+         | forceRun                                                  | If true, forces use of the address API even if the service request is available in the cache //??//  
+         | requestCompanyId                                          | ID of the partner that is requesting service from a different company.              
+                    
+        <br/>                                                               
+        Refer to the partner-specific doc for details on the request and response fields.    
+        
+      operationId: "runServiceCheck"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters: 
+        - 
+          $ref: "#/parameters/companyId"
+        -
+          $ref: "#/parameters/servicePayload"
+        -  
+          $ref: "#/parameters/Content-Type"
+        -  
+          $ref: "#/parameters/x-rope-application-id"
+          
+      responses: 
+        200: 
+          $ref: "#/responses/OK"
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+
+# Session
+
+  /session:
+    get: 
+      tags: 
+        - "Session"
+      description: > 
+        Searches for a session. For an overview, see <a href="http://confluence.redventures.net/display/ST01/.Creating+a+Rope+session+ID+v1.0" target="_blank">Creating a Rope session ID</a>.
+        
+        
+        Example path: <br/>        
+              `http://rope.redventures.net/session?applicationProfileId=17`&`trackingid=288475173`
+
+      operationId: "searchForRopeSession"
+     
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters: 
+        -
+          $ref: "#/parameters/applicationProfileId" 
+        -
+          $ref: "#/parameters/callId"
+        -  
+          $ref: "#/parameters/trackingId"
+        -  
+          $ref: "#/parameters/trackingTypeId"
+        -  
+          $ref: "#/parameters/Content-Type"     
+      responses: 
+        200:
+          description: "OK"
+          schema:
+             $ref: "#/definitions/sessionResponseSchema"
+          examples:
+            {"application/json":
+               {
+                  "ropeId": "R554117a342991415717905IozmPbB17",
+                  "applicationProfileId": "17",
+                  "trackingId": "123444",
+                  "trackingTypeId": "9",
+                  "agentId": "0",
+                  "interactionId": "0",
+                  "callId": null,
+                  "marketingCodeId": "0",
+                  "marketingProgramId": null,
+                  "hash": "14e78b4b895499e7104bd5b3dd9754b0",
+                  "dateAdded": "2015-04-29",
+                  "dateTimeAdded": "2015-04-29 12:40:51",
+                  "lastUpdated": "2016-04-11 17:16:45",
+                  "___type": "Rope\\Model\\Session"
+               }
+            }
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+  
+
+  /session.json: 
+    post: 
+      tags: 
+        - 
+          "Session"
+      description: > 
+        Creates a session ID from a subset of input fields.  For an overview, see <a href="http://confluence.redventures.net/display/ST01/.Creating+a+Rope+session+ID+v1.0" target="_blank">Creating a Rope session ID</a>.
+         
+        Required payload fields: **applicationProfileId**; and either **callId** or both **trackingId** and **trackingTypeId**. 
+          
+        All payload fields:
+         
+         | Name                                                      | Description
+         | -------------------------------------------------         | ---------------------------------------- 
+         | **agentId**                                               | IDs the sales agent, from //?? what source??// 
+         | **applicationProfileId**                                  | Configures the behavior of the workflow. 
+         | **callId**                                                | IDs the phone call. //?? what of web access??//  
+         | **interactionId**                                         | IDs the inbound Hailo call. //?? Hailo??//
+         | **marketingCodeId**                                       | IDs the marketing campaign, from the RV marketing admin portal.
+         | **marketingProgramId**                                    | IDs the marketing program, from the RV marketing admin portal. 
+         | **trackingId**                                            | IDs a tracking value specific to the trackingTypeId field.  //???//
+         | **trackingTypeId**                                        | Indicates the source of the customer contact from choices shown next //???//
+                  
+         <br/>                                                                      
+         For **trackingTypeID**: //??? need more details on each //
+         * 1: Lead ID. 
+         * 2: Chat ID.  The Articulate unique identifier.
+         * 3: Work Order ID, as used with HSP.
+         * 4: Visit ID. Web traffic IDs. //?? plural??//
+         * 5: External Order ID. The external partner portal ID.
+         * 6: Testing. Test ID.
+         * 7: Inbound call to Red Ventures.
+         * 8: Outbound call from Red Ventures.
+         * 9: Interaction ID, created by Hailo.        
+  
+      operationId: "createSession"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters: 
+        - 
+          $ref: "#/parameters/sessionPayload"
+        -  
+          $ref: "#/parameters/Content-Type"
+      responses: 
+        200:
+          $ref: "#/responses/OK"
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+  
+
+  /session/companies:
+    get: 
+      tags: 
+        - "Session"
+      description: > 
+        Searches for the companies that are tied to a session. //?? the one company?  does not return an array? //  For an overview of the Rope profile, where company names are stored, see 
+        <a href="http://confluence.redventures.net/display/ST01/.Requesting+a+Rope+profile+v1.0" target="_blank">Requesting a Rope profile</a>.
+             
+                        
+        Example path:<br/>      
+              `http://rope.redventures.net/session/companies?applicationProfileId=17`&`trackingid=288475173`
+
+      operationId: "searchForRopeSessionCompanies"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters: 
+        -
+          $ref: "#/parameters/applicationProfileId" 
+        -
+          $ref: "#/parameters/callId"
+        -  
+          $ref: "#/parameters/trackingId"
+        -  
+          $ref: "#/parameters/trackingTypeId"
+        -  
+          $ref: "#/parameters/Content-Type"     
+      responses: 
+        200:
+          description: "OK"
+          schema:
+             $ref: "#/definitions/sessionCompanyResponseSchema"
+          examples:
+            {"application/json":
+               {
+                  "ropeCompanyId": "1",
+                  "ropeId": "R554117a342991415717905IozmPbB17",
+                  "companyId": "19",
+                  "contactId": null,
+                  "serviceableId": "388787",
+                  "serviceable": "1",
+                  "maybeServiceable": "0",
+                  "orderId": null,
+                  "orderCompleted": null,
+                  "creditCheckId": null,
+                  "creditPass": null,
+                  "paymentId": null,
+                  "paymentCollected": null,
+                  "billingId": null,
+                  "recurringCharge": null,
+                  "active": "1",
+                  "hash": "e84fd17fd04283621c13f88d6fe9dfc4",
+                  "dateAdded": "2015-04-29",
+                  "dateTimeAdded": "2015-04-29 12:40:51",
+                  "lastUpdated": "2016-04-11 17:38:18",
+                  "___type": "Rope\\Model\\SessionCompany"
+               }
+            }
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+ 
+  /session/{RopeId}.json: 
+    get: 
+      tags: 
+        - 
+          "Session"
+      description: > 
+        Retrieves the Rope session data by ID. For an overview, see <a href="http://confluence.redventures.net/display/ST01/.Creating+a+Rope+session+ID+v1.0" target="_blank">Creating a Rope session ID</a>.
+        
+       
+        Example path: <br/>        
+              `http://rope.redventures.net/session/R57066c6e20214624745492sDVUx1999.json`
+      
+      operationId: getRopeSession"
+      
+      consumes: 
+      - "application/json"
+ 
+      produces: 
+      - "application/json"
+      
+      parameters: 
+        - 
+          $ref: "#/parameters/RopeSessionId"
+        -  
+          $ref: "#/parameters/Content-Type"   
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/sessionResponseSchema" 
+        404:
+          $ref: "#/responses/NotFound"
+        500:  
+          $ref: "#/responses/InternalServer"
+        default: 
+          $ref: "#/responses/default"
+ 
+ 
+definitions:
+   
+  addressResponseSchema:
+    title: addressResponse
+    type: object
+    properties:
+      street:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+      zip4:
+        type: string
+      
+  cityStateResponseSchema:
+    title: cityStateResponseSchema
+    type: object
+    properties:
+      city:
+        type: string
+      stateAbbr:
+        type: string
+      counties:
+        type: string
+      preferredCity:
+        type: integer  
+    required:
+      - city
+      - stateAbbr
+      - counties
+      - preferredCity  
+      
+  demographicResponseSchema:
+    title: demographicResponse
+    type: object
+    properties:
+      population:
+        type: integer
+      areaType:
+        type: string
+    required:
+      - population
+      - areaType
+  
+  parseResponseSchema:
+    title: parseResponse
+    properties:
+    
+      unparsed:  
+        type: object
+        properties:
+          address:
+            type: string
+        required:
+          - address
+    
+      parsed:  
+        type: object
+        properties:
+          address:
+            type: object
+            properties: 
+              streetNumber:
+                type: string
+              streetPostDirection:
+                type: string
+              streetPreDirection:
+                type: string
+              streetSuffix:
+                type: string
+              streetName:
+                type: string
+            required:
+              - streetNumber
+        required:
+          - address
+    required:
+      - unparsed 
+      - parsed 
+  
+  servicePayloadSchema:
+    title: runServiceCheck
+    type: object
+    properties:  
+      addressId:
+        type: integer
+      contactId:
+        type: integer
+      forceRun:
+        type: integer
+      requestCompanyId:
+        type: integer   
+    required: 
+      - contactId
+      - addressId  
+  
+  sessionCompanyResponseSchema:
+    title: sessionResponseSchema
+    type: object
+    properties:
+      ropeCompanyID:
+        type: string
+      ropeID:
+        type: string  
+      companyID:
+        type: string 
+      contactID:
+        type: string 
+      serviceableId:
+        type: string 
+      serviceable:
+        type: integer  
+      maybeServiceable:
+        type: integer 
+      orderID:
+        type: string
+      orderCompleted:
+        type: integer
+      creditCheckId:  
+        type: string
+      creditPass:
+        type: integer
+      paymentId:
+        type: string
+      paymentCollected:
+        type: integer
+      billingId:
+        type: string
+      recurringCharge:
+        type: integer
+      active:
+        type: integer 
+      hash:
+        type: string   
+      dateAdded:
+        type: string
+      dateTimeAdded:
+        type: string
+      lastUpdated:
+        type: string 
+      ___type:
+        type: string 
+    required: 
+      - ropeCompanyId
+      - ropeId
+      - companyId
+      - contactId
+      - serviceableId
+      - maybeServiceable
+      - active   
+      - hash
+      - dateAdded
+      - dateTimeAdded
+      - lastUpdated
+      - ___type
+      - rope
+  
+  
+  
+  
+  
+  
+  
+  
+  sessionPayloadSchema:
+    title: sessionPayloadSchema
+    type: object
+    properties:
+      agentId:
+        type: integer
+      applicationProfileId:
+        type: integer    
+      callId:
+        type: integer
+      interactionId:
+        type: integer
+      marketingCodeId:
+        type: integer
+      marketingProgramId:
+        type: integer    
+      trackingId:
+        type: integer
+      trackingTypeId:
+        type: integer
+    required: 
+      - applicationProfileId
+      - callId
+      - trackingId
+      - trackingTypeId         
+ 
+  sessionResponseSchema:
+    title: sessionResponseSchema
+    type: object
+    properties:
+      ropeId:
+        type: string
+      applicationProfileId:
+        type: integer      
+      trackingId:
+        type: integer
+      trackingTypeId:
+        type: integer   
+      agentId:
+        type: integer
+      interactionId:
+        type: integer      
+      callId:
+        type: integer
+      marketingCodeId:
+        type: integer
+      marketingProgramId:
+        type: integer          
+      hash:
+        type: string   
+      dateAdded:
+        type: string
+      dateTimeAdded:
+        type: string
+      lastUpdated:
+        type: string 
+      ___type:
+        type: string
+      rope:
+        type: string  
+    required: 
+      - ropeId
+      - applicationProfileId
+      - callId
+      - trackingId
+      - trackingTypeId   
+      - hash
+      - dateAdded
+      - dateTimeAdded
+      - lastUpdated
+      - ___type
+      - rope
+
+  zip4ResponseSchema:
+    title: zipResponseSchema
+    type: object
+    properties:
+      zip:
+        type: string
+      zip4:
+        type: string
+      zip9:
+        type: string
+    required: 
+      - zip
+      - zip4
+      - zip9
+
+
+
+
+
+
+
+parameters:  
+  
+  address:  
+    name: "address"
+    in: "query"
+    required: true
+    description: Partial address; see example
+    type: string
+
+  
+  addressOmit:  
+    name: "address"
+    in: "query"
+    required: true
+    description: Partial address without floor, unit #; see example
+    type: string
+
+
+
+
+
+  applicationProfileId:  
+    name: "applicationProfileId"
+    in: "query"
+    required: true
+    description: Rope profile ID
+    type: integer
+ 
+  callId:  
+    name: "callId"
+    in: "query"
+    required: false
+    description: Call ID
+    type: integer
+    
+  companyId:
+    name: "companyId"
+    in: "path"
+    required: true
+    description: Company ID
+    type: integer
+    
+  Content-Type:
+    name: "Content-Type"
+    in: "header"
+    required: true
+    description: application/json
+    type: string
+
+  driverAuto:  
+    name: "driver"
+    in: "path"
+    required: true
+    description: > 
+      Choose one: <br/>
+      google, melissadata, redventures, usps
+    type: string
+ 
+  driverDemographics:  
+    name: "driver"
+    in: "path"
+    required: true
+    description: > 
+      The only valid value: redventures
+    type: string
+    default: redventures
+ 
+ 
+ 
+ 
+  driverNearby:  
+    name: "driver"
+    in: "path"
+    required: true
+    description: > 
+      The only valid value: google
+    type: string
+    default: google
+ 
+
+ 
+ 
+ 
+ 
+  range:
+    name: "range"
+    in: "query"
+    required: false
+    description: >
+      Number of miles in which to search for an address.
+    type: integer
+ 
+  RopeSessionId:
+    name: "RopeId"
+    in: "path"
+    required: true
+    description: Rope session ID
+    type: string
+     
+  servicePayload: 
+    name: "servicePayload"
+    in: "body"
+    required: true
+    description: Click the schema!
+    schema:
+      $ref: "#/definitions/servicePayloadSchema"   
+   
+  sessionPayload:
+    name: "sessionPayload"
+    in: "body"
+    required: true
+    description: Click the schema! 
+    schema: 
+      $ref: "#/definitions/sessionPayloadSchema"  
+   
+  trackingId:  
+    name: "trackingId"
+    in: "query"
+    required: false
+    description: Tracking ID
+    type: integer
+  
+  trackingTypeId:  
+    name: "trackingTypeId"
+    in: "query"
+    required: false
+    description: > 
+      Tracking type ID; <br/>for valid values, see <br/>*POST /session.json*
+    type: integer
+ 
+  x-rope-application-id:
+    name: "x-rope-application-id"
+    in: "header"
+    required: true
+    description: Rope profile ID
+    type: string
+    
+  zip:  
+    name: "zip"
+    in: "query"
+    required: false
+    description: five-digit code
+    type: integer   
+    
+  zipRequired:  
+    name: "zip"
+    in: "query"
+    required: true
+    description: five-digit code
+    type: integer     
+    
+  
+  
+  
+  
+      
+responses:
+
+  OK:
+    description: "OK"
+  NotFound:
+    description: "Not Found"  
+  InternalServer:
+    description: "Internal Server Error"
+  default:
+    description: "Unexpected Error"  
+      
+ 
+

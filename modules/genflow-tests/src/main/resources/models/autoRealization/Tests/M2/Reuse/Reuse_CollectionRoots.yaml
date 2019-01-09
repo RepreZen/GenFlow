@@ -1,0 +1,19 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: > 
+  All root-level realizations use a single rule, 
+  embedding all properties (no links)  
+  
+name: Reuse_CollectionRoots
+realizationRules:
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet

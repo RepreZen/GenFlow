@@ -1,0 +1,20 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+/* 
+  This is the TaxBlaster API model created in the RepreZen Quick Start guide.
+*/
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./KeyProperties_KeysOrAll.yaml"
+
+		/** An individual Tax Filing record, accessed by its ID */
+		objectResource AccountantObject type Accountant
+			URI accountants/{id}
+				/** filingID of the requested TaxFiling */
+				required templateParam id property employeeID
+				
+			mediaTypes
+				application/json
+

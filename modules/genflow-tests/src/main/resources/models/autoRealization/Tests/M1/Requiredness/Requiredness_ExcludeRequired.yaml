@@ -1,0 +1,37 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  * Root objects include non-required properties
+  * Reference objects include required properties
+name: Requiredness_IncludeRequiredness
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        excludedProperties:
+        - _type: PropertySelector
+          isRequired: true
+  RefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        excludedProperties:
+        - _type: PropertySelector
+          isRequired: false
+  

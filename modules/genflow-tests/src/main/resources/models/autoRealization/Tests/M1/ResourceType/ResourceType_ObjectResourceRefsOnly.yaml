@@ -1,0 +1,56 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  * Root object resources contain ref properties only
+  * Root collection resources contain all properties
+  * References are realized with key properties only
+name: ResourceType_ObjectResourceRefsOnly
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_RootObj
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: OBJECT_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+  
+  RootCollections:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_RootColl
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: COLLECTION_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+
+  RefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+  

@@ -1,0 +1,91 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  This model includes a set of reusable LinkStrategy, PropertySetStrategy, and 
+  RealizationStrategy definitions that collectively capture updated RAPID-ML logic
+  for automatic linking and embedding:
+  * Root objects have all properties.
+  * References auto-linkable to an objectResource will include the auto-link, 
+    along with key properties, if any.
+  * Non-auto-linkable references will embed all properties.
+
+  There are no collectionResource auto-links, as these are problematic for reasons
+  previously documented. See the following issues:
+  * https://modelsolv.atlassian.net/browse/ZEN-3978
+  * https://modelsolv.atlassian.net/browse/ZEN-3863
+
+  This set of rules and reusable components should represent the essential 
+  functionality required for easily composable linking and embedding logic.
+
+  (*Note* - This was previously our M1 goal, but the milestones needed to be 
+  more granular, and it turns out that this goal requires advanced composition. 
+  So it's more appropriate to think of this as a near-final goal.)
+  
+name: LinkSpec_ObjectResource
+realizationRules:
+
+  RootObject:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        
+  ReferencePropertyWithLink:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+      autoLinkableToObjectResource: true
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType: 
+            _type: PrimitivePropertyRealization
+            isKey: true
+      links:
+      - strategy: reference
+        $ref: "#/components/links/AutoLinkToObjectResource"
+        
+  ReferencePropertyNoLink:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+      autoLinkableToObjectResource: false
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet: 
+        _type: InclusivePropertySet
+
+components:
+
+  realizations:
+
+    ReferencePropertyRealization:
+      _type: ObjectRealizationSpec
+      
+  propertySets: {}
+
+  links:
+    IncludeAutoLinkToObjectResource:
+      strategy: conditional
+      appliesTo: 
+      - _type: ContextPattern
+        autoLinkableToObjectResource: true
+      link: 
+        strategy: specification
+        targetResourceType: AUTO_LINK_OBJECT_RESOURCE
+        linkRelation: details

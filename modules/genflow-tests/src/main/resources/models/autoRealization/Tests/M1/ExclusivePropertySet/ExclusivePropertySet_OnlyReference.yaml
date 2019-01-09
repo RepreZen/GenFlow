@@ -1,0 +1,18 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+name: ExclusivePropertySet_OnlyReference
+realizationRules:
+  AllObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_OnlyReference
+    appliesTo:
+    - _type: ContextPattern
+      _documentation: Empty ContextPattern object has no selectors, meaning that this realization template applies to _all_ object references, in _all_ realization contexts.
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization

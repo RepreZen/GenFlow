@@ -1,0 +1,33 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./Reuse_SingleValuedRootsAndRefs.yaml"
+			
+		/** testing comment */
+		collectionResource PersonCollection type Person
+			URI /people
+			with all properties including
+				taxpayerID!
+			method GET getPeople
+				request
+				response with this PersonCollection statusCode 200
+			method POST postPerson
+				request with type Person
+				response with type Person statusCode 200
+				response statusCode 400
+				
+		objectResource PersonObject type Person
+			URI /people/{id}
+			method GET getPersonObject
+				request
+				response with type Person statusCode 200
+
+		objectResource TaxFilingObject type TaxFiling
+			URI /taxFilings/{id}
+				required templateParam id property filingID
+			method GET getTaxFiling
+				request
+				response with type TaxFiling statusCode 200

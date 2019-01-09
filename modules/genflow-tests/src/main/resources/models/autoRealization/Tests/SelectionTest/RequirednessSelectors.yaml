@@ -1,0 +1,20 @@
+_type: RealizationModel
+name: RequirednessSelectors
+realizationRules:
+      
+  Optional:
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        isRequired: false
+    realization:
+      _type: ObjectRealizationSpec
+  Required:
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        isRequired: true
+    realization:
+      _type: ObjectRealizationSpec

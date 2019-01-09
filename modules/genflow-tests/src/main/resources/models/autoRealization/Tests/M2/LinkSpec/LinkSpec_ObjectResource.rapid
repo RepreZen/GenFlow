@@ -1,0 +1,24 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./LinkSpec_ObjectResource.yaml"
+		
+		objectResource FinancialStatementObject type FinancialStatement
+			URI /statementID/{id}
+			mediaTypes
+				application/json
+			method GET getStatementObject
+				request
+				response FinancialStatementObject statusCode 200
+		
+		objectResource BalanceSheetObject type BalanceSheet
+			URI /balanceSheets/{id}
+			mediaTypes
+				application/json
+			method GET getBalanceSheetResource
+				request
+				response BalanceSheetObject statusCode 200
+		

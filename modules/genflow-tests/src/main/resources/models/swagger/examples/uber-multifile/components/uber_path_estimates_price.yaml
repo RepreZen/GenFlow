@@ -1,0 +1,46 @@
+---
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Address path item
+
+paths:
+
+  # Note the use of a simplified name for the path item object.
+  # The actual URI, assigned by the top-level Swagger spec, is
+  # /estimates/price. But a JSON pointer to this would require a
+  # '~1' token to substitute for each forward slash, and % url
+  # encoding sequences for the curly braces.
+  #
+  # The leading slash is required by Swagger, so a reference to
+  # this item will include a leading '~1'. But we can avoid
+  # further escape sequences by using a simplified name.
+
+  /price:
+    get:
+      summary: Price Estimates
+      description: |
+        The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted
+         string with the full price range and the localized currency symbol.<br><br>
+         The response also includes low and high estimates, and  the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring
+          currency conversion.
+         When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.
+      parameters:
+        - $ref: "./uber_parameters.yaml#/parameters/start_latitude"
+        - $ref: "./uber_parameters.yaml#/parameters/start_longitude"
+        - $ref: "./uber_parameters.yaml#/parameters/end_latitude"
+        - $ref: "./uber_parameters.yaml#/parameters/end_longitude"
+      tags:
+        - Estimates
+      responses:
+        200:
+          description: An array of price estimates by product
+          schema:
+            type: array
+            items:
+              # Reference to a Schema Object described in 'definitions' section of uber_schemas.yaml
+              $ref: "./uber_schemas.yaml#/definitions/PriceEstimate"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "./uber_schemas.yaml#/definitions/Error"

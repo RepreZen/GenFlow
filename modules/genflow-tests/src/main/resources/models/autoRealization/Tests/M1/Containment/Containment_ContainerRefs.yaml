@@ -1,0 +1,68 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: | 
+  * Root objects and containing references have all properties; 
+  * Container references have only keys; 
+  * Non-containment references are empty.
+
+name: Containment_ContainerRefs
+
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+
+  ContainingRefs:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_ContainingRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: CONTAINING
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+
+  ContainerRefs:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_ContainerRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: CONTAINER
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true      
+            
+  NonContainmentRefs:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_NonContainmentRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: NON_CONTAINMENT
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        _documentation: This is an empty-object realization. No properties included.
+  

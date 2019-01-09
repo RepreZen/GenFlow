@@ -1,0 +1,73 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: | 
+  * All objects have key properties and reference properties.
+  * References with an autoLink objectResource will have a link to that.
+name: LinkRef_ObjectResource
+realizationRules:
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+        
+  RefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+      links:
+      - strategy: reference
+        $ref: "#/components/links/ObjectOrCollectionLink"
+
+components:
+
+  realizations: {}
+
+  propertySets: {}
+
+  links:
+    ObjectOrCollectionLink:
+      strategy: switch
+      cases:
+      - strategy: conditional
+        where:
+          _type: Conditions
+          autoLinkableToObjectResource: true
+        link:
+          strategy: specification
+          linkRelation: objectDetail
+          targetResourceType: AUTO_LINK_OBJECT_RESOURCE
+      - strategy: conditional
+        where:
+          _type: Conditions
+          autoLinkableToCollectionResource: true
+        link:
+          strategy: specification
+          linkRelation: collectionDetail
+          targetResourceType: AUTO_LINK_COLLECTION_RESOURCE

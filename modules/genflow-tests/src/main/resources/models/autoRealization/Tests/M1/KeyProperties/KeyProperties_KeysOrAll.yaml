@@ -1,0 +1,50 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  * Root objects have all properties
+  * Referenced objects with keys have only key properties
+  * Reference properties without keys have all properties.
+name: KeyProperties_KeysOrAll
+realizationRules:
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+  RefsWithKeys:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      hasKeys: true
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          _documentation : Include only key properties.
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+  RefsWithoutKeys:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      hasKeys: false
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        _documentation : Include all properties
