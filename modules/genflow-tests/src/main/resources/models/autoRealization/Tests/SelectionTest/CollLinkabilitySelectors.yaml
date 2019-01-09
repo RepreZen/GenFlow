@@ -1,0 +1,16 @@
+_type: RealizationModel
+name: CollLinkabilitySelectors
+realizationRules:
+      
+  CollLinkable:
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToCollectionResource: true
+    realization:
+      _type: ObjectRealizationSpec
+  CollUnlinkable:
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToCollectionResource: false
+    realization:
+      _type: ObjectRealizationSpec

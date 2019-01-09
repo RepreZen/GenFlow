@@ -1,0 +1,44 @@
+---
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Address path item
+  description: This is a component file, used within the Uber API specification.
+
+paths:
+
+  # Note the use of a simplified name for the path item object.
+  # The actual URI, assigned by the top-level Swagger spec, is
+  # /estimates/time. But a JSON pointer to this would require a
+  # '~1' token to substitute for each forward slash, and % url
+  # encoding sequences for the curly braces.
+  #
+  # The leading slash is required by Swagger, so a reference to
+  # this item will include a leading '~1'. But we can avoid
+  # further escape sequences by using a simplified name.
+
+  /time:
+    get:
+      summary: Time Estimates
+      description: |
+        The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds.
+        We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.
+      parameters:
+        - $ref: "./uber_parameters.yaml#/parameters/start_latitude"
+        - $ref: "./uber_parameters.yaml#/parameters/start_longitude"
+        - $ref: "./uber_parameters.yaml#/parameters/customer_uuid"
+        - $ref: "./uber_parameters.yaml#/parameters/product_id"
+      tags:
+        - Estimates
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              # Reference to a Schema Object described in 'definitions' section of uber_schemas.yaml
+              $ref: "./uber_schemas.yaml#/definitions/Product"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "./uber_schemas.yaml#/definitions/Error"

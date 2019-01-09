@@ -1,0 +1,103 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: BeamUp API
+
+# This is a component file, used by the BeamUp API specification. 
+# The paths property is required, so we use curly braces to denote an empty object,
+# meaning there are no path items defined in this file. 
+paths: {}
+
+components:
+  # The parameters section contains a set of named, reusable Parameter Objects.
+  # We refer to these using a $ref property, with a JSON Reference value that resolves 
+  # to a Parameter Object defined here.
+  parameters:  
+      
+    latitude:
+      name: latitude
+      in: query
+      description: Latitude component of location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    longitude:
+      name: longitude
+      in: query
+      description: Longitude component of location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    start_latitude:
+      name: start_latitude
+      in: query
+      description: Latitude component of start location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    start_longitude:
+      name: start_longitude
+      in: query
+      description: Longitude component of start location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    end_latitude:
+      name: end_latitude
+      in: query
+      description: Latitude component of end location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    end_longitude:
+      name: end_longitude
+      in: query
+      description: Longitude component of end location.
+      required: true
+      schema:
+        type: number
+        format: double
+      
+    customer_uuid:
+      name: customer_uuid
+      in: query
+      description: Unique customer identifier to be used for experience customization.
+      schema:
+        type: string
+        format: uuid
+      
+    product_id:
+      name: product_id
+      in: query
+      description: |
+        Unique identifier representing a specific product for a given latitude & 
+        longitude.
+      schema:
+        type: string
+      
+    offset:
+      name: offset
+      in: query
+      description: Offset the list of returned results by this amount. Default is zero.
+      schema:
+        type: integer
+        format: int32
+      
+    limit:
+      name: limit
+      in: query
+      description: Number of items to retrieve. Default is 5, maximum is 100.
+      schema:
+        type: integer
+        format: int32 

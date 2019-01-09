@@ -1,0 +1,83 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: | 
+  * All objects have key properties and reference properties.
+  * References with an autoLink objectResource will have a link to that.
+name: LinkRef_ObjectResource
+realizationRules:
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+        
+  KeyRefWithLinks:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+      autoLinkableToObjectResource: true
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+      links:
+      - strategy: reference
+        $ref: "#/components/links/IncludeAutoLinkToObjectResource"
+
+  KeyRefNoLinks:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+      autoLinkableToObjectResource: false
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+
+components:
+
+  realizations: {}
+      
+  propertySets: {}
+
+  links:
+    IncludeAutoLinkToObjectResource:
+      strategy: specification
+      linkRelation: detail
+      targetResourceType: AUTO_LINK_OBJECT_RESOURCE

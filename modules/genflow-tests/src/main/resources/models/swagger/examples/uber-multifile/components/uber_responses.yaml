@@ -1,0 +1,20 @@
+---
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Uber Responses
+
+# This is a component file, used by the Uber API specification.
+# The paths property is required, so we use curly braces to denote an empty object,
+# meaning there are no path items defined in this file.
+paths: {}
+
+# The responses section contains a set of named, reusable Response Objects.
+# We refer to these using a $ref property, with a JSON Reference value that resolves
+# to a Response Object defined here.
+responses:
+
+  ErrorResponse:
+    description: Unexpected error
+    schema:
+      $ref: "./uber_schemas.yaml#/definitions/Error"

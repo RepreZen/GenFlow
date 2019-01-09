@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<referenceEmbedObject xmlns="http://modelsolv.com/reprezen/schemas/referenceembed/referenceembedinterface" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" prop1="value1" prop2="value1" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/referenceembed/referenceembedinterface referenceEmbedInterface.xsd ">
+    <target>
+        <atom:link href="http://tempuri.org" rel="target"/>
+    </target>
+    <order orderDate="Jan1" orderID="1234">
+        <lineItems id="cafe">
+            <product productID="cff" productName="coffee" productPrice="1.99">
+                <image>
+                    <atom:link href="http://tempuri.org" rel="related"/>
+                </image>
+            </product>
+        </lineItems>
+    </order>
+</referenceEmbedObject>

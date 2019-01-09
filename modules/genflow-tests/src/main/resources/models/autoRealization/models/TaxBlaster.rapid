@@ -1,0 +1,21 @@
+import TaxBlasterData.Model from "TaxBlasterDataModel.rapid" as data
+
+/* 
+  This is the TaxBlaster API model created in the RepreZen Quick Start guide.
+*/
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterInterface baseURI "http://taxblaster.com/api"
+
+		/** An individual Tax Filing record, accessed by its ID */
+		objectResource TaxFilingObject type TaxFiling
+			URI taxFilings/{id}
+				/** filingID of the requested TaxFiling */
+				required templateParam id property filingID
+
+			mediaTypes
+				application/json
+
+			method GET getTaxFiling
+				request
+				response with type TaxFiling statusCode 200
+				response statusCode 404

@@ -1,0 +1,31 @@
+---
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Address path item
+  description: This is a component file, used within the Uber API specification.
+
+paths:
+  /products:
+    # Operations are identified by an HTTP method.
+    get:
+      summary: Product Types
+      description: |
+        The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details
+        about each product, and lists the products in the proper display order.
+      parameters:
+        - $ref: "./uber_parameters.yaml#/parameters/latitude"
+        - $ref: "./uber_parameters.yaml#/parameters/longitude"
+      tags:
+        - Products
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              # Reference to a Schema Object described in 'definitions' section of uber_schemas.yaml
+              $ref: "./uber_schemas.yaml#/definitions/Product"
+        default:
+          # Defaults to an unexpected error response, defined in uber_responses.yaml.
+          $ref: "./uber_responses.yaml#/responses/ErrorResponse"

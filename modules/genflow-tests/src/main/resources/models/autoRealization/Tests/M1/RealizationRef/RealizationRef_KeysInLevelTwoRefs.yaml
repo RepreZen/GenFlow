@@ -1,0 +1,47 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: | 
+  * Root objects include all properties
+  * Reference properties in root objects have all properties embedded
+  * Other references hava only key properties embedded
+  
+name: ReferencePropertyRealization_KeysInLevelTwoRefs
+
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+            realization:
+              _type: ObjectRealizationSpec
+              propertySet:
+                _type: InclusivePropertySet
+          
+  NonRootRefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_NonRootRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true  

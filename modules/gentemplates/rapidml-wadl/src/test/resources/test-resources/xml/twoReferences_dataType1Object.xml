@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An instance of an XSD model generated from links/TwoReferences.rest -->
+<dataType1Object xmlns="http://modelsolv.com/reprezen/schemas/tworeferences/tworeferences" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" customerName="Peter" dataType1ID="zx" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/tworeferences/tworeferences twoReferences.xsd ">
+    <dataType1_containment1List>
+        <item dataType2ID="azxc">
+            <dataType2_reference1List>
+                <item dataType2ID="qaz">
+                    <atom:link href="http://tempuri.org/3" rel="dataType2_reference1"/>
+                </item>
+            </dataType2_reference1List>
+        </item>
+    </dataType1_containment1List>
+    <dataType1_containment2List>
+        <item dataType2ID="sdsdsd">
+            <dataType2_reference1List>
+                <item dataType2ID="xcxc">
+                    <atom:link href="http://tempuri.org/5" rel="dataType2_reference1"/>
+                </item>
+            </dataType2_reference1List>
+        </item>
+    </dataType1_containment2List>
+</dataType1Object>

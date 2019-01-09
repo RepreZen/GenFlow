@@ -1,0 +1,161 @@
+---
+# This is a mult-file Swagger spec used to test the SwaggerNormalizer
+
+swagger: "2.0"
+
+info:
+  title: Normalizer Test
+  version: "1.0"  
+
+parameters:
+  globalOverridden:
+    name: globalOverridden
+    in: query
+    type: string
+  globalNotOverridden:
+    name: globalNotOverridden
+    in: query
+    type: string
+
+consumes:
+- text/hoisted
+produces:
+- text/hoisted
+
+securityDefinitions:
+  basic_auth:
+    type: basic
+    
+security:
+  - basic_auth : []
+  
+paths: 
+  /testParams:
+    parameters:
+    - name: pathOverridden
+      in: query
+      type: string
+    - name: pathNotOverridden
+      in: query
+      type: string
+    - $ref: "#/parameters/globalOverridden"
+    - $ref: "ext/params.yaml#/parameters/externalOverridden"
+    - $ref: "ext/params.yaml#/parameters/externalNotOverridden"
+        
+    get:
+      parameters:
+        - name: local
+          in: query
+          type: string
+        - name: globalOverridden
+          in: query
+          type: integer
+        - name: pathOverridden
+          in: query
+          type: integer
+        - name: externalOverridden
+          in: query
+          type: integer
+        
+      responses:
+        default:
+          description: default
+           
+  /testMediaTypesNone:
+    get:
+      responses:
+        default:
+          description: default
+      
+  /testMediaTypesConsumesOnly:
+    get:
+      consumes:
+        - text/unhoisted
+      responses:
+        default:
+          description: default
+
+  /testMediaTypesProducesOnly:
+    get:
+      produces:
+        - text/unhoisted
+      responses:
+        default:
+          description: default
+  /testMediaTypesBoth:
+    get:
+      produces:
+        - text/unhoisted
+      consumes:
+        - text/unhoisted
+      responses:
+        default:
+          description: default
+          
+  /testResponseRefs:
+    get:
+      responses:
+        200:
+          $ref: ext/responses.yaml#/responses/Standard
+        404:
+          $ref: ext/responses.yaml#/responses/NotFound
+        500:
+          $ref: ext/responses.yaml#/responses/Error
+          
+  /testPathRef1:
+    $ref: ext/paths.yaml#/paths/~1test1
+  /testPathRef2/{id}:
+    $ref: ext/paths.yaml#/paths/~1test2
+  /testPathRef3/{id}:
+    $ref: ext/paths.yaml#/paths/~1test3~1%7Bid%7D
+    
+  /testDefinitionRefs:
+    get:
+      responses:
+        200:
+          description: Local
+          schema:
+            $ref: "#/definitions/local"
+        201:
+          description: Local Recursive
+          schema:
+            $ref: "#/definitions/localRecursive"
+        202:
+          description: Local Recursive Repeat
+          schema:
+            $ref: "#/definitions/localRecursive"
+            
+  /testAliases:
+    get:
+      consumes: &media
+      - application/json
+      - application/xml
+      produces: 
+        *media
+      responses:
+        200:
+          description: default
+
+definitions:
+  local:
+    type: string
+  
+  localRecursive:
+    type: object
+    properties:
+      a:
+        $ref: "#/definitions/A"
+      b:
+        $ref: "#/definitions/B"
+        
+  A:
+    type: object
+    properties:
+      b:
+        $ref: "#/definitions/B"
+        
+  B:
+    type: object
+    properties:
+      a:
+        $ref: "#/definitions/A"
