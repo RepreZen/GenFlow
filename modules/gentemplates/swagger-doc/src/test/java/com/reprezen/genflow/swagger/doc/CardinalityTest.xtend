@@ -1,10 +1,11 @@
-package com.reprezen.genflow.openapi3.doc
+package com.reprezen.genflow.swagger.doc
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.reprezen.genflow.api.normal.openapi.ObjectType
+import com.reprezen.genflow.api.normal.openapi.OpenApiNormalizer
+import com.reprezen.genflow.api.normal.openapi.Option
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
-import com.reprezen.kaizen.oasparser.OpenApiParser
-import com.reprezen.kaizen.oasparser.model3.OpenApi3
 import java.net.URL
 import org.jsoup.Jsoup
 import org.junit.Test
@@ -15,120 +16,115 @@ class CardinalityTest {
 
 	def String contentWithNoMinItems() {
 		'''
-			---
-			openapi: "3.0.0"
+			---  
+			swagger: "2.0"
 			info:
+			  description: Tax Blaster
 			  version: 1.0.0
-			  title: My API Spec
-			paths:
-			  /resourceUrl:
-			    get:
-			      responses:
-			        200:
-			          description: Success
-			          content:
-			            application/json:
-			              schema:
-			                type: object
-			                properties:
-			                  givenNames:
-			                    type: array
-			                    items:
-			                      type: string
+			  title: TaxBlaster
+			host: taxblaster.com
+			basePath: /api
+			paths: {}
+			definitions:
+			  Foo:
+			    type: object    
+			    properties:
+			      values:
+			        type: array
+			        items:
+			          type: string
 		'''
 	}
 
 	def String contentWithOnlyMinItems(Integer cardinality) {
 		'''
-			---
-			openapi: "3.0.0"
+			---  
+			swagger: "2.0"
 			info:
+			  description: Tax Blaster
 			  version: 1.0.0
-			  title: My API Spec
-			paths:
-			  /resourceUrl:
-			    get:
-			      responses:
-			        200:
-			          description: Success
-			          content:
-			            application/json:
-			              schema:
-			                type: object
-			                properties:
-			                  givenNames:
-			                    type: array
-			                    items:
-			                      type: string
-			                    minItems: «cardinality»
+			  title: TaxBlaster
+			host: taxblaster.com
+			basePath: /api
+			paths: {}
+			definitions:
+			  Foo:
+			    type: object    
+			    properties:
+			      values:
+			        type: array
+			        minItems: «cardinality»
+			        items:
+			          type: string
+
 		'''
 	}
 
 	def String contentWithOnlyMaxItems(Integer cardinality) {
 		'''
-			---
-			openapi: "3.0.0"
+			---  
+			swagger: "2.0"
 			info:
+			  description: Tax Blaster
 			  version: 1.0.0
-			  title: My API Spec
-			paths:
-			  /resourceUrl:
-			    get:
-			      responses:
-			        200:
-			          description: Success
-			          content:
-			            application/json:
-			              schema:
-			                type: object
-			                properties:
-			                  givenNames:
-			                    type: array
-			                    items:
-			                      type: string
-			                    maxItems: «cardinality»
+			  title: TaxBlaster
+			host: taxblaster.com
+			basePath: /api
+			paths: {}
+			definitions:
+			  Foo:
+			    type: object    
+			    properties:
+			      values:
+			        type: array
+			        maxItems: «cardinality»
+			        items:
+			          type: string
+
 		'''
 	}
 
 	def String contentWithMinMaxItems(Integer min, Integer max) {
 		'''
-			---
-			openapi: "3.0.0"
+			---  
+			swagger: "2.0"
 			info:
+			  description: Tax Blaster
 			  version: 1.0.0
-			  title: My API Spec
-			paths:
-			  /resourceUrl:
-			    get:
-			      responses:
-			        200:
-			          description: Success
-			          content:
-			            application/json:
-			              schema:
-			                type: object
-			                properties:
-			                  givenNames:
-			                    type: array
-			                    items:
-			                      type: string
-			                    minItems: «min»
-			                    maxItems: «max»
+			  title: TaxBlaster
+			host: taxblaster.com
+			basePath: /api
+			paths: {}
+			definitions:
+			  Foo:
+			    type: object    
+			    properties:
+			      values:
+			        type: array
+			        minItems: «min»
+			        maxItems: «max»
+			        items:
+			          type: string
 		'''
 	}
 
 	private def parse(String content) {
 		val mapper = new ObjectMapper(new YAMLFactory)
-		val model = new OpenApiParser().parse(mapper.readTree(
-			content
-		), new URL("file://test.yaml")) as OpenApi3
-		
-		val generator = new XGenerateOpenApi3Doc()
-		generator.init(new FakeGenTemplateContext)
+		val tree = mapper.readTree(content)
+
+		val model = new OpenApiNormalizer(
+			ObjectType.SWAGGER_MODEL_VERSION,
+			Option.DOC_DEFAULT_OPTIONS
+		).of(tree).normalizeToSwagger(new URL("file://test.yaml"))
+
+		val generator = new XGenerateSwaggerDoc()
+		val context = new FakeGenTemplateContext
+		context.genTargetParameters.put(XGenerateSwaggerDoc.PREVIEW_PARAM, true)
+		generator.init(context)
 		val result = generator.generate(model)
-		
+
 		val doc = Jsoup.parse(result)
-		doc.select(".list-group-item > table > tbody > tr")
+		doc.select(".panel-body").get(1).select("table > tbody > tr")
 	}
 
 	@Test

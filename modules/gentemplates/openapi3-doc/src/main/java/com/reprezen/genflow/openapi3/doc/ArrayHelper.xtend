@@ -17,13 +17,16 @@ class ArrayHelper implements Helper {
 	}
 
 	def String getArrayTypeSpec(Schema obj) {
-		val result = '''«obj.elementTypeName»«obj.arrayShape»'''
-		return result
+		'''«obj.elementTypeName»«obj.arrayShape»'''
 	}
 
 	def String getElementTypeName(Schema obj) {
 		val elementType = obj.elementType
-		#[elementType?.kaiZenSchemaName, elementType?.type, elementType.rzveTypeName].filter[it !== null].head
+		#[
+			elementType?.type,
+			elementType?.kaiZenSchemaName,
+			elementType?.rzveTypeName
+		].filterNull.head
 	}
 
 	def collectItemTypes(Schema obj, boolean includeFinal) {
@@ -63,7 +66,7 @@ class ArrayHelper implements Helper {
 			case min !== null && max === null: '''[«min»+]'''
 			case min === null && max !== null: '''[..«max»]'''
 			case min == max: '''[«min»]'''
-			default: '''«min»..«max»'''
+			default: '''[«min»..«max»]'''
 		}
 	}
 
