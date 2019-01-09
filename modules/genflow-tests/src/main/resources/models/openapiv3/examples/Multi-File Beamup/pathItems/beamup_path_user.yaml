@@ -1,0 +1,26 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: BeamUp API
+
+paths:
+  /user:
+    get:
+      summary: User Profile
+      description: |
+        The User Profile endpoint returns information about the BeamUp user that has
+        authorized with the application.
+      tags: 
+        - User
+      responses:
+        200:
+          description: Profile information for a user
+          content:
+            application/json:
+              schema:
+                # Reference to a Schema Object described in beamup_schemas.yaml
+                $ref: "../components/beamup_schemas.yaml#/components/schemas/Profile"
+        default:
+          # Defaults to an unexpected error response, defined in beamup_responses.yaml.
+          $ref: "../components/beamup_responses.yaml#/components/responses/ErrorResponse"

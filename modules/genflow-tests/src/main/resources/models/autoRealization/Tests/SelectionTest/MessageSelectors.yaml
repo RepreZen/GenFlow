@@ -1,0 +1,67 @@
+_type: RealizationModel
+name: MessageSelectors
+realizationRules:
+  InfoResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: INFORMATIONAL_1xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  SuccessResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: SUCCESSFUL_2xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  RedirResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: REDIRECTION_3xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  ClientFailResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: CLIENT_ERROR_4xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  ServerFailResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: SERVER_ERROR_5xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  AnyResponse:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+      
+  Request:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        messageType: REQUEST
+    realization:
+      _type: ObjectRealizationSpec
+      

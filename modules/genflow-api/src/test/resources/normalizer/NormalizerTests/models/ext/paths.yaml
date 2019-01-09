@@ -1,0 +1,41 @@
+---
+swagger: "2.0"
+info:
+  title: External defiitions
+  version: "1.0"
+paths:
+  /test1:
+    get:
+      operationId: test1Get
+      parameters:
+        - name: x
+          in: query
+          type: string
+      responses:
+        default:
+          description: "Default Response"
+  
+  /test2:
+    get:
+      operationId: test2Get
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+      responses:
+        default:
+          description: "Default Response"
+  
+  /test3/{id}:
+    get:
+      operationId: test3Get
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+      responses:
+        default:
+          description: "Default Response"
+          

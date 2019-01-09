@@ -1,0 +1,20 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://my-namespace.com"
+
+		with autoRealizations
+			"./Errors_NameCollision.yaml"
+
+		objectResource PersonObject type Person
+			URI /person
+		
+			
+		objectResource TaxFilingObject type TaxFiling
+			URI /taxFiling
+			
+		collectionResource PersonCollection type Person
+			URI /people
+			
+		collectionResource TaxFilingCollection type TaxFiling
+			URI /people

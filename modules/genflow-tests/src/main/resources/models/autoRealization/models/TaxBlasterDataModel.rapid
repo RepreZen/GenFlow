@@ -1,0 +1,104 @@
+/* This is a RAPID Model template. Customize it to describe your services and data types. */
+rapidModel TaxBlasterData
+	dataModel Model
+		/** A tax filing record for a given user, in a given tax jurisdiction, in a 
+		    specified tax year. */
+		structure TaxFiling
+			filingID : key string!
+			taxpayer : reference to Person
+			jurisdiction : string
+			year : key gYear
+			period : key int
+			currency : string
+			grossIncome : decimal
+			taxLiability : decimal
+
+		/** A TaxBlaster user. */
+		structure Person
+			taxpayerID : key string!
+			lastName : string
+			firstName : string
+			otherNames : string*
+
+		/** The supporting data type for the Index resource.  Not meaningful as a 
+		    business entity, but required to support a single point of entry. */
+		structure Index
+			people : reference to Person*
+			taxFilings : reference to TaxFiling*
+			accountants : reference to Accountant*
+			balanceSheets : reference to BalanceSheet*
+		
+		/** Describes the message body included in a response message, reporting 
+			an error condition. */	
+		structure ErrorResponse
+			errorCode : key string 
+			httpResponseCode : int
+			message : string
+
+		structure Accountant
+			employeeID : key string!
+			lastName : string
+			firstName : string
+			officeAddress : as containing reference to Address
+			clients : reference to Person*
+			
+		structure Address
+			addressLine1 : string
+			addressLine2 : string
+			city : string
+			stateOrProvince : string
+			postalCode : string
+			country : string
+			attentionLine: string
+			
+		structure FinancialStatement
+			statementID : readOnly key string!
+			company : as reference to Company
+			statementDate : date
+			beginDate : date
+			endDate : date
+			fiscalYear : gYear
+			balanceSheet : as containing reference to BalanceSheet inverse statement
+			incomeStatement : as containing reference to IncomeStatement inverse statement
+			cashFlowStatement : as containing reference to CashFlowStatement inverse statement
+			
+		structure BalanceSheet
+			balanceSheetID : readOnly key string!
+			statement : as container reference to FinancialStatement inverse balanceSheet
+			accountingMethod : as reference to AccountingStandard
+			assets : as decimal
+			liabilities : as decimal
+			equity : as decimal
+			comments : as containing reference to Comment*
+
+		structure IncomeStatement
+			incomeStatementID : readOnly key string!
+			statement : as container reference to FinancialStatement inverse incomeStatement
+			accountingMethod : as reference to AccountingStandard
+			income : decimal
+			expenses : decimal
+			netIncome : decimal
+			comments : as containing reference to Comment*
+		
+		structure CashFlowStatement 
+			cashFlowStatementID : readOnly key string!
+			statement : as container reference to FinancialStatement inverse cashFlowStatement
+			accountingMethod : as reference to AccountingStandard
+			startingCashPosition : decimal
+			endingCashPosition : decimal
+			comments : as containing reference to Comment*
+			
+		structure Company
+			companyID : readOnly key string!
+			companyName : string
+			
+		structure Comment
+			commentID : readOnly key string!
+			timestamp : dateTime
+			comment : string
+			
+		structure AccountingStandard
+			accountingStandardID : readOnly key string!
+			name : string
+			revision : string
+			revisionDate : date

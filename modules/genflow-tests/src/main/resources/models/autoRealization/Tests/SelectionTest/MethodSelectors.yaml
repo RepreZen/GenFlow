@@ -1,0 +1,102 @@
+_type: RealizationModel
+name: MethodSelectors
+realizationRules:
+  # first two templates have messageType constraints
+  # so they won't satisfy messages used for testing
+  # the method-specific cases
+  READ:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: READ_METHOD
+        messageType: REDIRECTION_3xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  WRITE:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: WRITE_METHOD
+        messageType: REDIRECTION_3xx_RESPONSE
+    realization:
+      _type: ObjectRealizationSpec
+  GET:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: GET_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  POST:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: POST_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  PUT:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: PUT_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  PATCH:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: PATCH_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  DELETE:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: DELETE_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  OPTIONS:
+    _type: RealizationRule
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: OPTIONS_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  HEAD:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: HEAD_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  TRACE:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: TRACE_METHOD
+    realization:
+      _type: ObjectRealizationSpec
+  CONNECT:
+    appliesTo:
+    - _type: ContextPattern
+      definedIn:
+        _type: MessageDefinitionContext
+        methodType: CONNECT_METHOD
+    realization:
+      _type: ObjectRealizationSpec

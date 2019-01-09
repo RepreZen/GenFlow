@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataType1 xmlns:test="http://modelsolv.com/reprezen/schemas/testxsd/testxsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" simpleProp="" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/testxsd/testxsd testXSD.xsd ">
+    <simpleRef id=""/>
+    <containmentRef id=""/>
+    <simpleRefUnboundedList>
+        <simpleRefUnbounded id=""/>
+    </simpleRefUnboundedList>
+    <simpleRefUnboundedMandatoryList>
+        <simpleRefUnboundedMandatory id=""/>
+    </simpleRefUnboundedMandatoryList>
+    <containmentRefUnboundedList>
+        <containmentRefUnbounded id=""/>
+    </containmentRefUnboundedList>
+    <simpleRefBoundedList>
+        <simpleRefBounded id=""/>
+        <simpleRefBounded id=""/>
+        <simpleRefBounded id=""/>
+    </simpleRefBoundedList>
+    <containmentRefBoundedList>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+        <containmentRefBounded id=""/>
+    </containmentRefBoundedList>
+    <simplePropUnboundedList>
+        <item>0.0</item>
+    </simplePropUnboundedList>
+    <simplePropBounderList>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+    </simplePropBounderList>
+</dataType1>

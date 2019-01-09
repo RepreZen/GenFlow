@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An instance of an XSD model generated from Customer.rest -->
+<customerObject xmlns="http://modelsolv.com/reprezen/schemas/customer/customer" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" customerID="ABC123" customerName="John Smith" xsi:schemaLocation="http://modelsolv.com/reprezen/schemas/customer/customer customer.xsd">
+    <ordersList>
+        <item currency="USD" orderID="qwe_rty" price="20.0" quantity="1.0">
+            <lineItemsList>
+                <item lineItemID="a1234">
+                    <product productID="qwert1">
+                        <atom:link href="http://tempuri.org/1" rel="product"/>
+                    </product>
+                </item>
+                <item lineItemID="b1234">
+                    <product productID="qwert3">
+                        <atom:link href="http://tempuri.org/1" rel="product"/>
+                    </product>
+                </item>
+            </lineItemsList>
+        </item>
+    </ordersList>
+</customerObject>

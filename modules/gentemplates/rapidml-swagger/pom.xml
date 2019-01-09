@@ -19,8 +19,13 @@
             <artifactId>genflow-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>rapidml-jsonschema</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-tests</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

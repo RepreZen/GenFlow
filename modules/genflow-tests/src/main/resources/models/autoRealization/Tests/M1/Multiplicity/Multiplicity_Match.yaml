@@ -1,0 +1,55 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: | 
+  * Root objects include all properties.
+  * Single-valued reference properties include only primitive properties. 
+  * Multi-Valued reference Properties include only key properties.
+name: Multiplicity_Match
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+          
+  SingleValuedRefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_SingleValuedRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: SINGLE_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization  
+
+  MultiValuedRefObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_MultiValuedRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true  

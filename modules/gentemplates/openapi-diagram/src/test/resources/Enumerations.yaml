@@ -1,0 +1,341 @@
+---
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "TaxBlaster"
+host: "taxblaster.com"
+basePath: "/api"
+tags:
+- name: "IndexObject"
+  description: "The Index Resource is the entry point to the TaxBlaster API.   To\
+    \ minimize coupling, consuming applications should start here,  and follow the\
+    \ links to related resources."
+- name: "TaxFilingCollection"
+  description: "The list of Tax Filings visible to the authorized user."
+- name: "PersonCollection"
+  description: "The list of TaxBlaster users.  The results will vary in membership\
+    \  and level of detail, depending on your access privileges."
+- name: "TaxFilingObject"
+  description: "An individual Tax Filing record, accessed by its ID"
+- name: "PersonObject"
+  description: "An individual user by ID."
+schemes:
+- "http"
+paths:
+  /index:
+    get:
+      tags:
+      - "IndexObject"
+      description: ""
+      operationId: "getIndex"
+      consumes:
+      - "application/xml"
+      responses:
+        404:
+          description: ""
+        200:
+          description: ""
+          schema:
+            $ref: "#/definitions/IndexObject"
+  /people:
+    get:
+      tags:
+      - "PersonCollection"
+      description: ""
+      operationId: "getPersonCollection"
+      consumes:
+      - "application/xml"
+      responses:
+        200:
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PersonCollection"
+    post:
+      tags:
+      - "PersonCollection"
+      description: ""
+      operationId: "updatePersonCollection"
+      consumes:
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request body"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/PersonCollection"
+      responses:
+        200:
+          description: ""
+        400:
+          description: ""
+  /people/{id}:
+    get:
+      tags:
+      - "PersonObject"
+      description: ""
+      operationId: "getPersonObject"
+      consumes:
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "taxpayerID of the requested Person"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: ""
+          schema:
+            $ref: "#/definitions/PersonObject"
+    put:
+      tags:
+      - "PersonObject"
+      description: ""
+      operationId: "putPersonObject"
+      consumes:
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request body"
+        required: true
+        schema:
+          $ref: "#/definitions/PersonObject"
+      - name: "id"
+        in: "path"
+        description: "taxpayerID of the requested Person"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: ""
+        400:
+          description: ""
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "taxpayerID of the requested Person"
+      required: true
+      type: "string"
+  /taxFilings:
+    get:
+      tags:
+      - "TaxFilingCollection"
+      description: ""
+      operationId: "getTaxFilingCollection"
+      consumes:
+      - "application/xml"
+      responses:
+        200:
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TaxFilingCollection"
+    post:
+      tags:
+      - "TaxFilingCollection"
+      description: ""
+      operationId: "updateTaxFilingCollection"
+      consumes:
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request body"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/TaxFilingCollection"
+      responses:
+        200:
+          description: ""
+        400:
+          description: ""
+  /taxFilings/{id}:
+    get:
+      tags:
+      - "TaxFilingObject"
+      description: ""
+      operationId: "getTaxFiling"
+      consumes:
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "filingID of the requested TaxFiling"
+        required: true
+        type: "string"
+      responses:
+        404:
+          description: ""
+        200:
+          description: ""
+          schema:
+            $ref: "#/definitions/TaxFilingObject"
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "filingID of the requested TaxFiling"
+      required: true
+      type: "string"
+definitions:
+  CurrencyCodeEnum:
+    type: "string"
+    description: "Currency code enum, using explicit string values"
+    enum:
+    - "Euro"
+    - "Canadian Dollar"
+    - "US Dollar"
+    - "Swiss Franc"
+    - "Japanese Yen"
+    - "Indian Rupee"
+    - "Brazilian Real"
+  TaxFilingStatusEnum:
+    type: "integer"
+    description: "Tax filing status enumeration, using default values"
+    enum:
+    - "DRAFT_0"
+    - "PENDING_CPA_REVIEW_1"
+    - "PENDING_CLIENT_REVIEW_2"
+    - "FILED_3"
+    - "AMENDED_4"
+    - "CLOSED_5"
+  SpecialValueEnum:
+    type: "integer"
+    description: "Special Value Enum, using explicit integer values"
+    enum:
+    - "NORMAL_VALUE_0"
+    - "NOT_AVAILABLE_-65534"
+    - "NOT_APPLICABLE_-65533"
+    - "RESTRICTED_-65532"
+  IndexObject:
+    type: "object"
+    description: "The Index Resource is the entry point to the TaxBlaster API.   To\
+      \ minimize coupling, consuming applications should start here,  and follow the\
+      \ links to related resources."
+    properties: {}
+  TaxFilingCollection:
+    type: "object"
+    description: "The list of Tax Filings visible to the authorized user."
+    properties:
+      filingID:
+        description: ""
+        type: "string"
+      jurisdiction:
+        description: ""
+        type: "string"
+      year:
+        description: ""
+        type: "string"
+      period:
+        description: ""
+        type: "integer"
+      currency:
+        description: ""
+        $ref: "#/definitions/CurrencyCodeEnum"
+      grossIncome:
+        description: ""
+        type: "number"
+      taxLiability:
+        description: ""
+        type: "number"
+      status:
+        description: ""
+        $ref: "#/definitions/TaxFilingStatusEnum"
+  PersonCollection:
+    type: "object"
+    description: "The list of TaxBlaster users.  The results will vary in membership\
+      \  and level of detail, depending on your access privileges."
+    properties:
+      taxpayerID:
+        description: ""
+        type: "string"
+      lastName:
+        description: ""
+        type: "string"
+      firstName:
+        description: ""
+        type: "string"
+      otherNames:
+        type: "array"
+        items:
+          type: "string"
+      netWorth:
+        description: ""
+        type: "number"
+      netWorthSpecialValue:
+        description: ""
+        $ref: "#/definitions/SpecialValueEnum"
+      preferredLanguage:
+        description: ""
+        type: "string"
+      DOB:
+        description: ""
+        type: "string"
+        format: "date"
+  TaxFilingObject:
+    type: "object"
+    description: "An individual Tax Filing record, accessed by its ID"
+    properties:
+      filingID:
+        description: ""
+        type: "string"
+      jurisdiction:
+        description: ""
+        type: "string"
+      year:
+        description: ""
+        type: "string"
+      period:
+        description: ""
+        type: "integer"
+      currency:
+        description: ""
+        $ref: "#/definitions/CurrencyCodeEnum"
+      grossIncome:
+        description: ""
+        type: "number"
+      taxLiability:
+        description: ""
+        type: "number"
+      status:
+        description: ""
+        $ref: "#/definitions/TaxFilingStatusEnum"
+  PersonObject:
+    type: "object"
+    description: "An individual user by ID."
+    properties:
+      taxpayerID:
+        description: ""
+        type: "string"
+      lastName:
+        description: ""
+        type: "string"
+      firstName:
+        description: ""
+        type: "string"
+      otherNames:
+        type: "array"
+        items:
+          type: "string"
+      netWorth:
+        description: ""
+        type: "number"
+      netWorthSpecialValue:
+        description: ""
+        $ref: "#/definitions/SpecialValueEnum"
+      preferredLanguage:
+        description: ""
+        type: "string"
+      DOB:
+        description: ""
+        type: "string"
+        format: "date"

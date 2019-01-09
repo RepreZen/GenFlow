@@ -1,0 +1,26 @@
+---
+swagger: "2.0"
+info:
+  title: External parameter defintions
+  version: "1.0"
+
+paths: {}
+
+parameters:
+  externalOverridden:
+    name: externalOverridden
+    description: asdfasfsdaf
+    in: query
+    type: string
+  externalNotOverridden:
+    name: externalNotOverridden
+    description: xxx
+    in: query
+    type: string
+  externalBody:
+    name: body
+    description: xxxy
+    in: body
+    schema:
+      description: xxxyy
+      type: string

@@ -1,0 +1,15 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+name: InclusivePropertySet_Simple
+realizationRules:
+  AllObjectRefsAsInlineObjects:
+    _type: RealizationRule
+    _documentation: Simple realization model, realizes all references at all levels as inline objects with all properties.
+    namingPattern: ${TypeName}_AllProperties
+    appliesTo:
+    - _type: ContextPattern
+      _documentation: Empty ContextPattern object has no selectors, meaning that this realization template applies to _all_ object references, in _all_ realization contexts.
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet

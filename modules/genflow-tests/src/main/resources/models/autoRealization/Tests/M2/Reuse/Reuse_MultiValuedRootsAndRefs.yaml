@@ -1,0 +1,59 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: > 
+  Defines a ${TypeName}_Object realization that can be used in any single-valued context, and embeds all properties.  
+  Defines a ${TypeName}_List realization that can be used in any multi-valued context, and embeds only reference properties.  
+  
+name: MultiValuedRootsAndRefs
+realizationRules:
+  SingleValued:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Object
+    appliesTo:
+    - _type: ContextPattern
+      _documentation: ObjectResource root context
+      level:
+        _type: RootObjectContext
+      definedIn:
+        _type: ResourceDefinitionContext
+      resourceType: OBJECT_RESOURCE
+    - _type: ContextPattern
+      _documentation: Message root context
+      level:
+        _type: RootObjectContext
+      definedIn:
+        _type: MessageDefinitionContext
+    - _type: ContextPattern
+      _documentation: Single-valued reference context
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: SINGLE_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+
+  MultiValued:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_List
+    appliesTo:
+    - _type: ContextPattern
+      _documentation: Collection Resource root context
+      level:
+        _type: RootObjectContext
+      definedIn:
+        _type: ResourceDefinitionContext
+      resourceType: COLLECTION_RESOURCE
+    - _type: ContextPattern
+      _documentation: Multi-valued reference context
+      level:
+        _type: ReferencePropertyContext
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization

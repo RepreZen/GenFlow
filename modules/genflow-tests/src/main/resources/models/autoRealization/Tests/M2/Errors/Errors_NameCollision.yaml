@@ -1,0 +1,37 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+name: ReferenceLevel_RootsAndRefs
+realizationRules:
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: RootRealization
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: OBJECT_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+
+  RootCollections:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Collection
+    appliesTo:
+    - _type: ContextPattern
+      resourceType: COLLECTION_RESOURCE
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization

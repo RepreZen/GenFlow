@@ -1,0 +1,23 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./Reuse_CollectionRoots.yaml"
+			
+		/** testing */
+		collectionResource PersonCollection type Person
+			URI /people
+			mediaTypes
+				application/json
+			method GET getPeople
+				request
+				response with this PersonCollection statusCode 200
+				
+		collectionResource AccountantClients type Person
+			URI /accountant/{accountantID}/clients
+				required templateParam accountantID type string
+			method GET getClients
+				request
+				response with this AccountantClients statusCode 200

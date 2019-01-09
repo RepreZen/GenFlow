@@ -1,0 +1,49 @@
+_type: RealizationModel
+name: ContainmentSelectors
+realizationRules:
+      
+  Container:
+    appliesTo:
+    - _type: ContextPattern
+      level: 
+        _type: ReferencePropertyContext
+        containment: CONTAINER
+        multiplicity: SINGLE_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+  NonContainer:
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: NON_CONTAINER
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+  Containing:
+    appliesTo:
+    - _type: ContextPattern
+      level: 
+        _type: ReferencePropertyContext
+        containment: CONTAINING 
+        multiplicity: SINGLE_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+  NonContaining:
+    appliesTo:
+    - _type: ContextPattern
+      level: 
+        _type: ReferencePropertyContext
+        containment: NON_CONTAINING 
+        multiplicity: MULTI_VALUED
+    realization:
+      _type: ObjectRealizationSpec
+  NonContainment:
+    appliesTo:
+    - _type: ContextPattern
+      level: 
+        _type: ReferencePropertyContext
+        containment: NON_CONTAINMENT
+    realization:
+      _type: ObjectRealizationSpec
+

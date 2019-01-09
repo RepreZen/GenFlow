@@ -1,0 +1,44 @@
+---
+# This is a sample multi-file Swagger spec, describing a simple Uber API.
+# The files comprising this project demonstrate local and cross-file
+# references.
+swagger: "2.0"
+info:
+  title: Uber API
+  description: Move your app forward with the Uber API
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+
+# Each Path Item Object describes a resource, containing a set of operations
+# at a specified path.  The Path Item object can define parameters and
+# responses common all of its contained operations.
+paths:
+
+  # Note the use of the '~1' sequence at the beginning of the pathItem
+  # name, in the last segment of the JSON Pointer. The JSON Pointer
+  # specification uses '~1' to indicate a literal forward slash. It
+  # needs this substitution token because forward slash has special
+  # meaning as a path separator in a JSON Pointer.
+  #
+  # We have simplified the names of the Path Item Objects, but the
+  # leading slash is required by Swagger.
+  /products:
+    $ref: "./components/uber_path_products.yaml#/paths/~1products"
+  # Note that the actual path has multiple segments, but we  don't have to repeat all of that in the definition.
+  # We use a simple name (with the required leading slash), and reference it by its simple name.
+  /estimates/price:
+    $ref: "./components/uber_path_estimates_price.yaml#/paths/~1price"
+  /estimates/time:
+    $ref: "./components/uber_path_estimates_time.yaml#/paths/~1time"
+  /me:
+    $ref: "./components/uber_path_user.yaml#/paths/~1user"
+  /history:
+    $ref: "./components/uber_path_history.yaml#/paths/~1history"

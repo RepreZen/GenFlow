@@ -1,0 +1,79 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  Standard realization model for Quorum Business Solutions. 
+
+  Root objects have - 
+  * Primitive properties
+  * Non-containment references
+
+  Reference Properties have - 
+  * Key properties
+  * Auto-link to an objectResource, if one exists.
+
+name: QBSRealizationModel
+realizationRules:
+
+  RootObject:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+        - _type: PropertyRealization
+          propertyType:
+            _type: ReferencePropertyRealization
+            containment: NON_CONTAINMENT
+        
+  ReferenceObjectWithLink:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToObjectResource: true
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+      links:
+      - strategy: specification
+        linkRelation: detail
+        targetResourceType: AUTO_LINK_OBJECT_RESOURCE
+
+  ReferenceObjectNoLink:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Ref
+    appliesTo:
+    - _type: ContextPattern
+      autoLinkableToObjectResource: false
+      level:
+        _type: ReferencePropertyContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType:
+            _type: PrimitivePropertyRealization
+            isKey: true
+
+
+  
+  

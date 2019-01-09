@@ -1,0 +1,50 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./Zen4007.yaml"
+		
+		objectResource FinancialStatementObject type FinancialStatement
+			URI /financialStatements/{id}
+				required templateParam id property statementID
+			mediaTypes
+				application/json
+		
+		default collectionResource CommentCollection type Comment
+			URI /comments
+			mediaTypes
+				application/json
+
+		collectionResource BalanceSheetComments type Comment
+			URI /balanceSheets/{id}/comments
+				/* logically maps to BalanceSheet.balanceSheetID, but we can't capture that,
+				   b/c the resource is bound to Comment. So we have to fall back to string. */
+				required templateParam id type string
+			mediaTypes
+				application/json
+			
+
+		collectionResource IncomeStatementComments type Comment
+			URI /incomeStatements/{id}/comments
+				// logically maps to incomeStatementID
+				required templateParam id type string
+			mediaTypes
+				application/json
+
+		collectionResource CashFlowStatementComments type Comment
+			URI /cashFlowStatements/{id}/comments
+				// logically maps to cashFlowStatementID
+				required templateParam id type string
+			mediaTypes
+				application/json
+			method GET getCashFlowComments
+				request
+				response with CashFlowStatementComments statusCode 200
+				response with type ErrorResponse statusCode 400
+			method POST postComment
+				request with type Comment
+				response with type Comment statusCode 201
+					required param "Location" type anyURI in header 
+				response with type ErrorResponse statusCode 400

@@ -1,0 +1,56 @@
+$schema: ../../../../../../com.modelsolv.reprezen.realization/schema/auto-realization-config-schema.json
+_type: RealizationModel
+_documentation: |
+  * Root objects include everything. 
+  * Containing references include everything except container references. 
+  * Non-containing references include only primitive properties.
+  
+name: Containment_ExcludeContainer
+realizationRules:
+
+  RootObjects:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_Root
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: RootObjectContext
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+          
+  ContainingRefs:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_ContainingRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: CONTAINING
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: InclusivePropertySet
+        excludedProperties:
+        - _type: PropertySelector
+          propertyType:
+            _type: ReferencePropertySelector
+            containment: CONTAINER
+          
+  NonContainingRefs:
+    _type: RealizationRule
+    namingPattern: ${TypeName}_NonContainingRef
+    appliesTo:
+    - _type: ContextPattern
+      level:
+        _type: ReferencePropertyContext
+        containment: NON_CONTAINING
+    realization:
+      _type: ObjectRealizationSpec
+      propertySet:
+        _type: ExclusivePropertySet
+        includedProperties:
+        - _type: PropertyRealization
+          propertyType: 
+            _type: PrimitivePropertyRealization

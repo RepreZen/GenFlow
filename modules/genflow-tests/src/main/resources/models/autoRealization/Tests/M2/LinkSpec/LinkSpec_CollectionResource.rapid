@@ -1,0 +1,23 @@
+import TaxBlasterData.Model from "../../../models/TaxBlasterDataModel.rapid" as data
+
+rapidModel TaxBlaster
+	resourceAPI TaxBlasterAPI baseURI "http://taxblaster.com/api"
+
+		with autoRealizations
+			"./LinkSpec_CollectionResource.yaml"
+		
+		objectResource IndexObject type Index
+			URI /index
+			mediaTypes
+				application/json
+		
+		collectionResource CommentCollection type Comment
+			URI /comments
+			mediaTypes
+				application/json
+		
+		collectionResource TaxFilingCollection type TaxFiling
+			URI /taxFilings
+			mediaTypes
+				application/json
+	
