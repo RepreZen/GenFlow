@@ -84,7 +84,8 @@ class OpDoc {
 		''' 
 			«mediaType.schema?.description?.docHtml»
 			   «mediaType.schema?.renderSchema»
-			   «mediaType.examples.renderExamples»
+			   «mediaType.renderExample»
+			   «mediaType.renderExamples»
 		'''
 	}
 
@@ -107,9 +108,9 @@ class OpDoc {
 		'''
 			«chevron» <span class="label label-default">«contentType»</span> 
 			«schema?.schemaTitle»
-			«schema?.renderSchema»			
-			«mediaType?.example.renderExample»
-			«mediaType?.examples.renderExamples»
+			«schema?.renderSchema»
+			«mediaType?.renderExample»
+			«mediaType?.renderExamples»
 			«response.responseLinks»
 		'''
 	}
