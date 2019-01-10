@@ -22,7 +22,7 @@ class ArrayHelper implements Helper {
 
 	def String getElementTypeName(Object obj) {
 		val elementType = obj.elementType
-		#[elementType?.type, elementType.rzveTypeName].filter[it !== null].last
+		#[elementType?.type, elementType.rzveTypeName].filterNull.last
 	}
 
 	def collectItemTypes(Object obj, boolean includeFinal) {

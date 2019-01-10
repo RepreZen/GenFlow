@@ -6,7 +6,6 @@ import com.reprezen.kaizen.oasparser.model3.Schema
 class ArrayHelper implements Helper {
 
 	extension AttributeHelper attributeHelper
-	extension KaiZenParserHelper = new KaiZenParserHelper
 
 	override init() {
 		attributeHelper = HelperHelper.attributeHelper
@@ -22,11 +21,7 @@ class ArrayHelper implements Helper {
 
 	def String getElementTypeName(Schema obj) {
 		val elementType = obj.elementType
-		#[
-			elementType?.type,
-			elementType?.kaiZenSchemaName,
-			elementType?.rzveTypeName
-		].filterNull.head
+		#[elementType?.type, elementType?.rzveTypeName].filterNull.last
 	}
 
 	def collectItemTypes(Schema obj, boolean includeFinal) {
