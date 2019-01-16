@@ -42,6 +42,8 @@ class OpenApiNormalizerTest {
 			    Foo:
 			      type: object
 			  securitySchemes:
+			    notUsedScheme:
+			     type: basic
 			    oAuth2ClientCredentials:
 			      type: oauth2
 			      flows: 
@@ -52,9 +54,57 @@ class OpenApiNormalizerTest {
 		'''
 		
 		val result = parse(content)
-		assertNotNull(result)
+
+		assertTrue(result.isValid)
 
 		assertNotNull(result.securitySchemes.get("oAuth2ClientCredentials"))
+		assertNull(result.securitySchemes.get("notUsedScheme"))
+		assertEquals(1, result.securitySchemes.size)
+		assertEquals(1, result.securityRequirements.size)
+		assertNotNull(result.securityRequirements.get(0).getRequirement("oAuth2ClientCredentials"))
 	}
 
+    @Test
+    def void testRetainSecuritySchemesInPath() {
+        val content = '''
+            openapi: 3.0.0
+            info:
+              title: ''
+              version: ''
+            paths:
+              /entry:
+                get:
+                  security:
+                    - oAuth2ClientCredentials:
+                      - auth
+                  responses:
+                    '200':
+                      description: OK
+            components:
+              schemas:
+                Foo:
+                  type: object
+              securitySchemes:
+                notUsedScheme:
+                  type: basic
+                oAuth2ClientCredentials:
+                  type: oauth2
+                  flows: 
+                    clientCredentials:
+                      tokenUrl: '/oauth2/token'
+                      scopes:
+                        auth: auth
+        '''
+        
+        val result = parse(content)
+
+        assertTrue(result.isValid)
+        assertNotNull(result.securitySchemes.get("oAuth2ClientCredentials"))
+        assertNull(result.securitySchemes.get("notUsedScheme"))
+        assertEquals(1, result.securitySchemes.size)
+        assertEquals(0, result.securityRequirements.size)
+
+        assertNotNull(result.getPath("/entry").getOperation("get").getSecurityRequirement(0).getRequirement("oAuth2ClientCredentials"))
+    }
 }
+
