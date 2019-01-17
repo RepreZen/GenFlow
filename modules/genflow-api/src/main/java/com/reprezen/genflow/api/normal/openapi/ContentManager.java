@@ -201,17 +201,10 @@ public class ContentManager {
 					getRequiredSecuritySchemesFromPath(item).forEach(LocalContent::retain);
 				}
 			} else if (item.getSectionType() == ObjectType.ROOT && item.getName().equals("security")) {
-				getRequiredSecuritySchemesFromRequirement(item).forEach(LocalContent::retain);
+				collectSecuritySchemeObjects(collectSecuritySchemeNames((ArrayNode) item.getContent()))
+						.forEach(LocalContent::retain);
 			}
 		}
-	}
-
-	/*
-	 * Returns all SecuritySchemes that are being used in the root security
-	 * requirements.
-	 */
-	private Set<LocalContent> getRequiredSecuritySchemesFromRequirement(LocalContent security) {
-		return collectSecuritySchemes(collectSecurityNames((ArrayNode) security.getContent()));
 	}
 
 	/*
@@ -221,21 +214,23 @@ public class ContentManager {
 	private Set<LocalContent> getRequiredSecuritySchemesFromPath(LocalContent path) {
 		JsonNode tree = path.getContent();
 
-		List<JsonNode> securities = Stream.of("get", "put", "post", "delete", "options", "head", "patch", "trace") //
+		List<JsonNode> securityRequirementArrays = Stream
+				.of("get", "put", "post", "delete", "options", "head", "patch", "trace") //
 				.filter(e -> tree.has(e)) //
 				.map(e -> tree.get(e).path("security")) //
 				.filter(e -> e != null && !e.isMissingNode())//
 				.collect(Collectors.toList());
 
-		return collectSecuritySchemes(collectSecurityNames(securities.toArray(new ArrayNode[securities.size()])));
+		return collectSecuritySchemeObjects(collectSecuritySchemeNames(
+				securityRequirementArrays.toArray(new ArrayNode[securityRequirementArrays.size()])));
 	}
 
 	/*
 	 * Returns all SecuritySchemes having a name that is listed in the security
 	 * requirements.
 	 */
-	private Set<LocalContent> collectSecuritySchemes(Set<String> requirements) {
-		return requirements.stream() //
+	private Set<LocalContent> collectSecuritySchemeObjects(Set<String> securitySchemeNames) {
+		return securitySchemeNames.stream() //
 				.map(name -> localizer.getLocalContent("/components/securitySchemes", name)) //
 				.filter(Objects::nonNull) //
 				.collect(Collectors.toSet());
@@ -244,8 +239,8 @@ public class ContentManager {
 	/*
 	 * Returns all security requirement names.
 	 */
-	private Set<String> collectSecurityNames(ArrayNode... securities) {
-		return Stream.of(securities) //
+	private Set<String> collectSecuritySchemeNames(ArrayNode... securityRequirements) {
+		return Stream.of(securityRequirements) //
 				.flatMap(e -> stream(spliterator(e.elements(), e.size(), Spliterator.ORDERED), false)) //
 				.flatMap(e -> stream(spliteratorUnknownSize(e.fieldNames(), Spliterator.ORDERED), false)) //
 				.collect(Collectors.toSet());
