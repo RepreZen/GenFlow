@@ -17,8 +17,7 @@ class LinkSpec_CollectionResource_Test extends RealizationTestBase {
 			'''
 				type: object
 				minProperties: 1
-				description: "The supporting data type for the Index resource.  Not meaningful
-				  as a \nbusiness entity, but required to support a single point of entry."
+				description: "The supporting data type for the Index resource.  Not meaningful as a business entity, but required to support a single point of entry."
 				properties:
 				  people:
 				    type: array

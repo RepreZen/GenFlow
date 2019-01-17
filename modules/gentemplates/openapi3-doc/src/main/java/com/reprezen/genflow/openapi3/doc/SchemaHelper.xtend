@@ -9,14 +9,13 @@
 package com.reprezen.genflow.openapi3.doc
 
 import com.reprezen.genflow.openapi3.doc.StructureTable.SchemaStructureTable
-import com.reprezen.kaizen.oasparser.model3.Schema
 import com.reprezen.jsonoverlay.Overlay
+import com.reprezen.kaizen.oasparser.model3.Schema
 
 class SchemaHelper implements Helper {
 
 	extension AttributeHelper attributeHelper
 	extension ArrayHelper arrayHelper
-	extension KaiZenParserHelper = new KaiZenParserHelper
 
 	override init() {
 		attributeHelper = HelperHelper.attributeHelper
@@ -61,6 +60,6 @@ class SchemaHelper implements Helper {
 	}
 
 	def getSchemaTitle(Schema schema) {
-		#[schema.getKaiZenSchemaName, schema.title, schema.rzveTypeName].filter[it !== null].last
+		#[schema.title, schema.rzveTypeName].filterNull.last
 	}
 }

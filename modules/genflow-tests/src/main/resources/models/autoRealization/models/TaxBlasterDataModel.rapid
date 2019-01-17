@@ -1,8 +1,7 @@
 /* This is a RAPID Model template. Customize it to describe your services and data types. */
 rapidModel TaxBlasterData
 	dataModel Model
-		/** A tax filing record for a given user, in a given tax jurisdiction, in a 
-		    specified tax year. */
+		/** A tax filing record for a given user, in a given tax jurisdiction, in a specified tax year. */
 		structure TaxFiling
 			filingID : key string!
 			taxpayer : reference to Person
@@ -20,16 +19,14 @@ rapidModel TaxBlasterData
 			firstName : string
 			otherNames : string*
 
-		/** The supporting data type for the Index resource.  Not meaningful as a 
-		    business entity, but required to support a single point of entry. */
+		/** The supporting data type for the Index resource.  Not meaningful as a business entity, but required to support a single point of entry. */
 		structure Index
 			people : reference to Person*
 			taxFilings : reference to TaxFiling*
 			accountants : reference to Accountant*
 			balanceSheets : reference to BalanceSheet*
 		
-		/** Describes the message body included in a response message, reporting 
-			an error condition. */	
+		/** Describes the message body included in a response message, reporting an error condition. */	
 		structure ErrorResponse
 			errorCode : key string 
 			httpResponseCode : int

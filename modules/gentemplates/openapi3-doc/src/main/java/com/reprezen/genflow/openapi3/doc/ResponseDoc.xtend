@@ -36,7 +36,8 @@ class ResponseDoc {
 			        «response.description?.docHtml»
 			        «schema?.renderSchema»
 			        «response.getResponseHeaders»
-			        «mediaType?.examples.renderExamples»
+			        «mediaType?.renderExample»
+			        «mediaType?.renderExamples»
 			    </div>
 			</div>
 		'''
