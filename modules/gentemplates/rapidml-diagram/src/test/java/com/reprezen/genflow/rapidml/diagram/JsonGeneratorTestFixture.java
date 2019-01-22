@@ -59,7 +59,7 @@ public class JsonGeneratorTestFixture extends D3GeneratorTestFixture {
 		new ZenModelNormalizer().normalize(zenModel);
 		XGenerateJSON generator = new XGenerateJSON();
 		FakeGenTemplateContext context = new FakeGenTemplateContext();
-		context.setPrimarySource(new ZenModelSource(new File(zenModel.eResource().getURI().toFileString())) {
+		context.setPrimarySource(new ZenModelSource(new File("test.rapid")) {
 			@Override
 			public ZenModel load(File inFile) throws GenerationException {
 				return zenModel;
