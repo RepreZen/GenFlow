@@ -6,7 +6,6 @@ import com.reprezen.kaizen.oasparser.model3.Schema
 class ArrayHelper implements Helper {
 
 	extension AttributeHelper attributeHelper
-	extension KaiZenParserHelper = new KaiZenParserHelper
 
 	override init() {
 		attributeHelper = HelperHelper.attributeHelper
@@ -17,13 +16,12 @@ class ArrayHelper implements Helper {
 	}
 
 	def String getArrayTypeSpec(Schema obj) {
-		val result = '''«obj.elementTypeName»«obj.arrayShape»'''
-		return result
+		'''«obj.elementTypeName»«obj.arrayShape»'''
 	}
 
 	def String getElementTypeName(Schema obj) {
 		val elementType = obj.elementType
-		#[elementType?.kaiZenSchemaName, elementType?.type, elementType.rzveTypeName].filter[it !== null].head
+		#[elementType?.type, elementType?.rzveTypeName].filterNull.last
 	}
 
 	def collectItemTypes(Schema obj, boolean includeFinal) {
@@ -54,16 +52,16 @@ class ArrayHelper implements Helper {
 		val max = obj.maxItems
 		val min = obj.minItems
 		switch null {
-			case min === null && max === null:
+			case (min === null || min === 0) && (max === null || max === 0):
 				"[*]"
-			case min == 0 && max == 1:
+			case (min === null || min === 0) && max === 1:
 				"[?]"
-			case min == 1 && max === null:
+			case (min !== null && min === 1) && (max === null || max === 0):
 				"[+]"
 			case min !== null && max === null: '''[«min»+]'''
 			case min === null && max !== null: '''[..«max»]'''
 			case min == max: '''[«min»]'''
-			default: '''«min»..«max»'''
+			default: '''[«min»..«max»]'''
 		}
 	}
 

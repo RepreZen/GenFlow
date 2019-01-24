@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.reprezen.kaizen.oasparser.model3.Example
-import java.util.Map
+import com.reprezen.kaizen.oasparser.model3.MediaType
 
 class ExamplesHelper implements Helper {
 
@@ -18,16 +18,17 @@ class ExamplesHelper implements Helper {
 		docHelper = HelperHelper.docHelper
 	}
 
-	def <T extends Example> String renderExamples(Map<String, T> examples) {
-		examples?.keySet?.map[name|examples.get(name).render(name)]?.examplesSection
+	def <T extends Example> String renderExamples(MediaType mediaType) {
+		mediaType.examples?.keySet?.map[name|
+			mediaType.examples.get(name).render(name)
+		]?.examplesSection
 	}
 
-	def String renderExample(Object example) {
-		example?.exampleText?.exampleSection
+	def String renderExample(MediaType mediaType) {
+		mediaType.example?.exampleText?.exampleSection
 	}
 
-	def private String render(Example example,
-		String name) {
+	def private String render(Example example, String name) {
 		'''
 			<dt>«name»</dt>
 			<dd>
@@ -35,7 +36,7 @@ class ExamplesHelper implements Helper {
 				«IF example.description !== null»«example.description.docHtml»«ENDIF»
 				«IF example.externalValue !== null»<p><em>External Value: «example.externalValue.htmlEscape»</em></p>«ENDIF»
 				«example?.value?.exampleText»
-			</dd>							
+			</dd>
 		'''
 	}
 
@@ -60,14 +61,16 @@ class ExamplesHelper implements Helper {
 	}
 
 	def private String examplesSection(Iterable<String> examples) {
-		'''
-			<h4>Examples</h4>
-			<dd>
-			«FOR example : examples»
-				«example»
-			«ENDFOR»
-			</dd>
-		'''
+		if (examples.empty) ""
+		else 
+			'''
+				<h4>Examples</h4>
+				<dl>
+					«FOR example : examples»
+						«example»
+					«ENDFOR»
+				</dl>
+			'''
 	}
 
 }

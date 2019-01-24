@@ -22,7 +22,7 @@ class ArrayHelper implements Helper {
 
 	def String getElementTypeName(Object obj) {
 		val elementType = obj.elementType
-		#[elementType?.type, elementType.rzveTypeName].filter[it !== null].last
+		#[elementType?.type, elementType.rzveTypeName].filterNull.last
 	}
 
 	def collectItemTypes(Object obj, boolean includeFinal) {
@@ -53,16 +53,16 @@ class ArrayHelper implements Helper {
 		val max = obj.maxItems
 		val min = obj.minItems
 		switch null {
-			case min === null && max === null:
+			case (min === null || min === 0) && (max === null || max === 0):
 				"[*]"
-			case min == 0 && max == 1:
+			case (min === null || min === 0) && max === 1:
 				"[?]"
-			case min == 1 && max === null:
+			case (min !== null && min === 1) && (max === null || max === 0):
 				"[+]"
 			case min !== null && max === null: '''[«min»+]'''
 			case min === null && max !== null: '''[..«max»]'''
 			case min == max: '''[«min»]'''
-			default: '''«min»..«max»'''
+			default: '''[«min»..«max»]'''
 		}
 	}
 
