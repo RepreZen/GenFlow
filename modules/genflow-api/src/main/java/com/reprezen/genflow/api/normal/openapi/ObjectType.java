@@ -32,6 +32,7 @@ import com.google.common.collect.Sets;
  *
  */
 public enum ObjectType {
+
 	// v2 object types
 	PATH(2, "/paths", 3, "/paths"), //
 	DEFINITION(2, "/definitions"), //
