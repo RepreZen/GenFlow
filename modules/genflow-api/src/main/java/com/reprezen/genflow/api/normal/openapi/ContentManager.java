@@ -159,7 +159,6 @@ public class ContentManager {
 		for (ObjectType section : ObjectType.getTypesForVersion(modelVersion, Option.COMPONENT_OBJECTS)) {
 			localizeObjectsInSection(content, section);
 		}
-		localizeObjectsInSection(content, ObjectType.ROOT);
 		localizeObjectsInSection(content, ObjectType.PATH);
 	}
 
@@ -200,9 +199,8 @@ public class ContentManager {
 				if (item.getSectionType() == ObjectType.PATH && item.isRetained()) {
 					getRequiredSecuritySchemesFromPath(item).forEach(LocalContent::retain);
 				}
-			} else if (item.getSectionType() == ObjectType.ROOT && item.getName().equals("security")) {
-				collectSecuritySchemeObjects(collectSecuritySchemeNames((ArrayNode) item.getContent()))
-						.forEach(LocalContent::retain);
+			} else if (item.getSectionType() == ObjectType.SECURITY_SCHEME) {
+				item.retain();
 			}
 		}
 	}
