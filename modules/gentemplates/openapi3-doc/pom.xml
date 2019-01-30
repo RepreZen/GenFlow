@@ -36,7 +36,7 @@
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
-        <tag>HEAD</tag>
+        <tag>v1.2.0</tag>
     </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -45,7 +45,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>1.2.0</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
     <dependencies>
