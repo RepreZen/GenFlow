@@ -107,6 +107,7 @@ public class NormalizerParameters {
 	static {
 		specialRetainTypes.put("ALL", Option.ALL_OBJECTS);
 		specialRetainTypes.put("COMPONENTS", Option.COMPONENT_OBJECTS);
+		specialRetainTypes.put("PATH_OR_COMPONENTS", Option.PATH_OR_COMPONENTS);
 	}
 
 	private Set<ObjectType> getRetainData(Object data) throws BadParameterException {
