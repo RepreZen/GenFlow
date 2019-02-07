@@ -1,0 +1,88 @@
+---
+name: "KaiZen OpenAPI Normalizer [YAML+JSON]"
+genTemplateId: "com.reprezen.genflow.openapi.normalizer.OpenApiNormalizerGenTemplate"
+relativeOutputDir: generated
+prerequisites: null
+primarySource: 
+  path: "petstore.yaml"
+namedSources: null 
+# The parameters object contains variables that are processed directly by the GenTemplate.
+parameters: 
+  # List of model object types to inline.
+  # For v2 models, allowed values are PATH, DEFINITION, PARAMETER, and RESPONSE.
+  # For v3 models, allowed values are PATH, SCHEMA, RESPONSE, PARAMETER, EXAMPLE,
+  # REQUEST_BODY, HEADER, SECURITY_SCHEME, LINK, and CALLBACK.
+  # In both cases, ALL means all of those; COMPONENTS means all but PATH; NONE means none of them.
+  # Note that recursive objects cannot be fully inlined. Each explicit reference to such an
+  # object will be inlined, but recursive references encocuntered during that inlining will be
+  # retained as references, forcing the object to be retained in the normalized model.
+  INLINE: #
+    - "PARAMETER"
+    - "RESPONSE"
+  
+  # List of model object types to retain. Allowed values are same as for INLINE.
+  # As for INLINE, ALL means all types, and COMPONENTS means all but PATH.
+  # PATH_OR_COMPONENT means PATH if the model has any paths, and COMPONENTS otherwise.
+  # Note that any object for which there is a non-inlined reference will be retained regardless
+  # of this setting. If you see retained objects that you didn't expect, you may have to adjust
+  # your INLINE setting.
+  RETAIN: "PATH_OR_COMPONENTS"
+  
+  # Files whose unreferenced objects are eligible for retention
+  # ROOTS means the top-level file and files specified in ADDITIONAL_FILES.
+  # ALL means ROOTS plus any file that is loaded to resolve references.
+  RETENTION_SCOPE: "ALL"
+  
+  # List of additional files to be treated as top-level.
+  # Each file is specifed as a URL; relative URLs are resolved relative to
+  # the primary source model (NOT this GenTarget configuration file).
+  ADDITIONAL_FILES: #
+    []
+  
+  # List of hoisting operations to perform, including MEDIA_TYPE, PARAMETER, and SECURITY_REQUIREMENT.
+  # ALL means all of the above; NONE means none of them.
+  # This option applies only to v2 models
+  HOIST: "ALL"
+  
+  # Rewrite 'simple refs' to full refs. E.g. '$ref: Pet' => '$ref: "#/definitions/Pet"'
+  # This option applies only to v2 models.
+  REWRITE_SIMPLE_REFS: true
+  
+  # Copy schema definition name to title for definitions without titles
+  CREATE_DEF_TITLES: true
+  
+  # Replace null lists and maps with empty ones
+  #  This option applies only to v2 models.
+  INSTANTIATE_NULL_COLLECTIONS: true
+  
+  # Fill in missing 'object' types
+  # This option applies only to v2 models.
+  FIX_MISSING_TYPES: true
+  
+  # Write JSON Pointers as RepreZen vendor extension properties
+  ADD_JSON_POINTERS: true
+  
+  # How objects should be ordered in normalized model
+  # AS_DECLARED means leave things as they are in the source model
+  # SORTED means sort obects mostly alphabetically by name; see documentation for full details
+  # Note: ordering is currently enforced only for the root-level file
+  ORDERING: "SORTED"
+  
+  # Which aspects of the x-reprezen-normalization extension properties to retain in the generated spec. Choose from:
+  # - ORDERING for data recorded to reconstruct AS_DECLARED ordering
+  # - POINTER and FILE for data identifying definitions of certain objects
+  # - TYPE_NAME for property names of defined schema definitions
+  # - BAD_REF for information about unresolvable references
+  # You may also specify ALL or NONE
+  RETAIN_EXTENSION_DATA: "ALL"
+  
+  # Specify YAML, JSON, or BOTH (the default) to specify which form(s) of output file to produce
+  OUTPUTS: "BOTH"
+  
+  # In body parameters with x-examples vendor extension, convert non-text values into json-serialized text.
+  # This overcomes a bug in SwaggerParser that requires these examples to be text.
+  # This option applies only to v2 models.
+  FIX_X_EXAMPLES: true
+  
+  # Fold multi-line descriptions in YAML output.
+  foldMultiline: true
