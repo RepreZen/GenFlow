@@ -1,17 +1,22 @@
 package com.reprezen.genflow.api.normal.openapi;
 
+import static java.util.Spliterators.spliterator;
+import static java.util.Spliterators.spliteratorUnknownSize;
+import static java.util.stream.StreamSupport.stream;
+
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Spliterator;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.api.normal.openapi.ContentLocalizer.LocalContent;
@@ -192,28 +197,51 @@ public class ContentManager {
 		for (LocalContent item : localizer.getLocalContentItems()) {
 			if (item.isRetained()) {
 				if (item.getSectionType() == ObjectType.PATH && item.isRetained()) {
-					for (LocalContent requiredScheme : getRequiredSecuritySchemes(item)) {
-						requiredScheme.retain();
-					}
+					getRequiredSecuritySchemesFromPath(item).forEach(LocalContent::retain);
 				}
+			} else if (item.getSectionType() == ObjectType.SECURITY_SCHEME) {
+				item.retain();
 			}
 		}
 	}
 
-	private List<LocalContent> getRequiredSecuritySchemes(LocalContent path) {
+	/*
+	 * Returns all SecuritySchemes that are being used in the current path security
+	 * requirements.
+	 */
+	private Set<LocalContent> getRequiredSecuritySchemesFromPath(LocalContent path) {
 		JsonNode tree = path.getContent();
-		Set<String> reqs = new HashSet<>();
-		for (String meth : Arrays.asList("get", "put", "post", "delete", "options", "head", "patch", "trace")) {
-			if (tree.has(meth)) {
-				for (Iterator<JsonNode> reqIter = tree.get(meth).path("security").elements(); reqIter.hasNext();) {
-					for (Iterator<String> nameIter = reqIter.next().fieldNames(); nameIter.hasNext();) {
-						reqs.add(nameIter.next());
-					}
-				}
-			}
-		}
-		return reqs.stream().map(name -> localizer.getLocalContent("/components/securitySchemes", name))
-				.filter(lc -> lc != null).collect(Collectors.toList());
+
+		List<JsonNode> securityRequirementArrays = Stream
+				.of("get", "put", "post", "delete", "options", "head", "patch", "trace") //
+				.filter(e -> tree.has(e)) //
+				.map(e -> tree.get(e).path("security")) //
+				.filter(e -> e != null && !e.isMissingNode())//
+				.collect(Collectors.toList());
+
+		return collectSecuritySchemeObjects(collectSecuritySchemeNames(
+				securityRequirementArrays.toArray(new ArrayNode[securityRequirementArrays.size()])));
+	}
+
+	/*
+	 * Returns all SecuritySchemes having a name that is listed in the security
+	 * requirements.
+	 */
+	private Set<LocalContent> collectSecuritySchemeObjects(Set<String> securitySchemeNames) {
+		return securitySchemeNames.stream() //
+				.map(name -> localizer.getLocalContent("/components/securitySchemes", name)) //
+				.filter(Objects::nonNull) //
+				.collect(Collectors.toSet());
+	}
+
+	/*
+	 * Returns all security requirement names.
+	 */
+	private Set<String> collectSecuritySchemeNames(ArrayNode... securityRequirements) {
+		return Stream.of(securityRequirements) //
+				.flatMap(e -> stream(spliterator(e.elements(), e.size(), Spliterator.ORDERED), false)) //
+				.flatMap(e -> stream(spliteratorUnknownSize(e.fieldNames(), Spliterator.ORDERED), false)) //
+				.collect(Collectors.toSet());
 	}
 
 	public Optional<LocalContent> getAndRemoveRetainedModelObject() {
