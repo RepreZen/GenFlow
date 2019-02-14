@@ -9,6 +9,7 @@
 package com.reprezen.genflow.openapi.generator;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -105,13 +106,17 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 				throw new GenerationException("Failed to instantiate OpenAPI Codegen instance", e);
 			}
 			openAPICodegen.setOutputDir(context.getOutputDirectory().getAbsolutePath());
+
 			@SuppressWarnings("unchecked")
 			Map<String, String> config = (Map<String, String>) context.getGenTargetParameters()
 					.get(OPENAPI_CODEGEN_CONFIG);
 			if (config == null) {
 				config = Maps.newHashMap();
 			}
+
+			setCodegenOptions(openAPICodegen, context.getGenTargetParameters());
 			addParameters(config, context.getGenTargetParameters());
+
 			ClientOptInput clientOptInput = new ClientOptInput();
 			clientOptInput.setConfig(openAPICodegen);
 			ClientOpts clientOpts = new ClientOpts();
@@ -119,6 +124,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			clientOpts.setProperties(config);
 			clientOptInput.setOpts(clientOpts);
 			clientOptInput.setOpenAPI(model);
+
 			DefaultGenerator generator = new DefaultGenerator();
 			@SuppressWarnings("unchecked")
 			Map<String, String> systemProperties = (Map<String, String>) context.getGenTargetParameters()
@@ -133,10 +139,60 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			for (String key : params.keySet()) {
 				if (!SPECIAL_PARAMS.contains(key)) {
 					Object value = params.get(key);
-					if (value != null && value instanceof String) {
-						config.put(key, (String) value);
+					if (value != null && (value instanceof String || value instanceof Boolean)) {
+						config.put(key, value.toString());
 					}
 				}
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private void setCodegenOptions(CodegenConfig config, Map<String, Object> parameters) {
+			try {
+				Map<String, String> instantiationTypes = (Map<String, String>) parameters.get("instantiationTypes");
+				if (instantiationTypes != null) {
+					config.instantiationTypes().putAll(instantiationTypes);
+				}
+			} catch (ClassCastException e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Map<String, String> typeMappings = (Map<String, String>) parameters.get("typeMappings");
+				if (typeMappings != null) {
+					config.typeMapping().putAll(typeMappings);
+				}
+			} catch (ClassCastException e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Map<String, String> importMappings = (Map<String, String>) parameters.get("importMappings");
+				if (importMappings != null) {
+					config.importMapping().putAll(importMappings);
+				}
+			} catch (ClassCastException e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Map<String, String> reservedWordsMappings = (Map<String, String>) parameters
+						.get("reservedWordsMappings");
+				if (reservedWordsMappings != null) {
+					config.reservedWordsMappings().putAll(reservedWordsMappings);
+				}
+			} catch (ClassCastException e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Collection<String> languageSpecificPrimitives = (Collection<String>) parameters
+						.get("languageSpecificPrimitives");
+				if (languageSpecificPrimitives != null) {
+					config.languageSpecificPrimitives().addAll(languageSpecificPrimitives);
+				}
+			} catch (ClassCastException e) {
+				// TODO: handle exception
 			}
 		}
 
