@@ -64,6 +64,10 @@
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
+            <artifactId>swagger-codegen3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
             <artifactId>openapi-diagram</artifactId>
         </dependency>
         <dependency>

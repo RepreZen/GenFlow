@@ -314,6 +314,11 @@
                 <version>1.2.1-ZEN-3994-SNAPSHOT</version>
             </dependency>
             <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-codegen3</artifactId>
+                <version>1.2.1-ZEN-3994-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>1.5</version>

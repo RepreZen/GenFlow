@@ -16,7 +16,7 @@ import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.openapi.OpenApiDocument;
 import com.reprezen.genflow.api.openapi.OpenApiGenTemplate;
-import com.reprezen.genflow.api.swagger.SwaggerSource.SwaggerSource_MinimalNormalizerOptions;
+import com.reprezen.genflow.api.openapi.OpenApiSource;
 import com.reprezen.genflow.api.template.GenTemplate;
 import com.reprezen.genflow.api.template.GenTemplateContext;
 import com.reprezen.genflow.api.template.GenTemplateProperty;
@@ -58,8 +58,7 @@ public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 
 	@Override
 	public void configure() throws GenerationException {
-		alsoKnownAs("com.modelsolv.reprezen.gentemplates.swagger.codegen." + wrapper.getSimpleName());
-		define(primarySource().ofType(SwaggerSource_MinimalNormalizerOptions.class));
+		define(primarySource().ofType(OpenApiSource.class));
 		define(parameter().named(SWAGGER_CODEGEN_CONFIG).optional().withDescription(
 				"Contents of swagger codegen configuration file.",
 				"This is the file that would be passed with --config option on swagger codegen command line.",
