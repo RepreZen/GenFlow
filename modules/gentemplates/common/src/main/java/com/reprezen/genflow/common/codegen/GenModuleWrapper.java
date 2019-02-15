@@ -2,16 +2,12 @@ package com.reprezen.genflow.common.codegen;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Parameter;
-
-import io.swagger.codegen.CodegenConfig;
 
 public abstract class GenModuleWrapper<Config> {
 
@@ -99,7 +95,7 @@ public abstract class GenModuleWrapper<Config> {
 		return name;
 	}
 
-	enum GenericType {
+	public enum GenericType {
 		CLIENT, SERVER, DOCUMENTATION, CONFIG, OTHER
 	};
 
@@ -128,126 +124,6 @@ public abstract class GenModuleWrapper<Config> {
 
 	public abstract Logger getLogger();
 
-	public static class ScgModuleWrapper extends GenModuleWrapper<io.swagger.codegen.CodegenConfig> {
-
-		private Logger logger = LoggerFactory.getLogger(ScgModuleWrapper.class);
-
-		public ScgModuleWrapper(io.swagger.codegen.CodegenConfig config) {
-			super(config);
-		}
-
-		public ScgModuleWrapper(Class<CodegenConfig> configClass) {
-			super(configClass);
-		}
-
-		public static GenModuleWrapper<io.swagger.codegen.CodegenConfig> getDummyInstance() {
-			return new ScgModuleWrapper(io.swagger.codegen.CodegenConfig.class);
-		}
-
-		@Override
-		public Enum<?> getType() {
-			return config.getTag();
-		}
-
-		@Override
-		public GenericType getGenericType() {
-			switch (config.getTag()) {
-			case CLIENT:
-				return GenericType.CLIENT;
-			case SERVER:
-				return GenericType.SERVER;
-			case DOCUMENTATION:
-				return GenericType.DOCUMENTATION;
-			case CONFIG:
-				return GenericType.CONFIG;
-			case OTHER:
-			default:
-				return GenericType.OTHER;
-			}
-		}
-
-		@Override
-		public String getName() {
-			return config.getName();
-		}
-
-		@Override
-		public List<CliOptWrapper<?>> getClientOptions() {
-			return config.cliOptions().stream().map(cliOpt -> new ScgCliOptWrapper(cliOpt))
-					.collect(Collectors.toList());
-		}
-
-		@Override
-		public Logger getLogger() {
-			return logger;
-		}
-
-		@Override
-		public Enum<?> typeNamed(String name) {
-			return io.swagger.codegen.CodegenType.valueOf(name);
-		}
-
-	}
-
-	public static class OagModuleWrapper extends GenModuleWrapper<org.openapitools.codegen.CodegenConfig> {
-		private Logger logger = LoggerFactory.getLogger(ScgModuleWrapper.class);
-
-		public OagModuleWrapper(org.openapitools.codegen.CodegenConfig config) {
-			super(config);
-		}
-
-		public OagModuleWrapper(Class<org.openapitools.codegen.CodegenConfig> configClass) {
-			super(configClass);
-		}
-
-		public static GenModuleWrapper<org.openapitools.codegen.CodegenConfig> getDummyInstance() {
-			return new OagModuleWrapper(org.openapitools.codegen.CodegenConfig.class);
-		}
-
-		@Override
-		public Enum<?> getType() {
-			return config.getTag();
-		}
-
-		@Override
-		public GenericType getGenericType() {
-			switch (config.getTag()) {
-			case CLIENT:
-				return GenericType.CLIENT;
-			case SERVER:
-				return GenericType.SERVER;
-			case DOCUMENTATION:
-				return GenericType.DOCUMENTATION;
-			case CONFIG:
-				return GenericType.CONFIG;
-			case OTHER:
-			default:
-				return GenericType.OTHER;
-			}
-		}
-
-		@Override
-		public String getName() {
-			return config.getName();
-		}
-
-		@Override
-		public List<CliOptWrapper<?>> getClientOptions() {
-			return config.cliOptions().stream().map(cliOpt -> new OagCliOptWrapper(cliOpt))
-					.collect(Collectors.toList());
-		}
-
-		@Override
-		public Enum<?> typeNamed(String name) {
-			return org.openapitools.codegen.CodegenType.valueOf(name);
-		}
-
-		@Override
-		public Logger getLogger() {
-			return logger;
-		}
-	}
-
 	public static abstract class CliOptWrapper<CliOpt> {
 
 		protected CliOpt cliOpt;
@@ -259,42 +135,6 @@ public abstract class GenModuleWrapper<Config> {
 		public abstract String getName();
 
 		public abstract String getDescription();
-
-	}
-
-	public static class ScgCliOptWrapper extends CliOptWrapper<io.swagger.codegen.CliOption> {
-
-		public ScgCliOptWrapper(io.swagger.codegen.CliOption cliOpt) {
-			super(cliOpt);
-		}
-
-		@Override
-		public String getName() {
-			return cliOpt.getOpt();
-		}
-
-		@Override
-		public String getDescription() {
-			return cliOpt.getDescription();
-		}
-
-	}
-
-	public static class OagCliOptWrapper extends CliOptWrapper<org.openapitools.codegen.CliOption> {
-
-		public OagCliOptWrapper(org.openapitools.codegen.CliOption cliOpt) {
-			super(cliOpt);
-		}
-
-		@Override
-		public String getName() {
-			return cliOpt.getOpt();
-		}
-
-		@Override
-		public String getDescription() {
-			return cliOpt.getDescription();
-		}
 
 	}
 

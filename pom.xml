@@ -52,6 +52,7 @@
         <module>modules/gentemplates/openapi3-doc</module>
         <module>modules/gentemplates/openapi-generator</module>
         <module>modules/gentemplates/swagger-codegen</module>
+        <module>modules/gentemplates/swagger-codegen3</module>
         <module>modules/gentemplates/openapi-diagram</module>
         <module>modules/tools</module>
         <module>modules/gentemplates/swagger-doc</module>
@@ -301,6 +302,11 @@
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen</artifactId>
                 <version>2.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen</artifactId>
+                <version>3.0.4</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>

@@ -1,4 +1,12 @@
-package com.reprezen.genflow.swagger.codegen;
+/*******************************************************************************
+ * Copyright © 2013, 2019 Modelsolv, Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains the property
+ * of ModelSolv, Inc. See the file license.html in the root directory of
+ * this project for further information.
+ *******************************************************************************/
+package com.reprezen.genflow.swagger.codegen3;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,13 +20,13 @@ import com.reprezen.genflow.common.codegen.CodegenGenTemplateGroup;
 import com.reprezen.genflow.common.codegen.GenModuleWrapper;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
-import io.swagger.codegen.CodegenConfig;
+import io.swagger.codegen.v3.CodegenConfig;
 
-public class ScgCodegenGenTemplateGroup extends CodegenGenTemplateGroup<CodegenConfig> {
-	private static Logger logger = LoggerFactory.getLogger(ScgCodegenGenTemplateGroup.class);
+public class Scg3CodegenGenTemplateGroup extends CodegenGenTemplateGroup<CodegenConfig> {
+	private static Logger logger = LoggerFactory.getLogger(Scg3CodegenGenTemplateGroup.class);
 
-	public ScgCodegenGenTemplateGroup() {
-		super(ScgModuleWrapper.getDummyInstance());
+	public Scg3CodegenGenTemplateGroup() {
+		super(Scg3ModuleWrapper.getDummyInstance());
 	}
 
 	@Override
@@ -28,17 +36,17 @@ public class ScgCodegenGenTemplateGroup extends CodegenGenTemplateGroup<CodegenC
 
 	@Override
 	public GenModuleWrapper<CodegenConfig> wrap(CodegenConfig config) {
-		return new ScgModuleWrapper(config);
+		return new Scg3ModuleWrapper(config);
 	}
 
 	@Override
 	public IGenTemplate createGenTemplate(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
-		return new ScgCodegenGenTemplate(wrapper, info);
+		return new Scg3CodegenGenTemplate(wrapper, info);
 	}
 
 	public static void main(String[] args) {
 		// only used during development for testing outside of product
-		Iterable<IGenTemplate> genTemplatesIter = new ScgCodegenGenTemplateGroup()
+		Iterable<IGenTemplate> genTemplatesIter = new Scg3CodegenGenTemplateGroup()
 				.getGenTemplates(CodegenGenTemplateGroup.class.getClassLoader());
 		IGenTemplate[] genTemplates = Iterables.toArray(genTemplatesIter, IGenTemplate.class);
 		Arrays.sort(genTemplates, new Comparator<IGenTemplate>() {
