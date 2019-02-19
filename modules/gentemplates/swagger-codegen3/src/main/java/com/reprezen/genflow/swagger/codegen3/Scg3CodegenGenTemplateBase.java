@@ -33,10 +33,10 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 
-	public static final String SWAGGER_CODEGEN_SYSTEM_PROPERTIES = "swaggerCodegenSystemProperties";
-	public static final String SWAGGER_CODEGEN_CONFIG = "swaggerCodegenConfig";
-	public static final List<String> SPECIAL_PARAMS = Arrays.asList(SWAGGER_CODEGEN_CONFIG,
-			SWAGGER_CODEGEN_SYSTEM_PROPERTIES);
+	public static final String OPENAPI_CODEGEN_SYSTEM_PROPERTIES = "openApiCodegenSystemProperties";
+	public static final String OPENAPI_CODEGEN_CONFIG = "openApiCodegenConfig";
+	public static final List<String> SPECIAL_PARAMS = Arrays.asList(OPENAPI_CODEGEN_CONFIG,
+			OPENAPI_CODEGEN_SYSTEM_PROPERTIES);
 
 	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
@@ -59,23 +59,23 @@ public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 	@Override
 	public void configure() throws GenerationException {
 		define(primarySource().ofType(OpenApiSource.class));
-		define(parameter().named(SWAGGER_CODEGEN_CONFIG).optional().withDescription(
+		define(parameter().named(OPENAPI_CODEGEN_CONFIG).optional().withDescription(
 				"Contents of swagger codegen configuration file.",
 				"This is the file that would be passed with --config option on swagger codegen command line.",
 				"The JSON contents of that file should be the value of this parameter.",
 				"This parameter need not be used. If it is absent, all string-valued parameters are collected into",
 				"a map that is then passed to the swagger codegen module. If a map is provided here, then string-valued",
 				"parameters are still copied in, overriding like-named values appearing in the map."));
-		define(parameter().named(SWAGGER_CODEGEN_SYSTEM_PROPERTIES).optional().withDescription(
+		define(parameter().named(OPENAPI_CODEGEN_SYSTEM_PROPERTIES).optional().withDescription(
 				"System properties to set, as in the -D option of swagger codegen command line.",
 				"Each property should be a json object with a name/value pair for each property.",
 				"Example: for '-Dmodels -Dapis=User,Pets' use the following:", "value:", "  models: ''",
 				"  apis: Users,Pets"));
-		define(GenTemplateProperty.swaggerCodegenProvider());
+		define(GenTemplateProperty.swaggerCodegenV3Provider());
 		if (info != null) {
 			define(property().named(StandardProperties.DESCRIPTION) //
 					.withValue(String.format("Provider: %s\nGenerator Name: %s\nType: %s\nPackage: %s\nClassname: %s",
-							"Swagger Codegen", info.getReportedName(), info.getType(), wrapper.getPackageName(),
+							"Swagger Codegen v3", info.getReportedName(), info.getType(), wrapper.getPackageName(),
 							wrapper.getSimpleName())));
 			define(property().named(StandardProperties.GENERATOR_TYPE).withValue(info.getType().name()));
 		}
@@ -102,12 +102,12 @@ public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 			try {
 				openApiCodegen = wrapper.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
-				throw new GenerationException("Failed to instantiate Swagger Codegen instance", e);
+				throw new GenerationException("Failed to instantiate Swagger Codegen v3 instance", e);
 			}
 			openApiCodegen.setOutputDir(context.getOutputDirectory().getAbsolutePath());
 			@SuppressWarnings("unchecked")
 			Map<String, String> config = (Map<String, String>) context.getGenTargetParameters()
-					.get(SWAGGER_CODEGEN_CONFIG);
+					.get(OPENAPI_CODEGEN_CONFIG);
 			if (config == null) {
 				config = Maps.newHashMap();
 			}
@@ -122,7 +122,7 @@ public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 			DefaultGenerator generator = new DefaultGenerator();
 			@SuppressWarnings("unchecked")
 			Map<String, String> systemProperties = (Map<String, String>) context.getGenTargetParameters()
-					.get(SWAGGER_CODEGEN_SYSTEM_PROPERTIES);
+					.get(OPENAPI_CODEGEN_SYSTEM_PROPERTIES);
 			setSystemProperties(systemProperties);
 			generator.opts(clientOptInput);
 			reportScgVersion();
@@ -149,7 +149,7 @@ public abstract class Scg3CodegenGenTemplateBase extends OpenApiGenTemplate {
 		}
 
 		private void reportScgVersion() {
-			context.getLogger().info(String.format("Using swagger-codegen v%s\n",
+			context.getLogger().info(String.format("Using swagger-codegen-v3 v%s\n",
 					CodegenConfig.class.getPackage().getImplementationVersion()));
 		}
 	}

@@ -68,6 +68,12 @@ public class GenTemplateProperty {
 				.withUiSymbol("S").withUiColor("109,154,0");
 	}
 
+	public static PropertyBuilder swaggerCodegenV3Provider() {
+		return new PropertyBuilder().named(PROVIDER) //
+				.withValue("Swagger Codegen v3") //
+				.withUiSymbol("S").withUiColor("109,154,0");
+	}
+
 	public static PropertyBuilder openApiGeneratorProvider() {
 		return new PropertyBuilder().named(PROVIDER) //
 				.withValue("OpenAPI Generator") //
