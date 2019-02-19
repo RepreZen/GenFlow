@@ -37,6 +37,11 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -58,6 +63,31 @@
                             <arguments>
                                 <argument>${basedir}/src/main/resources/com/reprezen/genflow/swagger/codegen</argument>
                             </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-test-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <!-- 
+                          It is necessary to copy the GenTemplate Infos into the test-classes folder otherwise ScgCodegenModuleDiscovery 
+                          cannot find them when generators are launched from tests.
+                        -->
+                        <configuration>
+                            <outputDirectory>${basedir}/target/test-classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
