@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2018 ModelSolv, Inc. and others. All rights reserved. 
-	This program and the accompanying materials are made available under the 
-	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
-	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
         <version>1.2.1-SNAPSHOT</version>
-        <relativePath>../../../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <name>genflow-common</name>
-    <description>Common code for use in GenTemplate implementations</description>
-    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
+    <artifactId>genflow-api-rapidml</artifactId>
+    <name>genflow-api-rapidml</name>
+    <description>RepreZen GenFlow API RAPID-ML</description>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api-rapidml</url>
     <licenses>
         <license>
             <name>Eclipse Public License - Version 1.0</name>
@@ -42,9 +38,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:gimodulet://github.com/RepreZen/GenFlow.git</connection>
+        <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
-        <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
+        <url>https://github.com/RepreZen/GenFlow/tree/master/modules/genflow-api</url>
         <tag>HEAD</tag>
     </scm>
     <dependencies>
@@ -53,23 +49,28 @@
             <artifactId>genflow-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.core.runtime</artifactId>
-            <version>3.15.100</version>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.core.resources</artifactId>
-            <version>3.13.200</version>
+            <groupId>com.reprezen.rapidml</groupId>
+            <artifactId>com.reprezen.rapidml.model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-gfm-tables</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-autolink</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-csv</artifactId>
+            <artifactId>commons-text</artifactId>
         </dependency>
     </dependencies>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    <artifactId>genflow-common</artifactId>
 </project>

@@ -8,7 +8,6 @@ import org.openapitools.codegen.CodegenConfig;
 
 import com.reprezen.genflow.common.codegen.GenModuleDiscovery;
 import com.reprezen.genflow.common.codegen.GenModuleWrapper;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.OagModuleWrapper;
 
 public class OagCodegenModuleDiscovery extends GenModuleDiscovery<CodegenConfig> {
 

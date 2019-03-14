@@ -47,6 +47,7 @@
     </scm>
     <modules>
         <module>modules/genflow-api</module>
+        <module>modules/genflow-api-rapidml</module>
         <module>modules/standard-gentemplates</module>
         <module>modules/gentemplates/common</module>
         <module>modules/gentemplates/openapi3-doc</module>
@@ -274,6 +275,11 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
+                <version>1.2.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-api-rapidml</artifactId>
                 <version>1.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
