@@ -247,7 +247,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 		'''
 	}
 	
-	val indentedPreBlock = Pattern.compile("^(\\s*)<pre\\s+[^>]*class=\"remove-xtend-indent\"[^>]*>.*$",
+	val indentedPreBlock = Pattern.compile("^(\\s*)<pre(\\s+.*)?>.*$",
 		Pattern.CASE_INSENSITIVE + Pattern.DOTALL) // DOTALL so we match trailing \r chars
 
 	def private removeUnwantedIndentation(String html) {
@@ -256,7 +256,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 
 	def private removeUnwantedIndentation(List<String> lines) {
 		var i = 0
-		val unindentedLines = Lists.<String>newArrayList
+		val unindentedLines = Lists.<String>newArrayList 
 		while (i < lines.size) {
 			var line = lines.get(i)
 			var matcher = indentedPreBlock.matcher(line)
