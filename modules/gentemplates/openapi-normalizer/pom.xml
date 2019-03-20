@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.2.1-ZEN-4720-SNAPSHOT</version>
+        <version>1.2.1-SNAPSHOT</version>
         <relativePath>../../..</relativePath>
     </parent>
     <artifactId>openapi-normalizer</artifactId>
@@ -18,10 +18,6 @@
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 </project>
