@@ -63,13 +63,13 @@ public class OpenApiNormalizerGenTemplate extends OpenApiGenTemplate {
 				"REQUEST_BODY, HEADER, SECURITY_SCHEME, LINK, and CALLBACK.",
 				"In both cases, ALL means all of those; COMPONENTS means all but PATH; NONE means none of them.",
 				"Note that recursive objects cannot be fully inlined. Each explicit reference to such an",
-				"object will be inlined, but recursive references encocuntered during that inlining will be",
+				"object will be inlined, but recursive references encountered during that inlining will be",
 				"retained as references, forcing the object to be retained in the normalized model.")
 				.withDefault(Arrays.asList(ObjectType.PARAMETER, ObjectType.RESPONSE)));
 		define(parameter().named(OptionType.RETAIN.name())
 				.withDescription("List of model object types to retain. Allowed values are same as for INLINE.",
 						"As for INLINE, ALL means all types, and COMPONENTS means all but PATH.",
-						"PATH_OR_COMPONENT means PATH if the model has any paths, and COMPONENTS otherwise.",
+						"PATH_OR_COMPONENTS means PATH if the model has any paths, and COMPONENTS otherwise.",
 						"Note that any object for which there is a non-inlined reference will be retained regardless",
 						"of this setting. If you see retained objects that you didn't expect, you may have to adjust",
 						"your INLINE setting.")
