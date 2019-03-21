@@ -4,72 +4,72 @@
 	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
 	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
 	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.reprezen.genflow</groupId>
-        <artifactId>genflow</artifactId>
-        <version>1.2.1-ZEN-4770-SNAPSHOT</version>
-        <relativePath>../../../pom.xml</relativePath>
-    </parent>
-    <name>genflow-common</name>
-    <description>Common code for use in GenTemplate implementations</description>
-    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
-    <licenses>
-        <license>
-            <name>Eclipse Public License - Version 1.0</name>
-            <url>https://www.eclipse.org/legal/epl-v10.html</url>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Andy Lowry</name>
-            <email>andy.lowry@reprezen.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-        <developer>
-            <name>Guillaume Hillairet</name>
-            <email>g.hillairet@gmail.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-        <developer>
-            <name>Tatiana Fesenko</name>
-            <email>tatiana.fesenko@reprezen.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-    </developers>
-    <scm>
-        <connection>scm:git:gimodulet://github.com/RepreZen/GenFlow.git</connection>
-        <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
-        <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
-        <tag>HEAD</tag>
-    </scm>
-    <dependencies>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.core.runtime</artifactId>
-            <version>3.15.100</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.core.resources</artifactId>
-            <version>3.13.200</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-csv</artifactId>
-        </dependency>
-    </dependencies>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    <artifactId>genflow-common</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.reprezen.genflow</groupId>
+		<artifactId>genflow</artifactId>
+		<version>1.2.1-ZEN-4770-SNAPSHOT</version>
+		<relativePath>../../../pom.xml</relativePath>
+	</parent>
+	<name>genflow-common</name>
+	<description>Common code for use in GenTemplate implementations</description>
+	<url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - Version 1.0</name>
+			<url>https://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Andy Lowry</name>
+			<email>andy.lowry@reprezen.com</email>
+			<organization>RepreZen</organization>
+			<organizationUrl>https://www.reprezen.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Guillaume Hillairet</name>
+			<email>g.hillairet@gmail.com</email>
+			<organization>RepreZen</organization>
+			<organizationUrl>https://www.reprezen.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Tatiana Fesenko</name>
+			<email>tatiana.fesenko@reprezen.com</email>
+			<organization>RepreZen</organization>
+			<organizationUrl>https://www.reprezen.com</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:gimodulet://github.com/RepreZen/GenFlow.git</connection>
+		<developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
+		<url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/common</url>
+		<tag>HEAD</tag>
+	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>com.reprezen.genflow</groupId>
+			<artifactId>genflow-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+		</dependency>
+	</dependencies>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<artifactId>genflow-common</artifactId>
 </project>
