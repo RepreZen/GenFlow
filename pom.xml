@@ -300,7 +300,7 @@
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen</artifactId>
-                <version>2.4.0</version>
+                <version>2.4.4</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
