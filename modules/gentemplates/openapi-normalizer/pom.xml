@@ -19,5 +19,9 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 </project>

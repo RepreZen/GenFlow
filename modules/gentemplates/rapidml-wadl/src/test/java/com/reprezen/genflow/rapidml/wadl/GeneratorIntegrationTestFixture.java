@@ -74,13 +74,12 @@ public abstract class GeneratorIntegrationTestFixture extends GeneratorTestFixtu
 	protected Map<String, String> doGenerate(ZenModel zenModel, File dir, Monitor progressMonitor)
 			throws IOException, GenerationException {
 		new ZenModelNormalizer().normalize(zenModel);
-		context = new FakeGenTemplateContext(
-				new ZenModelSource(new File(zenModel.eResource().getURI().toFileString())) {
-					@Override
-					public ZenModel load(File inFile) throws GenerationException {
-						return zenModel;
-					}
-				});
+		context = new FakeGenTemplateContext(new ZenModelSource(new File("test.rapid")) {
+			@Override
+			public ZenModel load(File inFile) throws GenerationException {
+				return zenModel;
+			}
+		});
 		Map<String, String> generated = new HashMap<>();
 		context.setTraces(new GenTemplateTraces());
 		context.setTraceBuilder(new GenTemplateTraceBuilder(null));
