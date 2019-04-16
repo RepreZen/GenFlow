@@ -121,7 +121,7 @@ class MultilineCommentTest extends SwaggerGenTestBase {
 		assertEquals(expected.trim, processed)
 	}
 
-	@Test
+	@Test @Ignore
 	def void test_proper_multiline() throws Exception {
 		val zenModel = loadModelAndNormalize(model)
 
@@ -139,7 +139,7 @@ class MultilineCommentTest extends SwaggerGenTestBase {
 		assertTrue(swaggerText.contains(multilineTagValue))
 	}
 
-	@Test
+	@Test @Ignore
 	def void test_multiline_with_space_followed_by_linebreak() throws Exception {
 		val zenModel = loadModelAndNormalize(model)
 
@@ -157,7 +157,7 @@ class MultilineCommentTest extends SwaggerGenTestBase {
 		assertTrue(swaggerText.contains(multilineTagValue))
 	}
 
-	@Test
+	@Test @Ignore
 	def void test_multiline_with_trailing_space() throws Exception {
 		val zenModel = loadModelAndNormalize(model)
 
