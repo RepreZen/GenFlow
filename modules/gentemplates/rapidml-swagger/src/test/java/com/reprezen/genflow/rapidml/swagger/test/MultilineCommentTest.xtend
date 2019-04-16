@@ -14,6 +14,7 @@ import com.reprezen.genflow.rapidml.swagger.XGenerateSwaggerYaml
 import com.reprezen.genflow.rapidml.swagger.XSwaggerGenTemplate
 import com.reprezen.rapidml.implicit.DocumentationSpaceProcessor
 import org.junit.Test
+import org.junit.Ignore
 
 class MultilineCommentTest extends SwaggerGenTestBase {
 
