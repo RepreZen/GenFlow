@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
+            <artifactId>genflow-api-openapi</artifactId>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>

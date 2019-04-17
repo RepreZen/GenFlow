@@ -118,9 +118,5 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>swagger-nswag</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
-        </dependency>
     </dependencies>
 </project>

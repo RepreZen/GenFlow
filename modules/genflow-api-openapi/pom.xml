@@ -7,35 +7,32 @@
         <version>1.3.1-ZEN-4770-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>genflow-api-rapidml</artifactId>
+    <artifactId>genflow-api-openapi</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml.model</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-parser</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark</artifactId>
+            <groupId>com.reprezen.kaizen</groupId>
+            <artifactId>openapi-parser</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark-ext-gfm-tables</artifactId>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.commonmark</groupId>
-            <artifactId>commonmark-ext-autolink</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

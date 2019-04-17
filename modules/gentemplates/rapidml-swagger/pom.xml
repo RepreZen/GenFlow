@@ -15,6 +15,10 @@
             <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-parser</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-jsonschema</artifactId>
             <scope>test</scope>

@@ -10,38 +10,6 @@
     <name>openapi3-doc</name>
     <description>RepreZen Documentation GenTemplate for OpenAPI v3 Models</description>
     <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
-    <licenses>
-        <license>
-            <name>Eclipse Public License - Version 1.0</name>
-            <url>https://www.eclipse.org/legal/epl-v10.html</url>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Andy Lowry</name>
-            <email>andy.lowry@reprezen.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-        <developer>
-            <name>Guillaume Hillairet</name>
-            <email>g.hillairet@gmail.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-        <developer>
-            <name>Tatiana Fesenko</name>
-            <email>tatiana.fesenko@reprezen.com</email>
-            <organization>RepreZen</organization>
-            <organizationUrl>https://www.reprezen.com</organizationUrl>
-        </developer>
-    </developers>
-    <scm>
-        <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
-        <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
-        <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/openapi3-doc</url>
-        <tag>HEAD</tag>
-    </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -85,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
+            <artifactId>genflow-api-openapi</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

@@ -11,13 +11,13 @@ package com.reprezen.genflow.api.target;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.template.GenTemplateRegistry;
 import com.reprezen.genflow.api.template.IGenTemplate;
@@ -68,11 +68,11 @@ public class GenTarget {
 	private GenTargetPrimarySource primarySource;
 
 	/** Paths to prerequisite .gen files for prerequisite GenTargets. */
-	Map<String, GenTargetPrerequisite> prerequisites = Maps.newHashMap();
+	Map<String, GenTargetPrerequisite> prerequisites = new HashMap<>();
 
-	private final Map<String, GenTargetNamedSource> namedSources = Maps.newHashMap();
+	private final Map<String, GenTargetNamedSource> namedSources = new HashMap<>();
 
-	private Map<String, Object> parameters = Maps.newHashMap();
+	private Map<String, Object> parameters = new HashMap<>();
 
 	public String getName() {
 		return name;
@@ -164,7 +164,7 @@ public class GenTarget {
 	@JsonProperty("parameters")
 	public void setParameters(Object parameters) throws GenerationException {
 		if (parameters == null) {
-			this.parameters = Maps.newHashMap();
+			this.parameters = new HashMap<>();
 		} else if (parameters instanceof Map) {
 			@SuppressWarnings("unchecked")
 			Map<String, Object> parameterMap = (Map<String, Object>) parameters;
@@ -172,7 +172,7 @@ public class GenTarget {
 		} else if (parameters instanceof Collection) {
 			@SuppressWarnings("unchecked")
 			Collection<Map<String, Object>> parameterList = (Collection<Map<String, Object>>) parameters;
-			Map<String, Object> parameterMap = Maps.newHashMap();
+			Map<String, Object> parameterMap = new HashMap<>();
 			for (Map<String, Object> parameter : parameterList) {
 				parameterMap.put((String) parameter.get("name"), parameter.get("value"));
 			}

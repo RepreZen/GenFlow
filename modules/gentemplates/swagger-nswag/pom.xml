@@ -12,6 +12,10 @@
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-api-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
         <dependency>
