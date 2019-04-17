@@ -274,20 +274,12 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-common</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.openapitools</groupId>
@@ -302,11 +294,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>standard-gentemplates</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -317,11 +305,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-codegen</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -331,56 +315,32 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-diagram</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-generator</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi3-doc</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-doc</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>openapi-normalizer</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-ui</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.rapidml</groupId>
@@ -410,65 +370,37 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-doc</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-diagram</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-xsd</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-wadl</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jsonschema</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-swagger</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-csharp</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -478,11 +410,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-nodejs</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
@@ -507,20 +435,12 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jaxrs</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-nswag</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -535,11 +455,7 @@
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-tests</artifactId>
-<<<<<<< HEAD
-                <version>1.2.1-ZEN-4707-SNAPSHOT</version>
-=======
-                <version>1.3.1-SNAPSHOT</version>
->>>>>>> master
+                <version>1.3.1-ZEN-4707-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.jsoup</groupId>
