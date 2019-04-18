@@ -92,8 +92,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 			this.wrapper = wrapper;
 		}
 
-		@Override
-		public void generate(Swagger model) throws GenerationException {
+		protected ClientOptInput createCodeGenConfig() throws GenerationException {
 			CodegenConfig swaggerCodegen;
 			try {
 				swaggerCodegen = wrapper.newInstance();
@@ -118,7 +117,15 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 			clientOpts.setOutputDirectory(context.getOutputDirectory().getAbsolutePath());
 			clientOpts.setProperties(config != null ? config : Maps.<String, String>newHashMap());
 			clientOptInput.setOpts(clientOpts);
+
+			return clientOptInput;
+		}
+
+		@Override
+		public void generate(Swagger model) throws GenerationException {
+			ClientOptInput clientOptInput = createCodeGenConfig();
 			clientOptInput.setSwagger(model);
+
 			io.swagger.codegen.Generator generator = new DefaultGenerator();
 			@SuppressWarnings("unchecked")
 			Map<String, String> systemProperties = (Map<String, String>) context.getGenTargetParameters()

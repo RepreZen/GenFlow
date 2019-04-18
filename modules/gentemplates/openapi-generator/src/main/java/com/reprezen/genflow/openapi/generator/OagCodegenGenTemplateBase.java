@@ -98,7 +98,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			generate(openApi);
 		}
 
-		private void generate(OpenAPI model) throws GenerationException {
+		protected ClientOptInput createCodeGenConfig() throws GenerationException {
 			CodegenConfig openAPICodegen;
 			try {
 				openAPICodegen = wrapper.newInstance();
@@ -123,6 +123,12 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			clientOpts.setOutputDirectory(context.getOutputDirectory().getAbsolutePath());
 			clientOpts.setProperties(config);
 			clientOptInput.setOpts(clientOpts);
+
+			return clientOptInput;
+		}
+
+		private void generate(OpenAPI model) throws GenerationException {
+			ClientOptInput clientOptInput = createCodeGenConfig();
 			clientOptInput.setOpenAPI(model);
 
 			DefaultGenerator generator = new DefaultGenerator();
