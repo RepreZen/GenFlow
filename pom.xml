@@ -49,7 +49,6 @@
         <module>modules/genflow-api</module>
         <module>modules/genflow-api-openapi</module>
         <module>modules/genflow-api-rapidml</module>
-        <module>modules/standard-gentemplates</module>
         <module>modules/gentemplates/common</module>
         <module>modules/gentemplates/openapi3-doc</module>
         <module>modules/gentemplates/openapi-generator</module>
@@ -70,6 +69,10 @@
         <module>modules/gentemplates/rapidml-jaxrs</module>
         <module>modules/gentemplates/swagger-nswag</module>
         <module>modules/genflow-tests</module>
+        <module>modules/standard-gentemplates</module>
+        <module>modules/reprezen-openapi-gentemplates</module>
+        <module>modules/reprezen-rapidml-gentemplates</module>
+        <module>modules/openapi-gentemplates</module>
     </modules>
     <build>
         <plugins>
