@@ -31,10 +31,7 @@
         <dependency>
             <groupId>org.eclipse.platform</groupId>
             <artifactId>org.eclipse.core.runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.core.resources</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
