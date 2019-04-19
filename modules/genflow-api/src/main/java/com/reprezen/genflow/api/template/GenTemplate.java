@@ -64,6 +64,11 @@ import com.reprezen.genflow.api.util.TypeUtils;
 public abstract class GenTemplate<PrimaryType> extends AbstractGenTemplate {
 
 	public static final String OUTPUT_FILES_PARAM = "outputFileNames";
+	public static final String IMPORT_MAPPINGS = "importMappings";
+	public static final String LANGUAGE_SPECIFIC_PRIMITIVES = "languageSpecificPrimitives";
+	public static final String TYPE_MAPPINGS = "typeMappings";
+	public static final String INSTANTIATION_TYPES = "instantiationTypes";
+	public static final String RESERVED_WORDS_MAPPINGS = "reservedWordsMappings";
 	public static final VarName MODEL_VAR_NAME = new VarName("_model");
 	public static final VarName ITEM_VAR_NAME = new VarName("_item");
 

@@ -64,6 +64,32 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 				"Each property should be a JSON object with a name/value pair for each property.",
 				"Example: for '-Dmodels -Dapis=User,Pets' use the following:", "value:", "  models: ''",
 				"  apis: Users,Pets"));
+		define(parameter().named(LANGUAGE_SPECIFIC_PRIMITIVES).optional().withDescription(
+				"Specifies additional language specific primitive types.",
+				"You can have multiple occurrences of this option.", //
+				"Example: -Pet", //
+				"         -User"));
+		define(parameter().named(TYPE_MAPPINGS).optional().withDescription(
+				"Sets mappings between Swagger spec. types and generated code types.", //
+				"You can have multiple occurrences of this option.", //
+				"Example: array:List", //
+				"         map:Map"));
+		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
+				"Sets mappings between Swagger spec. types and generated code instance types.",
+				"You can have multiple occurrences of this option.", //
+				"Example (in Java): array:ArrayList", //
+				"                   map:HashMap"));
+		define(parameter().named(IMPORT_MAPPINGS).optional().withDescription(
+				"Specifies mappings between a given class and the import that should be used for that class.",
+				"You can have multiple occurrences of this option.", //
+				"Example: ArrayList:java.util.ArrayList", //
+				"		     HashMap:java.util.HashMap", //
+				"		     User:com.mycomp.User"));
+		define(parameter().named(RESERVED_WORDS_MAPPINGS).optional().withDescription(
+				"Specifies how a reserved name should be escaped to. Otherwise, the default _<name> is used.",
+				"You can have multiple occurrences of this option.", //
+				"Example (in Java): switch:xswitch", //
+				"                   transient:xtransient"));
 		define(GenTemplateProperty.openApiGeneratorProvider());
 		define(property().named(StandardProperties.DESCRIPTION) //
 				.withValue(String.format("Provider: %s\nGenerator Name: %s\nType: %s\nPackage: %s\nClassname: %s",
@@ -155,7 +181,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 		@SuppressWarnings("unchecked")
 		private void setCodegenOptions(CodegenConfig config, Map<String, Object> parameters) {
 			try {
-				Map<String, String> instantiationTypes = (Map<String, String>) parameters.get("instantiationTypes");
+				Map<String, String> instantiationTypes = (Map<String, String>) parameters.get(INSTANTIATION_TYPES);
 				if (instantiationTypes != null) {
 					config.instantiationTypes().putAll(instantiationTypes);
 				}
@@ -164,7 +190,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			}
 
 			try {
-				Map<String, String> typeMappings = (Map<String, String>) parameters.get("typeMappings");
+				Map<String, String> typeMappings = (Map<String, String>) parameters.get(TYPE_MAPPINGS);
 				if (typeMappings != null) {
 					config.typeMapping().putAll(typeMappings);
 				}
@@ -173,7 +199,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			}
 
 			try {
-				Map<String, String> importMappings = (Map<String, String>) parameters.get("importMappings");
+				Map<String, String> importMappings = (Map<String, String>) parameters.get(IMPORT_MAPPINGS);
 				if (importMappings != null) {
 					config.importMapping().putAll(importMappings);
 				}
@@ -183,7 +209,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 
 			try {
 				Map<String, String> reservedWordsMappings = (Map<String, String>) parameters
-						.get("reservedWordsMappings");
+						.get(RESERVED_WORDS_MAPPINGS);
 				if (reservedWordsMappings != null) {
 					config.reservedWordsMappings().putAll(reservedWordsMappings);
 				}
@@ -193,7 +219,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 
 			try {
 				Collection<String> languageSpecificPrimitives = (Collection<String>) parameters
-						.get("languageSpecificPrimitives");
+						.get(LANGUAGE_SPECIFIC_PRIMITIVES);
 				if (languageSpecificPrimitives != null) {
 					config.languageSpecificPrimitives().addAll(languageSpecificPrimitives);
 				}
