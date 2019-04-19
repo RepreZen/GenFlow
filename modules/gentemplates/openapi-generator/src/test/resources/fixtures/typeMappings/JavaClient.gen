@@ -148,15 +148,7 @@ parameters:
   
   # library template (sub-template) to use
   library: null
-
-  # Indicates the class is already included as default		
-  languageSpecificPrimitives:
-    - Pet
- 
-  # Specifies mappings between a given class and the import that should be used for that class
-  importMappings:
-    Pet: org.my.Pet
-
+  
   # Contents of OpenAPI Generator configuration file.
   # This is the file that would be passed with the --config option on the OpenAPI Generator
   # command line. The JSON contents of that file should be the value of this parameter.
@@ -172,3 +164,12 @@ parameters:
   #   models: ''
   #   apis: Users,Pets
   openApiCodegenSystemProperties: null
+  
+  # Sets mappings between OpenAPI spec types and generated code types
+  typeMappings:
+    array: LinkedList
+    
+  # Specifies mappings between a given class and the import that should be used for that class
+  importMappings:
+   LinkedList: java.util.ArrayList
+        

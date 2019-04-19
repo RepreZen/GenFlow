@@ -3,10 +3,11 @@ package com.reprezen.genflow.openapi.generator
 import com.google.common.io.Resources
 import com.reprezen.genflow.api.target.GenTargetUtils
 import java.io.File
+import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.logging.Logger
+import org.junit.Ignore
 import org.junit.Test
-import java.nio.file.Files
 
 import static org.junit.Assert.*
 
@@ -36,5 +37,55 @@ class JavaClientCodeGenTest {
 		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
 
 		assertTrue(Files.list(modelFolder.toPath).noneMatch["Pet.java".equals(it.toFile.name)])
+	}
+
+	@Test @Ignore
+	def void testInstantiationTypes() {
+		val url = Resources.getResource("fixtures/instantiationTypes/JavaClient.gen")
+
+		val genTarget = GenTargetUtils.load(Paths.get(url.toURI()).toFile())
+
+		val result = genTarget.execute(Logger.getLogger("test"))
+		val generatedFolder = new File(result.baseDirectory, "generated")
+		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
+		
+		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
+		val fileContents = new String(Files.readAllBytes(file?.get))
+		
+		assertTrue(fileContents.contains("this.owners = new LinkedList<Owner>();"))
+	}
+	
+	@Test
+	def void testTypeMappings() {
+		val url = Resources.getResource("fixtures/typeMappings/JavaClient.gen")
+
+		val genTarget = GenTargetUtils.load(Paths.get(url.toURI()).toFile())
+
+		val result = genTarget.execute(Logger.getLogger("test"))
+		val generatedFolder = new File(result.baseDirectory, "generated")
+		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
+		
+		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
+		assertNotNull(file)
+		
+		val fileContents = new String(Files.readAllBytes(file.get))
+		assertTrue(fileContents.contains("private LinkedList<Owner> owners"))
+	}
+	
+	@Test
+	def void testReservedWordsMappings() {
+		val url = Resources.getResource("fixtures/reservedWordsMappings/JavaClient.gen")
+
+		val genTarget = GenTargetUtils.load(Paths.get(url.toURI()).toFile())
+
+		val result = genTarget.execute(Logger.getLogger("test"))
+		val generatedFolder = new File(result.baseDirectory, "generated")
+		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
+		
+		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
+		assertNotNull(file)
+		
+		val fileContents = new String(Files.readAllBytes(file.get))
+		assertTrue(fileContents.contains("private String ___for"))
 	}
 }

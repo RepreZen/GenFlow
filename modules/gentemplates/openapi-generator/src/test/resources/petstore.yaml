@@ -30,7 +30,7 @@ paths:
               schema:
                 type: string
           content:
-            application/json:    
+            application/json:
               schema:
                 $ref: "#/components/schemas/Pets"
         default:
@@ -94,6 +94,19 @@ components:
           type: string
         tag:
           type: string
+        for:
+          type: string
+        owners:
+          type: array
+          items:
+            $ref: "#/components/schemas/Owner"
+
+    Owner:
+      type: object
+      properties:
+        name:
+          type: string
+
     Pets:
       type: array
       items:
