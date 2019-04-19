@@ -27,16 +27,23 @@ class JavaClientCodeGenTest {
 	}
 
 	@Test
-	def void testImportMappings() {
-		val url = Resources.getResource("fixtures/importMappings/JavaClient.gen")
+	def void testLanguageSpecificPrimitives() {
+		val url = Resources.getResource("fixtures/languageSpecificPrimitives/JavaClient.gen")
 
 		val genTarget = GenTargetUtils.load(Paths.get(url.toURI()).toFile())
 
 		val result = genTarget.execute(Logger.getLogger("test"))
 		val generatedFolder = new File(result.baseDirectory, "generated")
 		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
-
-		assertTrue(Files.list(modelFolder.toPath).noneMatch["Pet.java".equals(it.toFile.name)])
+		
+		val files = Files.list(modelFolder.toPath)
+		assertTrue(files.noneMatch["Owner.java".equals(it.toFile.name)])
+	
+		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
+		assertTrue(file.present)
+		
+		val fileContents = new String(Files.readAllBytes(file.get))
+		assertTrue(fileContents.contains("org.my.Owner"))
 	}
 
 	@Test @Ignore
@@ -50,9 +57,10 @@ class JavaClientCodeGenTest {
 		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
 		
 		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
-		val fileContents = new String(Files.readAllBytes(file?.get))
+		assertTrue(file.present)
 		
-		assertTrue(fileContents.contains("this.owners = new LinkedList<Owner>();"))
+		val fileContents = new String(Files.readAllBytes(file?.get))
+		assertTrue(fileContents.contains("this.owners = new HashSet<Owner>();"))
 	}
 	
 	@Test
@@ -66,10 +74,10 @@ class JavaClientCodeGenTest {
 		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
 		
 		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
-		assertNotNull(file)
+		assertTrue(file.present)
 		
 		val fileContents = new String(Files.readAllBytes(file.get))
-		assertTrue(fileContents.contains("private LinkedList<Owner> owners"))
+		assertTrue(fileContents.contains("private Set<Owner> owners"))
 	}
 	
 	@Test
@@ -83,9 +91,9 @@ class JavaClientCodeGenTest {
 		val modelFolder = new File(generatedFolder, "src/main/java/org/openapitools/client/model")
 		
 		val file = Files.list(modelFolder.toPath).filter["Pet.java".equals(it.toFile.name)].findFirst
-		assertNotNull(file)
+		assertTrue(file.present)
 		
 		val fileContents = new String(Files.readAllBytes(file.get))
-		assertTrue(fileContents.contains("private String ___for"))
+		assertTrue(fileContents.contains("private Boolean xswitch"))
 	}
 }

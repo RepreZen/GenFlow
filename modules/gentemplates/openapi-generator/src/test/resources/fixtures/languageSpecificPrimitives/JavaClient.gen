@@ -149,13 +149,20 @@ parameters:
   # library template (sub-template) to use
   library: null
 
-  # Indicates the class is already included as default		
+  # Specifies additional language specific primitive types.
+  # You can have multiple occurrences of this option.
+  # Example: -Pet
+  #          -User
   languageSpecificPrimitives:
-    - Pet
+    - Owner
  
-  # Specifies mappings between a given class and the import that should be used for that class
+  # Specifies mappings between a given class and the import that should be used for that class.
+  # You can have multiple occurrences of this option.
+  # Example: ArrayList:java.util.ArrayList
+  # 		 HashMap:java.util.HashMap
+  # 		 User:com.mycomp.User
   importMappings:
-    Pet: org.my.Pet
+    Owner: org.my.Owner
 
   # Contents of OpenAPI Generator configuration file.
   # This is the file that would be passed with the --config option on the OpenAPI Generator

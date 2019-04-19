@@ -165,11 +165,18 @@ parameters:
   #   apis: Users,Pets
   openApiCodegenSystemProperties: null
   
-  # Sets mappings between OpenAPI spec types and generated code types
+  # Sets mappings between Swagger spec. types and generated code types.
+  # You can have multiple occurrences of this option.
+  # Example: array: Set
+  #          map: Map
   typeMappings:
-    array: LinkedList
+    array: Set
     
-  # Specifies mappings between a given class and the import that should be used for that class
+  # Specifies mappings between a given class and the import that should be used for that class.
+  # You can have multiple occurrences of this option.
+  # Example: Set: java.util.Set
+  # 		 HashSet: java.util.HashSet
+  # 		 User: com.mycomp.User
   importMappings:
-   LinkedList: java.util.ArrayList
+     Set: java.util.Set
         

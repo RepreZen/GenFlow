@@ -94,8 +94,8 @@ components:
           type: string
         tag:
           type: string
-        for:
-          type: string
+        switch:
+          type: boolean
         owners:
           type: array
           items:

@@ -81,24 +81,24 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 		define(parameter().named(TYPE_MAPPINGS).optional().withDescription(
 				"Sets mappings between Swagger spec. types and generated code types.", //
 				"You can have multiple occurrences of this option.", //
-				"Example: array:List", //
-				"         map:Map"));
+				"Example: array: Set", //
+				"         map: Map"));
 		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
 				"Sets mappings between Swagger spec. types and generated code instance types.",
 				"You can have multiple occurrences of this option.", //
-				"Example (in Java): array:ArrayList", //
-				"                   map:HashMap"));
+				"Example (in Java): array: HashSet", //
+				"                   map: HashMap"));
 		define(parameter().named(IMPORT_MAPPINGS).optional().withDescription(
 				"Specifies mappings between a given class and the import that should be used for that class.",
 				"You can have multiple occurrences of this option.", //
-				"Example: ArrayList:java.util.ArrayList", //
-				"		     HashMap:java.util.HashMap", //
-				"		     User:com.mycomp.User"));
+				"Example: Set: java.util.Set", //
+				"		  HashSet: java.util.HashSet", //
+				"		  User: com.mycomp.User"));
 		define(parameter().named(RESERVED_WORDS_MAPPINGS).optional().withDescription(
 				"Specifies how a reserved name should be escaped to. Otherwise, the default _<name> is used.",
 				"You can have multiple occurrences of this option.", //
-				"Example (in Java): switch:xswitch", //
-				"                   transient:xtransient"));
+				"Example (in Java): switch: xswitch", //
+				"                   transient: xtransient"));
 		define(GenTemplateProperty.swaggerCodegenProvider());
 		if (info != null) {
 			define(property().named(StandardProperties.DESCRIPTION) //

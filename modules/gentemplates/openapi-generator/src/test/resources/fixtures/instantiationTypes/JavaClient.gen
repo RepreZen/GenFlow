@@ -165,9 +165,17 @@ parameters:
   #   apis: Users,Pets
   openApiCodegenSystemProperties: null
   
-  # Type mappings between the schema-type and the corresponding Java type
+  # Sets mappings between Swagger/OpenAPI spec. types and generated code instance types.
+  # You can have multiple occurrences of this option.
+  # Example (in Java): array: HashSet
+  #                    map: HashMap
   instantiationTypes: 
-    array: LinkedList
+    array: HashSet
 
+  # Specifies mappings between a given class and the import that should be used for that class.
+  # You can have multiple occurrences of this option.
+  # Example: Set: java.util.Set
+  # 		 HashSet: java.util.HashSet
+  # 		 User: com.mycomp.User
   importMappings:
-    LinkedList: java.util.LinkedList
+    HashSet: java.util.HashSet

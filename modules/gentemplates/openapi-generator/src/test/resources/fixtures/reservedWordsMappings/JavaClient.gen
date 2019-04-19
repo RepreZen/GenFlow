@@ -166,6 +166,9 @@ parameters:
   openApiCodegenSystemProperties: null
   
   # Specifies how a reserved name should be escaped to. Otherwise, the default _<name> is used.
+  # You can have multiple occurrences of this option.
+  # Example (in Java): switch: xswitch
+  #                    transient: xtransient
   reservedWordsMappings:
-    for: ___for
+    switch: xswitch
         
