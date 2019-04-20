@@ -261,12 +261,12 @@
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
-                <version>1.5.21</version>
+                <version>1.5.22</version>
             </dependency>
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-parser</artifactId>
-                <version>1.0.38</version>
+                <version>1.0.44</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.kaizen</groupId>
