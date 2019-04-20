@@ -4,30 +4,25 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.3.1-ZEN-3994-SNAPSHOT</version>
+        <version>1.2.1-ZEN-3994-SNAPSHOT</version>
         <relativePath>../../..</relativePath>
     </parent>
-    <artifactId>swagger-codegen</artifactId>
-    <name>swagger-codegen</name>
-    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/swagger-codegen</url>
+    <artifactId>swagger-codegen3</artifactId>
+    <name>swagger-codegen3</name>
+    <url>https://github.com/RepreZen/GenFlow/tree/master/modules/gentemplates/swagger-codegen3</url>
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.swagger</groupId>
+            <groupId>io.swagger.codegen.v3</groupId>
             <artifactId>swagger-codegen</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-compat-spec-parser</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-core</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-generators</artifactId>
+            <version>1.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -52,11 +47,11 @@
                         </goals>
                         <configuration>
                             <includeProjectDependencies>true</includeProjectDependencies>
-                            <mainClass>com.reprezen.genflow.swagger.codegen.ScgCodegenModuleDiscovery</mainClass>
+                            <mainClass>com.reprezen.genflow.swagger.codegen3.Scg3CodegenModuleDiscovery</mainClass>
                             <classpathScope>compile</classpathScope>
                             <cleanupDaemonThreads>false</cleanupDaemonThreads>
                             <arguments>
-                                <argument>${basedir}/src/main/resources/com/reprezen/genflow/swagger/codegen</argument>
+                                <argument>${basedir}/src/main/resources/com/reprezen/genflow/swagger/codegen3</argument>
                             </arguments>
                         </configuration>
                     </execution>

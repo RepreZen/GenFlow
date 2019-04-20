@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 
 import com.reprezen.genflow.common.codegen.GenModuleDiscovery;
 import com.reprezen.genflow.common.codegen.GenModuleWrapper;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper;
 
 import io.swagger.codegen.CodegenConfig;
 
