@@ -252,7 +252,7 @@ class XGenerateSwaggerDoc extends SwaggerOutputItem {
 		'''
 	}
 
-	val indentedPreBlock = Pattern.compile("^(\\s*)<pre\\s+[^>]*class=\"remove-xtend-indent\"[^>]*>.*$",
+	val indentedPreBlock = Pattern.compile("^(\\s*)<pre(\\s+.*)?>.*$",
 		Pattern.CASE_INSENSITIVE + Pattern.DOTALL) // DOTALL so we match trailing \r chars
 
 	def private removeUnwantedIndentation(String html) {

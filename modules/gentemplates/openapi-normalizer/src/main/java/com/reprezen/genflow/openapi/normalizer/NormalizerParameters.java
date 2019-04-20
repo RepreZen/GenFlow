@@ -92,7 +92,7 @@ public class NormalizerParameters {
 		}
 	}
 
-	private static Map<String, Collection<ObjectType>> specialInlineTypes = Maps.newHashMap();
+	private static Map<String, Set<ObjectType>> specialInlineTypes = Maps.newHashMap();
 	static {
 		specialInlineTypes.put("ALL", Option.ALL_OBJECTS);
 		specialInlineTypes.put("COMPONENTS", Option.COMPONENT_OBJECTS);
@@ -103,10 +103,11 @@ public class NormalizerParameters {
 		return getEnumListData(data, ObjectType.class, specialInlineTypes);
 	}
 
-	private static Map<String, Collection<ObjectType>> specialRetainTypes = Maps.newHashMap();
+	private static Map<String, Set<ObjectType>> specialRetainTypes = Maps.newHashMap();
 	static {
 		specialRetainTypes.put("ALL", Option.ALL_OBJECTS);
 		specialRetainTypes.put("COMPONENTS", Option.COMPONENT_OBJECTS);
+		specialRetainTypes.put("PATH_OR_COMPONENTS", Option.PATH_OR_COMPONENTS);
 	}
 
 	private Set<ObjectType> getRetainData(Object data) throws BadParameterException {
@@ -117,7 +118,7 @@ public class NormalizerParameters {
 		return getEnumData(data, RetentionScopeType.class);
 	}
 
-	private static Map<String, Collection<HoistType>> specialHoistTypes = Maps.newHashMap();
+	private static Map<String, Set<HoistType>> specialHoistTypes = Maps.newHashMap();
 	static {
 		specialHoistTypes.put("ALL", Option.ALL_HOIST_TYPES);
 		specialHoistTypes.put("NONE", Option.NO_HOIST_TYPES);
@@ -131,7 +132,7 @@ public class NormalizerParameters {
 		return getEnumData(data, OrderingScheme.class);
 	}
 
-	private static Map<String, Collection<ExtensionData>> specialExtensionRetentionTypes = Maps.newHashMap();
+	private static Map<String, Set<ExtensionData>> specialExtensionRetentionTypes = Maps.newHashMap();
 	static {
 		specialExtensionRetentionTypes.put("ALL", Option.ALL_EXTENSION_DATA);
 		specialExtensionRetentionTypes.put("NONE", Option.NO_EXTENSION_DATA);
@@ -141,7 +142,7 @@ public class NormalizerParameters {
 		return getEnumListData(data, ExtensionData.class, specialExtensionRetentionTypes);
 	}
 
-	private <T extends Enum<T>> Set<T> getEnumListData(Object data, Class<T> cls, Map<String, Collection<T>> specials)
+	private <T extends Enum<T>> Set<T> getEnumListData(Object data, Class<T> cls, Map<String, Set<T>> specials)
 			throws BadParameterException {
 		Set<T> results = Sets.newHashSet();
 		if (data instanceof Collection<?>) {
@@ -152,7 +153,10 @@ public class NormalizerParameters {
 		} else if (data instanceof String) {
 			String string = (String) data;
 			if (specials != null && specials.containsKey(string)) {
-				results.addAll(specials.get(string));
+				// we return the value instead of copying it
+				// as we want to test for object equality
+				// see method Options.isRetained(objectType, hasPaths)
+				results = specials.get(string);
 			} else {
 				results.add(getEnumData(data, cls));
 			}

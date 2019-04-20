@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.2.1-ZEN-3994-SNAPSHOT</version>
+        <version>1.3.1-ZEN-3994-SNAPSHOT</version>
         <relativePath>../../../</relativePath>
     </parent>
     <artifactId>swagger-doc</artifactId>
