@@ -74,31 +74,42 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 				"Example: for '-Dmodels -Dapis=User,Pets' use the following:", "value:", "  models: ''",
 				"  apis: Users,Pets"));
 		define(parameter().named(LANGUAGE_SPECIFIC_PRIMITIVES).optional().withDescription(
-				"Specifies additional language specific primitive types.",
-				"You can have multiple occurrences of this option.", //
-				"Example: -Pet", //
-				"         -User"));
+				"Specifies types that are provided by the API implementation, and so should not be generated.", //
+				"Type names here should be unqualified. The fully-qualified name should be defined in importMappings.", //
+				"The value is an array of type names. For example:", //
+				"  languageSpecificPrimitives:", //
+				"    - Pet", //
+				"    - User"));
 		define(parameter().named(TYPE_MAPPINGS).optional().withDescription(
-				"Sets mappings between Swagger spec. types and generated code types.", //
-				"You can have multiple occurrences of this option.", //
-				"Example: array: Set", //
-				"         map: Map"));
+				"Sets mappings between general-purpose types and declared types in the generated code. Types",
+				"may include string, number, integer, boolean, array, object or others defined by the generator.", //
+				"Type should be unqualified. The qualified name should be defined in importMappings. For example:", //
+				"  typeMappings:", //
+				"    array: Set", //
+				"    map: LinkedHashMap"));
 		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
-				"Sets mappings between Swagger spec. types and generated code instance types.",
-				"You can have multiple occurrences of this option.", //
-				"Example (in Java): array: HashSet", //
-				"                   map: HashMap"));
+				"Specifies mappings between general-purpose types and their runtime types, for cases where", //
+				"the generator may need to instantiate that type. Types may include map, array or other", //
+				"types defined by the generator. Type should be unqualified. The qualified name should", //
+				"be defined in importMappings. For example:", //
+				"  instantiationTypes:", //
+				"    array: HashSet", //
+				"    map: LinkedHashMap"));
 		define(parameter().named(IMPORT_MAPPINGS).optional().withDescription(
-				"Specifies mappings between a given class and the import that should be used for that class.",
-				"You can have multiple occurrences of this option.", //
-				"Example: Set: java.util.Set", //
-				"		  HashSet: java.util.HashSet", //
-				"		  User: com.mycomp.User"));
+				"Specifies mappings between an unqualified class name and the import that should be used", //
+				"for that class. For example:", //
+				"  importMappings:", //
+				"    HashSet: java.util.HashSet", //
+				"    LinkedHashMap: java.util.LinkedHashMap", //
+				"    User: com.mycomp.User"));
 		define(parameter().named(RESERVED_WORDS_MAPPINGS).optional().withDescription(
-				"Specifies how a reserved name should be escaped to. Otherwise, the default _<name> is used.",
-				"You can have multiple occurrences of this option.", //
-				"Example (in Java): switch: xswitch", //
-				"                   transient: xtransient"));
+				"Specifies a mapping between reserved keywords in the target language and legal, non-reserved", //
+				"names. Where the OpenAPI document uses a reserved word as a type, property operation or parameter", //
+				"name the generator will substitute the name provided in the map. Otherwise, the default _<name>", //
+				"is used. For example:", //
+				"  reservedWordsMappings:", //
+				"    switch: xswitch", //
+				"    transient: xtransient"));
 		define(GenTemplateProperty.swaggerCodegenProvider());
 		if (info != null) {
 			define(property().named(StandardProperties.DESCRIPTION) //
