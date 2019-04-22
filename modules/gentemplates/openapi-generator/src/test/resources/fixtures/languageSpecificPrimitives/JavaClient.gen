@@ -149,18 +149,21 @@ parameters:
   # library template (sub-template) to use
   library: null
 
-  # Specifies additional language specific primitive types.
-  # You can have multiple occurrences of this option.
-  # Example: -Pet
-  #          -User
+  # Specifies types that are provided by the API implementation, and so should not be generated.
+  # Type names here should be unqualified. The fully-qualified name should be defined in importMappings.
+  # The value is an array of type names. For example:
+  #   languageSpecificPrimitives:
+  #     - Pet
+  #     - User
   languageSpecificPrimitives:
     - Owner
  
-  # Specifies mappings between a given class and the import that should be used for that class.
-  # You can have multiple occurrences of this option.
-  # Example: ArrayList:java.util.ArrayList
-  # 		 HashMap:java.util.HashMap
-  # 		 User:com.mycomp.User
+  # Specifies mappings between an unqualified class name and the import that should be used
+  # for that class. For example:
+  #   importMappings:
+  #     HashSet: java.util.HashSet
+  #     LinkedHashMap: java.util.LinkedHashMap
+  #     User: com.mycomp.User
   importMappings:
     Owner: org.my.Owner
 

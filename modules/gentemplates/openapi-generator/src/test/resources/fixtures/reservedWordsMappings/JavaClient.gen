@@ -165,10 +165,13 @@ parameters:
   #   apis: Users,Pets
   openApiCodegenSystemProperties: null
   
-  # Specifies how a reserved name should be escaped to. Otherwise, the default _<name> is used.
-  # You can have multiple occurrences of this option.
-  # Example (in Java): switch: xswitch
-  #                    transient: xtransient
+  # Specifies a mapping between reserved keywords in the target language and legal, non-reserved
+  # names. Where the OpenAPI document uses a reserved word as a type, property operation or parameter
+  # name the generator will substitute the name provided in the map. Otherwise, the default _<name>
+  # is used. For example:
+  #   reservedWordsMappings:
+  #     switch: xswitch
+  #     transient: xtransient
   reservedWordsMappings:
     switch: xswitch
         
