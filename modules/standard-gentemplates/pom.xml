@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2018 ModelSolv, Inc. and others. All rights reserved. 
-	This program and the accompanying materials are made available under the 
-	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
+<!-- Copyright (c) 2018 ModelSolv, Inc. and others. All rights reserved.
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License v1.0 which accompanies this distribution,
+	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors:
 	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -52,75 +52,18 @@
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>openapi3-doc</artifactId>
+            <artifactId>reprezen-openapi-gentemplates</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>openapi-generator</artifactId>
+            <artifactId>reprezen-rapidml-gentemplates</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>swagger-codegen</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>openapi-diagram</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>swagger-doc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>openapi-normalizer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>swagger-ui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-doc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-diagram</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-xsd</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-wadl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-jsonschema</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-swagger</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-csharp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-nodejs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>rapidml-jaxrs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>swagger-nswag</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
+            <artifactId>openapi-gentemplates</artifactId>
+            <type>pom</type>
         </dependency>
     </dependencies>
 </project>

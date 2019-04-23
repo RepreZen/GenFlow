@@ -26,20 +26,12 @@
             <artifactId>jaxb-impl</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml.model</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>rapidml-xsd</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml</artifactId>
+            <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
     </dependencies>
 </project>

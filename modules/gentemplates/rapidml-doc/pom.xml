@@ -11,20 +11,12 @@
     <name>rapidml-doc</name>
     <dependencies>
         <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml.model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.rapidml</groupId>
-            <artifactId>com.reprezen.rapidml</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>genflow-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.reprezen.genflow</groupId>
+            <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

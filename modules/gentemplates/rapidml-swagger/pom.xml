@@ -12,11 +12,11 @@
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
+            <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-common</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-parser</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
