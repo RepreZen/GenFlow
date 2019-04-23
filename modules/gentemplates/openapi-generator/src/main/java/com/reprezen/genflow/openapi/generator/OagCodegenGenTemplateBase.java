@@ -80,7 +80,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 				"    map: LinkedHashMap"));
 		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
 				"Specifies mappings between general-purpose types and their runtime types, for cases where", //
-				"generated code may need to instantiate that type. Types may include map, array or other", //
+				"generated code may need to instantiate that type. Types may include map, array, or other", //
 				"types as defined by the generator. Type names should be unqualified. The qualified name should", //
 				"be defined in importMappings. Example usage:", //
 				"  instantiationTypes:", //
