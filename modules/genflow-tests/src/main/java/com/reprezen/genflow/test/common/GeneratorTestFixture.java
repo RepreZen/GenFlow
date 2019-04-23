@@ -18,6 +18,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -96,11 +97,9 @@ public abstract class GeneratorTestFixture extends TestWatcher {
 
 	private URI getRestFileURI(Description description) {
 		String sampleRestFilePath = getSampleRestName(description);
-		URI modelURI = URI.createFileURI(Resources.getResource("models/dsl").getFile());
-		for (String nextSegment : sampleRestFilePath.split("/")) {
-			modelURI = modelURI.appendSegment(nextSegment);
-		}
-		return modelURI;
+		URL sampleRestFileUrl = getClass().getClassLoader().getResource("models/dsl/" + sampleRestFilePath);
+
+		return URI.createURI(sampleRestFileUrl.toExternalForm());
 	}
 
 	protected abstract String getSampleRestName(Description description);

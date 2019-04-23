@@ -11,7 +11,6 @@ import com.google.common.collect.Iterables;
 import com.reprezen.genflow.api.template.IGenTemplate;
 import com.reprezen.genflow.common.codegen.CodegenGenTemplateGroup;
 import com.reprezen.genflow.common.codegen.GenModuleWrapper;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.OagModuleWrapper;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
 public class OagCodegenGenTemplateGroup extends CodegenGenTemplateGroup<CodegenConfig> {
