@@ -1,12 +1,11 @@
 package com.reprezen.genflow.openapi.generator
 
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.OagModuleWrapper
 import org.junit.Test
+import org.openapitools.codegen.languages.JavaClientCodegen
 
 import static org.junit.Assert.*
 import static org.mockito.Mockito.*
-import org.openapitools.codegen.languages.JavaClientCodegen
 
 class OagCodegenConfigTest {
 

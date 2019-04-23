@@ -1,12 +1,11 @@
 package com.reprezen.genflow.swagger.codegen
 
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper
 import io.swagger.codegen.languages.JavaClientCodegen
 import org.junit.Test
 
-import static org.mockito.Mockito.*
 import static org.junit.Assert.*
+import static org.mockito.Mockito.*
 
 class ScgCodegenConfigTest {
 
