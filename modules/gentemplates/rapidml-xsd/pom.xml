@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.3.1-SNAPSHOT</version>
         <relativePath>../../..</relativePath>
     </parent>
     <artifactId>rapidml-xsd</artifactId>
@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>
-            <artifactId>genflow-api</artifactId>
+            <artifactId>genflow-api-rapidml</artifactId>
         </dependency>
         <dependency>
             <groupId>com.reprezen.genflow</groupId>

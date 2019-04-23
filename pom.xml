@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.genflow</groupId>
     <artifactId>genflow</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GenFlow</name>
     <description>RepreZen GenFlow Framework</description>
@@ -47,7 +47,8 @@
     </scm>
     <modules>
         <module>modules/genflow-api</module>
-        <module>modules/standard-gentemplates</module>
+        <module>modules/genflow-api-openapi</module>
+        <module>modules/genflow-api-rapidml</module>
         <module>modules/gentemplates/common</module>
         <module>modules/gentemplates/openapi3-doc</module>
         <module>modules/gentemplates/openapi-generator</module>
@@ -68,6 +69,10 @@
         <module>modules/gentemplates/rapidml-jaxrs</module>
         <module>modules/gentemplates/swagger-nswag</module>
         <module>modules/genflow-tests</module>
+        <module>modules/standard-gentemplates</module>
+        <module>modules/reprezen-openapi-gentemplates</module>
+        <module>modules/reprezen-rapidml-gentemplates</module>
+        <module>modules/openapi-gentemplates</module>
     </modules>
     <build>
         <plugins>
@@ -113,7 +118,7 @@
             <plugin>
                 <groupId>org.eclipse.xtend</groupId>
                 <artifactId>xtend-maven-plugin</artifactId>
-                <version>2.15.0</version>
+                <version>2.17.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -132,10 +137,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <!-- Until we have time to actually fix things -->
                     <doclint>none</doclint>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                    <additionalJOption>-Xdoclint:none</additionalJOption>
                 </configuration>
                 <executions>
                     <execution>
@@ -218,13 +220,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson-version}.2</version>
+                <version>${jackson-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -232,24 +229,59 @@
                 <version>${jackson-version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.26</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>21.0</version>
+            </dependency>
+            <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
-                <version>1.5.21</version>
+                <version>1.5.22</version>
             </dependency>
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-parser</artifactId>
-                <version>1.0.38</version>
+                <version>1.0.44</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.kaizen</groupId>
                 <artifactId>openapi-parser</artifactId>
-                <version>[4.0,5.0)</version>
+                <version>4.0.3</version>
             </dependency>
             <dependency>
                 <groupId>io.swagger.parser.v3</groupId>
                 <artifactId>swagger-parser</artifactId>
                 <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>3.3.4</version>
             </dependency>
             <dependency>
                 <groupId>org.mvel</groupId>
@@ -264,7 +296,18 @@
             <dependency>
                 <groupId>org.eclipse.xtend</groupId>
                 <artifactId>org.eclipse.xtend.lib</artifactId>
-                <version>2.9.1</version>
+                <version>2.9.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.platform</groupId>
+                <artifactId>org.eclipse.core.runtime</artifactId>
+                <version>3.15.100</version>
             </dependency>
             <dependency>
                 <groupId>org.pegdown</groupId>
@@ -272,85 +315,14 @@
                 <version>1.6.0</version>
             </dependency>
             <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>genflow-api</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>genflow-common</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator</artifactId>
-                <version>3.3.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-csv</artifactId>
-                <version>1.6</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>standard-gentemplates</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen</artifactId>
                 <version>2.4.0</version>
             </dependency>
             <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>swagger-codegen</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>1.5</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>openapi-diagram</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>openapi-generator</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>openapi3-doc</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>swagger-doc</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>openapi-normalizer</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>swagger-ui</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.rapidml</groupId>
-                <artifactId>com.reprezen.rapidml.model</artifactId>
-                <version>${rapidml-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.rapidml</groupId>
-                <artifactId>com.reprezen.rapidml</artifactId>
-                <version>${rapidml-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.atlassian.commonmark</groupId>
@@ -368,49 +340,9 @@
                 <version>0.9.0</version>
             </dependency>
             <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-doc</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-diagram</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-xsd</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-wadl</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-jsonschema</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-swagger</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-csharp</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.8.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>rapidml-nodejs</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
@@ -434,13 +366,148 @@
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-api</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-api-openapi</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-api-rapidml</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-common</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>reprezen-openapi-gentemplates</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>reprezen-rapidml-gentemplates</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-gentemplates</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>standard-gentemplates</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-codegen</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-diagram</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-generator</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi3-doc</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-doc</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>openapi-normalizer</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>swagger-ui</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.rapidml</groupId>
+                <artifactId>com.reprezen.rapidml.model</artifactId>
+                <version>${rapidml-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.rapidml</groupId>
+                <artifactId>com.reprezen.rapidml</artifactId>
+                <version>${rapidml-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-doc</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-diagram</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-xsd</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-wadl</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-jsonschema</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-swagger</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-csharp</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>rapidml-nodejs</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
                 <artifactId>rapidml-jaxrs</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
+                <version>1.3.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>swagger-nswag</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
+                <version>1.3.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.reprezen.genflow</groupId>
+                <artifactId>genflow-tests</artifactId>
+                <version>1.3.1-SNAPSHOT</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -448,19 +515,28 @@
                 <version>4.12</version>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>2.9.5</version>
-            </dependency>
-            <dependency>
-                <groupId>com.reprezen.genflow</groupId>
-                <artifactId>genflow-tests</artifactId>
-                <version>1.2.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>1.11.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>2.23.4</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>1.6.6</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito2</artifactId>
+                <version>1.6.6</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -477,10 +553,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson-version>2.8.11</jackson-version>
+        <jackson-version>2.9.8</jackson-version>
         <nexus.autorelease>false</nexus.autorelease>
         <nexus.autodrop>true</nexus.autodrop>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <rapidml-version>0.0.7</rapidml-version>
+        <rapidml-version>0.0.10-SNAPSHOT</rapidml-version>
     </properties>
 </project>

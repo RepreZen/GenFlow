@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.validation.IResourceValidator
 
 @InjectWith(typeof(RapidMLInjectorProvider))
 abstract class XChangeSchemaTestBase extends AbstractXtextTests {
@@ -31,6 +32,9 @@ abstract class XChangeSchemaTestBase extends AbstractXtextTests {
 
 	@Inject
 	ResourceSet resourceSet
+
+	@Inject
+	IResourceValidator validator
 
 	new() {
 		// TODO
@@ -86,7 +90,7 @@ abstract class XChangeSchemaTestBase extends AbstractXtextTests {
 
 	def ZenModel loadAndGenerateImplicitValues() {
 		val ZenModel rapidModel = if (rapid_model_uri !== null) {
-				new ZenModelLoader(resourceSet).loadAndValidateModel(rapid_model_uri)
+				new ZenModelLoader(resourceSet, validator).loadAndValidateModel(rapid_model_uri)
 			} else {
 				parser.parse(rapid_model)
 			}

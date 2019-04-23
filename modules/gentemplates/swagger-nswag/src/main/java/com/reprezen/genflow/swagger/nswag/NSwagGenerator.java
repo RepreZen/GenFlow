@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.runtime.Platform;
 
 import com.reprezen.genflow.api.GenerationException;
 
@@ -20,21 +19,9 @@ public class NSwagGenerator {
 	private Config config;
 
 	public static boolean isPlatformSupported() {
-		if (Platform.isRunning()) {
-			switch (Platform.getOS()) {
-			case Platform.OS_WIN32:
-				return true;
-			default:
-				return false;
-			}
-		} else {
-			// this will happen during actual gentarget execution.
-			// If we're on an unsupported platform the execution will fail some other way,
-			// but since we don't know,
-			// we'll give it a shot.
-			return true;
-		}
+		String os = System.getProperty("os.name");
 
+		return os != null && os.startsWith("Windows");
 	}
 
 	public NSwagGenerator(Config config) {
