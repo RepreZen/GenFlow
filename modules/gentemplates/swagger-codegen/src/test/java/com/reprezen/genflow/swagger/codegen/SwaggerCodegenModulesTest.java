@@ -29,7 +29,6 @@ import com.reprezen.genflow.api.target.GenTargetPrerequisite;
 import com.reprezen.genflow.api.target.GenTargetPrimarySource;
 import com.reprezen.genflow.api.template.GenTemplate;
 import com.reprezen.genflow.api.trace.GenTemplateTraces;
-import com.reprezen.genflow.common.codegen.GenModuleWrapper.ScgModuleWrapper;
 import com.reprezen.genflow.common.codegen.GenModulesInfo;
 import com.reprezen.genflow.common.codegen.GenModulesInfo.Info;
 
