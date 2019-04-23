@@ -9,6 +9,7 @@
 package com.reprezen.genflow.openapi.generator;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.ClientOpts;
 import org.openapitools.codegen.CodegenConfig;
 import org.openapitools.codegen.DefaultGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
@@ -42,6 +45,8 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
 
+	private static Logger logger = LoggerFactory.getLogger(OagCodegenGenTemplateBase.class);
+
 	public OagCodegenGenTemplateBase(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
 		this.wrapper = wrapper;
 		this.info = info;
@@ -63,6 +68,43 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 				"Each property should be a JSON object with a name/value pair for each property.",
 				"Example: for '-Dmodels -Dapis=User,Pets' use the following:", "value:", "  models: ''",
 				"  apis: Users,Pets"));
+		define(parameter().named(LANGUAGE_SPECIFIC_PRIMITIVES).optional().withDescription(
+				"Specifies types that are provided by the API implementation, and so should not be generated.", //
+				"Type names should be unqualified. The qualified name should be defined in importMappings.", //
+				"The value is an array of type names. Example usage:", //
+				"  languageSpecificPrimitives:", //
+				"    - Pet", //
+				"    - User"));
+		define(parameter().named(TYPE_MAPPINGS).optional().withDescription(
+				"Sets mappings between general-purpose types and declared types in the generated code. Types",
+				"may include string, number, integer, boolean, array, object, or others defined by the generator.", //
+				"Types should be unqualified. The qualified name should be defined in importMappings. Example usage:", //
+				"  typeMappings:", //
+				"    array: Set", //
+				"    map: LinkedHashMap"));
+		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
+				"Specifies mappings between general-purpose types and their runtime types, for cases where", //
+				"generated code may need to instantiate that type. Types may include map, array, or other", //
+				"types as defined by the generator. Type names should be unqualified. The qualified name should", //
+				"be defined in importMappings. Example usage:", //
+				"  instantiationTypes:", //
+				"    array: HashSet", //
+				"    map: LinkedHashMap"));
+		define(parameter().named(IMPORT_MAPPINGS).optional().withDescription(
+				"Specifies mappings between an unqualified class or interface name and the qualified name that", //
+				"should be imported where that class is used. Example usage:", //
+				"  importMappings:", //
+				"    HashSet: java.util.HashSet", //
+				"    LinkedHashMap: java.util.LinkedHashMap", //
+				"    User: com.mycomp.User"));
+		define(parameter().named(RESERVED_WORDS_MAPPINGS).optional().withDescription(
+				"Specifies a mapping between reserved keywords in the target language and legal, non-reserved", //
+				"names. Where the OpenAPI document uses a reserved word as a type, property, operation, or", //
+				"parameter name, the generator will substitute the name provided in the map. Otherwise, the", //
+				"default underscore-prefixed _<name> will be applied. Example usage:", //
+				"  reservedWordsMappings:", //
+				"    switch: xswitch", //
+				"    transient: xtransient"));
 		define(GenTemplateProperty.openApiGeneratorProvider());
 		define(property().named(StandardProperties.DESCRIPTION) //
 				.withValue(String.format("Provider: %s\nGenerator Name: %s\nType: %s\nPackage: %s\nClassname: %s",
@@ -97,7 +139,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			generate(openApi);
 		}
 
-		private void generate(OpenAPI model) throws GenerationException {
+		protected ClientOptInput createCodeGenConfig() throws GenerationException {
 			CodegenConfig openAPICodegen;
 			try {
 				openAPICodegen = wrapper.newInstance();
@@ -105,20 +147,31 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 				throw new GenerationException("Failed to instantiate OpenAPI Codegen instance", e);
 			}
 			openAPICodegen.setOutputDir(context.getOutputDirectory().getAbsolutePath());
+
 			@SuppressWarnings("unchecked")
 			Map<String, String> config = (Map<String, String>) context.getGenTargetParameters()
 					.get(OPENAPI_CODEGEN_CONFIG);
 			if (config == null) {
 				config = Maps.newHashMap();
 			}
+
+			setCodegenOptions(openAPICodegen, context.getGenTargetParameters());
 			addParameters(config, context.getGenTargetParameters());
+
 			ClientOptInput clientOptInput = new ClientOptInput();
 			clientOptInput.setConfig(openAPICodegen);
 			ClientOpts clientOpts = new ClientOpts();
 			clientOpts.setOutputDirectory(context.getOutputDirectory().getAbsolutePath());
 			clientOpts.setProperties(config);
 			clientOptInput.setOpts(clientOpts);
+
+			return clientOptInput;
+		}
+
+		private void generate(OpenAPI model) throws GenerationException {
+			ClientOptInput clientOptInput = createCodeGenConfig();
 			clientOptInput.setOpenAPI(model);
+
 			DefaultGenerator generator = new DefaultGenerator();
 			@SuppressWarnings("unchecked")
 			Map<String, String> systemProperties = (Map<String, String>) context.getGenTargetParameters()
@@ -133,10 +186,60 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 			for (String key : params.keySet()) {
 				if (!SPECIAL_PARAMS.contains(key)) {
 					Object value = params.get(key);
-					if (value != null && value instanceof String) {
-						config.put(key, (String) value);
+					if (value != null && (value instanceof String || value instanceof Boolean)) {
+						config.put(key, value.toString());
 					}
 				}
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private void setCodegenOptions(CodegenConfig config, Map<String, Object> parameters) {
+			try {
+				Map<String, String> instantiationTypes = (Map<String, String>) parameters.get(INSTANTIATION_TYPES);
+				if (instantiationTypes != null) {
+					config.instantiationTypes().putAll(instantiationTypes);
+				}
+			} catch (ClassCastException e) {
+				logger.error("The defined instantiationTypes are invalid and are ignored by the generator");
+			}
+
+			try {
+				Map<String, String> typeMappings = (Map<String, String>) parameters.get(TYPE_MAPPINGS);
+				if (typeMappings != null) {
+					config.typeMapping().putAll(typeMappings);
+				}
+			} catch (ClassCastException e) {
+				logger.error("The defined typeMappings are invalid and are ignored by the generator");
+			}
+
+			try {
+				Map<String, String> importMappings = (Map<String, String>) parameters.get(IMPORT_MAPPINGS);
+				if (importMappings != null) {
+					config.importMapping().putAll(importMappings);
+				}
+			} catch (ClassCastException e) {
+				logger.error("The defined importMappings are invalid and are ignored by the generator");
+			}
+
+			try {
+				Map<String, String> reservedWordsMappings = (Map<String, String>) parameters
+						.get(RESERVED_WORDS_MAPPINGS);
+				if (reservedWordsMappings != null) {
+					config.reservedWordsMappings().putAll(reservedWordsMappings);
+				}
+			} catch (ClassCastException e) {
+				logger.error("The defined reservedWordsMappings are invalid and are ignored by the generator");
+			}
+
+			try {
+				Collection<String> languageSpecificPrimitives = (Collection<String>) parameters
+						.get(LANGUAGE_SPECIFIC_PRIMITIVES);
+				if (languageSpecificPrimitives != null) {
+					config.languageSpecificPrimitives().addAll(languageSpecificPrimitives);
+				}
+			} catch (ClassCastException e) {
+				logger.error("The defined languageSpecificPrimitives are invalid and are ignored by the generator");
 			}
 		}
 
