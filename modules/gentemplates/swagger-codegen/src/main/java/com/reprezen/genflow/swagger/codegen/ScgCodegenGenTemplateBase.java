@@ -75,38 +75,38 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 				"  apis: Users,Pets"));
 		define(parameter().named(LANGUAGE_SPECIFIC_PRIMITIVES).optional().withDescription(
 				"Specifies types that are provided by the API implementation, and so should not be generated.", //
-				"Type names here should be unqualified. The fully-qualified name should be defined in importMappings.", //
-				"The value is an array of type names. For example:", //
+				"Type names should be unqualified. The qualified name should be defined in importMappings.", //
+				"The value is an array of type names. Example usage:", //
 				"  languageSpecificPrimitives:", //
 				"    - Pet", //
 				"    - User"));
 		define(parameter().named(TYPE_MAPPINGS).optional().withDescription(
 				"Sets mappings between general-purpose types and declared types in the generated code. Types",
-				"may include string, number, integer, boolean, array, object or others defined by the generator.", //
-				"Type should be unqualified. The qualified name should be defined in importMappings. For example:", //
+				"may include string, number, integer, boolean, array, object, or others defined by the generator.", //
+				"Types should be unqualified. The qualified name should be defined in importMappings. Example usage:", //
 				"  typeMappings:", //
 				"    array: Set", //
 				"    map: LinkedHashMap"));
 		define(parameter().named(INSTANTIATION_TYPES).optional().withDescription(
 				"Specifies mappings between general-purpose types and their runtime types, for cases where", //
-				"the generator may need to instantiate that type. Types may include map, array or other", //
-				"types defined by the generator. Type should be unqualified. The qualified name should", //
-				"be defined in importMappings. For example:", //
+				"generated code may need to instantiate that type. Types may include map, array, or other", //
+				"types as defined by the generator. Type names should be unqualified. The qualified name should", //
+				"be defined in importMappings. Example usage:", //
 				"  instantiationTypes:", //
 				"    array: HashSet", //
 				"    map: LinkedHashMap"));
 		define(parameter().named(IMPORT_MAPPINGS).optional().withDescription(
-				"Specifies mappings between an unqualified class name and the import that should be used", //
-				"for that class. For example:", //
+				"Specifies mappings between an unqualified class or interface name and the qualified name that", //
+				"should be imported where that class is used. Example usage:", //
 				"  importMappings:", //
 				"    HashSet: java.util.HashSet", //
 				"    LinkedHashMap: java.util.LinkedHashMap", //
 				"    User: com.mycomp.User"));
 		define(parameter().named(RESERVED_WORDS_MAPPINGS).optional().withDescription(
 				"Specifies a mapping between reserved keywords in the target language and legal, non-reserved", //
-				"names. Where the OpenAPI document uses a reserved word as a type, property operation or parameter", //
-				"name the generator will substitute the name provided in the map. Otherwise, the default _<name>", //
-				"is used. For example:", //
+				"names. Where the OpenAPI document uses a reserved word as a type, property, operation, or", //
+				"parameter name, the generator will substitute the name provided in the map. Otherwise, the", //
+				"default underscore-prefixed _<name> will be applied. Example usage:", //
 				"  reservedWordsMappings:", //
 				"    switch: xswitch", //
 				"    transient: xtransient"));
