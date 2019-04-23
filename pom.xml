@@ -557,6 +557,6 @@
         <nexus.autorelease>false</nexus.autorelease>
         <nexus.autodrop>true</nexus.autodrop>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <rapidml-version>0.0.10-ZEN-4770-SNAPSHOT</rapidml-version>
+        <rapidml-version>0.0.10-SNAPSHOT</rapidml-version>
     </properties>
 </project>
