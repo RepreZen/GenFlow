@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
 import com.reprezen.genflow.api.swagger.SwaggerGenTemplate;
@@ -41,6 +44,8 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 
 	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
+
+	private static Logger logger = LoggerFactory.getLogger(ScgCodegenGenTemplateBase.class);
 
 	public ScgCodegenGenTemplateBase(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
 		this.wrapper = wrapper;
@@ -193,7 +198,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					config.instantiationTypes().putAll(instantiationTypes);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined  instantiationTypes are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -202,7 +207,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					config.typeMapping().putAll(typeMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined typeMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -211,7 +216,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					config.importMapping().putAll(importMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined importMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -221,7 +226,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					config.reservedWordsMappings().putAll(reservedWordsMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined reservedWordsMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -231,7 +236,7 @@ public abstract class ScgCodegenGenTemplateBase extends SwaggerGenTemplate {
 					config.languageSpecificPrimitives().addAll(languageSpecificPrimitives);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined languageSpecificPrimitives are invalid and are ignored by the generator");
 			}
 		}
 

@@ -17,6 +17,8 @@ import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.ClientOpts;
 import org.openapitools.codegen.CodegenConfig;
 import org.openapitools.codegen.DefaultGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 import com.reprezen.genflow.api.GenerationException;
@@ -42,6 +44,8 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 
 	protected final GenModuleWrapper<CodegenConfig> wrapper;
 	private Info info;
+
+	private static Logger logger = LoggerFactory.getLogger(OagCodegenGenTemplateBase.class);
 
 	public OagCodegenGenTemplateBase(GenModuleWrapper<CodegenConfig> wrapper, Info info) {
 		this.wrapper = wrapper;
@@ -197,7 +201,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					config.instantiationTypes().putAll(instantiationTypes);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined instantiationTypes are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -206,7 +210,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					config.typeMapping().putAll(typeMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined typeMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -215,7 +219,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					config.importMapping().putAll(importMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined importMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -225,7 +229,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					config.reservedWordsMappings().putAll(reservedWordsMappings);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined reservedWordsMappings are invalid and are ignored by the generator");
 			}
 
 			try {
@@ -235,7 +239,7 @@ public abstract class OagCodegenGenTemplateBase extends OpenApiGenTemplate {
 					config.languageSpecificPrimitives().addAll(languageSpecificPrimitives);
 				}
 			} catch (ClassCastException e) {
-				// TODO: handle exception
+				logger.error("The defined languageSpecificPrimitives are invalid and are ignored by the generator");
 			}
 		}
 
