@@ -150,32 +150,7 @@ class XGenerateSwaggerUIv3 {
 					<script>
 						window.onload = function() {
 			  				// Build a system
-			  				const ui = SwaggerUIBundle({
-								url: "",
-			    				spec: «json»,
-			    				dom_id: '#swagger-ui',
-			    				presets: [
-				      				SwaggerUIBundle.presets.apis,
-			      					SwaggerUIStandalonePreset
-			    				],
-			    				plugins: [
-				      				SwaggerUIBundle.plugins.DownloadUrl
-								],
-			    				layout: "StandaloneLayout",
-			    				validatorUrl: null,
-			    				«IF !Strings.isNullOrEmpty(options.oauth2RedirectUrl)»oauth2RedirectUrl: "«options.oauth2RedirectUrl»",«ENDIF»
-			    				tagsSorter: «IF options.tagsSorter !== null»«options.tagsSorter.maybeFunction»«ELSE»null«ENDIF»,
-			    				operationsSorter: «IF options.operationsSorter !== null»«options.operationsSorter.maybeFunction»«ELSE»null«ENDIF»,
-			    				defaultModelRendering: «IF options.defaultModelRendering !== null»"«options.defaultModelRenderingAsString»"«ELSE»null«ENDIF»,
-			    				defaultModelExpandDepth: «options.defaultModelExpandDepth»,
-			    				docExpansion: «IF options.docExpansion !== null»"«options.docExpansionAsString»"«ELSE»null«ENDIF»,
-			    				displayOperationId: «options.displayOperationId»,
-			    				displayRequestDuration: «options.displayRequestDuration»,
-			    				maxDisplayedTags: «options.maxDisplayedTags»,
-			    				filter: «options.filter»,
-				    			deepLinking: «options.deepLinking»,
-			    				showMutatedRequest: «options.showMutatedRequest»
-			  				});
+			  				 const ui = SwaggerUIBundle(«generateOptions(json, options)»)
 			
 			  				window.ui = ui;
 			  				// RepreZen customization Explore input form to download an external Swagger
@@ -205,9 +180,56 @@ class XGenerateSwaggerUIv3 {
 		return jsonMapper.writeValueAsString(tree);
 	}
 
+	private def orNull(Object value) '''«IF value !== null»"«value»"«ELSE»null«ENDIF»'''
+
 	private def maybeFunction(String option) {
+		if (option === null || option.isEmpty) return '''null'''
+
 		// apisSorter and methodsSorter options take either fixed string values (e.g. "alpha") or a Javascript function object. 
 		// The latter should not be quoted, while the former should. This method applies quoting unless the value begins with "function".
 		if(option.startsWith("function")) option else '''"«option»"'''
 	}
+
+	def String generateOptions(String spec, SwaggerUi3Options options) '''
+	  {
+	    url: "",
+	    spec: «spec»,
+	    dom_id: '#swagger-ui',
+	    presets: [
+	        SwaggerUIBundle.presets.apis,
+	        SwaggerUIStandalonePreset
+	    ],
+	    plugins: [
+	      SwaggerUIBundle.plugins.DownloadUrl
+	    ],
+	    layout: «orNull(options.layout)»,
+	    deepLinking: «options.deepLinking»,
+	    displayOperationId: «options.displayOperationId»,
+	    defaultModelsExpandDepth: «options.defaultModelsExpandDepth»,
+	    defaultModelExpandDepth: «options.defaultModelExpandDepth»,
+	    defaultModelRendering: «orNull(options.defaultModelRenderingAsString)»,
+	    displayRequestDuration: «options.displayRequestDuration»,
+	    docExpansion: «orNull(options.docExpansionAsString)»,
+	    filter: «options.filter»,
+	    maxDisplayedTags: «options.maxDisplayedTags»,
+	    operationsSorter: «maybeFunction(options.operationsSorter)»,
+	    showExtensions: «options.showExtensions»,
+	    showCommonExtensions: «options.showCommonExtensions»,
+	    tagsSorter: «maybeFunction(options.tagsSorter)»,
+	    onComplete: «maybeFunction(options.onComplete)»,
+	    «IF !Strings.isNullOrEmpty(options.oauth2RedirectUrl)»
+	    oauth2RedirectUrl: "«options.oauth2RedirectUrl»",
+	    «ENDIF»
+	    requestInterceptor: «maybeFunction(options.requestInterceptor)»,
+	    responseInterceptor: «maybeFunction(options.responseInterceptor)»,
+	    showMutatedRequest: «options.showMutatedRequest»,
+	    supportedSubmitMethods: «options.supportedSubmitMethodsAsString»,
+	    validatorUrl: «orNull(options.validatorUrl)»,
+	    modelPropertyMacro: «maybeFunction(options.modelPropertyMacro)»,
+	    parameterMacro: «maybeFunction(options.parameterMacro)»,
+	    initOAuth: «maybeFunction(options.initOAuth)»,
+	    preauthorizeBasic: «maybeFunction(options.preauthorizeBasic)»,
+	    preauthorizeApiKey: «maybeFunction(options.preauthorizeApiKey)»
+	  }
+	'''
 }
