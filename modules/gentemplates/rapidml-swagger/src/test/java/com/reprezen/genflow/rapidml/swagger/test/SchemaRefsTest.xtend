@@ -8,17 +8,16 @@
  *******************************************************************************/
 package com.reprezen.genflow.rapidml.swagger.test
 
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import com.reprezen.genflow.test.common.RapidMLInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.reprezen.genflow.test.common.RapidMLInjectorProvider
 
 @InjectWith(typeof(RapidMLInjectorProvider))
 @RunWith(typeof(XtextRunner))
-class SchemaRefsTest extends AbstractXtextTests {
+class SchemaRefsTest {
 
 	@Ignore
 	@Test

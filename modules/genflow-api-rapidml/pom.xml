@@ -22,8 +22,8 @@
             <artifactId>com.reprezen.rapidml.model</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.eclipse.xtend</groupId>
-        	<artifactId>org.eclipse.xtend.lib</artifactId>
+            <groupId>org.eclipse.xtend</groupId>
+            <artifactId>org.eclipse.xtend.lib</artifactId>
         </dependency>
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>

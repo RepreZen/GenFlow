@@ -30,8 +30,8 @@
             <artifactId>swagger-parser</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.eclipse.xtend</groupId>
-        	<artifactId>org.eclipse.xtend.lib</artifactId>
+            <groupId>org.eclipse.xtend</groupId>
+            <artifactId>org.eclipse.xtend.lib</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
