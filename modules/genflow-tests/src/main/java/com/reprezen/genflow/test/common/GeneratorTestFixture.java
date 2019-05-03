@@ -23,8 +23,11 @@ import java.nio.file.Files;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.reprezen.rapidml.RapidmlPackage;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.rules.TemporaryFolder;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -62,6 +65,8 @@ public abstract class GeneratorTestFixture extends TestWatcher {
 		// end of the workaround
 		URI modelURI = getRestFileURI(description);
 		try {
+			// Force package registration
+			EPackage.Registry.INSTANCE.put(RapidmlPackage.eNS_URI, RapidmlPackage.eINSTANCE);
 			ZenModel zenModel = loader.loadModel(modelURI);
 
 			Monitor progressMonitor = null;
