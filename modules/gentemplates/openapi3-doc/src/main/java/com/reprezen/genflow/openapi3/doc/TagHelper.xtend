@@ -29,8 +29,9 @@ class TagHelper implements Helper {
 	def getTagBadges(Operation op) {
 		'''
 			«FOR tag : op.tags?.reorderTags ?: #[]»
-				<span class="pull-right">&nbsp;<span class="badge" data-toggle="tooltip" data-title="«tag.modelTag?.
-                description?.docHtml?.toString?.htmlEscape»" data-html="true">«tag»</span></span>
+			<span class="float-right">&nbsp;
+			<span class="badge badge-dark" data-toggle="tooltip" data-title="«tag.modelTag?.description?.docHtml?.toString?.htmlEscape»" data-html="true">«tag»</span>
+			</span>
 			«ENDFOR»
 		'''
 	}

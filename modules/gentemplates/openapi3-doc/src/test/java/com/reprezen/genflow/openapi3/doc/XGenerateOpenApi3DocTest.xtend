@@ -2,19 +2,30 @@ package com.reprezen.genflow.openapi3.doc
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.google.common.io.Resources
+import com.reprezen.genflow.api.target.GenTargetUtils
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
 import com.reprezen.kaizen.oasparser.OpenApiParser
 import com.reprezen.kaizen.oasparser.model3.OpenApi3
 import java.net.URL
+import java.nio.file.Paths
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import org.junit.Test
+
 import static org.junit.Assert.*
+import java.util.logging.Logger
 
 class XGenerateOpenApi3DocTest {
 
 	@Test
-	public def void testRemoveUnwantedIndentation() {
+	def void test() {
+		val genTarget = GenTargetUtils.load(Paths.get(Resources.getResource("Doc.gen").toURI).toFile)
+		genTarget.execute(Logger.getLogger("test"))
+	}
+
+	@Test
+	def void testRemoveUnwantedIndentation() {
 		val content = '''
 			openapi: "3.0.0"
 			info:

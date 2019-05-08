@@ -37,14 +37,14 @@ class OpDoc {
 	def String getHtml(String method) {
 		'''
 			<a class="anchor toc-entry" id="«op.htmlId»" data-toc-level="2" data-toc-text="«method»"></a>
-			<span class="label label-primary resource-method">«method»</span>
+			<span class="badge badge-primary resource-method">«method»</span>
 			<code>«op.operationId.deprecate(op.isDeprecated)»</code>
 			«op.tagBadges»
 			«IF preview»
 				&nbsp;
 				<a href="#">
-						<span class="glyphicon glyphicon-edit" style="font-size: 1.5em;" data-toggle="tooltip" title="Go to definition in editor." 
-						onclick="reprezen_changeSelection('«op.pointer»', '«op.fileUrl»');return false;"></span>
+					<span class="glyphicon glyphicon-edit" style="font-size: 1.5em;" data-toggle="tooltip" title="Go to definition in editor." 
+					onclick="reprezen_changeSelection('«op.pointer»', '«op.fileUrl»');return false;"></span>
 				</a>
 			«ENDIF»
 			<ul class="list-group">
@@ -158,9 +158,9 @@ class OpDoc {
 			&nbsp;
 			<p>«link.description»</p>
 			<h5>Parameters</h5>
-			<table class="table">					
+			<table class="table">
 				<tr><th>Name</th><th>Value</th></tr>
-				«FOR parameter : parameters»				
+				«FOR parameter : parameters»
 					<tr><th>«parameter»</th><td>«link.parameters.get(parameter)»</td></tr>
 				«ENDFOR»
 			</table>

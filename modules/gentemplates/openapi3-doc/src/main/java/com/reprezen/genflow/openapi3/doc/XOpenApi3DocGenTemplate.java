@@ -19,7 +19,8 @@ public class XOpenApi3DocGenTemplate extends OpenApi3GenTemplate {
 		// Primary var is defined in GenTemplate.resolve() and is
 		// OpenApi3.toFirstLower()
 		define(outputItem().named("HTML").using(XGenerateOpenApi3Doc.class).writing("${openApi3.info.title}_doc.html"));
-		define(staticResource().copying("js").to("."));
+		define(staticResource().copying("bootstrap").to("bootstrap"));
+		define(staticResource().copying("jquery").to("jquery"));
 		define(staticResource().copying("images").to("images"));
 		define(parameter().named(SHOW_ALL_OF_COMPONENTS_OPTION).optional().withDefault("true")
 				.withDescription("Set to false to suppress component model names in allOf models"));

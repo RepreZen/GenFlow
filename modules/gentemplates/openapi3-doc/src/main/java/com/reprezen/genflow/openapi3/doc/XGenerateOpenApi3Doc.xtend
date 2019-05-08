@@ -43,13 +43,15 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<html lang="en">
 			    <!-- Preview: «preview» -->
 			    «htmlHeadSection(model, urlPrefix, preview)»
-			    <body data-spy="scroll" data-target="#toc">            
+			    <body data-spy="scroll" data-target="#toc">
 			       <!-- Fixed navbar -->
-			       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			       <div class="navbar navbar-light bg-light fixed-top navbar-expand-md" role="navigation">
 			          <div class="container">
 			            <div class="navbar-collapse collapse">
-			              <ul class="nav navbar-nav navbar-right">
-			                <li><a href="http://reprezen.com" target="_blank">Created with <img class="logo" src="images/logo.png"></a></li>
+			              <ul class="nav navbar-nav ml-auto">
+			                <li class="nav-item">
+			                <a href="http://reprezen.com" target="_blank" class="nav-link">Created with <img class="logo" src="images/logo.png"></a>
+			                </li>
 			              </ul>
 			            </div><!--/.nav-collapse -->
 			          </div>
@@ -57,33 +59,33 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			          <div class="container">
 			           <div class="row">
 			               «IF includeTOC»
-			               	<div class="col-md-3">
+			               	<div class="col-lg-3">
 			               	  <div id="toc" class="reprezen-sidebar hidden-print affix">
 			               	  </div>
 			               	</div>
 			               «ENDIF»
-			           
-			               <div class="col-md-9">
+
+			               <div class="col-lg-9">
 			                   <a class="anchor" id="model-spec"></a>
 			                   <div class="page-header">
 			                       <h1>OpenApi3 Specification</h1>
 			                   </div>
-			    
+
 			                    <a class="anchor" id="«model.htmlId»"></a>
 			                    «new TopMatter().get(model)»
 			                    «if(showPaths) model.pathsHtml»
 			                    «if(showParams) model.parametersHtml»
 			                    «if(showResponses) model.responsesHtml»
 			                    «if(showDefs) model.definitionsHtml»
-			    </div> <!-- /col-md-9 -->
+			    </div> <!-- /col-lg-9 -->
 			    </div>  <!-- /row -->
 			    </div> <!-- /container -->
 			    
 			        <!-- Bootstrap core JavaScript
 			        ================================================== -->
 			        <!-- Placed at the end of the document so the pages load faster -->
-			        <script src="«urlPrefix»jquery/jquery-1.10.2.min.js"></script>
-			        <script src="«urlPrefix»bootstrap/js/bootstrap.min.js"></script>
+			        <script src="«urlPrefix»jquery/3.3.1/jquery-3.3.1.slim.min.js"></script>
+			        <script src="«urlPrefix»bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 			        <script>
 			            $(document).ready(function() {
 			                var visibleClass = "glyphicon-collapse-up";
@@ -113,7 +115,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			        	«BODY_BOTTOM.inject»
 			        «ENDIF»
 			        «IF includeTOC»
-			        	<script src="«urlPrefix»bootstrap/js/reprezenTOCBuilder.js"></script>
+			        	<script src="«urlPrefix»bootstrap/4.3.1/js/reprezenTOCBuilder.js"></script>
 			        «ENDIF»
 			    </body>
 			    <!-- Generation time: «(System.nanoTime - startTime).elapsedTime» -->
@@ -140,15 +142,17 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			    <title>«model?.info?.title» Documentation</title>
 			
 			    <!-- Bootstrap core CSS -->
-			    <link href="«urlPrefix»bootstrap/css/bootstrap.css" rel="stylesheet">
-			    <link href="«urlPrefix»bootstrap/css/bootstrap-reprezen.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap-reprezen.css" rel="stylesheet">
 			    «IF preview»
 			    	<!-- Workaround for live preview problem with web-font loading -->
-			    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+			    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+			    		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+			    		crossorigin="anonymous">
 			    «ENDIF»
 			
 			    <!-- Custom styles for this template -->
-			    <link href="«urlPrefix»bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/navbar-fixed-top.css" rel="stylesheet">
 			
 			    <!-- Just for debugging purposes. Don't actually copy this line! -->
 			    <!--[if lt IE 9]><script src="«urlPrefix»docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -177,11 +181,11 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<div class="page-header">
 			    <h1>Path Specifications</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Path Specifications</h3>
+			<div class="card panel-primary">
+			    <div class="card-header text-white bg-primary">
+			        <h3 class="card-title">Path Specifications</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR path : model.paths?.keySet.sortByPosition(model.paths) ?: #[]»
 			        	«new PathDoc(path).html»
 			        «ENDFOR»
@@ -196,11 +200,11 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<div class="page-header">
 			    <h1>Parameters</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Parameters</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Parameters</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR param : model.parameters.keySet.sortByPosition(model.parameters)»
 			        	«new ParamDoc(model, param).html»
 			        «ENDFOR»
@@ -215,11 +219,11 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<div class="page-header">
 			    <h1>Responses</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Responses</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Responses</h3>
 			    </div>
-			    <div class="panel-body">			    
+			    <div class="card-body">
 			        «FOR response : model.responses.keySet.sortByPosition(model.responses)»
 			        	«new ResponseDoc(response).html»
 			        «ENDFOR»
@@ -234,11 +238,11 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<div class="page-header">
 			    <h1>Schema Definitions</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Schema Definitions</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Schema Definitions</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR definition : model.schemas.keySet.sortByPosition(model.schemas)»
 			        	«new ModelDoc(definition).html»
 			        «ENDFOR»

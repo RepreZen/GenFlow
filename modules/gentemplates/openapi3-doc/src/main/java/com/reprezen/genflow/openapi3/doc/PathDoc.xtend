@@ -35,9 +35,9 @@ class PathDoc {
 	def getHtml() {
 		'''
 			<a class="anchor toc-entry" id="«getHtmlId(path)»" data-toc-level="1" data-toc-text="«pathName.htmlEscape»"></a>
-			<div class="panel panel-default">
-			   <div class="panel-heading">
-					<h4 class="panel-title">
+			<div class="card">
+			   <div class="card-header">
+					<h4 class="card-title">
 					          Path: «pathName»
 					          «IF preview»
 					          	&nbsp;&nbsp;
@@ -48,7 +48,7 @@ class PathDoc {
 					          «ENDIF»
 					</h4>
 					  </div>
-					  <div class="panel-body">
+					  <div class="card-body">
 					  «path.commonTags.map[it.modelTag?.description].filterNull.join("\n\n").docHtml»
 					 «FOR method : path.operations.keySet.sortByPosition(path.operations)»
 					 	«new OpDoc(path.operations.get(method), model, path).getHtml(method)»
