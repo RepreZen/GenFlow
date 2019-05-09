@@ -2,6 +2,11 @@
  * Copyright 2013 ModelSolv, Inc.
  */
  
+ body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+ }
+ 
  /* The bootstrap color scheme does not support well the style for 'small'
    within a panel, so it was made a bit less grey. */
 .panel-primary .card-header .card-title small {
@@ -27,6 +32,10 @@ img.logo {
  *
  */
 
+.card {
+  margin-top: 8px;
+}
+
 .panel-primary > .restful-interface {
 }
 
@@ -34,6 +43,24 @@ img.logo {
 }
 
 span.resource-method {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+span.badge-dark {
+  font-size: 20px;
+}
+
+.operation-content .method-header:nth-child(2) {
+  margin: 0 0 16px 0;
+}
+
+.method-header {
+  margin: 16px 0 16px 0;
+}
+
+.method-badges > * {
+  margin-right: 8px;
 }
 
 /* 

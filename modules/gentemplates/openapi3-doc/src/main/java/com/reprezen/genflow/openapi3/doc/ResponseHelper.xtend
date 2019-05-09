@@ -22,7 +22,7 @@ class ResponseHelper implements Helper {
 		val headers = response.headers
 		if (headers !== null && !headers.empty) {
 			'''
-				<table class="table-condensed">
+				<table class="table">
 				    <tr><th>Name</th><th>Type</th><th>Description</th></tr>
 				    «FOR header : headers.entrySet»
 				    	<tr><th>«header.key»</th><td>«header.value?.schema.type»</td><td>«header.value?.description?.htmlEscape»</td></tr>

@@ -36,14 +36,18 @@ class OpDoc {
 
 	def String getHtml(String method) {
 		'''
-			<a class="anchor toc-entry" id="«op.htmlId»" data-toc-level="2" data-toc-text="«method»"></a>
-			<span class="badge badge-primary resource-method">«method»</span>
-			<code>«op.operationId.deprecate(op.isDeprecated)»</code>
-			«op.tagBadges»
+			<div class="row justify-content-between method-header">
+				<div class="row col-10 justify-content-start method-badges">
+					<span class="badge badge-primary resource-method">«method»</span>
+					<code>«op.operationId.deprecate(op.isDeprecated)»</code>
+					<a class="anchor toc-entry" id="«op.htmlId»" data-toc-level="2" data-toc-text="«method»"></a>
+				</div>
+				«op.tagBadges»
+			</div>
 			«IF preview»
 				&nbsp;
 				<a href="#">
-					<span class="glyphicon glyphicon-edit" style="font-size: 1.5em;" data-toggle="tooltip" title="Go to definition in editor." 
+					<span class="fas fa-edit" style="font-size: 1.5em;" data-toggle="tooltip" title="Go to definition in editor." 
 					onclick="reprezen_changeSelection('«op.pointer»', '«op.fileUrl»');return false;"></span>
 				</a>
 			«ENDIF»
@@ -168,7 +172,7 @@ class OpDoc {
 	}
 
 	def chevron() {
-		'<span class="glyphicon glyphicon-chevron-right"></span>'
+		'<span class="fas fa-chevron-right"></span>'
 	}
 
 	def statusLabel(String status) {

@@ -67,7 +67,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 
 			               <div class="col-lg-9">
 			                   <a class="anchor" id="model-spec"></a>
-			                   <div class="page-header">
+			                   <div class="pb-2 mt-4 mb-2 border-bottom">
 			                       <h1>OpenApi3 Specification</h1>
 			                   </div>
 
@@ -86,22 +86,41 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			        <!-- Placed at the end of the document so the pages load faster -->
 			        <script src="«urlPrefix»jquery/3.3.1/jquery-3.3.1.slim.min.js"></script>
 			        <script src="«urlPrefix»bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+			        «IF includeTOC»
+			            <script src="«urlPrefix»bootstrap/4.3.1/js/reprezenTOCBuilder.js"></script>
+			        «ENDIF»
 			        <script>
+			            // handle sidebar navigation removed in bootstrap 4
 			            $(document).ready(function() {
-			                var visibleClass = "glyphicon-collapse-up";
-			                var hiddenClass = "glyphicon-collapse-down";
+			                $(".nav-item").on("click", function(event){
+			                    event.stopPropagation();
+			                    var found = $(".nav").find(".active").not($(this));
+			                    var parents = $(this).parents();
+			                    found.not(parents).removeClass("active");
+
+			                    if ($(this).hasClass("active")) {
+			                        $(this).removeClass("active");
+			                    } else {
+			                        $(this).addClass("active");
+			                    }
+			                });
+
 			                var setTitle = function(visible) {
 			                    if ($(this).attr("data-visible-title") != undefined) {
 			                        $(this).attr("title", $(this).attr(visible ? "data-visible-title" : "data-hidden-title"));
-			                        $(this).tooltip("destroy");
+			                        $(this).tooltip("dispose");
 			                        $(this).tooltip();
 			                    }
 			                };
+
+			                var visibleClass = "fa-caret-square-up";
+			                var hiddenClass = "fa-caret-square-down";
 			                var toggleCollapseButton = function() {
 			                    var button = $($(this).attr('data-controller'));
 			                    button.toggleClass(visibleClass+" "+hiddenClass);
 			                    setTitle.call(button,$(this).hasClass("in"));
 			                };
+
 			                var controls = $(".collapse[data-controller]")
 			                controls.on("shown.bs.collapse hidden.bs.collapse", toggleCollapseButton);
 			                controls.each(function(i,control) {
@@ -113,9 +132,6 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			        </script>
 			        «IF preview»
 			        	«BODY_BOTTOM.inject»
-			        «ENDIF»
-			        «IF includeTOC»
-			        	<script src="«urlPrefix»bootstrap/4.3.1/js/reprezenTOCBuilder.js"></script>
 			        «ENDIF»
 			    </body>
 			    <!-- Generation time: «(System.nanoTime - startTime).elapsedTime» -->
@@ -138,12 +154,16 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			    <meta name="description" content="">
 			    <meta name="author" content="">
 			    <link rel="shortcut icon" href="«urlPrefix»docs-assets/ico/favicon.png">
-			
+
 			    <title>«model?.info?.title» Documentation</title>
-			
+
 			    <!-- Bootstrap core CSS -->
 			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap-reprezen.css" rel="stylesheet">
+			    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" 
+			    	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" 
+			    	crossorigin="anonymous">
+
 			    «IF preview»
 			    	<!-- Workaround for live preview problem with web-font loading -->
 			    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
@@ -178,7 +198,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private pathsHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-paths" data-toc-level="0" data-toc-text="Paths"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Path Specifications</h1>
 			</div>
 			<div class="card panel-primary">
@@ -197,7 +217,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private parametersHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-parameters" data-toc-level="0" data-toc-text="Parameters"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Parameters</h1>
 			</div>
 			<div class="card panel-primary">
@@ -216,7 +236,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private responsesHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-responses" data-toc-level="0" data-toc-text="Responses"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Responses</h1>
 			</div>
 			<div class="card panel-primary">
@@ -235,7 +255,7 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private definitionsHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-definitions" data-toc-level="0" data-toc-text="Schema Definitions"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Schema Definitions</h1>
 			</div>
 			<div class="card panel-primary">

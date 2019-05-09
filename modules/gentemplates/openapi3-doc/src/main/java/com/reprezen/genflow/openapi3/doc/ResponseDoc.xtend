@@ -54,6 +54,6 @@ class ResponseDoc {
 	}
 
 	def chevron() {
-		'<span class="glyphicon glyphicon-chevron-right"></span>'
+		'<span class="fas fa-chevron-right"></span>'
 	}
 }

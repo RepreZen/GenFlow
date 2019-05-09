@@ -23,7 +23,7 @@ class AttrDetails {
 			if (topLevel) {
 				// wrapping in an outer table to make it look the same as in the case where there really is 
 				// an outer table that contains this. Otherwise bootstrap css gives it an odd look
-				'''<table class="table table-condensed" style="margin:0"><tr><td style="border-top: 0px">«detailsTable»</td></tr></table>'''
+				'''<table class="table table" style="margin:0"><tr><td style="border-top: 0px">«detailsTable»</td></tr></table>'''
 			} else {
 				detailsTable
 			}
@@ -46,9 +46,8 @@ class AttrDetails {
 	def private getInfoButton(String id) {
 		'''
 			<a href="#«id»" data-toggle="collapse">
-			    <span id="«id»-controller" data-toggle="tooltip" 
-			        data-hidden-title="View Property Details" data-visible-title="Hide Property Details" 
-			        class="glyphicon glyphicon-collapse-down">
+			    <span id="«id»-controller" data-toggle="tooltip" class="far fa-caret-square-down" 
+			        data-hidden-title="View Property Details" data-visible-title="Hide Property Details" >
 			    </span>
 			</a>
 		'''

@@ -27,7 +27,7 @@ abstract class StructureTable<T> {
 	/* Public method for rendering a table describing an object */
 	def String render(String name) {
 		'''
-			<table class="table table-condensed">
+			<table class="table">
 			    «renderHeaderRow»
 			    «renderObject(name, null, new Indentation())»
 			</table>

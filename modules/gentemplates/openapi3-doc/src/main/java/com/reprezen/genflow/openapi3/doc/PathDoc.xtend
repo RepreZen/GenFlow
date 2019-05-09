@@ -42,16 +42,16 @@ class PathDoc {
 					          «IF preview»
 					          	&nbsp;&nbsp;
 					          	<a href="#">
-					          	    <span class="glyphicon glyphicon-edit text-primary" style="font-size: 1.3em;" data-toggle="tooltip" title="Go to definition in editor." 
+					          	    <span class="fas fa-edit text-primary" style="font-size: 1.3em;" data-toggle="tooltip" title="Go to definition in editor." 
 					          	        onclick="reprezen_changeSelection('«path.pointer»', '«path.fileUrl»'); return false;"></span>
 					          	</a>
 					          «ENDIF»
 					</h4>
 					  </div>
-					  <div class="card-body">
+					  <div class="card-body operation-content">
 					  «path.commonTags.map[it.modelTag?.description].filterNull.join("\n\n").docHtml»
-					 «FOR method : path.operations.keySet.sortByPosition(path.operations)»
-					 	«new OpDoc(path.operations.get(method), model, path).getHtml(method)»
+					  «FOR method : path.operations.keySet.sortByPosition(path.operations)»
+					  	«new OpDoc(path.operations.get(method), model, path).getHtml(method)»
 					 «ENDFOR»
 					 </div>
 			</div>
