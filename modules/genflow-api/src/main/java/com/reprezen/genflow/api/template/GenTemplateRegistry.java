@@ -95,7 +95,7 @@ public final class GenTemplateRegistry {
 	private void scan(boolean force) {
 		if (registry == null || force) {
 			registry = new HashMap<>();
-			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class).iterator();
+			Iterator<IGenTemplate> genTemplates = ServiceLoader.load(IGenTemplate.class, classLoader).iterator();
 			while (genTemplates.hasNext()) {
 				try {
 					IGenTemplate template = genTemplates.next();
