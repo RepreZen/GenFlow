@@ -37,7 +37,7 @@ class OpDoc {
 	def String getHtml(String method) {
 		'''
 			<div class="row justify-content-between method-header">
-				<div class="row col-10 justify-content-start method-badges">
+				<div class="row col-10 justify-content-start align-items-center method-badges">
 					<span class="badge badge-primary resource-method">«method»</span>
 					<code>«op.operationId.deprecate(op.isDeprecated)»</code>
 					<a class="anchor toc-entry" id="«op.htmlId»" data-toc-level="2" data-toc-text="«method»"></a>
@@ -77,7 +77,7 @@ class OpDoc {
 		'''
 			<li class="list-group-item">
 			    «FOR contentType : bodyParam.contentMediaTypes.keySet»
-			    	<strong>Request</strong> <span class="label label-default">«contentType»</span>«chevron»«bodyParam.contentMediaTypes.get(contentType).schema?.schemaTitle»
+			    	<strong>Request</strong> <span class="badge badge-primary">«contentType»</span>«chevron»«bodyParam.contentMediaTypes.get(contentType).schema?.schemaTitle»
 			    	«getMediaTypeHtml(contentType, bodyParam.contentMediaTypes.get(contentType))»
 			    «ENDFOR»
 			</li>
@@ -110,7 +110,7 @@ class OpDoc {
 	def getResponseContentHtml(Response response, String contentType, MediaType mediaType, String status) {
 		val schema = mediaType?.schema
 		'''
-			«chevron» <span class="label label-default">«contentType»</span> 
+			«chevron» <span class="badge badge-primary">«contentType»</span> 
 			«schema?.schemaTitle»
 			«schema?.renderSchema»
 			«mediaType?.renderExample»
@@ -189,12 +189,12 @@ class OpDoc {
 					case s >= 500 && s < 600: // server error
 						"danger"
 					default:
-						"default"
+						"primary"
 				}
 			} catch (NumberFormatException e) {
 				status // handle "default" case
 			}
-		'''<span class="label label-«context»">«status»</span>'''
+		'''<span class="badge badge-«context»">«status»</span>'''
 	}
 
 	def deprecate(String text, Boolean deprecated) {
