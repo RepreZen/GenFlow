@@ -13,6 +13,8 @@ class XChangeJsonSchemaNodeFactory extends JsonSchemaNodeFactory {
 	}
 
 	override createPrimitiveTypeNode(PrimitiveType element) {
+		
+		val options = this.options
 
 		return new SwaggerPrimitiveTypeNode(this, element) {
 

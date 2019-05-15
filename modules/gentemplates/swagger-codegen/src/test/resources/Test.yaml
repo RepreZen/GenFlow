@@ -1,0 +1,65 @@
+---
+swagger: "2.0"
+info:
+  description: "Tax Blaster"
+  version: "1.0.0"
+  title: "TaxBlaster"
+host: "taxblaster.com"
+basePath: "/api"
+tags:
+- name: "TaxFilingObject"
+  description: "An individual Tax Filing record, accessed by its ID"
+schemes:
+- "http"
+paths:
+  /taxFilings/{id}:
+    get:
+      tags:
+      - "TaxFilingObject"
+      description: ""
+      operationId: "getTaxFiling"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "filingID of the requested TaxFiling"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: ""
+          schema:
+            $ref: "#/definitions/TaxFilingObject"
+        404:
+          description: ""
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "filingID of the requested TaxFiling"
+      required: true
+      type: "string"
+
+definitions:
+  TaxFilingObject:
+    type: "object"
+    description: "An individual Tax Filing record, accessed by its ID"
+    properties:
+      filingID:
+        type: "string"
+      jurisdiction:
+        type: "string"
+      year:
+        type: "string"
+      period:
+        type: "integer"
+      currency:
+        type: "string"
+      grossIncome:
+        type: "number"
+      taxLiability:
+        type: "number"
+      taxpayer:
+        type: "object"

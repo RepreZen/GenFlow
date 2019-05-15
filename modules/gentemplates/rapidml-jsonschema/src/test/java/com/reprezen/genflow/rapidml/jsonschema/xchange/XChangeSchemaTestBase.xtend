@@ -19,13 +19,17 @@ import com.reprezen.rapidml.xtext.loaders.ZenModelLoader
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.validation.IResourceValidator
+import org.junit.runner.RunWith
 
+import static org.junit.Assert.*
+
+@RunWith(XtextRunner)
 @InjectWith(typeof(RapidMLInjectorProvider))
-abstract class XChangeSchemaTestBase extends AbstractXtextTests {
+abstract class XChangeSchemaTestBase {
 
 	@Inject
 	ParseHelper<ZenModel> parser
@@ -111,7 +115,7 @@ abstract class XChangeSchemaTestBase extends AbstractXtextTests {
 		jsonSchemaGenerator.init(
 			new FakeGenTemplateContext(if (parameters !== null) parameters else defaultParameters))
 		val String generated = jsonSchemaGenerator.generate(zenModel).toString;
-		println("Generated: \n" + generated)
+		// println("Generated: \n" + generated)
 		val jsonSchemasNode = new ObjectMapper().readTree(generated)
 
 		val definitions = jsonSchemasNode.get("definitions")
