@@ -52,7 +52,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -60,6 +60,11 @@
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
+                        <!--
+                          It is necessary to copy the GenTemplate info into the test-classes folder 
+                          otherwise ScgCodegenModuleDiscovery cannot find them when generators 
+                          are launched from tests.
+                        -->
                         <configuration>
                             <outputDirectory>${basedir}/target/test-classes</outputDirectory>
                             <resources>
