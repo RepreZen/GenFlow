@@ -15,7 +15,7 @@ import com.reprezen.genflow.api.template.FakeGenTemplateContext
 import com.reprezen.genflow.common.jsonschema.Options
 import com.reprezen.genflow.rapidml.swagger.XGenerateSwagger
 import com.reprezen.rapidml.implicit.ZenModelNormalizer
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
 import static org.hamcrest.CoreMatchers.equalTo
