@@ -7,21 +7,30 @@ import com.reprezen.genflow.api.target.GenTargetUtils
 import com.reprezen.genflow.api.template.FakeGenTemplateContext
 import com.reprezen.kaizen.oasparser.OpenApiParser
 import com.reprezen.kaizen.oasparser.model3.OpenApi3
+import java.io.File
 import java.net.URL
+import java.nio.file.Files
 import java.nio.file.Paths
+import java.util.logging.Logger
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import java.util.stream.Collectors
 import org.junit.Test
 
 import static org.junit.Assert.*
-import java.util.logging.Logger
 
 class XGenerateOpenApi3DocTest {
 
 	@Test
-	def void test() {
+	def void testGeneration() {
 		val genTarget = GenTargetUtils.load(Paths.get(Resources.getResource("Doc.gen").toURI).toFile)
-		genTarget.execute(Logger.getLogger("test"))
+		val result = genTarget.execute(Logger.getLogger("test"))
+		
+		val indexFiles = Files.find(new File(result.baseDirectory, "generated").toPath, 1, [path, attrs |
+			path.fileName.toString.endsWith("html")
+		]).collect(Collectors.toList)
+
+		assertEquals(1, indexFiles.size)
 	}
 
 	@Test
