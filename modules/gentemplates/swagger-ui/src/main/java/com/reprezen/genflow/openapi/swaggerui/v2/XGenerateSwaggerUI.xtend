@@ -24,15 +24,15 @@ class XGenerateSwaggerUI {
 		m
 	}
 
-	def String generateForSwaggerSpec(Swagger swagger, String urlPrefix, URL resolutionBase, boolean isLiveView,
+	def String generateForSwaggerSpec(Swagger swagger, URL resolutionBase, boolean isLiveView,
 		SwaggerUiOptions options, IGenTemplateContext context) {
 		val spec = mapper.writeValueAsString(swagger)
-		generateForSwaggerSpec(spec, urlPrefix, resolutionBase, isLiveView, options, context)
+		generateForSwaggerSpec(spec, resolutionBase, isLiveView, options, context)
 	}
 
 	extension HtmlInjections htmlInjections
 
-	def String generateForSwaggerSpec(String spec, String urlPrefix, URL resolutionBase, boolean isLiveView,
+	def String generateForSwaggerSpec(String spec, URL resolutionBase, boolean isLiveView,
 		SwaggerUiOptions options, IGenTemplateContext context) {
 		htmlInjections = context.genTargetParameters.get(HtmlInjections.HTML_INJECTIONS_PARAM) as HtmlInjections ?:
 			new HtmlInjections
@@ -43,39 +43,39 @@ class XGenerateSwaggerUI {
 					«HtmlInjections.HEAD_TOP.inject»
 					<meta http-equiv="X-UA-Compatible" content="IE=9,10" />
 					<title>Swagger UI</title>
-					<link rel="icon" type="image/png" href="«urlPrefix»/images/favicon-32x32.png" sizes="32x32" />
-					<link rel="icon" type="image/png" href="«urlPrefix»/images/favicon-16x16.png" sizes="16x16" />
-					<link href='«urlPrefix»/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/css/print.css' media='print' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/bootstrap/css/fake-bootstrap.css' rel='stylesheet' type='text/css'/>
-					<link href='«urlPrefix»/css/settings.css' rel='stylesheet' type='text/css'/>
+					<link rel="icon" type="image/png" href="assets/images/favicon-32x32.png" sizes="32x32" />
+					<link rel="icon" type="image/png" href="assets/images/favicon-16x16.png" sizes="16x16" />
+					<link href='assets/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+					<link href='assets/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+					<link href='assets/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+					<link href='assets/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+					<link href='assets/css/print.css' media='print' rel='stylesheet' type='text/css'/>
+					<link href='assets/bootstrap/css/fake-bootstrap.css' rel='stylesheet' type='text/css'/>
+					<link href='assets/css/settings.css' rel='stylesheet' type='text/css'/>
 					«IF options.theme !== null»
-						<link href='«urlPrefix»/css/theme-«options.theme.toString.toLowerCase».css' media='screen' rel='stylesheet' type='text/css'/>
+						<link href='assets/css/theme-«options.theme.toString.toLowerCase».css' media='screen' rel='stylesheet' type='text/css'/>
 					«ENDIF»
 					<!-- for some reason this doesn't load the fonts! 
-					<link href='«urlPrefix»/font-awesome-4.6.3/css/font-awesome.css' rel='stylesheet' type='text/css'/>
+					<link href='assets/font-awesome-4.6.3/css/font-awesome.css' rel='stylesheet' type='text/css'/>
 					-->
 					<!-- this does, but it requires connectivity -->
 					<script src="https://use.fontawesome.com/0ceea6e477.js"></script>
 			
-					<script src='«urlPrefix»/lib/js-yaml.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/object-assign-pollyfill.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/jquery.slideto.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/jquery.wiggle.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/handlebars-4.0.5.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/lodash.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/backbone-min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/swagger-ui.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/jsoneditor.min.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/marked.js' type='text/javascript'></script>
-					<script src='«urlPrefix»/lib/swagger-oauth.js' type='text/javascript'></script>
+					<script src='assets/lib/js-yaml.min.js' type='text/javascript'></script>
+					<script src='assets/lib/object-assign-pollyfill.js' type='text/javascript'></script>
+					<script src='assets/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+					<script src='assets/lib/jquery.slideto.min.js' type='text/javascript'></script>
+					<script src='assets/lib/jquery.wiggle.min.js' type='text/javascript'></script>
+					<script src='assets/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+					<script src='assets/lib/handlebars-4.0.5.js' type='text/javascript'></script>
+					<script src='assets/lib/lodash.min.js' type='text/javascript'></script>
+					<script src='assets/lib/backbone-min.js' type='text/javascript'></script>
+					<script src='assets/swagger-ui.js' type='text/javascript'></script>
+					<script src='assets/lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
+					<script src='assets/lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
+					<script src='assets/lib/jsoneditor.min.js' type='text/javascript'></script>
+					<script src='assets/lib/marked.js' type='text/javascript'></script>
+					<script src='assets/lib/swagger-oauth.js' type='text/javascript'></script>
 			
 					<script type="text/javascript">
 				hljs.configure({

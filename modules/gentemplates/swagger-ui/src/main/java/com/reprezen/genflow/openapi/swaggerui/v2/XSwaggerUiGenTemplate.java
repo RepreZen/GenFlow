@@ -19,7 +19,6 @@ import static com.reprezen.genflow.openapi.swaggerui.v2.SwaggerUiOptions.OPERATI
 import static com.reprezen.genflow.openapi.swaggerui.v2.SwaggerUiOptions.SHOW_REQUEST_HEADERS;
 import static com.reprezen.genflow.openapi.swaggerui.v2.SwaggerUiOptions.SUPPORTED_SUBMIT_METHOD_OPTION;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -125,9 +124,9 @@ public class XSwaggerUiGenTemplate extends SwaggerGenTemplate {
 			}
 
 			URL resolutionBase = getResolutionBase();
-			String urlPrefix = new File(context.getOutputDirectory(), "assets/.").toURI().toString();
-			String swaggerUiString = new XGenerateSwaggerUI().generateForSwaggerSpec(swagger, urlPrefix, resolutionBase,
+			String swaggerUiString = new XGenerateSwaggerUI().generateForSwaggerSpec(swagger, resolutionBase,
 					isLiveView(), options, context);
+
 			return swaggerUiString;
 		}
 

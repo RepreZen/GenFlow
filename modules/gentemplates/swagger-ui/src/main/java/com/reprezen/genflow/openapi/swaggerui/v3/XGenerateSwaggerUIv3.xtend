@@ -25,23 +25,23 @@ class XGenerateSwaggerUIv3 {
 	extension HtmlInjections htmlInjections
 	
 	val static mapper = if (Boolean.valueOf(true)) { // trick to get static code block 
-		val m = new ObjectMapper();
-		m.setSerializationInclusion(Include.NON_NULL);
-		m;
+		val m = new ObjectMapper()
+		m.setSerializationInclusion(Include.NON_NULL)
+		m
 	}
 
-	def generate(String json, String uriPrefix, String version, IGenTemplateContext context) {
-		generate(json, uriPrefix, false, SwaggerUi3Options.DEFAULT, context);
+	def generate(String json, String version, IGenTemplateContext context) {
+		generate(json, false, SwaggerUi3Options.DEFAULT, context)
 	}
 
-	def String generateNormalized(String modelText, File inputFile, Integer modelVersion, String uriPrefix,
-		boolean isLiveView, IGenTemplateContext context) {
-		val normalized = new OpenApiNormalizer(modelVersion, Option.MINIMAL_OPTIONS).of(modelText).normalizeToJson(
-			inputFile.toURI().toURL());
-		return generate(mapper.writeValueAsString(normalized), uriPrefix, isLiveView, SwaggerUi3Options.DEFAULT, context);
+	def String generateNormalized(String modelText, File inputFile, Integer modelVersion, boolean isLiveView, IGenTemplateContext context) {
+		val normalized = new OpenApiNormalizer(modelVersion, Option.MINIMAL_OPTIONS)
+			.of(modelText).normalizeToJson(inputFile.toURI().toURL())
+
+		return generate(mapper.writeValueAsString(normalized), isLiveView, SwaggerUi3Options.DEFAULT, context)
 	}
 
-	def String generate(String modelText, String uriPrefix, boolean isLiveView, SwaggerUi3Options options, IGenTemplateContext context) {
+	def String generate(String modelText, boolean isLiveView, SwaggerUi3Options options, IGenTemplateContext context) {
 		htmlInjections = context.genTargetParameters.get(HTML_INJECTIONS_PARAM) as HtmlInjections ?: new HtmlInjections
 		val json = modelText.toJson
 		'''
@@ -54,10 +54,10 @@ class XGenerateSwaggerUIv3 {
 					<meta charset="UTF-8">
 			  		<title>Swagger UI</title>
 			  		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
-			  		<link rel="stylesheet" type="text/css" href="«uriPrefix»/assets/swagger-ui.css" >
-				  	<link rel="stylesheet" type="text/css" href="«uriPrefix»/reprezen/css/mini-bootstrap.css" >
-			  		<link rel="icon" type="image/png" href="«uriPrefix»/assets/favicon-32x32.png" sizes="32x32" />
-			  		<link rel="icon" type="image/png" href="«uriPrefix»/assets/favicon-16x16.png" sizes="16x16" />
+			  		<link rel="stylesheet" type="text/css" href="assets/swagger-ui.css" >
+				  	<link rel="stylesheet" type="text/css" href="reprezen/css/mini-bootstrap.css" >
+			  		<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32" />
+			  		<link rel="icon" type="image/png" href="assets/favicon-16x16.png" sizes="16x16" />
 			  		<style>
 				    	html
 			    		{
@@ -106,7 +106,7 @@ class XGenerateSwaggerUIv3 {
 			
 					«IF !isLiveView»
 						<div class="zennav">
-						<a href="http://reprezen.com" target="_blank">Created with <img class="logo" src="«uriPrefix»/reprezen/images/logo.png" ></a>
+						<a href="http://reprezen.com" target="_blank">Created with <img class="logo" src="reprezen/images/logo.png" ></a>
 						</div>
 					«ENDIF»	
 			
@@ -145,23 +145,25 @@ class XGenerateSwaggerUIv3 {
 
 					<div id="swagger-ui"></div>
 			
-					<script src="«uriPrefix»/assets/swagger-ui-bundle.js"> </script>
-					<script src="«uriPrefix»/assets/swagger-ui-standalone-preset.js"> </script>
+					<script src="assets/swagger-ui-bundle.js"> </script>
+					<script src="assets/swagger-ui-standalone-preset.js"> </script>
 					<script>
 						window.onload = function() {
 			  				// Build a system
-			  				 const ui = SwaggerUIBundle(«generateOptions(json, options)»)
+			  				var ui = SwaggerUIBundle(«generateOptions(json, options)»);
 			
 			  				window.ui = ui;
 			  				// RepreZen customization Explore input form to download an external Swagger
 			  				// Can't use JQuery as it's not provided as a dependency .. $(".download-url-wrapper").remove();
 			  				var exploreElement = document.getElementsByClassName("topbar")[0];
-			  				exploreElement.parentNode.removeChild(exploreElement); 
+			  				if (exploreElement) {
+			  					exploreElement.parentNode.removeChild(exploreElement);
+			  				}
 						};
 					</script>
 					«IF isLiveView»
-						<script src='«uriPrefix»/reprezen/js/jquery-3.2.1.min.js' type='text/javascript'></script>
-						<script src='«uriPrefix»/reprezen/js/bootstrap-3.3.7.min.js' type='text/javascript'></script>
+						<script src='reprezen/js/jquery-3.2.1.min.js' type='text/javascript'></script>
+						<script src='reprezen/js/bootstrap-3.3.7.min.js' type='text/javascript'></script>
 					«ENDIF»
 					«BODY_BOTTOM.inject»
 				</body>
@@ -174,10 +176,10 @@ class XGenerateSwaggerUIv3 {
 
 	def private toJson(String modelText) {
 		if (modelText.trim().startsWith("{")) {
-			return modelText;
+			return modelText
 		}
-		val tree = yamlMapper.readTree(modelText);
-		return jsonMapper.writeValueAsString(tree);
+		val tree = yamlMapper.readTree(modelText)
+		return jsonMapper.writeValueAsString(tree)
 	}
 
 	private def orNull(Object value) '''«IF value !== null»"«value»"«ELSE»null«ENDIF»'''
