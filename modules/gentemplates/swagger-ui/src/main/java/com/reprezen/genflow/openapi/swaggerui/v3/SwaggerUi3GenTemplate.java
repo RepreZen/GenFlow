@@ -171,9 +171,7 @@ public class SwaggerUi3GenTemplate extends OpenApiGenTemplate {
 			} catch (IOException e) {
 				throw new GenerationException("Failed to extract JSON from OpenApi document", e);
 			}
-			String urlPrefix = context.getOutputDirectory().toURI().toString();
-			String swaggerUiString = new XGenerateSwaggerUIv3().generate(modelSpec, urlPrefix, isLiveView(), options,
-					context);
+			String swaggerUiString = new XGenerateSwaggerUIv3().generate(modelSpec, isLiveView(), options, context);
 			return swaggerUiString;
 		}
 
