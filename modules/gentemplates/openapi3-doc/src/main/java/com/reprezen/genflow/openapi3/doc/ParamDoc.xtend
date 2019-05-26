@@ -18,11 +18,11 @@ class ParamDoc {
 		val param = model.parameters.get(name)
 		'''
 			<a class="anchor toc-entry" id="«param.htmlId»" data-toc-level="1" data-toc-text="«name»"></a>
-			<div class="panel panel-default">
-			    <div class="panel-heading">
-			        <h4 class="panel-title"><strong>«name»</strong></h4>
+			<div class="card">
+			    <div class="card-header">
+			        <h4 class="card-title"><strong>«name»</strong></h4>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «model.parameters.get(name).paramHtml»
 			    </div>
 			</div>

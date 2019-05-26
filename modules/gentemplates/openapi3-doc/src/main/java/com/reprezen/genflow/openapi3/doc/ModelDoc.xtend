@@ -29,11 +29,11 @@ class ModelDoc {
 	def getHtml() {
 		'''
 			<a class="anchor toc-entry" id="«definition.htmlId»" data-toc-level=1 data-toc-text="«name»"></a>
-			<div class="panel panel-default">
-			    <div class="panel-heading">
-			        <h4 class="panel-title">«name»</h4>
+			<div class="card">
+			    <div class="card-header">
+			        <h4 class="card-title">«name»</h4>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «definition.description.docHtml»
 			        «definition.renderSchema»
 			    </div>

@@ -43,13 +43,15 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			<html lang="en">
 			    <!-- Preview: «preview» -->
 			    «htmlHeadSection(model, urlPrefix, preview)»
-			    <body data-spy="scroll" data-target="#toc">            
+			    <body data-spy="scroll" data-target="#toc">
 			       <!-- Fixed navbar -->
-			       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			       <div class="navbar navbar-light bg-light fixed-top navbar-expand-md" role="navigation">
 			          <div class="container">
 			            <div class="navbar-collapse collapse">
-			              <ul class="nav navbar-nav navbar-right">
-			                <li><a href="http://reprezen.com" target="_blank">Created with <img class="logo" src="images/logo.png"></a></li>
+			              <ul class="nav navbar-nav ml-auto">
+			                <li class="nav-item">
+			                <a href="http://reprezen.com" target="_blank" class="nav-link">Created with <img class="logo" src="images/logo.png"></a>
+			                </li>
 			              </ul>
 			            </div><!--/.nav-collapse -->
 			          </div>
@@ -57,49 +59,68 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			          <div class="container">
 			           <div class="row">
 			               «IF includeTOC»
-			               	<div class="col-md-3">
+			               	<div class="col-lg-3">
 			               	  <div id="toc" class="reprezen-sidebar hidden-print affix">
 			               	  </div>
 			               	</div>
 			               «ENDIF»
-			           
-			               <div class="col-md-9">
+
+			               <div class="col-lg-9">
 			                   <a class="anchor" id="model-spec"></a>
-			                   <div class="page-header">
+			                   <div class="pb-2 mt-4 mb-2 border-bottom">
 			                       <h1>OpenApi3 Specification</h1>
 			                   </div>
-			    
+
 			                    <a class="anchor" id="«model.htmlId»"></a>
 			                    «new TopMatter().get(model)»
 			                    «if(showPaths) model.pathsHtml»
 			                    «if(showParams) model.parametersHtml»
 			                    «if(showResponses) model.responsesHtml»
 			                    «if(showDefs) model.definitionsHtml»
-			    </div> <!-- /col-md-9 -->
+			    </div> <!-- /col-lg-9 -->
 			    </div>  <!-- /row -->
 			    </div> <!-- /container -->
 			    
 			        <!-- Bootstrap core JavaScript
 			        ================================================== -->
 			        <!-- Placed at the end of the document so the pages load faster -->
-			        <script src="«urlPrefix»jquery/jquery-1.10.2.min.js"></script>
-			        <script src="«urlPrefix»bootstrap/js/bootstrap.min.js"></script>
+			        <script src="«urlPrefix»jquery/3.3.1/jquery-3.3.1.slim.min.js"></script>
+			        <script src="«urlPrefix»bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+			        «IF includeTOC»
+			            <script src="«urlPrefix»bootstrap/4.3.1/js/reprezenTOCBuilder.js"></script>
+			        «ENDIF»
 			        <script>
+			            // handle sidebar navigation removed in bootstrap 4
 			            $(document).ready(function() {
-			                var visibleClass = "glyphicon-collapse-up";
-			                var hiddenClass = "glyphicon-collapse-down";
+			                $(".nav-item").on("click", function(event){
+			                    event.stopPropagation();
+			                    var found = $(".nav").find(".active").not($(this));
+			                    var parents = $(this).parents();
+			                    found.not(parents).removeClass("active");
+
+			                    if ($(this).hasClass("active")) {
+			                        $(this).removeClass("active");
+			                    } else {
+			                        $(this).addClass("active");
+			                    }
+			                });
+
 			                var setTitle = function(visible) {
 			                    if ($(this).attr("data-visible-title") != undefined) {
 			                        $(this).attr("title", $(this).attr(visible ? "data-visible-title" : "data-hidden-title"));
-			                        $(this).tooltip("destroy");
+			                        $(this).tooltip("dispose");
 			                        $(this).tooltip();
 			                    }
 			                };
+
+			                var visibleClass = "fa-caret-square-up";
+			                var hiddenClass = "fa-caret-square-down";
 			                var toggleCollapseButton = function() {
 			                    var button = $($(this).attr('data-controller'));
 			                    button.toggleClass(visibleClass+" "+hiddenClass);
 			                    setTitle.call(button,$(this).hasClass("in"));
 			                };
+
 			                var controls = $(".collapse[data-controller]")
 			                controls.on("shown.bs.collapse hidden.bs.collapse", toggleCollapseButton);
 			                controls.each(function(i,control) {
@@ -111,9 +132,6 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			        </script>
 			        «IF preview»
 			        	«BODY_BOTTOM.inject»
-			        «ENDIF»
-			        «IF includeTOC»
-			        	<script src="«urlPrefix»bootstrap/js/reprezenTOCBuilder.js"></script>
 			        «ENDIF»
 			    </body>
 			    <!-- Generation time: «(System.nanoTime - startTime).elapsedTime» -->
@@ -136,19 +154,25 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 			    <meta name="description" content="">
 			    <meta name="author" content="">
 			    <link rel="shortcut icon" href="«urlPrefix»docs-assets/ico/favicon.png">
-			
+
 			    <title>«model?.info?.title» Documentation</title>
-			
+
 			    <!-- Bootstrap core CSS -->
-			    <link href="«urlPrefix»bootstrap/css/bootstrap.css" rel="stylesheet">
-			    <link href="«urlPrefix»bootstrap/css/bootstrap-reprezen.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/bootstrap-reprezen.css" rel="stylesheet">
+			    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" 
+			    	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" 
+			    	crossorigin="anonymous">
+
 			    «IF preview»
 			    	<!-- Workaround for live preview problem with web-font loading -->
-			    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+			    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+			    		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+			    		crossorigin="anonymous">
 			    «ENDIF»
 			
 			    <!-- Custom styles for this template -->
-			    <link href="«urlPrefix»bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
+			    <link href="«urlPrefix»bootstrap/4.3.1/css/navbar-fixed-top.css" rel="stylesheet">
 			
 			    <!-- Just for debugging purposes. Don't actually copy this line! -->
 			    <!--[if lt IE 9]><script src="«urlPrefix»docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -174,14 +198,14 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private pathsHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-paths" data-toc-level="0" data-toc-text="Paths"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Path Specifications</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Path Specifications</h3>
+			<div class="card panel-primary">
+			    <div class="card-header text-white bg-primary">
+			        <h3 class="card-title">Path Specifications</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR path : model.paths?.keySet.sortByPosition(model.paths) ?: #[]»
 			        	«new PathDoc(path).html»
 			        «ENDFOR»
@@ -193,14 +217,14 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private parametersHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-parameters" data-toc-level="0" data-toc-text="Parameters"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Parameters</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Parameters</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Parameters</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR param : model.parameters.keySet.sortByPosition(model.parameters)»
 			        	«new ParamDoc(model, param).html»
 			        «ENDFOR»
@@ -212,14 +236,14 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private responsesHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-responses" data-toc-level="0" data-toc-text="Responses"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Responses</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Responses</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Responses</h3>
 			    </div>
-			    <div class="panel-body">			    
+			    <div class="card-body">
 			        «FOR response : model.responses.keySet.sortByPosition(model.responses)»
 			        	«new ResponseDoc(response).html»
 			        «ENDFOR»
@@ -231,14 +255,14 @@ class XGenerateOpenApi3Doc extends OpenApi3OutputItem {
 	def private definitionsHtml(OpenApi3 model) {
 		'''
 			<a class="anchor toc-entry" id="model-definitions" data-toc-level="0" data-toc-text="Schema Definitions"></a>
-			<div class="page-header">
+			<div class="pb-2 mt-4 mb-2 border-bottom">
 			    <h1>Schema Definitions</h1>
 			</div>
-			<div class="panel panel-primary">
-			    <div class="panel-heading">
-			        <h3 class="panel-title">Schema Definitions</h3>
+			<div class="card panel-primary">
+			    <div class="card-header">
+			        <h3 class="card-title">Schema Definitions</h3>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        «FOR definition : model.schemas.keySet.sortByPosition(model.schemas)»
 			        	«new ModelDoc(definition).html»
 			        «ENDFOR»

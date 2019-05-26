@@ -21,7 +21,7 @@ function buildToc() {
 		}
 		// create a fully formed list item with link for a toc-entry class element
 		function getItem(entry) {
-			return $("<li></li>").append($("<a></a>").attr("href", getHref(entry)).text(getText(entry)));
+			return $("<li></li>").addClass("nav-item").append($("<a></a>").addClass("nav-link").attr("href", getHref(entry)).text(getText(entry)));
 		}
 		// create a list of entries from the doc-wide list, starting with position 'start' and
 		// collecting a run of entries that are at level greater than 'level'
@@ -31,10 +31,10 @@ function buildToc() {
 					return entries.slice(start, i);
 				}
 			}
-			return entries.slice(start);			
+			return entries.slice(start);
 		}
 		function build(level, entries) {
-			var html = $("<ul></ul>").addClass("nav").addClass(level == 0 ? "bs-sidenav" : null);
+			var html = $("<ul></ul>").addClass("nav").addClass(level == 0 ? "bs-sidenav flex-column" : null);
 			for (var i = 0; i < entries.length;) {
 				var entry = $(entries).get(i);
 				var item;
@@ -42,7 +42,7 @@ function buildToc() {
 					item = getItem(entry);
 					i += 1;
 				} else {
-					item = $("<li></li>");
+					item = $("<li></li>").addClass("nav-item");
 				}
 				var subEntries = getSubEntries(entries, i, level);
 				if (subEntries.length > 0) {

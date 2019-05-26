@@ -15,11 +15,11 @@ class TopMatter {
 
 	def get(OpenApi3 model) {
 		'''
-			<div class="panel panel-primary">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">«model.info?.title» «model.baseUri»</h3>
+			<div class="card panel-primary">
+			  <div class="card-header text-white bg-primary">
+			    <h3 class="card-title">«model.info?.title» «model.baseUri»</h3>
 			  </div>
-			  <div class="panel-body restful-interface">
+			  <div class="card-body restful-interface">
 			    «model.info?.description?.docHtml»
 			    <table class="table">
 			        <tr><th>Version</th><td>«model.info?.version»</td></tr>

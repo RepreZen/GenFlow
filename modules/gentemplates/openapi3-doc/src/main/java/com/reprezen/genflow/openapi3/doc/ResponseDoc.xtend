@@ -27,11 +27,11 @@ class ResponseDoc {
 
 		'''
 			<a class="anchor toc-entry" id="«response.htmlId»" data-toc-level="1" data-toc-text="«status»"></a>
-			<div class="panel panel-default">
-			    <div class="panel-heading">
-			        <h4 class="panel-title"><strong>«status»</strong></h4>
+			<div class="card">
+			    <div class="card-header">
+			        <h4 class="card-title"><strong>«status»</strong></h4>
 			    </div>
-			    <div class="panel-body">
+			    <div class="card-body">
 			        <strong>Response</strong> «chevron» «schema?.schemaTitle»</h4>
 			        «response.description?.docHtml»
 			        «schema?.renderSchema»
@@ -54,6 +54,6 @@ class ResponseDoc {
 	}
 
 	def chevron() {
-		'<span class="glyphicon glyphicon-chevron-right"></span>'
+		'<span class="fas fa-chevron-right"></span>'
 	}
 }

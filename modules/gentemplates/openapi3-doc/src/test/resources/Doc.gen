@@ -1,0 +1,15 @@
+---
+name: "RepreZen HTML Documentation"
+genTemplateId: "com.reprezen.genflow.openapi3.doc.XOpenApi3DocGenTemplate"
+relativeOutputDir: generated
+prerequisites: null
+primarySource: 
+  path: "petstore.yaml"
+namedSources: null 
+# The parameters object contains variables that are processed directly by the GenTemplate.
+parameters: 
+  # Set to false to suppress component model names in allOf models
+  showAllOfComponentModels: "true"
+  
+  # Set to false to suppress table of contents
+  includeTableOfContents: "true"
