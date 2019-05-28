@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.reprezen.genflow</groupId>
         <artifactId>genflow</artifactId>
-        <version>1.3.1-SNAPSHOT</version>
+        <version>1.4.0</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -47,7 +47,7 @@
         <connection>scm:git:git://github.com/RepreZen/GenFlow.git</connection>
         <developerConnection>scm:git:ssh://github.com:RepreZen/GenFlow.git</developerConnection>
         <url>https://github.com/RepreZen/GenFlow/tree/master/modules/standard-gentemplates</url>
-        <tag>HEAD</tag>
+        <tag>v1.4.0</tag>
     </scm>
     <dependencies>
         <dependency>
