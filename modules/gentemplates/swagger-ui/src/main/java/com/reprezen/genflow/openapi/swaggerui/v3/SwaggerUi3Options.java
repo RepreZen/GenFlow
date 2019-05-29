@@ -283,6 +283,10 @@ public class SwaggerUi3Options {
 			supportedSubmitMethods = new SupportedSubmitMethod[0];
 		}
 
+		if (supportedSubmitMethods.length == 0) {
+			return "";
+		}
+
 		return Stream.of(supportedSubmitMethods) //
 				.map(e -> "'" + e.name().toLowerCase() + "'") //
 				.collect(Collectors.joining(",", "[", "]"));
