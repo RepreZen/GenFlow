@@ -17,6 +17,7 @@ import com.reprezen.genflow.api.normal.openapi.Option
 import com.reprezen.genflow.api.template.IGenTemplateContext
 import com.reprezen.genflow.common.HtmlInjections
 import java.io.File
+import java.util.Collection
 
 import static com.reprezen.genflow.common.HtmlInjections.*
 
@@ -182,15 +183,40 @@ class XGenerateSwaggerUIv3 {
 		return jsonMapper.writeValueAsString(tree)
 	}
 
-	private def orNull(Object value) '''«IF value !== null»"«value»"«ELSE»null«ENDIF»'''
-
-	private def maybeFunction(String option) {
-		if (option === null || option.isEmpty) return '''null'''
-
-		// apisSorter and methodsSorter options take either fixed string values (e.g. "alpha") or a Javascript function object. 
-		// The latter should not be quoted, while the former should. This method applies quoting unless the value begins with "function".
-		if(option.startsWith("function")) option else '''"«option»"'''
+	private def asOption(Object value, String key) {
+		switch value {
+			Boolean: '''«key»: «value»,'''
+			Integer: '''«key»: «value»,'''
+			String: '''
+				«IF !value.isNullOrEmpty»
+				«key»: «IF value.startsWith("[") || value.startsWith("{")»«value»«ELSE»"«value»"«ENDIF»,
+				«ENDIF»
+			'''
+			Collection<?>: '''
+				«IF value !== null && !value.isEmpty»
+				«key»: «value»,
+				«ENDIF»
+			'''
+			Object[]: '''
+			«IF value !== null && !value.isEmpty»
+			«key»: «value»,
+			«ENDIF»
+			'''
+			default: ''''''
+		}
 	}
+
+	// apisSorter and methodsSorter options take either fixed string values (e.g. "alpha") or a Javascript function object. 
+	// The latter should not be quoted, while the former should. This method applies quoting unless the value begins with "function".
+	private def asFunctionOption(String option, String key) '''
+		«IF !option.isNullOrEmpty()»
+			«IF option.startsWith("function")»
+				«key»: «option»,
+			«ELSE»
+				«key»: "«option»",
+			«ENDIF»
+		«ENDIF»
+	'''
 
 	def String generateOptions(String spec, SwaggerUi3Options options) '''
 	  {
@@ -204,34 +230,34 @@ class XGenerateSwaggerUIv3 {
 	    plugins: [
 	      SwaggerUIBundle.plugins.DownloadUrl
 	    ],
-	    layout: «orNull(options.layout)»,
-	    deepLinking: «options.deepLinking»,
-	    displayOperationId: «options.displayOperationId»,
-	    defaultModelsExpandDepth: «options.defaultModelsExpandDepth»,
-	    defaultModelExpandDepth: «options.defaultModelExpandDepth»,
-	    defaultModelRendering: «orNull(options.defaultModelRenderingAsString)»,
-	    displayRequestDuration: «options.displayRequestDuration»,
-	    docExpansion: «orNull(options.docExpansionAsString)»,
-	    filter: «options.filter»,
-	    maxDisplayedTags: «options.maxDisplayedTags»,
-	    operationsSorter: «maybeFunction(options.operationsSorter)»,
-	    showExtensions: «options.showExtensions»,
-	    showCommonExtensions: «options.showCommonExtensions»,
-	    tagsSorter: «maybeFunction(options.tagsSorter)»,
-	    onComplete: «maybeFunction(options.onComplete)»,
+	    «options.layout.asOption("layout")»
+	    «options.deepLinking.asOption("deepLinking")»
+	    «options.displayOperationId.asOption("displayOperationId")»
+	    «options.defaultModelsExpandDepth.asOption("defaultModelsExpandDepth")»
+	    «options.defaultModelExpandDepth.asOption("defaultModelExpandDepth")»
+	    «options.defaultModelRenderingAsString.asOption("defaultModelRendering")»
+	    «options.displayRequestDuration.asOption("displayRequestDuration")»
+	    «options.docExpansionAsString.asOption("docExpansion")»
+	    «options.filter.asOption("filter")»
+	    «options.maxDisplayedTags.asOption("maxDisplayedTags")»
+	    «options.operationsSorter.asFunctionOption("operationsSorter")»
+	    «options.showExtensions.asOption("showExtensions")»
+	    «options.showCommonExtensions.asOption("showCommonExtensions")»
+	    «options.tagsSorter.asFunctionOption("tagsSorter")»
+	    «options.onComplete.asFunctionOption("onComplete")»
 	    «IF !Strings.isNullOrEmpty(options.oauth2RedirectUrl)»
 	    oauth2RedirectUrl: "«options.oauth2RedirectUrl»",
 	    «ENDIF»
-	    requestInterceptor: «maybeFunction(options.requestInterceptor)»,
-	    responseInterceptor: «maybeFunction(options.responseInterceptor)»,
-	    showMutatedRequest: «options.showMutatedRequest»,
-	    supportedSubmitMethods: «options.supportedSubmitMethodsAsString»,
-	    validatorUrl: «orNull(options.validatorUrl)»,
-	    modelPropertyMacro: «maybeFunction(options.modelPropertyMacro)»,
-	    parameterMacro: «maybeFunction(options.parameterMacro)»,
-	    initOAuth: «maybeFunction(options.initOAuth)»,
-	    preauthorizeBasic: «maybeFunction(options.preauthorizeBasic)»,
-	    preauthorizeApiKey: «maybeFunction(options.preauthorizeApiKey)»
+	    «options.requestInterceptor.asFunctionOption("requestInterceptor")»
+	    «options.responseInterceptor.asFunctionOption("responseInterceptor")»
+	    «options.showMutatedRequest.asOption("showMutatedRequest")»
+	    «options.supportedSubmitMethodsAsString.asOption("supportedSubmitMethods")»
+	    «options.validatorUrl.asOption("validatorUrl")»
+	    «options.modelPropertyMacro.asFunctionOption("modelPropertyMacro")»
+	    «options.parameterMacro.asFunctionOption("parameterMacro")»
+	    «options.initOAuth.asFunctionOption("initOAuth")»
+	    «options.preauthorizeBasic.asFunctionOption("preauthorizeBasic")»
+	    «options.preauthorizeApiKey.asFunctionOption("preauthorizeApiKey")»
 	  }
 	'''
 }
