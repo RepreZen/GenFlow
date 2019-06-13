@@ -5,13 +5,9 @@
 Code Generation framework used in [RepreZen API
 Studio](https://www.reprezen.com/swagger-openapi-code-generation-api-first-microservices-enterprise-development).
 
-# Coming Soon...
-
-&nbsp;<img src="https://www.reprezen.com/hubfs/RepreZen_WIP_Ninja.png" width="200" />
-
 RepreZen API Studio supports API design-first and <a href="http://RZen.io/APICodeFlow" rel="noreferrer noopener" target="_blank">API
-    CodeFlow</a> with a highly-evolved, extensible code generation engine. These capabilities are being repackaged as
-<em>GenFlow</em>, soon to be announced.</p>
+    CodeFlow</a> with a highly-evolved, extensible code generation engine. These capabilities are now available here in
+<em>GenFlow</em>.</p>
 
 # An Open Framework for API Code Generation
 
