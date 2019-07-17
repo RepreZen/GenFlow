@@ -360,6 +360,11 @@
                 <version>2.2.7</version>
             </dependency>
             <dependency>
+                <groupId>com.mashape.unirest</groupId>
+                <artifactId>unirest-java</artifactId>
+                <version>${unirest-java.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
                 <version>${project.version}</version>
@@ -555,5 +560,6 @@
         <kaizen-parser-version>4.0.4-SNAPSHOT</kaizen-parser-version>
         <xtend-version>2.12.0</xtend-version>
         <rapidml-version>0.0.10</rapidml-version>
+        <unirest-java.version>1.4.9</unirest-java.version>
     </properties>
 </project>

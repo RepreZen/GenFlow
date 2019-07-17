@@ -36,5 +36,9 @@
             <groupId>com.reprezen.genflow</groupId>
             <artifactId>swagger-ui</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+        </dependency>
     </dependencies>
 </project>
