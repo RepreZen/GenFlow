@@ -52,6 +52,8 @@
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
+            <version>${unirest-java.version}</version>
+            <classifier>standalone</classifier>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

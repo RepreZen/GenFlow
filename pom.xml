@@ -360,12 +360,6 @@
                 <version>2.2.7</version>
             </dependency>
             <dependency>
-                <groupId>com.konghq</groupId>
-                <artifactId>unirest-java</artifactId>
-                <version>${unirest-java.version}</version>
-		<classifier>standalone</classifier>
-            </dependency>
-            <dependency>
                 <groupId>com.reprezen.genflow</groupId>
                 <artifactId>genflow-api</artifactId>
                 <version>${project.version}</version>
