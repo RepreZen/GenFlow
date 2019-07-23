@@ -362,7 +362,6 @@
             <dependency>
                 <groupId>com.konghq</groupId>
                 <artifactId>unirest-java</artifactId>
-                <classifier>standalone</classifier>
                 <version>${unirest-java.version}</version>
             </dependency>
             <dependency>
