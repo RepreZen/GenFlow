@@ -554,7 +554,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson-version>2.9.8</jackson-version>
+        <jackson-version>2.9.10.8</jackson-version>
         <nexus.autorelease>false</nexus.autorelease>
         <nexus.autodrop>true</nexus.autodrop>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
